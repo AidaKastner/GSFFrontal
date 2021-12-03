@@ -6,7 +6,6 @@ import '../css/Menu.css';
 import Idioma from "../components/Idioma";
 import { useTranslation } from 'react-i18next';
 
-console.log("AFOROS ");
 
 function VerImpAfor(props){
   const { t, i18n } = useTranslation(['global']);

@@ -1,4 +1,5 @@
-
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import React, { Component, useState , Fragment} from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,8 +8,7 @@ import { faEdit, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icon
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
-import { Translation } from 'react-i18next';
-import { Trans } from 'react-i18next';
+import { Translation, useTranslation } from 'react-i18next';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -17,20 +17,49 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import Tab from "./Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
-import fileDownload from 'js-file-download'
+import Select from 'react-select';
+import VerCarTramDet from "../components/VerCarTramDet";
+
+const StyleLink = styled(Link)`
+  display: flex;
+  color: #e1e9fc;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  list-style: none;
+  height: 60px;
+  text-decoration: none;
+  font-size: 18px;
+  &:hover {
+    background: #252831;
+    border-left: 4px solid #632ce4;
+    cursor: pointer;
+  }
+`;
 
 const url1 = "https://localhost:44301/Carreteras";
-const url2 = "https://localhost:44301/Tramos";
+const url2 = "https://localhost:44301/Tramos/combo";
 
-var indice ='';
+
 var paramIndex = 0;
+let yearIni = 1979;
 
 const config = {
   headers: {
       'content-type': 'application/json'
   }
 }
+let currentYear = new Date().getFullYear();
+console.log("Año actual", currentYear);
 
+//Combo
+const combo = [{ label: "Activos", value: "Activos" }, { label: "Inactivos", value: "Inactivos" }];
+for (var i = currentYear; i > yearIni; i--) {
+  combo.push({ label: i, value: i });
+  console.log("Años", i);
+}
+
+console.log("Selector", combo);
 
 class VerEditCarTrams extends Component{
   
@@ -47,12 +76,11 @@ class VerEditCarTrams extends Component{
       modalDescaragr: false,
       modalEliminar: false,
       modalEditar: false,
+      modalRedirigir: false,
       activeIndex: 0,
       Index: 0,
-      IndexCapa: 0,
       url:'',
-      capa:'',
-      columnaCapa:'',
+      comboSel:'Activos',
       form:{
         id:'',
         codigo:'',
@@ -73,24 +101,22 @@ class VerEditCarTrams extends Component{
 
   this.columns2 = [
     {dataField: 'carretera.nombre', text:<Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
+    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('Tramo')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoIni.m', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoIni.descripcion', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
+    {dataField: 'puntoIni.m', text: <Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation>, sort: true, filter: textFilter()},
+    {dataField: 'puntoIni.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoFin.m', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoFin.descripcion', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
+    {dataField: 'puntoFin.m', text: <Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation>, sort: true, filter: textFilter()},
+    {dataField: 'puntoFin.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'idDdCodTecReal', text: <Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'idDdRedes', text: <Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdOrganismoCompetente', text: <Translation ns= "global">{(t) => <>{t('Organismos')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdOrganismoConservacion', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
+    {dataField: 'idDdOrganismoCompetente', text: <Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation>, sort: true, filter: textFilter()},
+    {dataField: 'idDdOrganismoConservacion', text: <Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'idDdRegimenExplotacion', text: <Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'idDdRegimenGestion', text: <Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdTiposCalzada', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>,sort: true, filter: textFilter()},
+    {dataField: 'idDdTiposCalzada', text: <Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation>,sort: true, filter: textFilter()},
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAccionesTr}
   ]
-
-  
 
   //Paginación
   this.pagination = paginationFactory({
@@ -130,14 +156,13 @@ ButtonsAccionesTr = (cell, row, rowIndex) => {
 
 return (
   <div>
-  <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>
+  <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalRedirigir: true})}}><FontAwesomeIcon icon={faEdit}/></button>
   {"  "}
   <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
 </div>              
 
   );
 };
-
 
   //Maneja la edición e inserción en los forms
   handleChange=async e=>{
@@ -154,14 +179,17 @@ return (
     }
 
 
- habBtnSeleccionar(){
-  console.log(this.state.form);
-
- }
-
+   handleCombo = e => {
+    this.state.comboSel = e.value;
+    console.log("Funcion Combo",this.state.form);
+    console.log("Combo Seleccionado: ",this.state.comboSel);
+    this.peticionGet2();
+  };
+  
   componentDidMount(){
     this.peticionGet1();
     this.peticionGet2();
+    
   }
 
   // Cambia el índice de la Tab
@@ -211,7 +239,7 @@ peticionGet1=()=>{
 
 /*Obtención datos Organismos*/
 peticionGet2=()=>{
-  axios.get(url2).then(response2=>{
+  axios.get(url2+"/"+this.state.comboSel).then(response2=>{
 
       console.log(response2.data);
       var data2 = response2.data;
@@ -222,7 +250,11 @@ peticionGet2=()=>{
         orgtableData2: response2.data,
         tableData2: slice2
       })
-  });
+  }).catch(error=>{
+    console.log("KO");
+    console.log("URL para GET Combo:", url2+"/"+this.state.comboSel);
+    console.log(error);        
+});
 }    
 
 
@@ -245,6 +277,12 @@ modalDescaragr=()=>{
 modalEditar=()=>{
   this.setState({modalEditar: !this.state.modalEditar});
 }
+
+/*Editar registro*/
+modalRedirigir=()=>{
+  this.setState({modalRedirigir: !this.state.modalRedirigir});
+}
+
 
 /*Editar registro*/
 peticionPut=()=>{
@@ -295,7 +333,7 @@ peticionDownload=()=>{
   axios.post(url1+"/"+this.state.form.id, {
     responseType: 'blob'}).then(response=>{
     console.log("Descargar");
-    fileDownload(response.data, 'test.txt')
+    //fileDownload(response.data, 'test.txt')
     this.setState({modalDescaragr: false});
     this.peticionGet();
   }).catch(error=>{
@@ -360,6 +398,14 @@ seleccionarTramo=(CarTram)=>{
         content: (
           <div>
              {"  "}
+
+             <span style={{float: 'right'}}>
+                <Select 
+                  options={ combo } 
+                  onChange={this.handleCombo} 
+                  value={combo.find(obj => obj.value === this.state.comboSel)}
+                  /> 
+              </span>
             <br /><br />
             <BootstrapTable  
             bootstrap4 
@@ -383,18 +429,27 @@ seleccionarTramo=(CarTram)=>{
     ];
 
       return(
-        //Retomamos valores de Índice de la Tab o SubTab con su respectiva URL. Debajo, en el fragment, Pop-ups y Forms
-        /*indice= {activeIndex},
-        this.state.Index=indice.activeIndex,
-        console.log("Indice: ",this.state.Index),
-        console.log("URL elegida: ",this.state.url),*/
 
         <div className="App"> 
 
           <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />  
           
           <Fragment>
-		
+          <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#252831'}}  isOpen={this.state.modalRedirigir}>
+               <ModalHeader style={{display: 'block', backgroundColor: '#252831'}}>
+                <span style={{float: 'right', backgroundColor: '#252831'}}>
+                  <button  onClick={()=>this.modalRedirigir()}>X</button>
+                </span>
+                </ModalHeader>
+                <ModalBody style={{backgroundColor: '#e1e9fc'}}>
+                  <div style={{marginRight:'1%', marginTop: '5%', backgroundColor: '#e1e9fc'}}> 
+                    <h1><Translation ns= "global">{(t) => <>{t('VisInfTra')}</>}</Translation></h1>               
+                    <VerCarTramDet 
+                       id={this.state.form.id}
+                    />
+                  </div>    
+                  </ModalBody>
+          </Modal>
 			      <Modal isOpen={this.state.modalEliminar}>
 				      <ModalBody>
               <Translation ns= "global">{(t) => <>{t('eliReg')}</>}</Translation>			        
@@ -437,7 +492,7 @@ seleccionarTramo=(CarTram)=>{
 				      </ModalFooter>
 			      </Modal>
 			
-			      <Modal size="lg" style={{maxWidth: '800px', width: '60%'}} isOpen={this.state.modalEditar}>
+			      <Modal size="lg" style={{maxWidth: '1000px', width: '60%'}} isOpen={this.state.modalEditar}>
               <ModalHeader style={{display: 'block'}}>
               <span style={{float: 'right'}}>
                 <button className="btn btn-danger" onClick={()=>{this.setState({tipoModal: 'verificarEd'}); this.modalVerificarEd()}}>x</button>

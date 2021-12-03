@@ -6,7 +6,7 @@ import '../css/Pagination.css';
 import '../css/Menu.css';
 import { Trans } from 'react-i18next';
 import { Translation } from 'react-i18next';
-import BootstrapTable, {TableHeaderColumn} from 'react-bootstrap-table-next';
+import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
@@ -123,11 +123,7 @@ modalImportar=()=>{
             filter={filterFactory()}
             bordered={ false }
             headerWrapperClasses="table-responsive"
-<<<<<<< HEAD
             classes="w-auto text-nowrap"
-=======
-            classes='w-auto text-nowrap'
->>>>>>> 5de781f8fcccd6cb69713cff554113b03978f068
           >
 
 
