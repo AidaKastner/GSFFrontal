@@ -37,21 +37,35 @@ function CargarExcel(){
    
     await axios.post(url, f, config)
     .then(response =>{
-      console.log(response.data); 
-      var msg = <Translation ns= "global">{(t) => <>{t('ExcelOK')}</>}</Translation>   
+      console.log(response?.data); 
+      console.log("OK");
+      var FilasCargadas = response?.data[1] - 1;
+      console.log(FilasCargadas);
+
+      var msg= <Translation ns= "global">{(t) => <>{t('ExcelOK')}</>}</Translation>
+      /*var msg = <Translation ns= "global">
+        {(t) => <>{t('FilasCargadas')}</>}
+        {FilasCargadas}
+      </Translation>; */
+      
+      guardarMsgOut(msg);
+      
+
+      
       setMsgOutBoolOK(true);
       setMsgOutBoolKO(false);
-      guardarMsgOut(msg);
+      
+    
       
       
     }).catch(error=>{
       console.log("prueba2");
-
+      console.log(error.response?.data);
 
       setMsgOutBoolOK(false);
       setMsgOutBoolKO(true);
 
-      switch(error.response.data){
+      switch(error.response?.data[0]){
       
         case 1:
           var msg= <Translation ns= "global">{(t) => <>{t('ExcelKO')}</>}</Translation>           
@@ -66,7 +80,7 @@ function CargarExcel(){
           var msg= <Translation ns= "global">{(t) => <>{t('ActuacionKO')}</>}</Translation>
           break;
         default:
-          var msg= <Translation ns= "global">{(t) => <>{t('FormatoKO')}</>}</Translation>
+          var msg= <Translation ns= "global">{(t) => <>{t('ExcelKO')}</>}</Translation>
           break;
       } 
 

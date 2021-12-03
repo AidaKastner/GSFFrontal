@@ -524,7 +524,8 @@ peticionGet7=()=>{
         pageCount: Math.ceil(data7.length / this.state.perPage),
         orgtableData7: response7.data,
         tableData7: slice7,
-        modalImportar: false
+        modalImportar: false,
+        capa: slice7
       })
   });
 }    
@@ -541,7 +542,8 @@ peticionGet8=()=>{
         pageCount: Math.ceil(data8.length / this.state.perPage),
         orgtableData8: response8.data,
         tableData8: slice8,
-        modalImportar: false
+        modalImportar: false,
+        capa: slice8
       })
   });
 }    
@@ -558,7 +560,8 @@ peticionGet9=()=>{
         pageCount: Math.ceil(data9.length / this.state.perPage),
         orgtableData9: response9.data,
         tableData9: slice9,
-        modalImportar: false
+        modalImportar: false,
+        capa: slice9
       })
   });
 }    

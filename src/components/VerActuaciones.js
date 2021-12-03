@@ -43,8 +43,10 @@ class VerActuaciones extends Component{
       modalImportar: false,
       modalEliminar: false,
       modalInsertar: false,
+      tipoModal: '',
       form:{
-        id: ''
+        id: '',
+        actuacion: ''
       } 
   }
     
@@ -90,7 +92,7 @@ class VerActuaciones extends Component{
            
     return (
       <div>
-      <button className="btn btn-primary"><FontAwesomeIcon icon={faEdit}/></button>
+      <button className="btn btn-primary" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInsertar: true, tipoModal: 'Actualizar'})}}><FontAwesomeIcon icon={faEdit}/></button>
       {"  "}
       <button className="btn btn-danger" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
       </div>              
@@ -119,14 +121,7 @@ peticionGet=()=>{
         pageCount: Math.ceil(data.length / this.state.perPage),
         orgtableData: response.data,
         tableData: slice,
-        tiposActuaciones: response.data.tiposActuaciones,
-        carreterasData: response.data.carreteras,
-        tiposFirmeTramoData: response.data.tiposFirmeTramos,
-        capasBaseData: response.data.capasBase,
-        capasSubbaseData: response.data.capasSubbase,
-        capasRodaduraData: response.data.capasRodadura,
-        capasIntermediaData: response.data.capasIntermedia,
-        NivelesInfluenciaData: response.data.nivelesInfluencia,
+        desplegablesActuaciones: response.data.desplegablesActuaciones,
         modalImportar: false,
         modalInsertar: false
       })
@@ -160,7 +155,8 @@ seleccionarActuacion=(actuacion)=>{
   this.setState({
     tipoModal: 'actualizar',
     form: {
-      id: actuacion.id
+      id: actuacion.id,
+      actuacion: actuacion
     }
   })
 
@@ -171,9 +167,9 @@ seleccionarActuacion=(actuacion)=>{
         return(
           
             <div className="App" >            
-            <button className="btn btn-primario" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalImportar()}}><Trans ns= "global">ImpAct</Trans></button>       
+            <button className="btn btn-primario" onClick={()=>{this.setState({form: null}); this.modalImportar()}}><Trans ns= "global">ImpAct</Trans></button>       
             {"  "}
-            <button className="btn btn-primario" onClick={()=>{this.setState({form: null}); this.modalInsertar()}}><Trans ns= "global">AddAct</Trans></button>      
+            <button className="btn btn-primario" onClick={()=>{this.setState({form: null, tipoModal: 'Insertar'}); this.modalInsertar()}}><Trans ns= "global">AddAct</Trans></button>      
           <br /><br />
           <BootstrapTable 
             bootstrap4 
@@ -226,19 +222,17 @@ seleccionarActuacion=(actuacion)=>{
                   
                 </ModalHeader>
                 <ModalBody>
-                  <CrearEditarActuacion 
-                  idAct = '' 
-                  Data = {this.state.orgtableData}
-                  /*tiposActuaciones = {this.state.tiposActuaciones}
-                  carreteras = {this.state.carreterasData}
-                  tiposFirmeTramo = {this.state.tiposFirmeTramoData}
-                  capasBase = {this.state.capasBaseData}
-                  capasSubbase = {this.state.capasSubbaseData}
-                  capasRodadura = {this.state.capasRodaduraData}
-                  capasIntermedia = {this.state.capasIntermediaData}
-                  nivelesInfluencia = {this.state.NivelesInfluenciaData}*/
-
-                  />                 
+                {this.state.tipoModal=='Actualizar'?
+                  <CrearEditarActuacion                
+                    Actuacion = {this.state.form.actuacion}
+                    Data = {this.state.desplegablesActuaciones}
+                  />   
+                  :   
+                  <CrearEditarActuacion                  
+                    Actuacion = ''
+                    Data = {this.state.desplegablesActuaciones}
+                  />  
+                  }                   
                 </ModalBody>
 
                 <ModalFooter>                  
