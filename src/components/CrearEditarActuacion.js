@@ -257,11 +257,32 @@ function CrearEditarActuacion({Actuacion, Data}){
           
         });*/
 
-        await actualizarFormActuacion({
-            ...FormActuacion,
-            [e.target.name]: e.target.value
-          
-        });
+        if(e.target.name == "Creciente" || e.target.name == "Decreciente"){
+            console.log("SENTIDO ACTU", e.target.value);
+
+            if(e.target.name == "Creciente"){
+                await actualizarFormActuacion({
+                    ...FormActuacion,
+                    [e.target.name]: !(FormActuacion.Creciente)
+                
+                });
+            }else{
+                await actualizarFormActuacion({
+                    ...FormActuacion,
+                    [e.target.name]: !(FormActuacion.Decreciente)
+                
+                });
+            }
+            
+        }else{
+
+            await actualizarFormActuacion({
+                ...FormActuacion,
+                [e.target.name]: e.target.value
+            
+            });
+        }
+    
 
         /*if (FormActuacion.Carril1 > 0 && FormActuacion.Carril2 > 0){
             await actualizarFormActuacion({
@@ -273,10 +294,7 @@ function CrearEditarActuacion({Actuacion, Data}){
     
         console.log("FORM: ", FormActuacion);
         console.log("FORM ACTUACIONES: ", FormActuacion);
-
-        
-
-        //habBtnSeleccionar();
+       
    }
 
    const handleSelectChange=(e, {name})=>{
@@ -285,11 +303,6 @@ function CrearEditarActuacion({Actuacion, Data}){
     console.log("name:", name);
     console.log("tipoFirm ", FormActuacion.TipoFirmeTramo);
    
-    /*actualizarForm({
-        ...Form,
-        [name]: e.value
-      
-    });*/
 
     actualizarFormActuacion({
         ...FormActuacion,
@@ -306,24 +319,15 @@ function CrearEditarActuacion({Actuacion, Data}){
     }*/
     console.log("FORM ACTUACIONES: ", FormActuacion);
 
-    //habBtnSeleccionar();
 }
 
-   /*const habBtnSeleccionar=()=>{
-    console.log("Form: ", Form);
-    setBtnSeleccionar(false);
-    if((Form.TipoActuacion != '' && Form.TipoActuacion != 0) && Form.Carretera > 0 && Form.PKIni != '' &&
-           Form.MIni != '' && Form.PKFin != '' && Form.MFin != ''){
-            setBtnSeleccionar(true);
-           }
-   }*/
 
    const [msgOut, guardarMsgOut] = useState();
    const [msgOutSave, guardarMsgOutSave] = useState();
    const [msgOutBoolOK, setMsgOutBoolOK] = useState(false);
    const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
    const [TablaTramos, actualizarTablaTramos] = useState([]);
-   const [btnSeleccionar, setBtnSeleccionar] = useState(true);
+
 
 
    //Llamada al controlador para obtener la tabla de tramos
@@ -346,13 +350,7 @@ function CrearEditarActuacion({Actuacion, Data}){
 
         console.log("peticionSeleccionar");   
         console.log(FormActuacion); 
-        //var data= JSON.stringify(Form);
-        //data.append('TipoActuacion',Form.TipoActuacion);
-        data.append('idCarretera',FormActuacion.Carretera);
-        data.append('PkIni',FormActuacion.PkIni);
-        data.append('MIni',FormActuacion.MIni);
-        data.append('PkFin',FormActuacion.PkFin);
-        data.append('MFin',FormActuacion.MFin);
+
     
         //await axios.get(url, data, config)
         await axios.get(url+`${FormActuacion.Carretera}/${FormActuacion.PkIni}/${FormActuacion.MIni}/${FormActuacion.PkFin}/${FormActuacion.MFin}`)
@@ -362,7 +360,6 @@ function CrearEditarActuacion({Actuacion, Data}){
             setMsgOutBoolKO(false);
             actualizarTablaTramos(response.data.result); //Se rellena la tabla de tramos
             actualizarMostrarCampos({ShowTablaTramos: false, ShowCamposComunes: false, ShowCalzada: false, ShowCarriles: false, ShowTipoCalzada: false, ShowUtilizada: false, ShowCarrAntigua: false, ShowGestion: false, ShowLongitud: false, ShowTabFirme: false, ShowAnchuras: false, ShowFresado: false, ShowTabExplanada: false, ShowTabClasificacion: false});
-            setBtnSeleccionar(false);
             console.log(response.data); 
             console.log("activos: ", MostrarCampos);
 
@@ -467,13 +464,9 @@ function CrearEditarActuacion({Actuacion, Data}){
     useEffect(() => {
     console.log("ACTUACION: ", Actuacion);
     if(Actuacion.id > 0){
-        console.log("PRUEBA");
         actualizarMostrarCampos({ShowSeleccionarTramos:false});
-        peticionSeleccionar();
-        console.log("safd");
-        
-            
-    }
+        peticionSeleccionar();         
+     }
     }, []);
 
 
@@ -583,9 +576,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 var msg= <Translation ns= "global">{(t) => <>{t('FechaActuacionKO')}</>}</Translation>
                 break;
             case 4:
+                var msg= <Translation ns= "global">{(t) => <>{t('TipoCalzKO')}</>}</Translation>
+                break;
+            case 5:               
                 var msg= <Translation ns= "global">{(t) => <>{t('CarrilesKO')}</>}</Translation>
                 break;
-            case 5:
+            case 6:
                 var msg= <Translation ns= "global">{(t) => <>{t('EspesorKO')}</>}</Translation>
                 break;
             default:
