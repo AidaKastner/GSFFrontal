@@ -47,7 +47,7 @@ const Sidebar = () => {
 
 
 const SidebarNav = styled.nav`
-  background: #15171c;
+  background: #3f3f3f;
   width: 250px;
   height: 100vh;
   display: flex;
