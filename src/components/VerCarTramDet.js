@@ -2,19 +2,21 @@ import React, { Component, useState , Fragment} from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
 import { Translation, useTranslation, Trans } from 'react-i18next';
-import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
-import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import Tab from "./Tab";
-
+import Spinner from "../components/Spinner"; 
+import GoogleMapComponent from "../components/GoogleMapComponent";
 
 
 const url = "https://localhost:44301/Tramos/";
@@ -34,6 +36,7 @@ class VerCarTramDet extends Component{
       idTramSel: props.id,
       offset: 0,
       tableData: [],
+      aditionalData: [],
       orgtableData: [],
       perPage: 50000,
       currentPage: 0,
@@ -47,6 +50,7 @@ class VerCarTramDet extends Component{
       comboSel:'Activos',
       currentYear: new Date(),
       fechaAltaFor:'',
+      content: null,
       form:{
         id:'',
         codigo:'',
@@ -103,7 +107,12 @@ class VerCarTramDet extends Component{
         IdCarreteras:''
       } 
   }
-    
+
+  this.columns = [
+    {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
+    {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true}
+   ]
+
 
   }
 
@@ -162,12 +171,15 @@ peticionGet=()=>{
 
       console.log(response.data);
 
-      var data = response.data;
-     
+      var data = response.data.carriles;
+      var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
 
       this.setState({
-        orgtableData: response.data
+        orgtableData: response.data,
+        tableData: slice,
+        content: response
       })
+      console.log("AQUI, CARRILES", response.data.carriles);
       this.state.form.nombre=this.state.orgtableData.carretera.nombre;
       this.state.form.codigo=this.state.orgtableData.carretera.codigo;
       this.state.form.comentario=this.state.orgtableData.comentario;
@@ -226,9 +238,6 @@ peticionGet=()=>{
       this.state.form.explRellenoCbr=this.state.orgtableData.explanadasTramo.rellenoCbr;
       this.state.form.explCoronacion=this.state.orgtableData.explanadasTramo.coronacion;
       this.state.form.explCoronacionCbr=this.state.orgtableData.explanadasTramo.coronacionCbr;
-
-      this.state.form.carSent=this.state.orgtableData.carriles.sentido;
-      this.state.form.carrOrd=this.state.orgtableData.carriles.ordenCarril;
  
     }).catch(error=>{
       console.log("KO");
@@ -568,32 +577,21 @@ seleccionarTramo=(CarTram)=>{
       {
         label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
         content: (
-          <div>
-             {"  "}
-            <br /><br />
-            <MDBTable>
-      <MDBTableHead>
-        <tr>
-          <th scope='col'> </th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('cm')}</>}</Translation></th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('cbr')}</>}</Translation></th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>
-          <th scope='row'><Translation ns= "global">{(t) => <>{t('relleno')}</>}</Translation></th>
-          <td>{this.state.form.explRelleno}</td>
-          <td>{this.state.form.explRellenoCbr}</td>
-
-        </tr>
-        <tr>
-          <th scope='row'><Translation ns= "global">{(t) => <>{t('coronacion')}</>}</Translation></th>
-          <td>{this.state.form.explCoronacion}</td>
-          <td>{this.state.form.explCoronacionCbr}</td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
-        
+          <div style={{marginLeft:'30%'}}>
+            {"  "}
+          <br /><br />
+          <BootstrapTable 
+            bootstrap4 
+            wrapperClasses="table-responsive"
+            keyField='id' 
+            columns={this.columns} 
+            data={this.state.orgtableData.carriles}
+            bordered={ false }
+            filter={filterFactory()}
+            headerWrapperClasses="table-responsive"
+            classes="w-auto text-nowrap"
+          >
+        </BootstrapTable>
           </div>
         ),
         disabled: false
@@ -604,7 +602,18 @@ seleccionarTramo=(CarTram)=>{
           <div>
              {"  "}
             <br /><br />
-            
+            <BootstrapTable 
+            bootstrap4 
+            wrapperClasses="table-responsive"
+            keyField='id' 
+            columns={this.columns} 
+            data={this.state.orgtableData.carriles}
+            bordered={ false }
+            filter={filterFactory()}
+            headerWrapperClasses="table-responsive"
+            classes="w-auto text-nowrap"
+          >
+          </BootstrapTable>
           </div>
         ),
         disabled: false
@@ -623,6 +632,12 @@ seleccionarTramo=(CarTram)=>{
 
     ];
         
+      if (!this.state.content) 
+      return (
+        <div className="u-full-width" style={{marginLeft:'50%'}}>
+          <Spinner /> 
+        </div>
+      );
       return(
        
         <div className="app" style={{ backgroundColor: '#e1e9fc', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
@@ -777,7 +792,7 @@ seleccionarTramo=(CarTram)=>{
                 <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
             </div>
               <div>
-                <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyB5XqKVMRIVh-YUMhdZMrOCAJcD7tWaOig"></script>
+                
               </div>
             </form>
             </div>

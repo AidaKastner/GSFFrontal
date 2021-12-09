@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import Cookies from 'universal-cookie';
 import Sidebar from "../components/Sidebar";
-import Idioma from "../components/Idioma";
+import SidebarBack from "../components/SidebarBack";
 import { useTranslation } from 'react-i18next';
-
+import Idioma from "../components/Idioma";
 
 function Menu(props){
 
@@ -14,12 +14,14 @@ function Menu(props){
     return(
         <div>
             <div>
-                {/*Cargamos el menú lateral*/}
-                <Sidebar />
-            </div>
-            <div>
                 <Idioma />
             </div>
+            <div>
+                {/*Cargamos el menú lateral*/}
+                <SidebarBack />
+                <Sidebar /> 
+            </div>
+ 
         </div>
     );
 }

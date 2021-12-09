@@ -6,8 +6,8 @@ import { IconContext } from 'react-icons/lib';
 import { NavLink } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
  
-var len ='';
-let idimoSel='1';
+let len;
+let idimoSel;
 
 const Idioma = () => {
     const [Form, IdiomaSel] = useState({

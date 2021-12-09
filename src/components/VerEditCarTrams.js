@@ -19,6 +19,7 @@ import Tab from "./Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import Select from 'react-select';
 import VerCarTramDet from "../components/VerCarTramDet";
+import Spinner from "../components/Spinner"; 
 
 const StyleLink = styled(Link)`
   display: flex;
@@ -81,6 +82,7 @@ class VerEditCarTrams extends Component{
       Index: 0,
       url:'',
       comboSel:'Activos',
+      content: null,
       form:{
         id:'',
         codigo:'',
@@ -94,12 +96,13 @@ class VerEditCarTrams extends Component{
  
   //Carga de datos de las tablas
   this.columns = [
+    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'comentario', text:<Translation ns= "global">{(t) => <>{t('comentario')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones}
+    {dataField: 'comentario', text:<Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation>, sort: true, filter: textFilter()}
   ]
 
   this.columns2 = [
+    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAccionesTr},
     {dataField: 'carretera.nombre', text:<Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('Tramo')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, sort: true, filter: textFilter()},
@@ -114,8 +117,7 @@ class VerEditCarTrams extends Component{
     {dataField: 'idDdOrganismoConservacion', text: <Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'idDdRegimenExplotacion', text: <Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'idDdRegimenGestion', text: <Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdTiposCalzada', text: <Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation>,sort: true, filter: textFilter()},
-    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAccionesTr}
+    {dataField: 'idDdTiposCalzada', text: <Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation>,sort: true, filter: textFilter()}
   ]
 
   //Paginación
@@ -248,7 +250,8 @@ peticionGet2=()=>{
       this.setState({
         pageCount: Math.ceil(data2.length / this.state.perPage),
         orgtableData2: response2.data,
-        tableData2: slice2
+        tableData2: slice2,
+        content: response2
       })
   }).catch(error=>{
     console.log("KO");
@@ -427,6 +430,13 @@ seleccionarTramo=(CarTram)=>{
 
 
     ];
+
+      if (!this.state.content) 
+      return (
+        <div className="u-full-width" style={{marginLeft:'50%'}}>
+          <Spinner /> 
+        </div>
+      );
 
       return(
 

@@ -17,6 +17,8 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import Tab from "../components/Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
+import Spinner from "../components/Spinner"; 
+import Idioma from "../components/Idioma";
 
 
 const url1 = "https://localhost:44301/DdCodTecReal";
@@ -76,6 +78,7 @@ class VerEditTrams extends Component{
       setBtnSeleccionar: false,
       capa:'',
       columnaCapa:'',
+      content: null,
       form:{
         codigo:'',
         nombre:'',
@@ -87,39 +90,44 @@ class VerEditTrams extends Component{
  
   //Carga de datos de las tablas
   this.columns = [
+    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones}
+    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()}
   ]
 
   this.columns2 = [
+    ,
+    {dataField: 'acciones', text: <Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'acciones', text: <Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones}
+    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()}
   ]
 
   this.columns3 = [
+    ,
+    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones}
+    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()}
   ]
 
   this.columns4 = [
+    ,
+    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones}
+    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()}
   ]
 
   this.columns5 = [
+    ,
+    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones}
+    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter()}
   ]
 
   this.columns6 = [
+    ,
+    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdTiposFirmesTramo', text:<Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones}
+    {dataField: 'idDdTiposFirmesTramo', text:<Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter()}
   ]
 
   this.state.columnaCapa = this.columns6
@@ -159,7 +167,7 @@ class VerEditTrams extends Component{
 
   //Default idtramos para evitar el null
   InserSelector = () => {
-    console.log("EDITAMOS",editBool);
+    console.log("edit",editBool);
     if(editBool===false){
 
       idtramos='Flexible';
@@ -561,7 +569,8 @@ peticionGet9=()=>{
         orgtableData9: response9.data,
         tableData9: slice9,
         modalImportar: false,
-        capa: slice9
+        capa: slice9,
+        content: response9
       })
   });
 }    
@@ -830,15 +839,21 @@ seleccionarTramo=(diccionario, editar)=>{
 
 
     ];
-
+      if (!this.state.content) 
+      return (
+        <div className="row"  style={{marginLeft:'50%'}}>
+          <Spinner /> 
+        </div>
+      );
       return(
+
         //Retomamos valores de Índice de la Tab o SubTab con su respectiva URL. Debajo, en el fragment, Pop-ups y Forms
         indice= {activeIndex},
         this.state.Index=indice.activeIndex,
         console.log("Indice: ",this.state.Index),
         this.state.url=this.checkSwitch(indice.activeIndex),
         console.log("URL elegida: ",this.state.url),
-
+        
         <div className="App"> 
 
           <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />  

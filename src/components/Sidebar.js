@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons/lib';
 
-
 const Sidebar = () => {
 
 
@@ -23,8 +22,10 @@ const Sidebar = () => {
           <div className="Navicon">   
             <NavLink to='#'>      
                 <FaIcons.FaBars onClick={showSidebar} />
-            </NavLink>  
-          </div>                            
+            </NavLink> 
+
+          </div>     
+                       
         </div>
           <SidebarNav sidebar={sidebar}>
           <div className="SidebarWrap">          

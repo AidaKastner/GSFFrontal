@@ -13,7 +13,7 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import ImpExcelAforos from './ImpExcelAforos';
-
+import Spinner from "../components/Spinner"; 
 
 
 const urlAf = "https://localhost:44301/Aforos";
@@ -33,6 +33,7 @@ class VerImpAforos extends Component{
       perPage: 50000,
       currentPage: 0,
       modalImportar: false,
+      content: null,
       form:{
         id: ''
       } 
@@ -96,7 +97,8 @@ peticionGet=()=>{
         pageCount: Math.ceil(data.length / this.state.perPage),
         orgtableData: response.data,
         tableData: slice,
-        modalImportar: false
+        modalImportar: false,
+        content: response
       })
   });
 }    
@@ -107,6 +109,13 @@ modalImportar=()=>{
 }    
 
     render(){
+        if (!this.state.content) 
+        return (
+          <div className="u-full-width"  style={{marginLeft:'50%'}}>
+            <Spinner /> 
+          </div>
+        );
+
         return(
           
             <div className="App">            

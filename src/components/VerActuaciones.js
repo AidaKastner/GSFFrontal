@@ -20,7 +20,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
-
+import Spinner from "../components/Spinner"; 
 
 
 const urlAct = "https://localhost:44301/actuaciones";
@@ -44,15 +44,15 @@ class VerActuaciones extends Component{
       modalEliminar: false,
       modalInsertar: false,
       tipoModal: '',
+      content: null,
       form:{
         id: '',
         actuacion: ''
       } 
   }
-    
-
 
   this.columns = [
+    {dataField: 'acciones', text: <Translation ns= "global">{(t) => <>{t( 'Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'idDdTipoActuaciones', text:<Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'carretera.nombre', text: <Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'claveObra', text: <Translation ns= "global">{(t) => <>{t('Clave')}</>}</Translation>, sort: true, filter: textFilter()},
@@ -63,8 +63,7 @@ class VerActuaciones extends Component{
     {dataField: 'carreterasAntigua', text: <Translation ns= "global">{(t) => <>{t('CarreteraAnt')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${row.puntoIni.pk} + ${row.puntoIni.m}`}</div>;}, filter: textFilter()},
     {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t( 'PKFin')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${row.puntoFin.pk} + ${row.puntoFin.m}`}</div>;}, filter: textFilter()},
-    {dataField: 'importe', text: <Translation ns= "global">{(t) => <>{t( 'Importe')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'acciones', text: <Translation ns= "global">{(t) => <>{t( 'Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones}
+    {dataField: 'importe', text: <Translation ns= "global">{(t) => <>{t( 'Importe')}</>}</Translation>, sort: true, filter: textFilter()}
   ]
 
 
@@ -123,7 +122,8 @@ peticionGet=()=>{
         tableData: slice,
         desplegablesActuaciones: response.data.desplegablesActuaciones,
         modalImportar: false,
-        modalInsertar: false
+        modalInsertar: false,
+        content: response
       })
   });
 }    
@@ -163,7 +163,14 @@ seleccionarActuacion=(actuacion)=>{
   console.log("ID a eliminar: ", actuacion.id);
 }    
 
-    render(){
+    render(){ 
+        if (!this.state.content) 
+        return (
+          <div className="u-full-width"  style={{marginLeft:'50%'}}>
+            <Spinner /> 
+          </div>
+        );
+
         return(
           
             <div className="App" >            
