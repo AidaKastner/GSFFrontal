@@ -15,11 +15,6 @@ import { Translation } from 'react-i18next';
 export const SidebarData = [
     
     {
-        title: <Translation ns= "global">{(t) => <>{t('Home')}</>}</Translation>, 
-        icon: <HomeIcon />,
-        path: '/menu',
-    },
-    {
         title: <Translation ns= "global">{(t) => <>{t('gestTram')}</>}</Translation>,
         icon: <DirectionsCarIcon />,
         path: '/menu',
@@ -42,20 +37,8 @@ export const SidebarData = [
                 path:'/VerImpAfor'
             },
             {
-                title: <Translation ns= "global">{(t) => <>{t('varAf')}</>}</Translation>,
-                path:'/menu'
-            },
-            {
                 title: <Translation ns= "global">{(t) => <>{t('impAc')}</>}</Translation>,
                 path:'/CargarActuaciones'
-            },
-            {
-                title: <Translation ns= "global">{(t) => <>{t('crearAct')}</>}</Translation>,
-                path:'/menu'
-            },
-            {
-                title: <Translation ns= "global">{(t) => <>{t('verAct')}</>}</Translation>,
-                path:'/menu'
             },
         ],
     },

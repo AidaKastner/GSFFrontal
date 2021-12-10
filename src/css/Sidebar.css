@@ -1,5 +1,5 @@
 .Nav{
-    background: #15171c;
+    background: #3f3f3f;
     height: 80px;
     display: flex;
     align-items: center;
@@ -15,12 +15,20 @@
 }
 
 .SidebarWrap{
+    background: #3f3f3f;
     width: 100%;
+}
+
+.SidebarWrap a:hover{
+    background: #9a9ca5;
+    border-left: 4px solid #a11510;
+    cursor: pointer;
+    color: #a11510;
 }
 
 .SidebarLink { 
   display: flex;
-  color: #e1e9fc;
+  color: #eaeaee;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
@@ -28,10 +36,12 @@
   height: 60px;
   text-decoration: none;
   font-size: 18px;
+  background: #3f3f3f;
 }
 
 .SidebarLink a:hover{
-    background: #252831;
-    border-left: 4px solid #632ce4;
+    background: #9a9ca5;
+    border-left: 4px solid #a11510;
     cursor: pointer;
+    color: #a11510;
 }
