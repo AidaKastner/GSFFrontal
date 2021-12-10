@@ -6,7 +6,6 @@ import Sidebar from "../components/Sidebar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form } from "react-bootstrap";
 import '../css/Menu.css';
-import Idioma from "../components/Idioma";
 import { useTranslation } from 'react-i18next';
 
 
@@ -17,9 +16,6 @@ function CargarActuaciones(props){
                  
             <div>
               <Sidebar />
-            </div>
-            <div>
-                <Idioma />
             </div>
             <div style={{marginLeft:'15%'}}>         
               {/*<div>

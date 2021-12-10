@@ -18,7 +18,6 @@ import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import Tab from "../components/Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import Spinner from "../components/Spinner"; 
-import Idioma from "../components/Idioma";
 
 
 const url1 = "https://localhost:44301/DdCodTecReal";

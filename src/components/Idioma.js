@@ -19,6 +19,25 @@ const Idioma = () => {
     const showLanguagebar = () => setLanguagebar(!languagebar);
     const setLanguageSel = (language) => changeLanguageSel(language);
 
+    const setLangauge = (idimoSel) => {
+        switch(idimoSel) {
+            case "1":
+                i18n.changeLanguage("ca");
+                languageSel = "CAT";
+                break;
+            case "2":
+                i18n.changeLanguage("es");
+                languageSel = "ESP";
+                break;
+            default:
+                i18n.changeLanguage("ca");
+                languageSel = "CAT";
+                break;
+        }
+
+        setLanguageSel(languageSel);
+    };
+
     //Maneja la edición e inserción en los forms
     const handleChange = e => {
         IdiomaSel({ [Form.idioma]: e.target.className });
@@ -46,7 +65,11 @@ const Idioma = () => {
     }
 
     const { i18n } = useTranslation();
-    
+
+    if (idimoSel !== undefined && idimoSel !== '1' && languageSel === 'CAT') {
+        setLangauge(idimoSel);
+    }
+
     return (
         <IdiomaNav>
             <IconContext.Provider value={{ color: '#fff' }}>
@@ -79,7 +102,7 @@ const Idioma = () => {
 
 const IdiomaNav = styled.nav`
     width: 100px;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     transition: 350ms;

@@ -3,7 +3,6 @@ import VerEditCarTrams from "../components/VerEditCarTrams";
 import Sidebar from "../components/Sidebar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Menu.css';
-import Idioma from "../components/Idioma";
 import { useTranslation } from 'react-i18next';
 import SidebarBack from "../components/SidebarBack";
 
@@ -15,9 +14,6 @@ function VerEditTram(props){
           <SidebarBack />
           <Sidebar />
         </div>
-          <div>
-            <Idioma />
-          </div>
         <div style={{marginLeft:'15%'}}>         
           <div style={{marginRight:'10%', marginTop: '5%'}}> 
             <h1>{ t('verEditCyT') }</h1>               
