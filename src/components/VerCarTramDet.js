@@ -35,7 +35,9 @@ class VerCarTramDet extends Component{
     this.state = {
       idTramSel: props.id,
       offset: 0,
+      offsetAf: 0,
       tableData: [],
+      tableAforos: [],
       aditionalData: [],
       orgtableData: [],
       perPage: 50000,
@@ -87,7 +89,7 @@ class VerCarTramDet extends Component{
         firmesTramoespIntdCar:'',
         firmesTramoespSubBasCar:'',
         firmesTramoespIntArc:'',
-        firmesTramoespIntArc:'',
+        firmesTramoespespBasArc:'',
         firmesTramoespBasArc:'',
         firmesTramoArcRod:'', 
         firmesTramoArcInt:'',
@@ -113,6 +115,11 @@ class VerCarTramDet extends Component{
     {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true}
    ]
 
+   this.columns2 = [
+    {dataField: 'campanya', text:<Translation ns= "global">{(t) => <>{t('campanya')}</>}</Translation>, sort: true},
+    {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true}
+   
+   ]
 
   }
 
@@ -168,18 +175,22 @@ peticionGet=()=>{
   console.log("Tramo escogido: ",this.state.idTramSel);
   
   axios.get(url+this.state.idTramSel).then(response=>{
-
-      console.log(response.data);
+      console.log("AQUI, Data", response.data);
+      console.log("AQUI, TramosAforos", response.data.tramosAforos);
+      console.log("AQUI, TramosAforos", response.data.tramosAforos.idAforosNavigation.anyomedida);
 
       var data = response.data.carriles;
+      var dataAforos = response.data.tramosAforos.idAforosNavigation;
       var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+      //var sliceAf = dataAforos.slice(this.state.offsetAf, this.state.offsetAf + this.state.perPage)
 
       this.setState({
         orgtableData: response.data,
         tableData: slice,
+        tableAforos: response.data.tramosAforos,
         content: response
       })
-      console.log("AQUI, CARRILES", response.data.carriles);
+     
       this.state.form.nombre=this.state.orgtableData.carretera.nombre;
       this.state.form.codigo=this.state.orgtableData.carretera.codigo;
       this.state.form.comentario=this.state.orgtableData.comentario;
@@ -227,7 +238,7 @@ peticionGet=()=>{
       
       this.state.form.firmesTramoespRodArc=this.state.orgtableData.firmesTramo.espesorRodaduraArcen;
       this.state.form.firmesTramoespIntArc=this.state.orgtableData.firmesTramo.espesorIntermediaArcen;
-      this.state.form.firmesTramoespBasArc=this.state.orgtableData.firmesTramo.espesorBaseArcen;
+      this.state.form.firmesTramoespespBasArc=this.state.orgtableData.firmesTramo.espesorBaseArcen;
       this.state.form.firmesTramoespSubBasArc=this.state.orgtableData.firmesTramo.espesorSubbaseArcen;
      
       this.state.form.explTrTerNat=this.state.orgtableData.explanadasTramo.idDdTerrenosNaturales;
@@ -238,7 +249,7 @@ peticionGet=()=>{
       this.state.form.explRellenoCbr=this.state.orgtableData.explanadasTramo.rellenoCbr;
       this.state.form.explCoronacion=this.state.orgtableData.explanadasTramo.coronacion;
       this.state.form.explCoronacionCbr=this.state.orgtableData.explanadasTramo.coronacionCbr;
- 
+      
     }).catch(error=>{
       console.log("KO");
       console.log("URL para GET Tramo:", url+this.state.idTramSel);
@@ -415,6 +426,7 @@ seleccionarTramo=(CarTram)=>{
       {
         label: <Translation ns= "global">{(t) => <>{t('Firme')}</>}</Translation>,
         content: (
+
           <div>
              {"  "}
             <br /><br />
@@ -606,8 +618,8 @@ seleccionarTramo=(CarTram)=>{
             bootstrap4 
             wrapperClasses="table-responsive"
             keyField='id' 
-            columns={this.columns} 
-            data={this.state.orgtableData.carriles}
+            columns={this.columns2} 
+            data={this.state.orgtableData}
             bordered={ false }
             filter={filterFactory()}
             headerWrapperClasses="table-responsive"
@@ -619,7 +631,7 @@ seleccionarTramo=(CarTram)=>{
         disabled: false
       },
       {
-        label: <Trans ns= "global">{(t) => <>{t('Act')}</>}</Trans>,
+        label: <Translation ns= "global">{(t) => <>{t('Act')}</>}</Translation>,
         content: (
           <div>
              {"  "}
