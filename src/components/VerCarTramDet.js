@@ -180,7 +180,7 @@ peticionGet=()=>{
       console.log("AQUI, TramosAforos", response.data.tramosAforos.idAforosNavigation.anyomedida);
 
       var data = response.data.carriles;
-      var dataAforos = response.data.tramosAforos.idAforosNavigation;
+      //var dataAforos = response.data.tramosAforos.idAforosNavigation;
       var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
       //var sliceAf = dataAforos.slice(this.state.offsetAf, this.state.offsetAf + this.state.perPage)
 
