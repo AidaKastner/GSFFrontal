@@ -501,7 +501,7 @@ function CrearEditarActuacion({Actuacion, Data}){
 
     //Firmes
     data.append('idTipoFirmeTramo', FormActuacion.TipoFirmeTramo)
-    data.append('idNivelesInfluencia ', FormActuacion.nivelesInfluencia)
+    data.append('idNivelesInfluencia', FormActuacion.NivelesInfluencia)
     data.append('CPA', FormActuacion.CPA)
     data.append('Fresado', FormActuacion.Fresado)
     data.append('AnchuraCarril', FormActuacion.AnchCarril)
