@@ -323,7 +323,6 @@ function CrearEditarActuacion({Actuacion, Data}){
 
 
    const [msgOut, guardarMsgOut] = useState();
-   const [msgOutSave, guardarMsgOutSave] = useState();
    const [msgOutBoolOK, setMsgOutBoolOK] = useState(false);
    const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
    const [TablaTramos, actualizarTablaTramos] = useState([]);
@@ -369,7 +368,7 @@ function CrearEditarActuacion({Actuacion, Data}){
 
 
         }).catch(error=>{
-            console.log(error); 
+            console.log("error tramos:", error.response.data); 
             actualizarTablaTramos([]);
             actualizarMostrarCampos({ShowTablaTramos: false, ShowCamposComunes: false, ShowCalzada: false, ShowCarriles: false, ShowTipoCalzada: false, ShowUtilizada: false, ShowCarrAntigua: false, ShowGestion: false, ShowLongitud: false, ShowTabFirme: false, ShowAnchuras: false, ShowFresado: false, ShowTabExplanada: false, ShowTabClasificacion: false});
 
@@ -379,19 +378,25 @@ function CrearEditarActuacion({Actuacion, Data}){
             //Mensajes de error
             switch(error.response.data){          
                 case 1:
+                    console.log("error 1")
                     //PK Ini mayor que PK Fin
-                    var msg= <Translation ns= "global">{(t) => <>{t('PkIniMayorFin')}</>}</Translation>
+                    var msg=<Translation ns= "global">{(t) => <>{t('PkIniMayorFin')}</>}</Translation>
+                    guardarMsgOut(msg);
                     break;
                 case 2:
                     //No existen tramos activos
-                    var msg= <Translation ns= "global">{(t) => <>{t('SinTramAct')}</>}</Translation>
+                    var msg=<Translation ns= "global">{(t) => <>{t('SinTramAct')}</>}</Translation>
+                    guardarMsgOut(msg);
                     break;
                 default:
-                    var msg= <Translation ns= "global">{(t) => <>{t('ErrorGuardarAct')}</>}</Translation>
+                    var msg=<Translation ns= "global">{(t) => <>{t('ErrorGuardarAct')}</>}</Translation>
+                    guardarMsgOut(msg);
                     break;
             }
 
-            guardarMsgOut(msg);
+            
+            console.log("msgOut ", msgOut);
+            console.log(msgOutBoolKO);
         })   
 
         }
@@ -470,6 +475,11 @@ function CrearEditarActuacion({Actuacion, Data}){
     }, []);
 
 
+    
+    const [msgOutSave, guardarMsgOutSave] = useState();
+    const [msgOutBoolOKS, setMsgOutBoolOKS] = useState(false);
+    const [msgOutBoolKOS, setMsgOutBoolKOS] = useState(false);
+
    //Llamada al controlador para guardar la actuación
    const peticionGuardarActuacion=async e=>{
     const data = new FormData();
@@ -497,6 +507,7 @@ function CrearEditarActuacion({Actuacion, Data}){
     data.append('Utilizada', FormActuacion.Utilizada)
     data.append('Observaciones', FormActuacion.Observaciones)
     data.append('Importe', FormActuacion.Importe)
+    data.append('Longitud', FormActuacion.Longitud)
     data.append('idTipoCalzada', FormActuacion.TipoCalz)
 
     //Firmes
@@ -549,8 +560,8 @@ function CrearEditarActuacion({Actuacion, Data}){
         
         console.log(response.data); 
 
-        setMsgOutBoolKO(false);
-        setMsgOutBoolOK(true); 
+        setMsgOutBoolKOS(false);
+        setMsgOutBoolOKS(true); 
         var msg= <Translation ns= "global">{(t) => <>{t('GuardarActuacionOK')}</>}</Translation>
         guardarMsgOutSave(msg);
 
@@ -558,8 +569,8 @@ function CrearEditarActuacion({Actuacion, Data}){
         console.log(error); 
         console.log(error.response.data);  
 
-        setMsgOutBoolKO(true);
-        setMsgOutBoolOK(false); 
+        setMsgOutBoolKOS(true);
+        setMsgOutBoolOKS(false); 
 
 
         switch(error.response.data){       
@@ -1032,7 +1043,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 onChange={handleSelectChange}
                 labelKey='nombre'
                 valueKey='codigo'
-                isDisabled={!(MostrarCampos.ShowSeleccionarTramos)}
+                isDisabled={(Actuacion != '')? true: false}
                 options={optionsTiposAct}
                 defaultValue={{value: FormActuacion.TipoActuacion}}>               
                 </Select>
@@ -1046,7 +1057,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 name="PkIni" 
                 id="PkIni" 
                 placeholder="PK"
-                disabled={!(MostrarCampos.ShowSeleccionarTramos)}
+                disabled={(Actuacion != '')? true: false}
                 value={FormActuacion.PkIni}               
                 onChange={handleChange}/></Col> 
 
@@ -1055,7 +1066,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 name="MIni" 
                 id="MIni" 
                 placeholder="M" 
-                disabled={!(MostrarCampos.ShowSeleccionarTramos)}
+                disabled={(Actuacion != '')? true: false}
                 value={FormActuacion.MIni}                 
                 onChange={handleChange}/></Col>           
             
@@ -1071,7 +1082,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                     labelKey='nombre'
                     valueKey='id'
                     options={optionsCarreteras}
-                    isDisabled={!(MostrarCampos.ShowSeleccionarTramos)}
+                    isDisabled={(Actuacion != '')? true: false}
                     //</Col>defaultValue={{label: "Seleccionar", value: 0}}>  
                     defaultValue={{value: FormActuacion.Carretera}}>                   
                 </Select>
@@ -1086,7 +1097,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                                 name="PkFin" 
                                 id="PkFin" 
                                 placeholder="PK"
-                                disabled={!(MostrarCampos.ShowSeleccionarTramos)}
+                                disabled={(Actuacion != '')? true: false}
                                 value={FormActuacion.PkFin}   
                                 onChange={handleChange}/></Col> 
             <Col xs={2}><input className="form-control" 
@@ -1094,7 +1105,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                                 name="MFin" 
                                 id="MFin" 
                                 placeholder="M"
-                                disabled={!(MostrarCampos.ShowSeleccionarTramos)}
+                                disabled={(Actuacion != '')? true: false}
                                 value={FormActuacion.MFin} 
                                 onChange={handleChange}/><br /></Col> 
             <br />
@@ -1102,7 +1113,7 @@ function CrearEditarActuacion({Actuacion, Data}){
             </Container>
             
             {/*Botón Seleccionar*/}
-            {MostrarCampos.ShowSeleccionarTramos == true ?
+            {Actuacion == '' ?
             <Container>
                <Row>
                 {/*Botón 'Seleccionar'*/}
@@ -1297,14 +1308,14 @@ function CrearEditarActuacion({Actuacion, Data}){
 
             <Container>
             <br />
-            { msgOutBoolOK ? 
+            { msgOutBoolOKS ? 
                 <div className="alert alert-success">
                     {/*Mostramos mensaje*/}
                     {msgOutSave}
                 </div>
                 : ""}
 
-                { msgOutBoolKO ? 
+                { msgOutBoolKOS ? 
                 <div class="alert alert-danger">
                     {/*Mostramos mensaje*/}
                     {msgOutSave}

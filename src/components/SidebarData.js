@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import HomeIcon from '@mui/icons-material/Home';
+import EditRoadIcon from '@mui/icons-material/EditRoad';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import CarRepairIcon from '@mui/icons-material/CarRepair';
 import StorageIcon from '@mui/icons-material/Storage';
@@ -10,13 +10,14 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useTranslation } from 'react-i18next';
 import { Translation } from 'react-i18next';
+import EditRoad from '@mui/icons-material/EditRoad';
 
 
 export const SidebarData = [
     
     {
         title: <Translation ns= "global">{(t) => <>{t('gestTram')}</>}</Translation>,
-        icon: <DirectionsCarIcon sx = {{fontSize: 30}}/>,
+        icon: <EditRoad sx = {{fontSize: 30}}/>,
         path: '/menu',
 
         subNav: [
