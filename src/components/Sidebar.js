@@ -7,6 +7,7 @@ import * as AiIcons from 'react-icons/ai';
 import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons/lib';
+import Idioma from "../components/Idioma";
 
 const Sidebar = () => {
 
@@ -23,9 +24,8 @@ const Sidebar = () => {
             <NavLink to='#'>      
                 <FaIcons.FaBars onClick={showSidebar} />
             </NavLink> 
-
-          </div>     
-                       
+          </div>
+          <Idioma />
         </div>
           <SidebarNav sidebar={sidebar}>
           <div className="SidebarWrap">          

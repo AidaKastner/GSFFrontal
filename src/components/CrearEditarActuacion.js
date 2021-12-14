@@ -501,7 +501,7 @@ function CrearEditarActuacion({Actuacion, Data}){
 
     //Firmes
     data.append('idTipoFirmeTramo', FormActuacion.TipoFirmeTramo)
-    data.append('idNivelesInfluencia ', FormActuacion.nivelesInfluencia)
+    data.append('idNivelesInfluencia', FormActuacion.NivelesInfluencia)
     data.append('CPA', FormActuacion.CPA)
     data.append('Fresado', FormActuacion.Fresado)
     data.append('AnchuraCarril', FormActuacion.AnchCarril)
@@ -888,14 +888,14 @@ function CrearEditarActuacion({Actuacion, Data}){
 
                 {/*Coronación*/}
                 <Col xs={2} style={{textAlign: "right"}}><label htmlFor="Coronación"><Translation ns= "global">{(t) => <>{t('Coronación')}</>}</Translation></label></Col> 
-                <Col xs={2}><input className="form-control" type="number" name="Coronacion" id="Coronación" placeholder="cm" onChange={handleChange} value={FormActuacion?FormActuacion.Coronacion: ''}/><br /></Col>   
+                <Col xs={2}><input className="form-control" type="number" step="any" name="Coronacion" id="Coronación" placeholder="cm" onChange={handleChange} value={FormActuacion?FormActuacion.Coronacion: ''}/><br /></Col>   
                 <Col xs={2}><input className="form-control" type="number" name="CoronacionCBR" id="CoronaciónCBR" placeholder="CBR/RC" onChange={handleChange} value={FormActuacion?FormActuacion.CoronacionCBR: ''}/><br /></Col>        
                 
                 </Row>
              </Container>
           </div>
         ),
-        disabled: (!MostrarCampos.ShowTabFirme)
+        disabled: (!MostrarCampos.ShowTabExplanada)
       },
      {
         //Pestaña de Clasificaciones (información de tramo nuevo) 
