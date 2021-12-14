@@ -143,9 +143,10 @@ class VerEditCarTrams extends Component{
       <div>
       <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>
       {"  "}
-      <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+      <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalDescaragr: true})}}><FontAwesomeIcon icon={faDownload}/></button>
       {"  "}
-      <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalDescaragr: true})}}><FontAwesomeIcon icon={faDownload}/></button>
+      <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+
       </div>              
 
       );
