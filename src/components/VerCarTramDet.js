@@ -27,6 +27,10 @@ const config = {
   }
 }
 
+var slice;
+var sliceAct;
+var msgOut = "No se han encontrado registros.";
+
 
 class VerCarTramDet extends Component{
   
@@ -38,6 +42,7 @@ class VerCarTramDet extends Component{
       offsetAf: 0,
       tableData: [],
       tableAforos: [],
+      tableAct: [],
       aditionalData: [],
       orgtableData: [],
       perPage: 50000,
@@ -53,6 +58,8 @@ class VerCarTramDet extends Component{
       currentYear: new Date(),
       fechaAltaFor:'',
       content: null,
+      setMsgOutBoolKO: false,
+      setMsgOutActKO: false,
       form:{
         id:'',
         codigo:'',
@@ -117,9 +124,22 @@ class VerCarTramDet extends Component{
 
    this.columns2 = [
     {dataField: 'campanya', text:<Translation ns= "global">{(t) => <>{t('campanya')}</>}</Translation>, sort: true},
-    {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true}
+    {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
+    {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true},
+    {dataField: 'imd', text:<Translation ns= "global">{(t) => <>{t('imd')}</>}</Translation>, sort: true},
+    {dataField: 'porcPesados', text:<Translation ns= "global">{(t) => <>{t('porc_pesados')}</>}</Translation>, sort: true},
+    {dataField: 'modelosEvolCrtCarril.imdPesados', text:<Translation ns= "global">{(t) => <>{t('imdp')}</>}</Translation>, sort: true},
+    {dataField: 'idDdCategoriasTrafico', text:<Translation ns= "global">{(t) => <>{t('CatTraf')}</>}</Translation>, sort: true}
+  ]
    
-   ]
+  this.columns3 = [
+    {dataField: 'actuacione.claveObra', text:<Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, sort: true},
+    {dataField: 'actuacione.idDdTipoActuaciones', text:<Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation>, sort: true},
+    {dataField: 'actuacione.fecha', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, sort: true},
+    {dataField: 'actuacione.sentido', text:<Translation ns= "global">{(t) => <>{t('Sentido')}</>}</Translation>, sort: true}
+  ]
+   
+
 
   }
 
@@ -175,19 +195,27 @@ peticionGet=()=>{
   console.log("Tramo escogido: ",this.state.idTramSel);
   
   axios.get(url+this.state.idTramSel).then(response=>{
-      console.log("AQUI, Data", response.data);
-      console.log("AQUI, TramosAforos", response.data.tramosAforos);
-      console.log("AQUI, TramosAforos", response.data.tramosAforos.idAforosNavigation.anyomedida);
+      console.log("Data", response.data);
 
       var data = response.data.carriles;
-      //var dataAforos = response.data.tramosAforos.idAforosNavigation;
-      var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-      //var sliceAf = dataAforos.slice(this.state.offsetAf, this.state.offsetAf + this.state.perPage)
+      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+      var dataAct = response.data.actuacionesTramos;
+      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+      console.log("Data actuaciones", dataAct);
+
+      if (data == null) {
+        this.state.setMsgOutBoolKO(true)
+      };
+
+     if (dataAct == null) {
+        this.state.setMsgOutActKO(true)
+      };
 
       this.setState({
         orgtableData: response.data,
         tableData: slice,
-        tableAforos: response.data.tramosAforos,
+        tableAforos: slice,
+        tableAct: sliceAct,
         content: response
       })
      
@@ -346,13 +374,10 @@ seleccionarTramo=(CarTram)=>{
         label: <Translation ns= "global">{(t) => <>{t('Clasif')}</>}</Translation>,
         
         content: (
-          <div>
-             
+          <div>             
               {"  "}
               <br /><br />
-              
-            
-            <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>
+              <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>
                 <input
                     type="text"
                     name="ClasFunRedes"
@@ -427,10 +452,10 @@ seleccionarTramo=(CarTram)=>{
         label: <Translation ns= "global">{(t) => <>{t('Firme')}</>}</Translation>,
         content: (
 
-          <div>
-             {"  "}
-            <br /><br />
-            <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
+            <div>
+              {"  "}
+              <br /><br />
+              <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
                 <input
                     type="text"
                     name="TipFirTram"
@@ -438,7 +463,7 @@ seleccionarTramo=(CarTram)=>{
                     //onChange={actualizarState}
                     value={this.state.form.firmesTramoNombre}
                 />
-            <label><Translation ns= "global">{(t) => <>{t('NilInf')}</>}</Translation></label>
+              <label><Translation ns= "global">{(t) => <>{t('NilInf')}</>}</Translation></label>
                 <input
                     type="text"
                     name="NilInf"
@@ -447,7 +472,7 @@ seleccionarTramo=(CarTram)=>{
                     value={this.state.form.firmesTramoInfl}
                 />
 
-            <label><Translation ns= "global">{(t) => <>{t('CPA')}</>}</Translation></label>
+              <label><Translation ns= "global">{(t) => <>{t('CPA')}</>}</Translation></label>
                 <input
                     type="text"
                     name="CPA"
@@ -455,7 +480,7 @@ seleccionarTramo=(CarTram)=>{
                     //onChange={actualizarState}
                     value={this.state.form.firmesTramoCpa}
                 />
-            <label><Translation ns= "global">{(t) => <>{t('AnchCar')}</>}</Translation></label>
+              <label><Translation ns= "global">{(t) => <>{t('AnchCar')}</>}</Translation></label>
                 <input
                     type="text"
                     name="AnchCar"
@@ -463,7 +488,7 @@ seleccionarTramo=(CarTram)=>{
                     //onChange={actualizarState}
                     value={this.state.form.firmesTramoAnchCar}
                 />
-            <label><Translation ns= "global">{(t) => <>{t('AnchArc')}</>}</Translation></label>
+              <label><Translation ns= "global">{(t) => <>{t('AnchArc')}</>}</Translation></label>
                 <input
                     type="text"
                     name="AnchArc"
@@ -471,7 +496,7 @@ seleccionarTramo=(CarTram)=>{
                     //onChange={actualizarState}
                     value={this.state.form.firmesTramoAnchArc}
                 />
-            <label><Translation ns= "global">{(t) => <>{t('MPD')}</>}</Translation></label>
+              <label><Translation ns= "global">{(t) => <>{t('MPD')}</>}</Translation></label>
                 <input
                     type="text"
                     name="MPD"
@@ -479,48 +504,48 @@ seleccionarTramo=(CarTram)=>{
                     //onChange={actualizarState}
                     value={this.state.form.firmesTramoMpd}
                 />
-    <MDBTable>
-      <MDBTableHead>
-        <tr>
-          <th scope='col'> </th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('Carril')}</>}</Translation></th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('arcen')}</>}</Translation></th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>
-          <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaRod')}</>}</Translation></th>
-          <td>{this.state.form.firmesTramoCarRod}</td>
-          <td>{this.state.form.firmesTramoespRodCar}</td>
-          <td>{this.state.form.firmesTramoArcRod}</td>
-          <td>{this.state.form.firmesTramoespRodArc}</td>
-        </tr>
-        <tr>
-          <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaInter')}</>}</Translation></th>
-          <td>{this.state.form.firmesTramoCarInter}</td>
-          <td>{this.state.form.firmesTramoespIntdCar}</td>
-          <td>{this.state.form.firmesTramoArcInt}</td> 
-          <td>{this.state.form.firmesTramoespIntArc}</td>
-        </tr>
-        <tr>
-          <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaBase')}</>}</Translation></th>
-          <td>{this.state.form.firmesTramoCarBase}</td>
-          <td>{this.state.form.firmesTramoespBasCar}</td>
-          <td>{this.state.form.firmesTramoArcBas}</td> 
-          <td>{this.state.form.firmesTramoespespBasArc}</td>
-        </tr>
-        <tr>
-          <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaSubb')}</>}</Translation></th>
-          <td>{this.state.form.firmesTramoCarSubBase}</td>
-          <td>{this.state.form.firmesTramoespSubBasCar}</td>
-          <td>{this.state.form.firmesTramoArcSub}</td>
-          <td>{this.state.form.firmesTramoespSubBasArc}</td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
-          </div>
+              <MDBTable>
+                <MDBTableHead>
+                  <tr>
+                    <th scope='col'> </th>
+                    <th scope='col'><Translation ns= "global">{(t) => <>{t('Carril')}</>}</Translation></th>
+                    <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
+                    <th scope='col'><Translation ns= "global">{(t) => <>{t('arcen')}</>}</Translation></th>
+                    <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
+                  </tr>
+                </MDBTableHead>
+              <MDBTableBody>
+                  <tr>
+                    <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaRod')}</>}</Translation></th>
+                    <td>{this.state.form.firmesTramoCarRod}</td>
+                    <td>{this.state.form.firmesTramoespRodCar}</td>
+                    <td>{this.state.form.firmesTramoArcRod}</td>
+                    <td>{this.state.form.firmesTramoespRodArc}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaInter')}</>}</Translation></th>
+                    <td>{this.state.form.firmesTramoCarInter}</td>
+                    <td>{this.state.form.firmesTramoespIntdCar}</td>
+                    <td>{this.state.form.firmesTramoArcInt}</td> 
+                    <td>{this.state.form.firmesTramoespIntArc}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaBase')}</>}</Translation></th>
+                    <td>{this.state.form.firmesTramoCarBase}</td>
+                    <td>{this.state.form.firmesTramoespBasCar}</td>
+                    <td>{this.state.form.firmesTramoArcBas}</td> 
+                    <td>{this.state.form.firmesTramoespespBasArc}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaSubb')}</>}</Translation></th>
+                    <td>{this.state.form.firmesTramoCarSubBase}</td>
+                    <td>{this.state.form.firmesTramoespSubBasCar}</td>
+                    <td>{this.state.form.firmesTramoArcSub}</td>
+                    <td>{this.state.form.firmesTramoespSubBasArc}</td>
+                  </tr>
+                </MDBTableBody>
+              </MDBTable>
+            </div>
           
         ),
         disabled: false
@@ -532,21 +557,21 @@ seleccionarTramo=(CarTram)=>{
           <div>
              {"  "}
             <br /><br />
-    <MDBTable>
-      <MDBTableHead>
-        <tr>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('terrnat')}</>}</Translation></th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('cbr')}</>}</Translation></th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>        
-          <td>{this.state.form.explTrTerNat}</td>
-          <td>{this.state.form.explTrTerNatCbr}</td>
-        </tr>
-        {"  "}
+            <MDBTable>
+              <MDBTableHead>
+                <tr>
+                  <th scope='col'><Translation ns= "global">{(t) => <>{t('terrnat')}</>}</Translation></th>
+                  <th scope='col'><Translation ns= "global">{(t) => <>{t('cbr')}</>}</Translation></th>
+                </tr>
+              </MDBTableHead>
+            <MDBTableBody>
+              <tr>        
+                <td>{this.state.form.explTrTerNat}</td>
+                <td>{this.state.form.explTrTerNatCbr}</td>
+              </tr>
+            {"  "}
             <br /><br />
-        <label><Translation ns= "global">{(t) => <>{t('CategExpl')}</>}</Translation></label>
+            <label><Translation ns= "global">{(t) => <>{t('CategExpl')}</>}</Translation></label>
                 <input
                     type="text"
                     name="MPD"
@@ -554,35 +579,32 @@ seleccionarTramo=(CarTram)=>{
                     //onChange={actualizarState}
                     value={this.state.form.explCatExpl}
                 />
-        {"  "}
-        <br /><br />
-      <MDBTable>
-      <MDBTableHead>
-        <tr>
-          <th scope='col'> </th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('cm')}</>}</Translation></th>
-          <th scope='col'><Translation ns= "global">{(t) => <>{t('cbr')}</>}</Translation></th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>
-          <th scope='row'><Translation ns= "global">{(t) => <>{t('relleno')}</>}</Translation></th>
-          <td>{this.state.form.explRelleno}</td>
-          <td>{this.state.form.explRellenoCbr}</td>
-
-        </tr>
-        <tr>
-          <th scope='row'><Translation ns= "global">{(t) => <>{t('coronacion')}</>}</Translation></th>
-          <td>{this.state.form.explCoronacion}</td>
-          <td>{this.state.form.explCoronacionCbr}</td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
-         
-      </MDBTableBody>
-    </MDBTable>
-
-          </div>
+             {"  "}
+             <br /><br />
+            <MDBTable>
+              <MDBTableHead>
+                <tr>
+                  <th scope='col'> </th>
+                  <th scope='col'><Translation ns= "global">{(t) => <>{t('cm')}</>}</Translation></th>
+                  <th scope='col'><Translation ns= "global">{(t) => <>{t('cbr')}</>}</Translation></th>
+                </tr>
+              </MDBTableHead>
+              <MDBTableBody>
+                <tr>
+                  <th scope='row'><Translation ns= "global">{(t) => <>{t('relleno')}</>}</Translation></th>
+                  <td>{this.state.form.explRelleno}</td>
+                  <td>{this.state.form.explRellenoCbr}</td>
+                </tr>
+                <tr>
+                  <th scope='row'><Translation ns= "global">{(t) => <>{t('coronacion')}</>}</Translation></th>
+                  <td>{this.state.form.explCoronacion}</td>
+                  <td>{this.state.form.explCoronacionCbr}</td>
+                </tr>
+              </MDBTableBody>
+            </MDBTable> 
+          </MDBTableBody>
+        </MDBTable>
+        </div>
         ),
         disabled: false
       },
@@ -595,9 +617,9 @@ seleccionarTramo=(CarTram)=>{
           <BootstrapTable 
             bootstrap4 
             wrapperClasses="table-responsive"
-            keyField='id' 
+            keyField='ordenCarril' 
             columns={this.columns} 
-            data={this.state.orgtableData.carriles}
+            data={this.state.tableData}
             bordered={ false }
             filter={filterFactory()}
             headerWrapperClasses="table-responsive"
@@ -611,33 +633,60 @@ seleccionarTramo=(CarTram)=>{
       {
         label: <Translation ns= "global">{(t) => <>{t('Afr')}</>}</Translation>,
         content: (
+          <Fragment>
+           { !this.state.setMsgOutBoolKO ? 
           <div>
              {"  "}
             <br /><br />
             <BootstrapTable 
-            bootstrap4 
-            wrapperClasses="table-responsive"
-            keyField='id' 
-            columns={this.columns2} 
-            data={this.state.orgtableData}
-            bordered={ false }
-            filter={filterFactory()}
-            headerWrapperClasses="table-responsive"
-            classes="w-auto text-nowrap"
-          >
-          </BootstrapTable>
-          </div>
+              bootstrap4 
+              wrapperClasses="table-responsive"
+              keyField='campanya' 
+              columns={this.columns2} 
+              data={this.state.tableAforos}
+              bordered={ false }
+              filter={filterFactory()}
+              headerWrapperClasses="table-responsive"
+              classes="w-auto text-nowrap"
+              >
+              </BootstrapTable>
+            </div>
+          :
+            <div class="alert alert-danger">
+              {msgOut}
+            </div>        
+          }
+          </Fragment>
         ),
         disabled: false
       },
       {
         label: <Translation ns= "global">{(t) => <>{t('Act')}</>}</Translation>,
         content: (
+          <Fragment>
+          { !this.state.setMsgOutActKO ? 
           <div>
              {"  "}
             <br /><br />
-            
-          </div>
+            <BootstrapTable 
+              bootstrap4 
+              wrapperClasses="table-responsive"
+              keyField='campanya' 
+              columns={this.columns3} 
+              data={this.state.tableAct}
+              bordered={ false }
+              filter={filterFactory()}
+              headerWrapperClasses="table-responsive"
+              classes="w-auto text-nowrap"
+              >
+              </BootstrapTable>
+            </div>
+          :
+            <div class="alert alert-danger">
+              {msgOut}
+            </div>        
+          }
+          </Fragment>
         ),
         disabled: false
       },
