@@ -16,7 +16,7 @@ export const SidebarData = [
     
     {
         title: <Translation ns= "global">{(t) => <>{t('gestTram')}</>}</Translation>,
-        icon: <DirectionsCarIcon />,
+        icon: <DirectionsCarIcon sx = {{fontSize: 30}}/>,
         path: '/menu',
 
         subNav: [
@@ -44,37 +44,37 @@ export const SidebarData = [
     },
     {
         title: <Translation ns= "global">{(t) => <>{t('gestAusc')}</>}</Translation>, 
-        icon: <CarRepairIcon />,
+        icon: <CarRepairIcon sx = {{fontSize: 30}}/>,
         path: '/menu'
     },
     {
         title: <Translation ns= "global">{(t) => <>{t('comsDat')}</>}</Translation>, 
-        icon: <StorageIcon />,
+        icon: <StorageIcon sx = {{fontSize: 30}}/>,
         path: '/menu'
     },
     {
         title: <Translation ns= "global">{(t) => <>{t('Clasif')}</>}</Translation>,
-        icon: <LibraryBooksIcon />,
+        icon: <LibraryBooksIcon sx = {{fontSize: 30}}/>,
         path: '/menu'
     },
     {
         title: <Translation ns= "global">{(t) => <>{t('Evol')}</>}</Translation>,
-        icon: <ShowChartIcon />,
+        icon: <ShowChartIcon sx = {{fontSize: 30}}/>,
         path: '/menu'
     },
     {
         title: <Translation ns= "global">{(t) => <>{t('Admin')}</>}</Translation>,
-        icon: <AdminPanelSettingsIcon />,
+        icon: <AdminPanelSettingsIcon sx = {{fontSize: 30}}/>,
         path: '/menu'
     },
     {
         title: <Translation ns= "global">{(t) => <>{t('Docum')}</>}</Translation>, 
-        icon: <DescriptionIcon />,
+        icon: <DescriptionIcon sx = {{fontSize: 30}}/>,
         path: '/menu'
     },
     {
         title: <Translation ns= "global">{(t) => <>{t('CerrarSes')}</>}</Translation>,
-        icon: <ExitToAppIcon />,
+        icon: <ExitToAppIcon sx = {{fontSize: 30}}/>,
         path: '/'
     },
     
