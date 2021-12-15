@@ -40,18 +40,22 @@ const StyleLink = styled(Link)`
 
 const url1 = "https://localhost:44301/Carreteras";
 const url2 = "https://localhost:44301/Tramos/combo";
-
+const url3 = "https://localhost:44301";
 
 var paramIndex = 0;
 let yearIni = 1979;
 
-const config = {
+let authToken = sessionStorage.getItem("JWT");
+
+let config = {
   headers: {
+      'Authorization': authToken,
+      'Accept': 'application/json',
       'content-type': 'application/json'
   }
 }
+
 let currentYear = new Date().getFullYear();
-console.log("Año actual", currentYear);
 
 //Combo
 const combo = [{ label: "Activos", value: "Activos" }, { label: "Inactivos", value: "Inactivos" }];
@@ -225,7 +229,9 @@ peticionGet=()=>{
 
 /*Obtención datos Clasificación técnica real*/
 peticionGet1=()=>{
-  axios.get(url1).then(response=>{
+  authToken = sessionStorage.getItem("JWT");
+  console.log('AutToken:', authToken);
+   axios.get(url1, { headers: {"Authorization" : authToken} }).then(response=>{
 
       console.log(response.data);
 
@@ -241,8 +247,17 @@ peticionGet1=()=>{
 }    
 
 /*Obtención datos Organismos*/
-peticionGet2=()=>{
-  axios.get(url2+"/"+this.state.comboSel).then(response2=>{
+peticionGet2=()=>{  
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+
+  //axios.get(url2+"/"+this.state.comboSel,{ headers: {"Authorization" : authToken} }).then(response2=>{
+  axios.get(url2+"/"+this.state.comboSel,config).then(response2=>{
 
       console.log(response2.data);
       var data2 = response2.data;
@@ -292,11 +307,15 @@ modalRedirigir=()=>{
 peticionPut=()=>{
   const data = new FormData();
 
-  console.log("Codigo a editar: ", this.state.form.id);
-  console.log("URL escogida: ", url1);
-
-  axios.put(url1,this.state.form,config).then(response=>{
-    console.log("OK PUT");
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  
+  axios.put(url1,this.state.form,config).then(response=>{    
     this.setState({modalEditar: false});
     this.peticionGet();
     this.setState({modalVerificarEd: false});
@@ -315,14 +334,17 @@ peticionPut=()=>{
 
 /*Eliminar registro*/
 peticionDelete=()=>{
-  console.log("Codigo a eliminar: ", this.state.form.id);
-  console.log("URL Delete: ", url1);
-  axios.delete(url1+"/"+this.state.form.id).then(response=>{
-    console.log("eliminar");
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  axios.delete(url1+"/"+this.state.form.id, config).then(response=>{
     this.setState({modalEliminar: false});
     this.peticionGet();
-  }).catch(error=>{
-    console.log("KO Delete");
+  }).catch(error=>{   
     console.log(url1);
     console.log(this.state.form.id);
     console.log(error);    
@@ -332,8 +354,13 @@ peticionDelete=()=>{
 
 /*Descargar PDF registro*/
 peticionDownload=()=>{
-  console.log("Codigo a descargar: ", this.state.form.id);
-  console.log("URL Descargar: ", url1);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
   axios.post(url1+"/"+this.state.form.id, {
     responseType: 'blob'}).then(response=>{
     console.log("Descargar");
