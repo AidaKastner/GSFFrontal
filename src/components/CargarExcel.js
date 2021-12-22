@@ -20,8 +20,12 @@ function CargarExcel(){
 
   const [archivo, setArchivo]=useState(null);
   const [msgOut, guardarMsgOut] = useState();
+  const [msgOutErr, guardarMsgOutErr] = useState();
+  const [msgOutErr1, guardarMsgOutErr1] = useState([]);
   const [msgOutBoolOK, setMsgOutBoolOK] = useState(false);
   const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
+
+  const [items, setItems] = useState([]);
  
 
   const subirArchivos=e=>{
@@ -37,60 +41,105 @@ function CargarExcel(){
    
     await axios.post(url, f, config)
     .then(response =>{
+
+      //Se inicializan mensajes salida
+      guardarMsgOut("");
+      guardarMsgOutErr(""); 
+      guardarMsgOutErr1([]);
+      setMsgOutBoolOK(false);
+      setMsgOutBoolKO(false);
+
       console.log(response?.data); 
       console.log("OK");
-      var FilasCargadas = response?.data[1] - 1;
-      console.log(FilasCargadas);
 
-      var msg= <Translation ns= "global">{(t) => <>{t('ExcelOK')}</>}</Translation>
-      /*var msg = <Translation ns= "global">
-        {(t) => <>{t('FilasCargadas')}</>}
-        {FilasCargadas}
-      </Translation>; */
-      
-      guardarMsgOut(msg);
-      
+      var FilasCargadas = 0; var FilasConError = 0;
+      var NumFilas = response?.data.length;
 
+      if(NumFilas == 0){
+        var msg= <Translation ns= "global">{(t) => <>{t('ExcelKO')}</>}</Translation>
+        guardarMsgOutErr(msg); 
+        setMsgOutBoolKO(true);
+      }
+
+      var Id=0;
+      console.log("NumFilas: ", response?.data.length)
+
+      for(var i=0; i<NumFilas; i++){
+        console.log(response?.data[i].item2);
+        console.log(response?.data[1, i]);
+        if(response?.data[i].item2 == 0){
+
+          FilasCargadas += 1; 
+          console.log("FilasCargadas: ", FilasCargadas)
+          var msgOK = <Translation ns= "global">{(t) => <>{t('FilasCargadasAct', { NFilas: FilasCargadas})}</>}</Translation>
+          guardarMsgOut(msgOK);
+          setMsgOutBoolOK(true);
+
+        }else{
+
+          FilasConError += 1; 
+          console.log("FilasConError: ", FilasConError)
+          guardarMsgOutErr(msgKO);
+          setMsgOutBoolKO(true); 
+
+          console.log("error ", response?.data[i].item2, "FILA: ", response?.data[i].item1);
+
+           //Mensajes de error por cada fila
+          switch(response?.data[i].item2){
+          case 1:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('CarreteraKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>
+            break;
+          case 2:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('ActuacionKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 3:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          default:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation> 
+          }
       
-      setMsgOutBoolOK(true);
-      setMsgOutBoolKO(false);
-      
-    
-      
-      
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: Id, name: msgKO}]);
+
+            Id += 1;
+            console.log(Id);
+        }
+      }
+
+      if(FilasConError > 0){
+        var msgKO = <Translation ns= "global">{(t) => <>{t('FilasNoCargadasAct', { NFilasKO: FilasConError })}</>}</Translation>
+        guardarMsgOutErr(msgKO);
+      }
+
     }).catch(error=>{
-      console.log("prueba2");
-      console.log(error.response?.data);
 
+      //Se inicializan mensajes salida
+      guardarMsgOut("");
+      guardarMsgOutErr(""); 
+      guardarMsgOutErr1([]);
       setMsgOutBoolOK(false);
       setMsgOutBoolKO(true);
+      var msg = "";
 
-      switch(error.response?.data[0]){
-      
+      console.log("prueba2");
+      console.log("error: ", error.response?.data);
+
+      switch(error.response?.data[0]){    
         case 1:
-          var msg= <Translation ns= "global">{(t) => <>{t('ExcelKO')}</>}</Translation>           
-            break;
+          var msg = <Translation ns= "global">{(t) => <>{t('ExcelKO')}</>}</Translation>                    
+          break;
         case 2:
           var msg= <Translation ns= "global">{(t) => <>{t('FormatoKO')}</>}</Translation>
-          break;
-        case 3:
-          var msg= <Translation ns= "global">{(t) => <>{t('CarreteraKO')}</>}</Translation>
-          break;
-        case 4:
-          var msg= <Translation ns= "global">{(t) => <>{t('ActuacionKO')}</>}</Translation>
           break;
         default:
           var msg= <Translation ns= "global">{(t) => <>{t('ExcelKO')}</>}</Translation>
           break;
-      } 
-
-      guardarMsgOut(msg);
+      }
       
-    })
-    
+      guardarMsgOutErr(msg); 
+    })        
   }
 
-  
 
   return (
     <div>
@@ -100,18 +149,25 @@ function CargarExcel(){
         <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
         
         <button className="btn btn-primario" onClick={()=>insertarArchivos()}>{ t('Cargar') }</button>
-       <br/><br/>
+       
        { msgOutBoolOK ? 
+       <div><br/><br/>
        <div className="alert alert-success">
           {/*Mostramos mensaje*/}
           {msgOut}
       </div>
+      </div>
       : ""}
 
       { msgOutBoolKO ? 
+      <div><br/>
        <div class="alert alert-danger">
           {/*Mostramos mensaje*/}
-          {msgOut}
+          {msgOutErr}
+          {msgOutErr1.map(msgOutErr1 => (
+          <li key={msgOutErr1.id}>{msgOutErr1.name}</li>
+        ))}
+      </div>
       </div>
       : ""}
    

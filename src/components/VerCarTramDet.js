@@ -21,8 +21,12 @@ import GoogleMapComponent from "../components/GoogleMapComponent";
 
 const url = "https://localhost:44301/Tramos/";
 
-const config = {
+let authToken = sessionStorage.getItem("JWT");
+
+let config = {
   headers: {
+      'Authorization': authToken,
+      'Accept': 'application/json',
       'content-type': 'application/json'
   }
 }
@@ -30,6 +34,7 @@ const config = {
 var slice;
 var sliceAct;
 var msgOut = "No se han encontrado registros.";
+
 
 
 class VerCarTramDet extends Component{
@@ -196,6 +201,13 @@ peticionGet=()=>{
   
   axios.get(url+this.state.idTramSel).then(response=>{
       console.log("Data", response.data);
+      config = {
+        headers: {
+            'Authorization': sessionStorage.getItem("JWT"),
+            'Accept': 'application/json',
+            'content-type': 'application/json'
+        }
+      };
 
       var data = response.data.carriles;
       slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
@@ -282,9 +294,8 @@ peticionGet=()=>{
       console.log("KO");
       console.log("URL para GET Tramo:", url+this.state.idTramSel);
       console.log(error); 
-  });
-}    
-
+    });
+  }    
 
 
 /*Verificar Insertar registro*/
@@ -310,6 +321,13 @@ peticionPut=()=>{
 
   console.log("Codigo a editar: ", this.state.form.id);
   console.log("URL escogida: ", url);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
 
   axios.put(url,this.state.form,config).then(response=>{
     console.log("OK PUT");
@@ -331,9 +349,16 @@ peticionPut=()=>{
 
 /*Eliminar registro*/
 peticionDelete=()=>{
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
   console.log("Codigo a eliminar: ", this.state.form.id);
   console.log("URL Delete: ", url);
-  axios.delete(url+"/"+this.state.form.id).then(response=>{
+  axios.delete(url+"/"+this.state.form.id,config).then(response=>{
     console.log("eliminar");
     this.setState({modalEliminar: false});
     this.peticionGet();

@@ -41,17 +41,21 @@ const StyleLink = styled(Link)`
 const url1 = "https://localhost:44301/Carreteras";
 const url2 = "https://localhost:44301/Tramos/combo";
 
-
 var paramIndex = 0;
 let yearIni = 1979;
+var indice ='';
 
-const config = {
+let authToken = sessionStorage.getItem("JWT");
+
+let config = {
   headers: {
+      'Authorization': authToken,
+      'Accept': 'application/json',
       'content-type': 'application/json'
   }
 }
+
 let currentYear = new Date().getFullYear();
-console.log("Año actual", currentYear);
 
 //Combo
 const combo = [{ label: "Activos", value: "Activos" }, { label: "Inactivos", value: "Inactivos" }];
@@ -83,6 +87,7 @@ class VerEditCarTrams extends Component{
       url:'',
       comboSel:'Activos',
       content: null,
+      setBtnInsertar: false,
       form:{
         id:'',
         codigo:'',
@@ -97,27 +102,27 @@ class VerEditCarTrams extends Component{
   //Carga de datos de las tablas
   this.columns = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'comentario', text:<Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation>, sort: true, filter: textFilter()}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'comentario', text:<Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})}
   ]
 
   this.columns2 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAccionesTr},
-    {dataField: 'carretera.nombre', text:<Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('Tramo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoIni.m', text: <Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoIni.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoFin.m', text: <Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'puntoFin.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdCodTecReal', text: <Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdRedes', text: <Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdOrganismoCompetente', text: <Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdOrganismoConservacion', text: <Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdRegimenExplotacion', text: <Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdRegimenGestion', text: <Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'idDdTiposCalzada', text: <Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation>,sort: true, filter: textFilter()}
+    {dataField: 'carretera.nombre', text:<Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('Tramo')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'puntoIni.m', text: <Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'puntoIni.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'puntoFin.m', text: <Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'puntoFin.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'idDdCodTecReal', text: <Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'idDdRedes', text: <Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'idDdOrganismoCompetente', text: <Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'idDdOrganismoConservacion', text: <Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'idDdRegimenExplotacion', text: <Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'idDdRegimenGestion', text: <Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
+    {dataField: 'idDdTiposCalzada', text: <Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation>,sort: true, filter: textFilter({placeholder: 'Search...'})}
   ]
 
   //Paginación
@@ -179,6 +184,12 @@ return (
     console.log("Funcion Handle",this.state.form);
     console.log("Indice: ",this.state.Index);
 
+      if(this.state.form.codigo === "" || this.state.form.comentario === "" || this.state.form.codigo === undefined || this.state.form.comentario === undefined){
+        this.setState({setBtnInsertar: false});
+      }else{
+        this.setState({setBtnInsertar: true});
+      }
+      console.log("Estado Validación: ",this.state.setBtnInsertar);
     }
 
 
@@ -225,7 +236,9 @@ peticionGet=()=>{
 
 /*Obtención datos Clasificación técnica real*/
 peticionGet1=()=>{
-  axios.get(url1).then(response=>{
+  authToken = sessionStorage.getItem("JWT");
+  console.log('AutToken:', authToken);
+   axios.get(url1, { headers: {"Authorization" : authToken} }).then(response=>{
 
       console.log(response.data);
 
@@ -241,8 +254,17 @@ peticionGet1=()=>{
 }    
 
 /*Obtención datos Organismos*/
-peticionGet2=()=>{
-  axios.get(url2+"/"+this.state.comboSel).then(response2=>{
+peticionGet2=()=>{  
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+
+  //axios.get(url2+"/"+this.state.comboSel,{ headers: {"Authorization" : authToken} }).then(response2=>{
+  axios.get(url2+"/"+this.state.comboSel,config).then(response2=>{
 
       console.log(response2.data);
       var data2 = response2.data;
@@ -261,6 +283,10 @@ peticionGet2=()=>{
 });
 }    
 
+/*Insertar registro*/
+modalInsertar=()=>{
+  this.setState({modalInsertar: !this.state.modalInsertar});
+}
 
 /*Verificar Insertar registro*/
 modalVerificar=()=>{
@@ -272,7 +298,7 @@ modalVerificarEd=()=>{
   this.setState({modalVerificarEd: !this.state.modalVerificarEd});
 }
 
-/*Descargar PDF del registro*/
+/*Descargar ZIP del registro*/
 modalDescaragr=()=>{
   this.setState({modalDescaragr: !this.state.modalDescaragr});
 }
@@ -292,16 +318,21 @@ modalRedirigir=()=>{
 peticionPut=()=>{
   const data = new FormData();
 
-  console.log("Codigo a editar: ", this.state.form.id);
-  console.log("URL escogida: ", url1);
-
-  axios.put(url1,this.state.form,config).then(response=>{
-    console.log("OK PUT");
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+if (this.state.setBtnInsertar==true){
+  axios.put(url1,this.state.form,config).then(response=>{    
     this.setState({modalEditar: false});
     this.peticionGet();
     this.setState({modalVerificarEd: false});
   }).catch(error=>{
     this.setState({modalVerificarEd: false});
+    this.setState({setBtnInsertar: false});
     console.log("KO");
     console.log("URL para PUT:", url1);
     console.log(data);
@@ -310,19 +341,66 @@ peticionPut=()=>{
     console.log(error);        
     alert("Error mientras se modificaban datos. Pongase en contacto con elservicio técnico"); 
 })   
+}else{
+  alert("Rellena correctamente el formulario");
+  this.setState({setBtnInsertar: false});
+}
 }
 
+/*Insertar registro*/
+peticionPost=()=>{
+  const data = new FormData();
+
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+
+  console.log("Objeto a insertar: ", this.state.form);
+  console.log("URL escogida: ", url1);
+  console.log("Validación: ", this.state.setBtnInsertar);
+
+  if (this.state.setBtnInsertar==true){
+    axios.post(url1,this.state.form, config).then(response=>{
+      console.log("OK POST");
+      this.setState({modalInsertar: false});
+      this.setState({setBtnInsertar: false});
+      this.setState({modalVerificar: false});
+      this.peticionGet();
+    }).catch(error=>{
+      this.setState({setBtnInsertar: false});
+      this.setState({modalVerificar: false});
+      console.log("KO");
+      console.log("URL para POST:", url1);
+      console.log(data);
+      console.log(config);
+      console.log("ERROR POST");
+      console.log(error); 
+      alert("Error mientras se añadían datos. Pongase en contacto con el servicio técnico");  
+      this.setState({modalInsertar: false});   
+    })   
+  }else{
+    alert("Rellena correctamente el formulario");
+    this.setState({setBtnSeleccionar: false});
+  }
+}
 
 /*Eliminar registro*/
 peticionDelete=()=>{
-  console.log("Codigo a eliminar: ", this.state.form.id);
-  console.log("URL Delete: ", url1);
-  axios.delete(url1+"/"+this.state.form.id).then(response=>{
-    console.log("eliminar");
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  axios.delete(url1+"/"+this.state.form.id, config).then(response=>{
     this.setState({modalEliminar: false});
     this.peticionGet();
-  }).catch(error=>{
-    console.log("KO Delete");
+  }).catch(error=>{   
     console.log(url1);
     console.log(this.state.form.id);
     console.log(error);    
@@ -330,14 +408,45 @@ peticionDelete=()=>{
 })   
 }
 
-/*Descargar PDF registro*/
+/*Descargar ZIP registro*/
 peticionDownload=()=>{
-  console.log("Codigo a descargar: ", this.state.form.id);
-  console.log("URL Descargar: ", url1);
-  axios.post(url1+"/"+this.state.form.id, {
-    responseType: 'blob'}).then(response=>{
-    console.log("Descargar");
-    //fileDownload(response.data, 'test.txt')
+  config = {
+    responseType: 'arraybuffer',
+    body: 'data',
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-disposition': 'attachment',
+        'content-type': 'application/octet-stream',
+        'Access-Control-Allow-Origin': '*',
+        'server': 'Microsoft-IIS/10.0', 
+        'x-powered-by': 'ASP.NET' 
+    }
+  };
+  axios.post(url1+"/"+this.state.form.id, config, {responseType: 'arraybuffer'},  {body: 'data'}, 
+  {  headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-disposition': 'attachment',
+        'content-type': 'application/octet-stream',
+        'Access-Control-Allow-Origin': '*',
+        'server': 'Microsoft-IIS/10.0', 
+        'x-powered-by': 'ASP.NET' 
+    }
+    }).then(response=>{
+    console.log("response",response);
+    console.log("response",response.data);
+    let extension = 'zip';
+    let tempFileName = this.state.form.codigo;
+    let fileName = "Auscultacions_"+`${tempFileName}.${extension}`;
+    const urlDown = window.URL.createObjectURL(new Blob([response.data],{
+      type:'application/zip'
+    }));
+    const link = document.createElement('a');
+    link.href = urlDown;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
     this.setState({modalDescaragr: false});
     this.peticionGet();
   }).catch(error=>{
@@ -346,7 +455,7 @@ peticionDownload=()=>{
     console.log(this.state.form.id);
     console.log(error);    
     this.setState({modalDescaragr: false});
-    alert("Error mientras se descargaba el PDF. Pongase en contacto con elservicio técnico");    
+    alert("Error mientras se descargaba el ZIP. Pongase en contacto con elservicio técnico");    
 })   
 }
 
@@ -379,7 +488,7 @@ seleccionarTramo=(CarTram)=>{
         
         content: (
           <div>
-             
+               <button className="btn btn-primario" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}><Translation ns= "global">{(t) => <>{t('addRegist')}</>}</Translation></button>
               {"  "}
               <br /><br />
               <BootstrapTable  
@@ -440,18 +549,44 @@ seleccionarTramo=(CarTram)=>{
       );
 
       return(
-
+         //Retomamos valores de Índice de la Tab. Debajo, en el fragment, Pop-ups y Forms
+         indice= {activeIndex},
+         
         <div className="App"> 
 
           <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />  
           
           <Fragment>
-          <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#252831'}}  isOpen={this.state.modalRedirigir}>
+
+            <Modal  size="lg" style={{maxWidth: '800px', width: '60%'}} isOpen={this.state.modalInsertar}>
+				      <ModalHeader style={{display: 'block'}}>
+              <span style={{float: 'right'}}>
+                <button className="btn btn-danger" onClick={()=>{this.setState({tipoModal: 'verificar'}); this.modalVerificar()}}>x</button>
+              </span>
+              <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('insReg')}</>}</Translation></ModalTitle>
+              </ModalHeader>             
+				        <ModalBody>
+				          <div className="form-group">
+						        <label htmlFor="id"><Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation></label>
+						        <input className="form-control" type="text" maxLength = "64" name='codigo' id='codigo' onChange={this.handleChange} />
+						        <br />
+						        <label htmlFor="comentario"><Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation></label>
+						        <input className="form-control" type="text" maxLength = "255" name="comentario" id="comentario" onChange={this.handleChange} />						
+					        </div>
+				        </ModalBody>	
+				        <ModalFooter>                  
+					        <button className="btn btn-success" onClick={()=>this.peticionPost()}>Aceptar</button>
+                  
+				        </ModalFooter>
+			      </Modal>
+
+            <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#252831'}}  isOpen={this.state.modalRedirigir}>
                <ModalHeader style={{display: 'block', backgroundColor: '#252831'}}>
                 <span style={{float: 'right', backgroundColor: '#252831'}}>
                   <button  onClick={()=>this.modalRedirigir()}>X</button>
                 </span>
                 </ModalHeader>
+                { indice.activeIndex != 0  ?
                 <ModalBody style={{backgroundColor: '#e1e9fc'}}>
                   <div style={{marginRight:'1%', marginTop: '5%', backgroundColor: '#e1e9fc'}}> 
                     <h1><Translation ns= "global">{(t) => <>{t('VisInfTra')}</>}</Translation></h1>               
@@ -459,8 +594,11 @@ seleccionarTramo=(CarTram)=>{
                        id={this.state.form.id}
                     />
                   </div>    
-                  </ModalBody>
-          </Modal>
+                </ModalBody>
+                :
+                   <div></div>
+                }
+            </Modal>
 			      <Modal isOpen={this.state.modalEliminar}>
 				      <ModalBody>
               <Translation ns= "global">{(t) => <>{t('eliReg')}</>}</Translation>			        

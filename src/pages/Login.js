@@ -18,7 +18,7 @@ function Foo(props) {
     //const { t, i18n } = useTranslation();
     const { t, i18n } = useTranslation(['global']);
     const routerHistory = useHistory();
-
+    
     const [form, setForm]=useState({
         mail:'',
         password:''
@@ -37,20 +37,21 @@ function Foo(props) {
     var componente;
 
     const iniciarSesion=async()=>{
-        console.log("dfsdf")   
+           
         await axios.get(baseUrl+`/${form.mail}/${form.password}`)
-        .then(response=>{    
-            console.log("dfsdf")       
-            return response.data;
-        }).then(response=>{  
-            //Usuario y contraseña correctos -> Se entra al menú principal  
-            console.log("dfsdf")      
-            var respuesta=response[0];
+        .then(response=>{                
+            const token = 'Bearer ' + response.data;
+            axios.defaults.headers.common["Authorization"] = token ;
+            sessionStorage.setItem("JWT", token);
+            console.log(token);                          
+            return response.data;            
+        }).then(response=>{              
+            //Usuario y contraseña correctos -> Se entra al menú principal              
+            var respuesta=response[0];            
             cookies.set('id', respuesta.id, {path:'/'});
             routerHistory.push('menu');
         }).catch(error=>{
-            //Usuario o contraseña incorrectos
-            console.log("PRUEBA3");
+            //Usuario o contraseña incorrectos           
             console.log(error);
             //alert('El usuario o la contraseña no son correctos.');
             guardarError(true);            
@@ -85,7 +86,7 @@ function Foo(props) {
                     </div>
 
                     <div className="campo-form">
-                    <label>{ t('pass') }: </label>
+                    <label>{ t('pass') } </label>
                     <br />
                     <input
                         type="password"
