@@ -12,6 +12,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import Tab from "../components/Tab";
 import { Form } from 'reactstrap';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 function CrearEditarActuacion({Actuacion, Data}){
     console.log("Actuacion: ", Actuacion);
@@ -55,6 +56,8 @@ function CrearEditarActuacion({Actuacion, Data}){
         Redes: '', ClasifTecReal: '', OrgConservacion: '', OrgCompetente: '', RegGestion: '', RegExplot: '',
         ZonaTermica : '', ZonaPluv: ''
     });
+
+
     //Campos Actuación
     const [MostrarCampos, actualizarMostrarCampos] = useState({
         ShowSeleccionarTramos: true,
@@ -74,13 +77,21 @@ function CrearEditarActuacion({Actuacion, Data}){
         ShowLongitud: false,
     });
 
-
+    const [ModalConfGuardar, setModalConfGuardar] = useState(false);
 
     //Campos iniciales para obtener los tramos activos
     let optionsTiposAct = Data.tiposActuaciones.map(function(elemento){
         return{
-        value: elemento.codigo,
-        label: elemento.nombre
+            value: elemento.codigo,
+            label: elemento.nombre
+        };
+    })
+
+    //Campos iniciales para obtener los tramos activos
+    let optionsTiposActHabilitados = Data.tiposActuaciones.map(function(elemento){
+        return{
+            value: elemento.codigo,
+            label: elemento.nombre
         };
     })
 
@@ -116,56 +127,90 @@ function CrearEditarActuacion({Actuacion, Data}){
         {value: 4, label: '4'},
     ]
 
-    const optionsCalzada = [
-        {value: 'Unica', label: 'Única'},
-        {value: 'Separada', label: 'Separada'}
-    ]
 
     const optionsUtilizada = [
-        {value: 'Creixent', label: 'Creixent'},
-        {value: 'Decreixent', label: 'Decreixent'}
+        {value: 'C', label: 'Creixent'},
+        {value: 'D', label: 'Decreixent'}
     ]
 
-    //Desplegables para la pestaña de Frimes 
+    //Desplegables para la pestaña de Firmes 
     const optionsTiposFirmesTramo = Data.tiposFirmeTramos.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
-    const optionsCapaBase = Data.capasBase.filter(x=>x.idDdTiposFirmesTramo == FormActuacion.TipoFirmeTramo && x.codigo != "").map(function(elemento){
+    const optionsCapaBase = Data.capasBase.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
-    const optionsCapaSubbase = Data.capasSubbase.filter(x=>x.idDdTiposFirmesTramo == FormActuacion.TipoFirmeTramo && x.codigo != "").map(function(elemento){
+    const optionsCapaBaseFilter = Data.capasBase.filter(x=>x.idDdTiposFirmesTramo == FormActuacion.TipoFirmeTramo && x.codigo != "").map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
-    const optionsCapaRodadura = Data.capasRodadura.filter(x=>x.idDdTiposFirmesTramo == FormActuacion.TipoFirmeTramo && x.codigo != "").map(function(elemento){
+    const optionsCapaSubbase = Data.capasSubbase.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
-    const optionsCapaIntermedia = Data.capasIntermedia.filter(x=>x.idDdTiposFirmesTramo == FormActuacion.TipoFirmeTramo && x.codigo != "").map(function(elemento){
+    const optionsCapaSubbaseFilter = Data.capasSubbase.filter(x=>x.idDdTiposFirmesTramo == FormActuacion.TipoFirmeTramo && x.codigo != "").map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
+        };
+    })
+
+    const optionsCapaRodadura = Data.capasRodadura.map(function(elemento){
+        return{
+        value: elemento.codigo,
+        label: elemento.codigo,
+        elemento: elemento
+        };
+    })
+
+    const optionsCapaRodaduraFilter = Data.capasRodadura.filter(x=>x.idDdTiposFirmesTramo == FormActuacion.TipoFirmeTramo && x.codigo != "").map(function(elemento){
+        return{
+        value: elemento.codigo,
+        label: elemento.codigo,
+        elemento: elemento
+        };
+    })
+
+    const optionsCapaIntermedia = Data.capasIntermedia.map(function(elemento){
+        return{
+        value: elemento.codigo,
+        label: elemento.codigo,
+        elemento: elemento
+        };
+    })
+
+    const optionsCapaIntermediaFilter = Data.capasIntermedia.filter(x=>x.idDdTiposFirmesTramo == FormActuacion.TipoFirmeTramo && x.codigo != "").map(function(elemento){
+        return{
+        value: elemento.codigo,
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
     const optionsNivelesInfluencia = Data.nivelesInfluencia.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
@@ -174,14 +219,16 @@ function CrearEditarActuacion({Actuacion, Data}){
     const optionsTerrenoNatural = Data.terrenosNaturales.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
     const optionsCategoriaExplanada = Data.categoriasExplanada.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
@@ -190,62 +237,60 @@ function CrearEditarActuacion({Actuacion, Data}){
     const optionsRedes = Data.redes.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.nombre
+        label: elemento.nombre,
+        elemento: elemento
         };
     })
 
     const optionsCodTecnicaReal = Data.codTecnicaReal.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.nombre
+        label: elemento.nombre,
+        elemento: elemento
         };
     })
 
     const optionsOrganismos = Data.organismos.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.nombre
+        label: elemento.nombre,
+        elemento: elemento
         };
     })
 
     const optionsRegimenGestion = Data.regimenGestion.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.nombre
+        label: elemento.nombre,
+        elemento: elemento
         };
     })
 
     const optionsRegimenExplotacion = Data.regimenExplotacion.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.nombre
+        label: elemento.nombre,
+        elemento: elemento
         };
     })
 
     const optionsZonasTermicas = Data.zonasTermicas.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
     const optionsZonasPluviometricas = Data.zonasPluviometricas.map(function(elemento){
         return{
         value: elemento.codigo,
-        label: elemento.codigo
+        label: elemento.codigo,
+        elemento: elemento
         };
     })
 
-     //campos iniciales
-     /*const [Form, actualizarForm] = useState({
-        TipoActuacion: '',
-        Carretera: '',
-        PkIni: '',
-        PkFin: '',
-        MIni: '',
-        MFin: '',
-    });*/
-    
+
 
     const handleChange=async e=>{
         //e.persist();
@@ -281,20 +326,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 [e.target.name]: e.target.value
             
             });
-        }
-    
-
-        /*if (FormActuacion.Carril1 > 0 && FormActuacion.Carril2 > 0){
-            await actualizarFormActuacion({
-                ...FormActuacion,
-                Calzada: "Separada"
-            });
-            console.log("Separada");
-        }*/
-    
-        console.log("FORM: ", FormActuacion);
-        console.log("FORM ACTUACIONES: ", FormActuacion);
-       
+        }       
    }
 
    const handleSelectChange=(e, {name})=>{
@@ -303,20 +335,31 @@ function CrearEditarActuacion({Actuacion, Data}){
     console.log("name:", name);
     console.log("tipoFirm ", FormActuacion.TipoFirmeTramo);
    
+    var CalzadaValue = FormActuacion.calzada;
+
+    if(name == 'Carril1' || name == 'Carril2'){
+        if((name == 'Carril1' && e.value > 0 && FormActuacion.Carril2 > 0) ||
+           (name == 'Carril2' && e.value > 0 && FormActuacion.Carril1 > 0)){
+               CalzadaValue = 'Separades';
+           }else{
+               CalzadaValue = 'Única';
+           }
+    }
+    
 
     actualizarFormActuacion({
         ...FormActuacion,
-        [name]: e.value
-      
+        [name]: e.value,
+        Calzada: CalzadaValue  
     });
 
-    /*if (FormActuacion.Carril1 > 0 && FormActuacion.Carril2 > 0){
-        actualizarFormActuacion({
-            ...FormActuacion,
-            Calzada: "Separada"
-        });
-        console.log("Separada");
-    }*/
+
+
+    if(name == 'TipoFirmeTramo'){
+        FormActuacion.CapaBaseArcen = ''; FormActuacion.CapaBaseCarril = '';
+        FormActuacion.CapaSubbaseArcen = ''; 
+    }
+
     console.log("FORM ACTUACIONES: ", FormActuacion);
 
 }
@@ -425,6 +468,7 @@ function CrearEditarActuacion({Actuacion, Data}){
          //Desdoblamiento
          case 'D':
             console.log("desdob");
+
             if(FormActuacion.Id>0){
                 actualizarMostrarCampos({ShowTablaTramos: true, ShowCamposComunes: true, ShowCalzada: true, ShowCarriles: true, ShowTipoCalzada: true, ShowUtilizada: true, ShowCarrAntigua: true, ShowGestion: true, ShowTabFirme: true, ShowAnchuras: true, ShowTabExplanada: true});
             }else{
@@ -468,10 +512,20 @@ function CrearEditarActuacion({Actuacion, Data}){
 
     useEffect(() => {
     console.log("ACTUACION: ", Actuacion);
+    console.log(FormActuacion.TipoActuacion);
     if(Actuacion.id > 0){
         actualizarMostrarCampos({ShowSeleccionarTramos:false});
         peticionSeleccionar();         
      }
+
+
+     console.log("FormActuacion.CapaRodaduraArcen: ", FormActuacion.CapaRodaduraArcen)
+     console.log("LABEL :", optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraArcen)[0]?.label);
+
+     console.log("FormActuacion.CapaRodaduraCarril: ", FormActuacion.CapaRodaduraCarril)
+     console.log("LABEL :", optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraCarril)[0]?.label);
+     console.log(optionsTiposAct);
+
     }, []);
 
 
@@ -552,6 +606,8 @@ function CrearEditarActuacion({Actuacion, Data}){
     data.append('idRegExpl', FormActuacion.RegExplot)
     data.append('idZonasPluviomet', FormActuacion.ZonaPluv)
     data.append('idZonasTerm', FormActuacion.ZonaTermica)
+
+    console.log("data.append ", data);
 
  //Se envían los datos al controlador (InsertarActuacionesController/GuardarActuacion)
     await axios.post(url, data, config)
@@ -634,7 +690,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsTiposFirmesTramo}
-                    defaultValue={{value:FormActuacion.TipoFirmeTramo}}>               
+                    defaultValue={{value:FormActuacion.TipoFirmeTramo, label: FormActuacion.TipoFirmeTramo? optionsTiposFirmesTramo.filter(x=>x.value == FormActuacion.TipoFirmeTramo)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -646,7 +702,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsNivelesInfluencia}
-                    defaultValue={{value:FormActuacion.NivelesInfluencia}}>               
+                    defaultValue={{value:FormActuacion.NivelesInfluencia, label: FormActuacion.NivelesInfluencia? optionsNivelesInfluencia.filter(x=>x.value == FormActuacion.NivelesInfluencia)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -674,7 +730,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 labelKey='codigo'
                 valueKey='codigo'
                 options={optionsTiposFirmesTramo}
-                defaultValue={{value:FormActuacion.TipoFirmeTramo}}>               
+                defaultValue={{value:FormActuacion.TipoFirmeTramo, label: FormActuacion.TipoFirmeTramo? optionsTiposFirmesTramo.filter(x=>x.value == FormActuacion.TipoFirmeTramo)[0]?.label: ''}}>               
                 </Select>
             <br /></Col>
 
@@ -686,7 +742,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 labelKey='codigo'
                 valueKey='codigo'
                 options={optionsNivelesInfluencia}
-                defaultValue={{value:FormActuacion.NivelesInfluencia}}>               
+                defaultValue={{value:FormActuacion.NivelesInfluencia, label: FormActuacion.NivelesInfluencia? optionsNivelesInfluencia.filter(x=>x.value == FormActuacion.NivelesInfluencia)[0]?.label: ''}}>               
                 </Select>
             <br /></Col>
 
@@ -702,11 +758,11 @@ function CrearEditarActuacion({Actuacion, Data}){
             <Row>           
                 {/*Anchura Carril*/}
                 <Col xs={2} style={{textAlign: "right"}}><label htmlFor="AnchCarril"><Translation ns= "global">{(t) => <>{t('AnchCarril')}</>}</Translation></label></Col>                          
-                <Col xs={2}><input className="form-control" type="number" name="AnchCarril" id="AnchCarril" onChange={handleChange} value={FormActuacion?FormActuacion.AnchCarril: ''}/><br /></Col>           
+                <Col xs={2}><input className="form-control" type="number" format="N2" name="AnchCarril" id="AnchCarril" onChange={handleChange} value={FormActuacion?FormActuacion.AnchCarril: ''}/><br /></Col>           
 
                 {/*Anchura Arcén*/}
                 <Col xs={2} style={{textAlign: "right"}}><label htmlFor="AnchArcen"><Translation ns= "global">{(t) => <>{t('AnchArcen')}</>}</Translation></label></Col>                          
-                <Col xs={2}><input className="form-control" type="number" name="AnchArcen" id="AnchArcen" onChange={handleChange} value={FormActuacion?FormActuacion.AnchArcen: ''}/><br /></Col>           
+                <Col xs={2}><input className="form-control" type="number" step="0.01" name="AnchArcen" id="AnchArcen" onChange={handleChange} value={FormActuacion?FormActuacion.AnchArcen: ''}/><br /></Col>           
                 <br />
             </Row>        
             : null}
@@ -729,8 +785,8 @@ function CrearEditarActuacion({Actuacion, Data}){
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
-                    options={optionsCapaRodadura}
-                    defaultValue={{value:FormActuacion.CapaRodaduraCarril}}>               
+                    options={optionsCapaRodaduraFilter}
+                    defaultValue={{value:FormActuacion.CapaRodaduraCarril, label: FormActuacion.CapaRodaduraCarril? optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraCarril)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -743,8 +799,8 @@ function CrearEditarActuacion({Actuacion, Data}){
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
-                    options={optionsCapaRodadura}
-                    defaultValue={{value:FormActuacion.CapaRodaduraArcen}}>               
+                    options={optionsCapaRodaduraFilter}
+                    defaultValue={{value:FormActuacion.CapaRodaduraArcen, label: FormActuacion.CapaRodaduraArcen? optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraArcen)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -761,8 +817,8 @@ function CrearEditarActuacion({Actuacion, Data}){
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
-                    options={optionsCapaIntermedia}
-                    defaultValue={{value:FormActuacion.CapaIntermediaCarril}}>               
+                    options={optionsCapaIntermediaFilter}
+                    defaultValue={{value:FormActuacion.CapaIntermediaCarril, label: FormActuacion.CapaIntermediaCarril? optionsCapaIntermedia.filter(x=>x.value == FormActuacion.CapaIntermediaCarril)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -775,8 +831,8 @@ function CrearEditarActuacion({Actuacion, Data}){
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
-                    options={optionsCapaIntermedia}
-                    defaultValue={{value:FormActuacion.CapaIntermediaArcen}}>               
+                    options={optionsCapaIntermediaFilter}
+                    defaultValue={{value:FormActuacion.CapaIntermediaArcen, label: FormActuacion.CapaIntermediaArcen? optionsCapaIntermedia.filter(x=>x.value == FormActuacion.CapaIntermediaArcen)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -793,8 +849,8 @@ function CrearEditarActuacion({Actuacion, Data}){
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
-                    options={optionsCapaBase}
-                    defaultValue={{value:FormActuacion.CapaBaseCarril}}>               
+                    options={optionsCapaBaseFilter}
+                    defaultValue={{value:FormActuacion.CapaBaseCarril, label: FormActuacion.CapaBaseCarril? optionsCapaBase.filter(x=>x.value == FormActuacion.CapaBaseCarril)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -807,8 +863,8 @@ function CrearEditarActuacion({Actuacion, Data}){
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
-                    options={optionsCapaBase}
-                    defaultValue={{value:FormActuacion.CapaBaseArcen}}>               
+                    options={optionsCapaBaseFilter}
+                    defaultValue={{value:FormActuacion.CapaBaseArcen, label: FormActuacion.CapaBaseArcen? optionsCapaBase.filter(x=>x.value == FormActuacion.CapaBaseArcen)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -825,8 +881,8 @@ function CrearEditarActuacion({Actuacion, Data}){
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
-                    options={optionsCapaSubbase}
-                    defaultValue={{value:FormActuacion.CapaSubbaseCarril}}>               
+                    options={optionsCapaSubbaseFilter}
+                    defaultValue={{value:FormActuacion.CapaSubbaseCarril, label: FormActuacion.CapaSubbaseCarril? optionsCapaSubbase.filter(x=>x.value == FormActuacion.CapaSubbaseCarril)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -839,8 +895,8 @@ function CrearEditarActuacion({Actuacion, Data}){
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
-                    options={optionsCapaSubbase}
-                    defaultValue={{value:FormActuacion.CapaSubbaseArcen}}>               
+                    options={optionsCapaSubbaseFilter}
+                    defaultValue={{value:FormActuacion.CapaSubbaseArcen, label: FormActuacion.CapaSubbaseArcen? optionsCapaSubbase.filter(x=>x.value == FormActuacion.CapaSubbaseArcen)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -869,7 +925,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsTerrenoNatural}
-                    defaultValue={{value:FormActuacion.TerrenoNatural}}>               
+                    defaultValue={{value:FormActuacion.TerrenoNatural, label: FormActuacion.TerrenoNatural? optionsTerrenoNatural.filter(x=>x.value == FormActuacion.TerrenoNatural)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
 
@@ -881,7 +937,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCategoriaExplanada}
-                    defaultValue={{value:FormActuacion.CategoriaExplanada}}>               
+                    defaultValue={{value:FormActuacion.CategoriaExplanada, label: FormActuacion.CategoriaExplanada? optionsCategoriaExplanada.filter(x=>x.value == FormActuacion.CategoriaExplanada)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
                  
@@ -899,7 +955,7 @@ function CrearEditarActuacion({Actuacion, Data}){
 
                 {/*Coronación*/}
                 <Col xs={2} style={{textAlign: "right"}}><label htmlFor="Coronación"><Translation ns= "global">{(t) => <>{t('Coronación')}</>}</Translation></label></Col> 
-                <Col xs={2}><input className="form-control" type="number" step="any" name="Coronacion" id="Coronación" placeholder="cm" onChange={handleChange} value={FormActuacion?FormActuacion.Coronacion: ''}/><br /></Col>   
+                <Col xs={2}><input className="form-control" type="number" name="Coronacion" id="Coronación" placeholder="cm" onChange={handleChange} value={FormActuacion?FormActuacion.Coronacion: ''}/><br /></Col>   
                 <Col xs={2}><input className="form-control" type="number" name="CoronacionCBR" id="CoronaciónCBR" placeholder="CBR/RC" onChange={handleChange} value={FormActuacion?FormActuacion.CoronacionCBR: ''}/><br /></Col>        
                 
                 </Row>
@@ -1042,10 +1098,10 @@ function CrearEditarActuacion({Actuacion, Data}){
                  <Select name="TipoActuacion" 
                 onChange={handleSelectChange}
                 labelKey='nombre'
-                valueKey='codigo'
-                isDisabled={(Actuacion != '')? true: false}
-                options={optionsTiposAct}
-                defaultValue={{value: FormActuacion.TipoActuacion}}>               
+                valueKey='codigo'   
+                isDisabled={(Actuacion != '')? true: false}  
+                options={optionsTiposAct.filter(x=>x.value != 'N' && x.value != 'V')} //Nuevo Tramo y Variante se deshabilitan
+                defaultValue={{value: FormActuacion.TipoActuacion, label: FormActuacion.TipoActuacion? optionsTiposAct.filter(x=>x.value == FormActuacion.TipoActuacion)[0]?.label: ''}}>               
                 </Select>
             <br /></Col>
             
@@ -1083,8 +1139,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                     valueKey='id'
                     options={optionsCarreteras}
                     isDisabled={(Actuacion != '')? true: false}
-                    //</Col>defaultValue={{label: "Seleccionar", value: 0}}>  
-                    defaultValue={{value: FormActuacion.Carretera}}>                   
+                    defaultValue={{value: FormActuacion.Carretera, label: FormActuacion.TipoActuacion? optionsCarreteras.filter(x=>x.value == FormActuacion.Carretera)[0]?.label: ''}}>                   
                 </Select>
             <br /></Col>    
 
@@ -1180,7 +1235,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 
 
                 {MostrarCampos.ShowCamposComunes == true ? <Col xs={2} style={{textAlign: "right"}}><label htmlFor="Fecha"><Translation ns= "global">{(t) => <>{t('FechaFinAct')}</>}</Translation></label></Col>: null} 
-                {MostrarCampos.ShowCamposComunes == true ? <Col xs={2}><input type="date" name="Fecha" id="Fecha" onChange={handleChange} value={FormActuacion?FormActuacion.Fecha: ''}/><br />  </Col>: null}                                                 
+                {MostrarCampos.ShowCamposComunes == true ? <Col xs={2}><input type="date" name="Fecha" id="Fecha" onChange={handleChange} value={FormActuacion?FormActuacion.Fecha.substr(0,10): ''}/><br />  </Col>: null}                                                 
                 
 
                 </Row>
@@ -1214,11 +1269,11 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {MostrarCampos.ShowTipoCalzada == true ?<Col xs={2}>
                                                             <Select name="TipoCalz" 
                                                                 onChange={handleSelectChange}
-                                                                options={optionsTipoCalz}
-                                                                defaultValue={{value:FormActuacion.TipoCalz}}>                   
+                                                                options={FormActuacion.TipoActuacion == 'D'? optionsTipoCalz.filter(x=>x.value=='Anada/Tornada') : optionsTipoCalz}
+                                                                defaultValue={{value: FormActuacion.TipoCalz}}>                   
                                                             </Select><br />
                                                         </Col>: null} 
-
+                
                 
                 
                 {MostrarCampos.ShowCarriles == true ?<Col xs={2} style={{textAlign: "right"}}><label htmlFor="Carriles"><Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation></label></Col>: null} 
@@ -1226,39 +1281,27 @@ function CrearEditarActuacion({Actuacion, Data}){
                                                         <Select name="Carril1" 
                                                             onChange={handleSelectChange}
                                                             options={optionsCarriles}
-                                                            defaultValue={{value:FormActuacion.Carril1}}>                 
+                                                            defaultValue={{value:FormActuacion.Carril1, label: FormActuacion.Carril1? optionsCarriles.filter(x=>x.value == FormActuacion.Carril1)[0]?.label: ''}}>                  
                                                         </Select><br />
                                                     </Col>: null} 
                 {MostrarCampos.ShowCarriles == true ?<Col xs={1}>
                                                         <Select name="Carril2" 
                                                             onChange={handleSelectChange}
                                                             options={optionsCarriles}
-                                                            defaultValue={{value:FormActuacion.Carril2}}>                  
+                                                            defaultValue={{value:FormActuacion.Carril2, label: FormActuacion.Carril2? optionsCarriles.filter(x=>x.value == FormActuacion.Carril2)[0]?.label: ''}}>                 
                                                         </Select><br />
                                                     </Col>: null} 
             
-                
-
-                
-                
                 {MostrarCampos.ShowCarrAntigua == true ?<Col xs={2} style={{textAlign: "right"}}><label htmlFor="CarreteraAnt"><Translation ns= "global">{(t) => <>{t('CarreteraAnt')}</>}</Translation></label></Col>: null} 
                 {MostrarCampos.ShowCarrAntigua == true ?<Col xs={2}><input className="form-control" type="text" name="CarreteraAnt" id="CarreteraAnt" onChange={handleChange} value={FormActuacion?FormActuacion.CarreteraAnt: ''}/></Col>: null}                                                                                
-                
+                                     
                 </Row>
                 
                 <Row> 
 
                 {MostrarCampos.ShowCalzada == true ?<Col xs={2} style={{textAlign: "right"}}><label htmlFor="Calzada"><Translation ns= "global">{(t) => <>{t('Calzada')}</>}</Translation></label></Col>: null} 
-                {MostrarCampos.ShowCalzada == true ?<Col xs={2}>
-                                                        <Select name="Calzada" 
-                                                            onChange={handleSelectChange}
-                                                            options={optionsCalzada}
-                                                            defaultValue={{value:FormActuacion.Calzada}}>                   
-                                                        </Select><br />
-                                                    </Col> : null} 
-                
-
-                
+                {MostrarCampos.ShowCalzada == true ?<Col xs={2}><input className="form-control" type="text" name="Calzada" id="Calzada" disabled='true' onChange={handleChange} value={FormActuacion?FormActuacion.Calzada: ''}/><br /></Col> : null}
+                  
                 
                 {MostrarCampos.ShowGestion == true ?<Col xs={2} style={{textAlign: "right"}}><label htmlFor="Gestion"><Translation ns= "global">{(t) => <>{t('Gestion')}</>}</Translation></label></Col>: null}
                 {MostrarCampos.ShowGestion == true ?<Col xs={2}><input className="form-control" type="text" name="Gestion" id="Gestion" onChange={handleChange} value={FormActuacion?FormActuacion.Gestion: ''}/></Col>: null}  
@@ -1269,7 +1312,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                                                         <Select name="Utilizada" 
                                                             onChange={handleSelectChange}
                                                             options={optionsUtilizada}
-                                                            defaultValue={{value:FormActuacion.Utilizada}}>                   
+                                                            defaultValue={{value:FormActuacion.Utilizada, label: FormActuacion.Utilizada? optionsUtilizada.filter(x=>x.value == FormActuacion.Utilizada)[0]?.label: ''}}>                   
                                                         </Select><br />                        
                                                     </Col> : null}
 
@@ -1298,7 +1341,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                     {/*Botón 'Guardar'*/}
                     <Col xs={10}></Col>
                     <Col xs={2} style={{textAlign: "right"}}><button className="btn btn-primario" 
-                                                            onClick={()=>peticionGuardarActuacion()}>
+                                                            onClick={()=>{setModalConfGuardar(true)}}>
                                                             <Translation ns= "global">{(t) => <>{t('Guardar')}</>}</Translation>
                                                             </button></Col>
                     <br />
@@ -1322,13 +1365,22 @@ function CrearEditarActuacion({Actuacion, Data}){
                 </div>
                 : ""}
             </Container>
-        
+
+
+          {/*Modal para verificar si se quiere Guargar*/}
+          <Modal isOpen={ModalConfGuardar}>
+				      <ModalBody>
+              <br />
+              <Translation ns= "global">{(t) => <>{t('ConfGuardar')}</>}</Translation>        
+              <br /><br />     			        
+				</ModalBody>
+                <ModalFooter>                            
+                    <button className="btn btn-primary" size="sm" onClick={()=>{setModalConfGuardar(false); peticionGuardarActuacion()}}><Translation ns= "global">{(t) => <>{t('Continuar')}</>}</Translation></button>
+                    <button className="btn btn-primario" size="sm" onClick={()=>{setModalConfGuardar(false)}}><Translation ns= "global">{(t) => <>{t('Cancelar')}</>}</Translation></button>      
+				</ModalFooter>    
+		    </Modal>
         </div>
     )
-
-
-
-
 }
 
 export default CrearEditarActuacion;

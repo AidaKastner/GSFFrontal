@@ -43,7 +43,9 @@ class VerActuaciones extends Component{
       modalImportar: false,
       modalEliminar: false,
       modalInsertar: false,
+      modalVerificar: false,
       tipoModal: '',
+      tipoModalV: '',
       content: null,
       form:{
         id: '',
@@ -51,6 +53,7 @@ class VerActuaciones extends Component{
       } 
   }
 
+  {/*Tabla de Actuaciones*/}
   this.columns = [
     {dataField: 'acciones', text: <Translation ns= "global">{(t) => <>{t( 'Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones, align: 'center'},
     {dataField: 'ddTipoActuacione.nombre', text:<Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'},
@@ -62,13 +65,12 @@ class VerActuaciones extends Component{
     {dataField: 'gestion', text: <Translation ns= "global">{(t) => <>{t('Gestion')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'},
     {dataField: 'carreterasAntigua', text: <Translation ns= "global">{(t) => <>{t('CarreteraAnt')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'},
     {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${row.puntoIni.pk} + ${row.puntoIni.m}`}</div>;}, filter: textFilter(), align: 'center'},
-    {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t( 'PKFin')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${row.puntoFin.pk} + ${row.puntoFin.m}`}</div>;}, filter: textFilter(), align: 'center'},
-    {dataField: 'importe', text: <Translation ns= "global">{(t) => <>{t( 'Importe')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'}
+    {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${row.puntoFin.pk} + ${row.puntoFin.m}`}</div>;}, filter: textFilter(), align: 'center'},
+    {dataField: 'importe', text: <Translation ns= "global">{(t) => <>{t('Importe')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'}
   ]
 
 
  
-
   this.pagination = paginationFactory({
     page: 1,
     sizePerPage: 10,
@@ -78,24 +80,21 @@ class VerActuaciones extends Component{
     prePageText: '<',
     showTotal: true,
     alwaysShowAllBtns: true,
-  })
-
-
+    })
   }
 
 
   ButtonsAcciones = (cell, row, rowIndex) => {
     //console.log("cell :", cell);
     //console.log("row: ", row);
-    //  console.log("rowindex ", rowIndex);
+    //console.log("rowindex ", rowIndex);
            
     return (
       <div>
-      <button className="btn btn-primary" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInsertar: true, tipoModal: 'Actualizar'})}}><FontAwesomeIcon icon={faEdit}/></button>
+      <button className="btn btn-primary" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInsertar: true, tipoModal: 'Actualizar', tipoModalV: ''})}}><FontAwesomeIcon icon={faEdit}/></button>
       {"  "}
       <button className="btn btn-danger" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
       </div>              
-
       );
   };
 
@@ -110,9 +109,7 @@ peticionGet=()=>{
   axios.get(url).then(response=>{
 
       console.log(response.data);
-      
-      //this.setState({data: response.data})
-      
+            
       var data = response.data.actuaciones;
       var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
 
@@ -123,6 +120,7 @@ peticionGet=()=>{
         desplegablesActuaciones: response.data.desplegablesActuaciones,
         modalImportar: false,
         modalInsertar: false,
+        modelVerificar: false, 
         content: response
       })
   });
@@ -140,27 +138,35 @@ peticionDelete=()=>{
 }    
 
     
-
+/*Se activa/desactiva el modal para importar el Excel*/
 modalImportar=()=>{
+  console.log("Modal Importar");
   this.setState({modalImportar: !this.state.modalImportar});
 }    
 
+/*Se activa/desactiva el modal para Insertar/Editar una Actuación*/
 modalInsertar=()=>{
   this.setState({modalInsertar: !this.state.modalInsertar});
 }
 
+/*Se activa/desactiva el modal para verificar si se quiere salir de Crear/Editar*/
+modalVerificar=()=>{
+  this.setState({modalVerificar: !this.state.modalVerificar});
+}
+
+
+
+//Se guarda la actuación seleccionada
 seleccionarActuacion=(actuacion)=>{
   console.log("seleccionarActuacion");
   console.log(actuacion);
   this.setState({
-    tipoModal: 'actualizar',
     form: {
       id: actuacion.id,
       actuacion: actuacion
     }
   })
-
-  console.log("ID a eliminar: ", actuacion.id);
+  console.log("ID actuación: ", actuacion.id);
 }    
 
     render(){ 
@@ -176,7 +182,7 @@ seleccionarActuacion=(actuacion)=>{
             <div className="App" >            
             <button className="btn btn-primario" onClick={()=>{this.setState({form: null}); this.modalImportar()}}><Trans ns= "global">ImpAct</Trans></button>       
             {"  "}
-            <button className="btn btn-primario" onClick={()=>{this.setState({form: null, tipoModal: 'Insertar'}); this.modalInsertar()}}><Trans ns= "global">AddAct</Trans></button>      
+            <button className="btn btn-primario" onClick={()=>{this.setState({form: null, tipoModal: 'Insertar', tipoModalV: ''}); this.modalInsertar()}}><Trans ns= "global">AddAct</Trans></button>      
           <br /><br />
           <BootstrapTable 
             bootstrap4 
@@ -185,33 +191,25 @@ seleccionarActuacion=(actuacion)=>{
             data={this.state.tableData}
             pagination={this.pagination}
             filter={filterFactory()}
-            bordered={ false }
+            bordered={false}
           />
 
+
+          {/*Modal para cargar un Excel de actuaciones*/}
           <Modal isOpen={this.state.modalImportar}>
                 <ModalHeader style={{display: 'block'}}>
-                  <span style={{float: 'right'}} onClick={()=>this.modalImportar()}>x</span>
+                  <span style={{float: 'right'}}>
+                    <button className="btn btn-danger" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Importar', tipoModal: ''})}}>x</button>
+                  </span>
                 </ModalHeader>
+
                 <ModalBody>
                   <CargarExcel/>
                 </ModalBody>
-
-                <ModalFooter>
-                  {/*this.state.tipoModal=='insertar'?
-                    <button className="btn btn-success" onClick={()=>this.peticionPost()}>
-                    Insertar
-                  </button>: <button className="btn btn-primary" onClick={()=>this.peticionPut()}>
-                    Actualizar
-                  </button>*/
-                  }
-                    {/*<button className="btn btn-primario" onClick={()=>this.props.insertarArchivos}>Importar</button>*/}
-                    <button className="btn btn-success" onClick={()=>this.peticionGet()}>Aceptar</button>
-                    {/*<button className="btn btn-danger" onClick={()=>this.modalInsertar()}>Cancelar</button>*/}
-                </ModalFooter>
           </Modal>
        
 
-
+          {/*Modal para Eliminar la Actuación*/}
           <Modal isOpen={this.state.modalEliminar}>
             <ModalBody>
             <Translation ns= "global">{(t) => <>{t( 'ElimAct')}</>}</Translation>
@@ -222,11 +220,12 @@ seleccionarActuacion=(actuacion)=>{
             </ModalFooter>
           </Modal>
 
-
+        {/*Modal para Crear o Modificar una Actuación*/}
           <Modal size="lg" style={{maxWidth: '1600px', width: '80%'}} isOpen={this.state.modalInsertar}>
                 <ModalHeader style={{display: 'block'}}>
-                  <span style={{float: 'right'}} onClick={()=>this.modalInsertar()}>x</span>
-                  
+                  <span style={{float: 'right'}}>
+                    <button className="btn btn-danger" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Guardar', tipoModal:'Insertar'})}}>x</button>
+                  </span>
                 </ModalHeader>
                 <ModalBody>
                 {this.state.tipoModal=='Actualizar'?
@@ -241,12 +240,24 @@ seleccionarActuacion=(actuacion)=>{
                   />  
                   }                   
                 </ModalBody>
-
-                <ModalFooter>                  
-                    <button className="btn btn-success" onClick={()=>this.peticionGet()}>Aceptar</button>
-                </ModalFooter>
           </Modal>
 
+          {/*Modal para verificar si se quiere salir de Crear/Editar o de Importar*/}
+          <Modal isOpen={this.state.modalVerificar}>
+				      <ModalBody>
+              <br />
+              {this.state.tipoModalV=='Guardar'?
+              <Translation ns= "global">{(t) => <>{t('SalirModalSave')}</>}</Translation>  
+              :
+              <Translation ns= "global">{(t) => <>{t('SalirModal')}</>}</Translation>     
+              }
+              <br /><br />     			        
+				      </ModalBody>
+				      <ModalFooter>                            
+				        <button className="btn btn-danger" size="sm" onClick={()=>{this.setState({modalVerificar: false, modalInsertar: false}); this.peticionGet()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                <button className="btn btn-primary" size="sm" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('Permanecer')}</>}</Translation></button>
+				      </ModalFooter>
+			    </Modal>
           </div>
         )
     }
