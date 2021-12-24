@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faInfo } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import ReactPaginate from 'react-paginate';
 import '../css/Pagination.css';
 import CargarExcel from "../components/CargarExcel";
 import CrearEditarActuacion from "../components/CrearEditarActuacion";
+import InfoActuacion from "../components/InfoActuaciones";
 import '../css/Menu.css';
 import { Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +19,6 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
-import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import Spinner from "../components/Spinner"; 
 
@@ -43,6 +43,7 @@ class VerActuaciones extends Component{
       modalImportar: false,
       modalEliminar: false,
       modalInsertar: false,
+      modalInfo: false,
       modalVerificar: false,
       tipoModal: '',
       tipoModalV: '',
@@ -61,12 +62,12 @@ class VerActuaciones extends Component{
     {dataField: 'claveObra', text: <Translation ns= "global">{(t) => <>{t('Clave')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'},
     {dataField: 'fecha', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, sort: true, formatter: (cell, row) =>{return <div>{`${row.fecha.substring(0,10)}`}</div>;}, filter: textFilter(), align: 'center'},
     {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('Sentido')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'},
-    {dataField: 'calzada', text: <Translation ns= "global">{(t) => <>{t('Calzada')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'},
+    {dataField: 'calzada', text: <Translation ns= "global">{(t) => <>{t('Calzada')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center', formatter: (cell, row) =>{return <div>{`${row.carriles != ''? ((row.carriles?.substring(0,1) > 0 && row.carriles?.substring(2,3) > 0) ? 'Separades' : 'Única') :''}`}</div>;}},
     {dataField: 'gestion', text: <Translation ns= "global">{(t) => <>{t('Gestion')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'},
     {dataField: 'carreterasAntigua', text: <Translation ns= "global">{(t) => <>{t('CarreteraAnt')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'},
     {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${row.puntoIni.pk} + ${row.puntoIni.m}`}</div>;}, filter: textFilter(), align: 'center'},
     {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${row.puntoFin.pk} + ${row.puntoFin.m}`}</div>;}, filter: textFilter(), align: 'center'},
-    {dataField: 'importe', text: <Translation ns= "global">{(t) => <>{t('Importe')}</>}</Translation>, sort: true, filter: textFilter(), align: 'center'}
+    {dataField: 'importe', text: <Translation ns= "global">{(t) => <>{t('Importe')}</>}</Translation>, sort: true, filter: textFilter(), formatter: (cell, row) =>{return <div>{`${row.importe.toLocaleString('es')}`}</div>;}, align: 'center'}
   ]
 
 
@@ -80,6 +81,7 @@ class VerActuaciones extends Component{
     prePageText: '<',
     showTotal: true,
     alwaysShowAllBtns: true,
+    className: 'paginationCustom'
     })
   }
 
@@ -90,7 +92,9 @@ class VerActuaciones extends Component{
     //console.log("rowindex ", rowIndex);
            
     return (
-      <div>
+      <div>    
+      <button className="btn btn-primary" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInfo: true})}}><FontAwesomeIcon icon={faInfo}/></button>
+      {"  "}
       <button className="btn btn-primary" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInsertar: true, tipoModal: 'Actualizar', tipoModalV: ''})}}><FontAwesomeIcon icon={faEdit}/></button>
       {"  "}
       <button className="btn btn-danger" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
@@ -120,7 +124,8 @@ peticionGet=()=>{
         desplegablesActuaciones: response.data.desplegablesActuaciones,
         modalImportar: false,
         modalInsertar: false,
-        modelVerificar: false, 
+        modalVerificar: false, 
+        modalInfo: false, 
         content: response
       })
   });
@@ -146,12 +151,20 @@ modalImportar=()=>{
 
 /*Se activa/desactiva el modal para Insertar/Editar una Actuación*/
 modalInsertar=()=>{
+  console.log("Modal Insertar");
+  console.log(this.state);
   this.setState({modalInsertar: !this.state.modalInsertar});
 }
 
 /*Se activa/desactiva el modal para verificar si se quiere salir de Crear/Editar*/
 modalVerificar=()=>{
   this.setState({modalVerificar: !this.state.modalVerificar});
+}
+
+/*Se activa/desactiva el modal para mostrar la información de la actuación*/
+modalInfo=()=>{
+  console.log("Modal Info");
+  this.setState({modalInfo: !this.state.modalInfo});
 }
 
 
@@ -192,6 +205,9 @@ seleccionarActuacion=(actuacion)=>{
             pagination={this.pagination}
             filter={filterFactory()}
             bordered={false}
+            wrapperClasses="table-responsive"
+            headerWrapperClasses="table-responsive"
+            classes="w-auto text-nowrap"
           />
 
 
@@ -202,7 +218,6 @@ seleccionarActuacion=(actuacion)=>{
                     <button className="btn btn-danger" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Importar', tipoModal: ''})}}>x</button>
                   </span>
                 </ModalHeader>
-
                 <ModalBody>
                   <CargarExcel/>
                 </ModalBody>
@@ -230,7 +245,7 @@ seleccionarActuacion=(actuacion)=>{
                 <ModalBody>
                 {this.state.tipoModal=='Actualizar'?
                   <CrearEditarActuacion                
-                    Actuacion = {this.state.form.actuacion}
+                    Actuacion = {this.state.form?.actuacion}
                     Data = {this.state.desplegablesActuaciones}
                   />   
                   :   
@@ -241,6 +256,8 @@ seleccionarActuacion=(actuacion)=>{
                   }                   
                 </ModalBody>
           </Modal>
+
+          
 
           {/*Modal para verificar si se quiere salir de Crear/Editar o de Importar*/}
           <Modal isOpen={this.state.modalVerificar}>
@@ -258,6 +275,24 @@ seleccionarActuacion=(actuacion)=>{
                 <button className="btn btn-primary" size="sm" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('Permanecer')}</>}</Translation></button>
 				      </ModalFooter>
 			    </Modal>
+
+
+          {/*Modal para mostrar la información de una Actuación*/}
+          <Modal size="lg" style={{maxWidth: '1600px', width: '80%'}} isOpen={this.state.modalInfo}>
+                <ModalHeader style={{display: 'block'}}>
+                  <h1 style={{marginBottom: '0%'}}><Translation ns= "global">{(t) => <>{t('InfoAct')}</>}</Translation></h1> 
+                </ModalHeader>
+                <ModalBody>
+                  <InfoActuacion                
+                    Actuacion = {this.state.form?.actuacion}
+                  />                   
+                </ModalBody>
+                <ModalFooter>                            
+                  <span style={{float: 'right'}}>
+                      <button className="btn btn-danger" onClick={()=>{this.modalInfo();}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                  </span> 
+                </ModalFooter>
+          </Modal>
           </div>
         )
     }

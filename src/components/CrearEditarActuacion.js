@@ -540,6 +540,16 @@ function CrearEditarActuacion({Actuacion, Data}){
 
     console.log("peticionSeleccionar");   
     console.log(FormActuacion); 
+    console.log(FormActuacion.AnchCarril); 
+
+    //Campos con decimales. Se deben enviar con coma a la api.
+    var Importe = String(FormActuacion.Importe.replace(".", ","))
+    var CPA = String(FormActuacion.CPA.replace(".", ","))
+    var AnchCarril = String(FormActuacion.AnchCarril.replace(".", ","))
+    var AnchArcen = String(FormActuacion.AnchArcen.replace(".", ","))
+
+    console.log(AnchCarril);
+
 
     data.append('Id', FormActuacion.Id)
     data.append('idTipoActuacion', FormActuacion.TipoActuacion)
@@ -560,17 +570,17 @@ function CrearEditarActuacion({Actuacion, Data}){
     data.append('CarreteraAntigua', FormActuacion.CarreteraAnt)
     data.append('Utilizada', FormActuacion.Utilizada)
     data.append('Observaciones', FormActuacion.Observaciones)
-    data.append('Importe', FormActuacion.Importe)
+    data.append('Importe', Importe)
     data.append('Longitud', FormActuacion.Longitud)
     data.append('idTipoCalzada', FormActuacion.TipoCalz)
 
     //Firmes
     data.append('idTipoFirmeTramo', FormActuacion.TipoFirmeTramo)
     data.append('idNivelesInfluencia', FormActuacion.NivelesInfluencia)
-    data.append('CPA', FormActuacion.CPA)
+    data.append('CPA', CPA)
     data.append('Fresado', FormActuacion.Fresado)
-    data.append('AnchuraCarril', FormActuacion.AnchCarril)
-    data.append('AnchuraArcen', FormActuacion.AnchArcen)
+    data.append('AnchuraCarril', AnchCarril )
+    data.append('AnchuraArcen', AnchArcen)
     data.append('idCapaRodaduraCarril', FormActuacion.CapaRodaduraCarril)
     data.append('CapaRodaduraEspCarr', FormActuacion.CapaRodaduraEspCarr)
     data.append('idCapaRodaduraArcen', FormActuacion.CapaRodaduraArcen)
@@ -622,8 +632,8 @@ function CrearEditarActuacion({Actuacion, Data}){
         guardarMsgOutSave(msg);
 
     }).catch(error=>{
-        console.log(error); 
-        console.log(error.response.data);  
+        console.log("ERROR:", error); 
+        console.log("ERROR.DATA:", error.response.data);  
 
         setMsgOutBoolKOS(true);
         setMsgOutBoolOKS(false); 
@@ -1085,7 +1095,7 @@ function CrearEditarActuacion({Actuacion, Data}){
     return(
 
         <div>  
-          <h1><Translation ns= "global">{(t) => <>{t('ActNueva')}</>}</Translation></h1>            
+                    
           <div className="form-group">       
           
             
