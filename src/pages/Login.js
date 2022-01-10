@@ -9,6 +9,7 @@ import { ClassNames } from '@emotion/react';
 import { useTranslation } from 'react-i18next';
 import Idioma from "../components/Idioma";
 import { useHistory } from 'react-router-dom';
+import { Translation } from 'react-i18next';
 
 
 function Foo(props) {
@@ -25,7 +26,6 @@ function Foo(props) {
     });
 
     const handleChange=e=>{
-        console.log("dfsdf") 
         const {name, value} = e.target;
         setForm({
             ...form,
@@ -61,6 +61,8 @@ function Foo(props) {
     if(error){
         //Mensaje de error
         componente = <Error mensaje='Datos incorrectos.'/>
+        var Mensaje = <Translation ns= "global">{(t) => <>{t('LoginKO')}</>}</Translation>;
+        componente = <Error mensaje={Mensaje}/>
         console.log(componente);
     }
 

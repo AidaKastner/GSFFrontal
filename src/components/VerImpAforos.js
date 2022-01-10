@@ -17,8 +17,6 @@ import Spinner from "../components/Spinner";
 
 
 const urlAf = "https://localhost:44301/Aforos";
-//const { t, i18n } = useTranslation();
-
 
 
 class VerImpAforos extends Component{
@@ -33,6 +31,7 @@ class VerImpAforos extends Component{
       perPage: 50000,
       currentPage: 0,
       modalImportar: false,
+      modalVerificar: false, 
       content: null,
       form:{
         id: ''
@@ -40,7 +39,7 @@ class VerImpAforos extends Component{
   }
     
 
-
+  /*Tabla de Aforos*/
   this.columns = [
     {dataField: 'region', text:<Translation ns= "global">{(t) => <>{t('region')}</>}</Translation>, sort: true, filter: textFilter()},
     {dataField: 'codigo', text: <Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
@@ -103,10 +102,16 @@ peticionGet=()=>{
   });
 }    
 
-  
+/*Se activa/desactiva el modal para importar un Excel*/
 modalImportar=()=>{
   this.setState({modalImportar: !this.state.modalImportar});
 }    
+
+/*Se activa/desactiva el modal para verificar si se quiere salir de Crear/Editar*/
+modalVerificar=()=>{
+  this.setState({modalVerificar: !this.state.modalVerificar});
+}
+
 
     render(){
         if (!this.state.content) 
@@ -140,24 +145,30 @@ modalImportar=()=>{
 
           <Modal isOpen={this.state.modalImportar}>
                 <ModalHeader style={{display: 'block'}}>
-                  <span style={{float: 'right'}} onClick={()=>this.modalImportar()}>x</span>
+                <span style={{float: 'right'}}>
+                    <button className="btn btn-danger" onClick={()=>{this.modalVerificar();}}>x</button>
+                </span>
                 </ModalHeader>
                 <ModalBody>
                   <ImpExcelAforos/>
                 </ModalBody>
-
                 <ModalFooter>
-                  {/*this.state.tipoModal=='insertar'?
-                    <button className="btn btn-success" onClick={()=>this.peticionPost()}>
-                    Insertar
-                  </button>: <button className="btn btn-primary" onClick={()=>this.peticionPut()}>
-                    Actualizar
-                  </button>*/
-                  }
-                    {/*<button className="btn btn-primario" onClick={()=>this.props.insertarArchivos}>Importar</button>*/}              
-                    {/*<button className="btn btn-danger" onClick={()=>this.modalInsertar()}>Cancelar</button>*/}
                 </ModalFooter>
           </Modal>
+
+
+          {/*Modal para verificar si se quiere salir de Crear/Editar o de Importar*/}
+          <Modal isOpen={this.state.modalVerificar}>
+				      <ModalBody>
+              <br />
+              <Translation ns= "global">{(t) => <>{t('SalirModal')}</>}</Translation>     
+              <br /><br />     			        
+				      </ModalBody>
+				      <ModalFooter>                            
+				        <button className="btn btn-danger" size="sm" onClick={()=>{this.setState({modalVerificar: false, modalInsertar: false}); this.peticionGet()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                <button className="btn btn-primary" size="sm" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('Permanecer')}</>}</Translation></button>
+				      </ModalFooter>
+			    </Modal>
           </div>
         )
     }

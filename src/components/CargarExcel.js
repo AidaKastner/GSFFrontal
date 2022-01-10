@@ -144,12 +144,11 @@ function CargarExcel(){
   return (
     <div>
       <br/>
-        <h1><Translation ns= "global">{(t) => <>{t('ImpActs')}</>}</Translation>   </h1>
-        {/*<p>Idioma : { i18n.language }</p>*/}
-        <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
-        
-        <button className="btn btn-primario" onClick={()=>insertarArchivos()}>{ t('Cargar') }</button>
-       
+        <h1><Translation ns= "global">{(t) => <>{t('ImpActs')}</>}</Translation></h1>    
+          <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />   
+          <button className="btn btn-primario" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+          <br/><br/><br/>
+
        { msgOutBoolOK ? 
        <div><br/><br/>
        <div className="alert alert-success">
