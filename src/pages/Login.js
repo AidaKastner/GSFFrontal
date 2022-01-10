@@ -75,7 +75,7 @@ function Foo(props) {
                 <div className="form-group">
   
                 <div className="campo-form">
-                    <label>{ t('user') }: </label>
+                    <label>{ t('user') } </label>
                     <br />
                     <input
                         type="text"
