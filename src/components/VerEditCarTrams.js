@@ -4,7 +4,7 @@ import React, { Component, useState , Fragment} from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faInfo, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
@@ -21,30 +21,14 @@ import Select from 'react-select';
 import VerCarTramDet from "../components/VerCarTramDet";
 import Spinner from "../components/Spinner"; 
 
-const StyleLink = styled(Link)`
-  display: flex;
-  color: #e1e9fc;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  list-style: none;
-  height: 60px;
-  text-decoration: none;
-  font-size: 18px;
-  &:hover {
-    background: #252831;
-    border-left: 4px solid #632ce4;
-    cursor: pointer;
-  }
-`;
-
 const url1 = "https://localhost:44301/Carreteras";
 const url2 = "https://localhost:44301/Tramos/combo";
+const url3 = "https://localhost:44301/Tramos/baja";
 
 var paramIndex = 0;
 let yearIni = 1979;
 var indice ='';
-
+var msg = '';
 let authToken = sessionStorage.getItem("JWT");
 
 let config = {
@@ -88,20 +72,26 @@ class VerEditCarTrams extends Component{
       comboSel:'Activos',
       content: null,
       setBtnInsertar: false,
+      msgOutErr: false,
+      guardarMsgOutErr: false,
+      msgOutBoolKO: false,
+      setMsgOutBoolKO: false,
+      setMsgOutBoolOK: false,
       form:{
         id:'',
         codigo:'',
         nombre:'',
         comentario:'',
         idGrafo:'',
-        IdCarreteras:''
+        IdCarreteras:'',
+        rutaKml:''
       } 
   }
     
  
   //Carga de datos de las tablas
   this.columns = [
-    {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
+    {dataField: 'accionesTram', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
     {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})},
     {dataField: 'comentario', text:<Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Search...'})}
   ]
@@ -146,12 +136,11 @@ class VerEditCarTrams extends Component{
   
     return (
       <div>
-      <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>
-      {"  "}
-      <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalDescaragr: true})}}><FontAwesomeIcon icon={faDownload}/></button>
-      {"  "}
-      <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
-
+        {/*<button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>*/}
+        {"  "}
+        <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalDescaragr: true})}}><FontAwesomeIcon icon={faDownload}/></button>
+        {"  "}
+        <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
       </div>              
 
       );
@@ -164,10 +153,10 @@ ButtonsAccionesTr = (cell, row, rowIndex) => {
 
 return (
   <div>
-  <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalRedirigir: true})}}><FontAwesomeIcon icon={faEdit}/></button>
-  {"  "}
-  <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
-</div>              
+    <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalRedirigir: true})}}><FontAwesomeIcon icon={faInfo}/></button>
+    {"  "}
+    <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+  </div>              
 
   );
 };
@@ -181,6 +170,9 @@ return (
         [e.target.name]: e.target.value
       }
     });
+    //Limpiamos la pantalla de mensajes
+    this.setState({setMsgOutBoolKO: false});
+    this.setState({setMsgOutBoolOK: false});
     console.log("Funcion Handle",this.state.form);
     console.log("Indice: ",this.state.Index);
 
@@ -226,7 +218,7 @@ peticionGet=()=>{
     case 1: this.peticionGet2();
     break;
 
-    default:  this.peticionGet1();
+    default: this.peticionGet1();
     break;
 
     }
@@ -234,7 +226,62 @@ peticionGet=()=>{
 }
 
 
-/*Obtención datos Clasificación técnica real*/
+//Control mensaje de errores descarga ZIPs
+controlErr=(controlError)=>{
+  console.log("Control de errores: ",controlError);
+
+  switch(controlError) {
+
+    case 0: msg= <Translation ns= "global">{(t) => <>{t('PDFKO0')}</>}</Translation>;
+    break;
+
+    case 1: msg= <Translation ns= "global">{(t) => <>{t('PDFKO1')}</>}</Translation>;
+    break;
+
+    case 2: msg= <Translation ns= "global">{(t) => <>{t('PDFKO2')}</>}</Translation>;
+    break;
+
+    case 3: msg= <Translation ns= "global">{(t) => <>{t('PDFKO3')}</>}</Translation>;
+    break;
+
+    case 4: msg= <Translation ns= "global">{(t) => <>{t('PDFKO4')}</>}</Translation>;
+    break;
+
+    case 5: msg= <Translation ns= "global">{(t) => <>{t('PDFKO5')}</>}</Translation>;
+    break;
+
+    default: msg= <Translation ns= "global">{(t) => <>{t('PDFKO0')}</>}</Translation>;
+    break;
+
+    }
+
+}
+
+//Control mensaje de errores baja tramo
+controlErrBaja=(controlErrorTramo)=>{
+  console.log("Control de errores Baja Tramo: ", controlErrorTramo);
+
+  switch(controlErrorTramo) {
+
+    case 0: msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMKO00')}</>}</Translation>;
+    break;
+
+    case 1: msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMKO01')}</>}</Translation>;
+    break;
+
+    case 2: msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMKO02', { TramKO: this.state.form.rutaKml })}</>}</Translation>;
+    break;
+
+    default: msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMKO00')}</>}</Translation>;
+    break;
+
+    }
+
+}
+
+
+
+/*Obtención datos Carreteras*/
 peticionGet1=()=>{
   authToken = sessionStorage.getItem("JWT");
   console.log('AutToken:', authToken);
@@ -253,7 +300,7 @@ peticionGet1=()=>{
   });
 }    
 
-/*Obtención datos Organismos*/
+/*Obtención Tramos*/
 peticionGet2=()=>{  
   config = {
     headers: {
@@ -347,6 +394,41 @@ if (this.state.setBtnInsertar==true){
 }
 }
 
+
+/*Editar registro*/
+peticionPutBaja=()=>{
+  console.log("Acción baja");
+  console.log("rutaKml", this.state.form.rutaKml);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  axios.put(url3+"/"+this.state.form.id,config).then(response=>{    
+    this.setState({modalEliminar: false});
+    this.setState({setMsgOutBoolOK: true});
+    this.setState({setMsgOutBoolKO: false});
+    msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMOK')}</>}</Translation>;
+    this.peticionGet();
+  }).catch(error=>{
+    this.setState({setMsgOutBoolKO: true});
+    this.setState({setMsgOutBoolOK: false});
+    console.log(url3);
+    console.log(this.state.form.id);
+    console.log(error);    
+    console.log("Error response", error.response);
+    console.log("Error response data", error.response?.data);
+    this.controlErrBaja(error.response?.data); 
+    this.setState({modalEliminar: false});
+    this.peticionGet(); 
+})   
+
+}
+
+
+
 /*Insertar registro*/
 peticionPost=()=>{
   const data = new FormData();
@@ -379,7 +461,7 @@ peticionPost=()=>{
       console.log(config);
       console.log("ERROR POST");
       console.log(error); 
-      alert("Error mientras se añadían datos. Pongase en contacto con el servicio técnico");  
+      this.controlErr(error.response?.data.byteLength);
       this.setState({modalInsertar: false});   
     })   
   }else{
@@ -390,6 +472,7 @@ peticionPost=()=>{
 
 /*Eliminar registro*/
 peticionDelete=()=>{
+  console.log("Acción delete");
   config = {
     headers: {
         'Authorization': sessionStorage.getItem("JWT"),
@@ -399,16 +482,22 @@ peticionDelete=()=>{
   };
   axios.delete(url1+"/"+this.state.form.id, config).then(response=>{
     this.setState({modalEliminar: false});
+    this.setState({setMsgOutBoolOK: true});
+    this.setState({setMsgOutBoolKO: false});
+    msg= <Translation ns= "global">{(t) => <>{t('DELETEOK')}</>}</Translation>;
     this.peticionGet();
   }).catch(error=>{   
+    this.setState({setMsgOutBoolKO: true});
+    this.setState({setMsgOutBoolOK: false});
     console.log(url1);
     console.log(this.state.form.id);
     console.log(error);    
-    alert("Error mientras se eliminaban datos. Pongase en contacto con elservicio técnico");    
+    msg= <Translation ns= "global">{(t) => <>{t('DELETEKO')}</>}</Translation>;  
+    this.peticionGet(); 
 })   
 }
 
-/*Descargar ZIP registro*/
+/*Descargar ZIP*/
 peticionDownload=()=>{
   config = {
     responseType: 'arraybuffer',
@@ -436,6 +525,8 @@ peticionDownload=()=>{
     }).then(response=>{
     console.log("response",response);
     console.log("response",response.data);
+    console.log("response request",response.request);
+    console.log("response request status",response.request.status);
     let extension = 'zip';
     let tempFileName = this.state.form.codigo;
     let fileName = "Auscultacions_"+`${tempFileName}.${extension}`;
@@ -447,15 +538,24 @@ peticionDownload=()=>{
     link.setAttribute('download', fileName);
     document.body.appendChild(link);
     link.click();
+    this.setState({setMsgOutBoolOK: true});
+    this.setState({setMsgOutBoolKO: false});
     this.setState({modalDescaragr: false});
+    msg= <Translation ns= "global">{(t) => <>{t('PDFOK')}</>}</Translation>;
     this.peticionGet();
   }).catch(error=>{
+    this.setState({setMsgOutBoolKO: true});
+    this.setState({setMsgOutBoolOK: false});
     console.log("KO Download");
     console.log(url1);
     console.log(this.state.form.id);
-    console.log(error);    
+    console.log(error);
+    console.log("Error response", error.response);
+    console.log("Error response data", error.response?.data);
+    console.log("Error response data byteLength", error.response?.data.byteLength);
+    this.controlErr(error.response?.data.byteLength);
     this.setState({modalDescaragr: false});
-    alert("Error mientras se descargaba el ZIP. Pongase en contacto con elservicio técnico");    
+    this.peticionGet(); 
 })   
 }
 
@@ -471,7 +571,8 @@ seleccionarTramo=(CarTram)=>{
       codigo: CarTram.codigo,
       nombre: CarTram.nombre,
       comentario: CarTram.comentario,
-      idGrafo: CarTram.idGrafo
+      idGrafo: CarTram.idGrafo,
+      rutaKml: CarTram.rutaKml
     }
   })
 
@@ -480,7 +581,6 @@ seleccionarTramo=(CarTram)=>{
 }   
     //Devolvemos las Tabs con datos
     render(url){
-        
         const { activeIndex } = this.state;
             const tabs = [
       {
@@ -488,7 +588,23 @@ seleccionarTramo=(CarTram)=>{
         
         content: (
           <div>
-               <button className="btn btn-primario" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}><Translation ns= "global">{(t) => <>{t('addRegist')}</>}</Translation></button>
+          { this.state.setMsgOutBoolOK ? 
+          <div><br/><br/>
+              <div className="alert alert-success">
+                {/*Mostramos mensaje*/}
+                {msg}
+              </div>
+            </div>
+            : ""}
+          { this.state.setMsgOutBoolKO ? 
+            <div><br/>
+             <div class="alert alert-danger">
+                {/*Mostramos mensaje*/}
+                {msg}
+            </div>
+            </div>
+            : ""}
+               {/*<button className="btn btn-primario" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}><Translation ns= "global">{(t) => <>{t('addRegist')}</>}</Translation></button>*/}
               {"  "}
               <br /><br />
               <BootstrapTable  
@@ -510,7 +626,23 @@ seleccionarTramo=(CarTram)=>{
         label: <Translation ns= "global">{(t) => <>{t('Tramo')}</>}</Translation>,
         content: (
           <div>
-             {"  "}
+            { this.state.setMsgOutBoolOK ? 
+              <div><br/><br/>
+                <div className="alert alert-success">
+                  {/*Mostramos mensaje*/}
+                  {msg}
+                </div>
+              </div>
+            : ""}
+            { this.state.setMsgOutBoolKO ? 
+            <div><br/>
+              <div class="alert alert-danger">
+                {/*Mostramos mensaje*/}
+                {msg}
+              </div>
+            </div>
+            : ""}
+            {"  "}
 
              <span style={{float: 'right'}}>
                 <Select 
@@ -601,10 +733,18 @@ seleccionarTramo=(CarTram)=>{
             </Modal>
 			      <Modal isOpen={this.state.modalEliminar}>
 				      <ModalBody>
-              <Translation ns= "global">{(t) => <>{t('eliReg')}</>}</Translation>			        
+              { indice.activeIndex != 0  ?
+                <Translation ns= "global">{(t) => <>{t('BAJATRAM')}</>}</Translation>			     
+              :
+                <Translation ns= "global">{(t) => <>{t('eliReg')}</>}</Translation>	
+              }  
 				      </ModalBody>
 				      <ModalFooter>
-				        <button className="btn btn-danger" onClick={()=>this.peticionDelete(this.state.url)}>Sí</button>
+              { indice.activeIndex != 0  ?
+                <button className="btn btn-danger" onClick={()=>this.peticionPutBaja(url3)}>Sí</button>
+              :
+                <button className="btn btn-danger" onClick={()=>this.peticionDelete(this.state.url)}>Sí</button>
+              }
 				        <button className="btn btn-primary" onClick={()=>this.setState({modalEliminar: false})}>No</button>
 				      </ModalFooter>
 			      </Modal>
@@ -616,7 +756,7 @@ seleccionarTramo=(CarTram)=>{
 				      <ModalFooter>
 				        <button className="btn btn-danger" onClick={()=>this.peticionDownload()}>Sí</button>
 				        <button className="btn btn-primary" onClick={()=>this.setState({modalDescaragr: false})}>No</button>
-				      </ModalFooter>
+                </ModalFooter>
 			      </Modal>
 
             <Modal isOpen={this.state.modalVerificar}>
@@ -652,10 +792,10 @@ seleccionarTramo=(CarTram)=>{
               <ModalBody>
 					        <div className="form-group">
 						        <label htmlFor="id"><Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation></label>
-						        <input className="form-control" type="text" maxLength = "16" name='codigo' id='codigo' readOnly onChange={this.handleChange} value={this.state.form?this.state.form.codigo: ''}/>
+						        <input className="form-control" type="text" maxLength = "64" name='codigo' id='codigo' readOnly onChange={this.handleChange} value={this.state.form?this.state.form.codigo: ''}/>
 						        <br />
 						        <label htmlFor="comentario"><Translation ns= "global">{(t) => <>{t('comentario')}</>}</Translation></label>
-						        <input className="form-control" type="text" maxLength = "60" name="comentario" id="comentario" onChange={this.handleChange} value={this.state.form?this.state.form.comentario: ''}/>
+						        <input className="form-control" type="text" maxLength = "255" name="comentario" id="comentario" onChange={this.handleChange} value={this.state.form?this.state.form.comentario: ''}/>
 					        </div>  
               </ModalBody>
               <ModalFooter>                  
