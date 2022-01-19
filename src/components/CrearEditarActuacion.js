@@ -15,10 +15,11 @@ import { Form } from 'reactstrap';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 function CrearEditarActuacion({Actuacion, Data}){
+    console.log("**********************");
     console.log("Actuacion: ", Actuacion);
     console.log("DATA: ", Data);
 
-    
+    let authToken = sessionStorage.getItem("JWT");
 
     const url = "https://localhost:44301/api/InsertarActuaciones/";
 
@@ -28,6 +29,7 @@ function CrearEditarActuacion({Actuacion, Data}){
         }
     }
 
+
     //Campos Actuación
     const [FormActuacion, actualizarFormActuacion] = useState({
         Id: Actuacion? Actuacion.id: '',
@@ -35,23 +37,23 @@ function CrearEditarActuacion({Actuacion, Data}){
         TipoActuacion: Actuacion? Actuacion.idDdTipoActuaciones: '', Carretera: Actuacion?Actuacion.idCarreteras: '', 
         PkIni: Actuacion?Actuacion.puntoIni.pk: '', PkFin: Actuacion?Actuacion.puntoFin.pk: '', MIni: Actuacion?Actuacion.puntoIni.m: '', MFin: Actuacion?Actuacion.puntoFin.m: '',
         //Campos Actuación
-        ClaveObra: Actuacion? Actuacion.claveObra: '', Importe: Actuacion? Actuacion.importe: '', Fecha: Actuacion? Actuacion.fecha: '', Creciente: Actuacion?Actuacion.sentido?.includes("C")?true: false:true, Decreciente: Actuacion?Actuacion.sentido?.includes("D")?true: false:true, Observaciones: Actuacion?Actuacion.observaciones: '',
-        TipoCalz: '', Carril1: Actuacion?Actuacion.carriles?.substring(0,1): '', Carril2: Actuacion?Actuacion.carriles?.substring(2,3): '', CarreteraAnt: Actuacion?Actuacion.carreteraAntigua: '', Calzada: Actuacion?Actuacion.calzada: '', Gestion: Actuacion?Actuacion.gestion: '', Utilizada: Actuacion?Actuacion.utilizada: '', Longitud: Actuacion?Actuacion.longitud: '',
+        ClaveObra: Actuacion? Actuacion.claveObra: '', Importe: Actuacion?.importe > 0 ? Actuacion.importe: '', Fecha: Actuacion? Actuacion.fecha: '', Creciente: Actuacion?Actuacion.sentido?.includes("C")?true: false:true, Decreciente: Actuacion?Actuacion.sentido?.includes("D")?true: false:true, Observaciones: Actuacion?Actuacion.observaciones: '',
+        TipoCalz: '', Carril1: Actuacion?Actuacion.carriles?.substring(0,1): '', Carril2: Actuacion?Actuacion.carriles?.substring(2,3): '', CarreteraAnt: Actuacion.carreteraAntigua != null ? Actuacion.carreteraAntigua: '', Calzada: Actuacion?.calzada != null ? Actuacion.calzada: '', Gestion: Actuacion.gestion != null ? Actuacion.gestion: '', Utilizada: Actuacion.utilizada != null ? Actuacion.utilizada: '', Longitud: Actuacion?.longitud > 0 ? Actuacion.longitud: '',
         //Pestaña Firmes
-        TipoFirmeTramo: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idCarrilDdTiposFirmesTramo: '', NivelesInfluencia: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idDdNivelesInfluencia: '', CPA: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.cpa: '', 
-        AnchCarril: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.anchuraCarril: '', AnchArcen: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.anchuraArcen: '', Fresado: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.fresado: '',
-        CapaRodaduraCarril: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idCarrilDdCapasRodadura: '', CapaRodaduraEspCarr: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.espesorRodaduraCarril: '', 
-        CapaRodaduraArcen: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idArcenDdCapasRodadura: '', CapaRodaduraEspArc: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.espesorRodaduraArcen: '', 
-        CapaIntermediaCarril: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idCarrilDdCapasIntermedia: '', CapaIntermediaEspCarr: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.espesorIntermediaCarril: '', 
-        CapaIntermediaArcen: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idArcenDdCapasIntermedia: '', CapaIntermediaEspArc: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.espesorIntermediaArcen: '', 
-        CapaBaseCarril: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idCarrilDdCapasBase: '', CapaBaseEspCarr: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.espesorBaseCarril: '', 
-        CapaBaseArcen: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idArcenDdCapasBase: '', CapaBaseEspArc: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.espesorBaseArcen: '',
-        CapaSubbaseCarril: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idCarrilDdCapasSubbase: '', CapaSubbaseEspCarr: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.espesorSubbaseCarril: '', 
-        CapaSubbaseArcen: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idCarrilDdArcenSubbase: '', CapaSubbaseEspArc: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.espesorSubbaseArcen: '',
+        TipoFirmeTramo: Actuacion?.actuacionesFirme?.idCarrilDdTiposFirmesTramo != null ? Actuacion.actuacionesFirme.idCarrilDdTiposFirmesTramo: '', NivelesInfluencia: Actuacion?.actuacionesFirme?.idDdNivelesInfluencia != null ? Actuacion.actuacionesFirme.idDdNivelesInfluencia: '', CPA: Actuacion?.actuacionesFirme?.cpa > 0 ? Actuacion.actuacionesFirme.cpa: '', 
+        AnchCarril: Actuacion?.actuacionesFirme?.anchuraCarril > 0 ? Actuacion.actuacionesFirme?.anchuraCarril: '', AnchArcen: Actuacion?.actuacionesFirme?.anchuraArcen > 0 ? Actuacion.actuacionesFirme.anchuraArcen: '', Fresado: Actuacion?.actuacionesFirme?.fresado > 0 ? Actuacion.actuacionesFirme.fresado: '',
+        CapaRodaduraCarril: Actuacion?.actuacionesFirme?Actuacion.actuacionesFirme.idCarrilDdCapasRodadura: '', CapaRodaduraEspCarr: Actuacion?.actuacionesFirme?.espesorRodaduraCarril > 0 ? Actuacion.actuacionesFirme.espesorRodaduraCarril: '', 
+        CapaRodaduraArcen: Actuacion?.actuacionesFirme?.idArcenDdCapasRodadura != null ? Actuacion.actuacionesFirme.idArcenDdCapasRodadura: '', CapaRodaduraEspArc: Actuacion?.actuacionesFirme?.espesorRodaduraArcen > 0 ? Actuacion.actuacionesFirme.espesorRodaduraArcen: '', 
+        CapaIntermediaCarril: Actuacion?.actuacionesFirme?.idCarrilDdCapasIntermedia != null ? Actuacion.actuacionesFirme?.idCarrilDdCapasIntermedia: '', CapaIntermediaEspCarr: Actuacion?.actuacionesFirme?.espesorIntermediaCarril > 0 ? Actuacion.actuacionesFirme.espesorIntermediaCarril: '', 
+        CapaIntermediaArcen: Actuacion?.actuacionesFirme?.idArcenDdCapasIntermedia != null ? Actuacion.actuacionesFirme.idArcenDdCapasIntermedia: '', CapaIntermediaEspArc: Actuacion?.actuacionesFirme?.espesorIntermediaArcen > 0 ? Actuacion.actuacionesFirme.espesorIntermediaArcen: '', 
+        CapaBaseCarril: Actuacion?.actuacionesFirme?.idCarrilDdCapasBase != null ? Actuacion.actuacionesFirme.idCarrilDdCapasBase: '', CapaBaseEspCarr: Actuacion?.actuacionesFirme?.espesorBaseCarril > 0 ? Actuacion.actuacionesFirme.espesorBaseCarril: '', 
+        CapaBaseArcen: Actuacion?.actuacionesFirme?.idArcenDdCapasBase != null ? Actuacion.actuacionesFirme.idArcenDdCapasBase: '', CapaBaseEspArc: Actuacion?.actuacionesFirme?.espesorBaseArcen > 0 ? Actuacion.actuacionesFirme.espesorBaseArcen: '',
+        CapaSubbaseCarril: Actuacion?.actuacionesFirme?.idCarrilDdCapasSubbase != null ? Actuacion.actuacionesFirme.idCarrilDdCapasSubbase: '', CapaSubbaseEspCarr: Actuacion?.actuacionesFirme?.espesorSubbaseCarril > 0 ? Actuacion.actuacionesFirme.espesorSubbaseCarril: '', 
+        CapaSubbaseArcen: Actuacion?.actuacionesFirme?.idArcenDdCapasSubbase != null ? Actuacion.actuacionesFirme.idArcenDdCapasSubbase: '', CapaSubbaseEspArc: Actuacion?.actuacionesFirme?.espesorSubbaseArcen > 0 ? Actuacion.actuacionesFirme.espesorSubbaseArcen: '',
         //Pestaña Explanadas
         TerrenoNatural: Actuacion?.actuacionesExplanada?Actuacion.actuacionesExplanada.idDdTerrenosNaturales: '', CategoriaExplanada: Actuacion?.actuacionesExplanada?Actuacion.actuacionesExplanada?.idDdCategoriasExplanadas: '', 
-        TerrenoNatCBR: Actuacion?.actuacionesExplanada?Actuacion.actuacionesExplanada?.terrenoNaturalCbr: '', Relleno: Actuacion?.actuacionesExplanada?Actuacion.actuacionesExplanada?.relleno: '', 
-        RellenoCBR: Actuacion?.actuacionesExplanada?Actuacion.actuacionesExplanada?.rellenoCbr: '', Coronacion: Actuacion?.actuacionesExplanada?Actuacion.actuacionesExplanada?.coronacion: '', CoronacionCBR: Actuacion?.actuacionesExplanada?Actuacion.actuacionesExplanada?.coronacionCbr: '',
+        TerrenoNatCBR: Actuacion?.actuacionesExplanada?.terrenoNaturalCbr > 0 ? Actuacion.actuacionesExplanada?.terrenoNaturalCbr: '', Relleno: Actuacion?.actuacionesExplanada?.relleno > 0 ? Actuacion.actuacionesExplanada?.relleno: '', 
+        RellenoCBR: Actuacion?.actuacionesExplanada?.rellenoCbr > 0 ? Actuacion.actuacionesExplanada?.rellenoCbr: '', Coronacion: Actuacion?.actuacionesExplanada?.coronacion > 0 ? Actuacion.actuacionesExplanada?.coronacion: '', CoronacionCBR: Actuacion?.actuacionesExplanada?.coronacionCbr > 0 ? Actuacion.actuacionesExplanada?.coronacionCbr: '',
         //Pestana Clasificaciones (Tramo)
         Redes: '', ClasifTecReal: '', OrgConservacion: '', OrgCompetente: '', RegGestion: '', RegExplot: '',
         ZonaTermica : '', ZonaPluv: ''
@@ -384,6 +386,7 @@ function CrearEditarActuacion({Actuacion, Data}){
 
         setMsgOutBoolKO(true);
         var msg= <Translation ns= "global">{(t) => <>{t('CamposObligatorios')}</>}</Translation>
+        console.log("guardarMsgOut");
         guardarMsgOut(msg);
 
     }else{
@@ -395,7 +398,9 @@ function CrearEditarActuacion({Actuacion, Data}){
 
     
         //await axios.get(url, data, config)
-        await axios.get(url+`${FormActuacion.Carretera}/${FormActuacion.PkIni}/${FormActuacion.MIni}/${FormActuacion.PkFin}/${FormActuacion.MFin}`)
+        authToken = sessionStorage.getItem("JWT");
+        console.log('AutToken Act:', authToken);
+        await axios.get(url+`${FormActuacion.Carretera}/${FormActuacion.PkIni}/${FormActuacion.MIni}/${FormActuacion.PkFin}/${FormActuacion.MFin}`, { headers: {"Authorization" : authToken} })
         .then(response =>{
             console.log("OK1");
             console.log(response.data);
@@ -415,28 +420,33 @@ function CrearEditarActuacion({Actuacion, Data}){
             actualizarTablaTramos([]);
             actualizarMostrarCampos({ShowTablaTramos: false, ShowCamposComunes: false, ShowCalzada: false, ShowCarriles: false, ShowTipoCalzada: false, ShowUtilizada: false, ShowCarrAntigua: false, ShowGestion: false, ShowLongitud: false, ShowTabFirme: false, ShowAnchuras: false, ShowFresado: false, ShowTabExplanada: false, ShowTabClasificacion: false});
 
-            setMsgOutBoolKO(true);
-            setMsgOutBoolOK(false);  
             
+            setMsgOutBoolOK(false);  
+            console.log("ERROR");
             //Mensajes de error
             switch(error.response.data){          
                 case 1:
                     console.log("error 1")
                     //PK Ini mayor que PK Fin
                     var msg=<Translation ns= "global">{(t) => <>{t('PkIniMayorFin')}</>}</Translation>
+                    setMsgOutBoolKO(true);
                     guardarMsgOut(msg);
                     break;
                 case 2:
                     //No existen tramos activos
                     var msg=<Translation ns= "global">{(t) => <>{t('SinTramAct')}</>}</Translation>
+                    setMsgOutBoolKO(true);
                     guardarMsgOut(msg);
                     break;
                 default:
+                    console.log("error actuación");
+                    console.log(error.response.data);
                     var msg=<Translation ns= "global">{(t) => <>{t('ErrorGuardarAct')}</>}</Translation>
+                    setMsgOutBoolKO(true);
+                    console.log("guardarMsgOutSave");
                     guardarMsgOut(msg);
                     break;
-            }
-
+            }      
             
             console.log("msgOut ", msgOut);
             console.log(msgOutBoolKO);
@@ -543,10 +553,16 @@ function CrearEditarActuacion({Actuacion, Data}){
     console.log(FormActuacion.AnchCarril); 
 
     //Campos con decimales. Se deben enviar con coma a la api.
-    var Importe = String(FormActuacion.Importe.replace(".", ","))
-    var CPA = String(FormActuacion.CPA.replace(".", ","))
-    var AnchCarril = String(FormActuacion.AnchCarril.replace(".", ","))
-    var AnchArcen = String(FormActuacion.AnchArcen.replace(".", ","))
+    var Importe = FormActuacion.Importe;
+    console.log("Importe", Importe);
+    Importe = Importe?.toString().replace(".", ",");
+    console.log("Importe", Importe);
+    var CPA = FormActuacion.CPA;
+    CPA = CPA?.toString().replace(".", ",");
+    var AnchCarril = FormActuacion.AnchCarril;
+    AnchCarril = AnchCarril?.toString().replace(".", ",");
+    var AnchArcen = FormActuacion.AnchArcen;
+    AnchArcen = AnchArcen?.toString().replace(".", ",");
 
     console.log(AnchCarril);
 
@@ -629,6 +645,7 @@ function CrearEditarActuacion({Actuacion, Data}){
         setMsgOutBoolKOS(false);
         setMsgOutBoolOKS(true); 
         var msg= <Translation ns= "global">{(t) => <>{t('GuardarActuacionOK')}</>}</Translation>
+        console.log("guardarMsgOutSave");
         guardarMsgOutSave(msg);
 
     }).catch(error=>{
@@ -662,10 +679,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 var msg= <Translation ns= "global">{(t) => <>{t('EspesorKO')}</>}</Translation>
                 break;
             default:
+                console.log("error actuac");
                 var msg= <Translation ns= "global">{(t) => <>{t('GuardarActuacionKO')}</>}</Translation>
                 break;
         }
 
+        console.log("guardarMsgOutSave");
         guardarMsgOutSave(msg);
 
       })   
