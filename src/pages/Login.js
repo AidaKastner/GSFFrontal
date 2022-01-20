@@ -1,4 +1,4 @@
-import React, {useState, Suspense } from 'react';
+import React, {useState, Suspense, useEffect } from 'react';
 import md5 from 'md5';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
@@ -36,12 +36,20 @@ function Foo(props) {
 
     var componente;
 
+    let authToken = sessionStorage.getItem("JWT");
+
+    useEffect(() => {
+        //Se inicializa el token
+        sessionStorage.setItem("JWT", null);
+        console.log("AuthToken Login: ", authToken);
+    }, []);
+
     const iniciarSesion=async()=>{
            
         await axios.get(baseUrl+`/${form.mail}/${form.password}`)
         .then(response=>{                
             const token = 'Bearer ' + response.data;
-            axios.defaults.headers.common["Authorization"] = token ;
+            axios.defaults.headers.common["Authorization"] = token;
             sessionStorage.setItem("JWT", token);
             console.log(token);                          
             return response.data;            
