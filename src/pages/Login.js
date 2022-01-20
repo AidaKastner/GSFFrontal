@@ -32,6 +32,7 @@ function Foo(props) {
             [name]: value
         });
         console.log(form);
+        guardarError(false);
     }
 
     var componente;
@@ -77,6 +78,7 @@ function Foo(props) {
     return(
  
         <div className="form-usuario">
+            <h1 class="application-name">{ t('applicationName') }</h1>
             <div>
                 <Idioma />
             </div>
