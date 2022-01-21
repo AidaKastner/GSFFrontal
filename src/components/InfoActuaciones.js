@@ -186,13 +186,13 @@ function InfoActuaciones({Actuacion}){
 
           <Row>       
           <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspCoronacion"><Translation ns= "global">{(t) => <>{t('EspCoronacion')}</>}</Translation></label></Col>            
-          <Col xs={1}>{Actuacion.actuacionesExplanada?.coronacion <= 0? '': Actuacion.actuacionesExplanada?.coronacion + ' cm.'}</Col>
+          <Col xs={1}>{(Actuacion.actuacionesExplanada?.coronacion <= 0 || Actuacion.actuacionesExplanada == null) ? '': Actuacion.actuacionesExplanada?.coronacion + ' cm.'}</Col>
 
           <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRCoronacion"><Translation ns= "global">{(t) => <>{t('CBRCoronacion')}</>}</Translation></label></Col>            
           <Col xs={1}>{Actuacion.actuacionesExplanada?.coronacionCbr}</Col>
 
           <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspRelleno"><Translation ns= "global">{(t) => <>{t('EspRelleno')}</>}</Translation></label></Col>            
-          <Col xs={1}>{Actuacion.actuacionesExplanada?.relleno <= 0? '': Actuacion.actuacionesExplanada?.relleno + ' cm.'}</Col>
+          <Col xs={1}>{(Actuacion.actuacionesExplanada?.relleno <= 0 || Actuacion.actuacionesExplanada == null)? '': Actuacion.actuacionesExplanada?.relleno + ' cm.'}</Col>
 
           <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRRelleno"><Translation ns= "global">{(t) => <>{t('CBRRelleno')}</>}</Translation></label></Col>            
           <Col xs={1}>{Actuacion.actuacionesExplanada?.rellenoCbr}</Col>
@@ -200,13 +200,13 @@ function InfoActuaciones({Actuacion}){
 
         <Row>       
           <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspTerreno"><Translation ns= "global">{(t) => <>{t('EspTerreno')}</>}</Translation></label></Col>            
-          <Col xs={1}>{Actuacion.actuacionesExplanada?.relleno <= 0? '': Actuacion.actuacionesExplanada?.relleno + ' cm.'}</Col>
+          <Col xs={1}>{(Actuacion.actuacionesExplanada?.relleno <= 0 || Actuacion.actuacionesExplanada == null)? '': Actuacion.actuacionesExplanada?.relleno + ' cm.'}</Col>
 
           <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRTerreno"><Translation ns= "global">{(t) => <>{t('CBRTerreno')}</>}</Translation></label></Col>            
           <Col xs={1}>{Actuacion.actuacionesExplanada?.rellenoCbr}</Col>
 
           <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CategoriaExpl"><Translation ns= "global">{(t) => <>{t('CategoriaExplanada')}</>}</Translation></label></Col>            
-          <Col xs={1}>{Actuacion.actuacionesExplanada?.idDdCategoriasExplanadas}</Col>
+          <Col xs={1}>{Actuacion.actuacionesExplanada?.idDdCategoriasExplanadas != null ? Actuacion.actuacionesExplanada?.idDdCategoriasExplanadas : ''}</Col>
         </Row>
         </Container>                                               
       </div>

@@ -28,6 +28,16 @@ const url = "https://localhost:44301/api/CargarActuaciones";
 //const { t, i18n } = useTranslation();
 
 
+let authToken = sessionStorage.getItem("JWT");
+
+let config = {
+  headers: {
+      'Authorization': authToken,
+      'Accept': 'application/json',
+      'content-type': 'application/json'
+  }
+}
+
 
 class VerActuaciones extends Component{
   
@@ -53,6 +63,7 @@ class VerActuaciones extends Component{
         actuacion: ''
       } 
   }
+
 
   {/*Tabla de Actuaciones*/}
   this.columns = [
@@ -85,6 +96,9 @@ class VerActuaciones extends Component{
     })
   }
 
+  
+
+
 
   ButtonsAcciones = (cell, row, rowIndex) => {
     //console.log("cell :", cell);
@@ -110,7 +124,9 @@ class VerActuaciones extends Component{
 
 /*Obtención datos*/
 peticionGet=()=>{
-  axios.get(url).then(response=>{
+  authToken = sessionStorage.getItem("JWT");
+  console.log('AutToken Act:', authToken);
+  axios.get(url, { headers: {"Authorization" : authToken} }).then(response=>{
 
       console.log(response.data);
             
@@ -158,6 +174,7 @@ modalInsertar=()=>{
 
 /*Se activa/desactiva el modal para verificar si se quiere salir de Crear/Editar*/
 modalVerificar=()=>{
+  console.log("Modal verificar");
   this.setState({modalVerificar: !this.state.modalVerificar});
 }
 
@@ -239,7 +256,7 @@ seleccionarActuacion=(actuacion)=>{
           <Modal size="lg" style={{maxWidth: '1600px', width: '80%'}} isOpen={this.state.modalInsertar}>
                 <ModalHeader style={{display: 'block'}}>
                   <span style={{float: 'right'}}>
-                    <button className="btn btn-danger" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Guardar', tipoModal:'Insertar'})}}>x</button>
+                    <button className="btn btn-danger" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Guardar'})}}>x</button>
                   </span>
                 </ModalHeader>
                 <ModalBody>

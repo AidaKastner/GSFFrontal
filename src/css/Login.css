@@ -265,21 +265,28 @@ aside  {
 }
 
 .form-usuario {
-    background-color: var(--gris2);
-    height: 100vh;
-    min-height: 800px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: var(--gris2);
+  height: 100vh;
+  min-height: 800px;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-usuario .application-name {
+  color: white;
+  padding-top: 100px;
 }
 
 .contenedor-form {
   position: relative;
-    padding: 5rem 3rem;
-    max-width: 500px;
-    width: 95%;
-    background-color: var(--blanco);
-    border-radius: 1rem;
+  padding: 5rem 3rem;
+  max-width: 800px;
+  width: 100%;
+  max-height: 430px;
+  height: 100%;
+  background-color: var(--blanco);
+  border-radius: 1rem;
+  margin: auto;
 }
 
 .campo-form {
@@ -295,16 +302,16 @@ aside  {
 }
 .campo-form label {
   flex: 0 0 100px;
- 
+  margin-right: 1.5rem;
 }
 .campo-form input[type="password"],
 .campo-form input[type="email"], 
 .campo-form input[type="text"] {
-  
   border: 1px solid #e1e1e1;
   padding: 1rem;
   flex: 1;
   margin-left: 5px;
+  font-size: 120%;
 }
 
 .enlace-cuenta {
