@@ -1202,7 +1202,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                <Row>
                 {/*Botón 'Seleccionar'*/}
                 <Col xs={10}></Col>
-                <Col xs={2} style={{textAlign: "right"}}><button className="btn btn-primario" 
+                <Col xs={2} style={{textAlign: "right"}}><button className="btn btn-primario btn-sm" 
                                                         onClick={()=>peticionSeleccionar()}>
                                                         <Translation ns= "global">{(t) => <>{t('SeleccionarTramos')}</>}</Translation>
                                                         </button></Col>
@@ -1369,7 +1369,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Row>
                     {/*Botón 'Guardar'*/}
                     <Col xs={10}></Col>
-                    <Col xs={2} style={{textAlign: "right"}}><button className="btn btn-primario" 
+                    <Col xs={2} style={{textAlign: "right"}}><button className="btn btn-primario btn-sm" 
                                                             onClick={()=>{setModalConfGuardar(true)}}>
                                                             <Translation ns= "global">{(t) => <>{t('Guardar')}</>}</Translation>
                                                             </button></Col>
@@ -1404,8 +1404,8 @@ function CrearEditarActuacion({Actuacion, Data}){
               <br /><br />     			        
 				</ModalBody>
                 <ModalFooter>                            
-                    <button className="btn btn-primary" size="sm" onClick={()=>{setModalConfGuardar(false); peticionGuardarActuacion()}}><Translation ns= "global">{(t) => <>{t('Continuar')}</>}</Translation></button>
-                    <button className="btn btn-primario" size="sm" onClick={()=>{setModalConfGuardar(false)}}><Translation ns= "global">{(t) => <>{t('Cancelar')}</>}</Translation></button>      
+                    <button className="btn btn-primary btn-sm" onClick={()=>{setModalConfGuardar(false); peticionGuardarActuacion()}}><Translation ns= "global">{(t) => <>{t('Continuar')}</>}</Translation></button>
+                    <button className="btn btn-primario btn-sm" onClick={()=>{setModalConfGuardar(false)}}><Translation ns= "global">{(t) => <>{t('Cancelar')}</>}</Translation></button>      
 				</ModalFooter>    
 		    </Modal>
         </div>

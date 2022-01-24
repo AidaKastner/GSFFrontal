@@ -7,6 +7,7 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
+import '../css/Button.css';
 import { Translation } from 'react-i18next';
 import { Trans } from 'react-i18next';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -199,9 +200,9 @@ class VerEditTrams extends Component{
   
     return (
       <div>
-      <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row, true); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>
+      <button className="btn btn-primary btn-sm" onClick={()=>{this.seleccionarTramo(row, true); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>
       {"  "}
-      <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row, false); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+      <button className="btn btn-danger btn-sm" onClick={()=>{this.seleccionarTramo(row, false); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
       </div>              
 
       );
@@ -856,7 +857,7 @@ seleccionarTramo=(diccionario, editar)=>{
 			      <Modal  size="lg" style={{maxWidth: '800px', width: '60%'}} isOpen={this.state.modalInsertar}>
 				      <ModalHeader style={{display: 'block'}}>
               <span style={{float: 'right'}}>
-                <button className="btn btn-danger" onClick={()=>{this.setState({tipoModal: 'verificar'}); this.modalVerificar()}}>x</button>
+                <button className="btn btn-danger btn-sm" onClick={()=>{this.setState({tipoModal: 'verificar'}); this.modalVerificar()}}>x</button>
               </span>
               <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('insReg')}</>}</Translation></ModalTitle>
               </ModalHeader>
@@ -885,7 +886,7 @@ seleccionarTramo=(diccionario, editar)=>{
 					      }     
 				      </ModalBody>	
 				      <ModalFooter>                  
-					      <button className="btn btn-success" onClick={()=>this.peticionPost(this.state.url)}>Aceptar</button>
+					      <button className="btn btn-success btn-sm" onClick={()=>this.peticionPost(this.state.url)}>Aceptar</button>
 				      </ModalFooter>
 			      </Modal>
 		
@@ -904,9 +905,9 @@ seleccionarTramo=(diccionario, editar)=>{
               <Translation ns= "global">{(t) => <>{t('GuardarCamAdd')}</>}</Translation>                			        
 				      </ModalBody>
 				      <ModalFooter>                               
-				        <button className="btn btn-primary" onClick={()=>this.peticionPost(this.state.url)}><Translation ns= "global">{(t) => <>{t('Guardar')}</>}</Translation></button>
-				        <button className="btn btn-primary" onClick={()=>this.setState({modalVerificar: false, modalInsertar: false})}><Translation ns= "global">{(t) => <>{t('NGuardar')}</>}</Translation></button>
-                <button className="btn btn-primary" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('cancelar')}</>}</Translation></button>
+				        <button className="btn btn-primary btn-sm" onClick={()=>this.peticionPost(this.state.url)}><Translation ns= "global">{(t) => <>{t('Guardar')}</>}</Translation></button>
+				        <button className="btn btn-primary btn-sm" onClick={()=>this.setState({modalVerificar: false, modalInsertar: false})}><Translation ns= "global">{(t) => <>{t('NGuardar')}</>}</Translation></button>
+                <button className="btn btn-primary btn-sm" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('cancelar')}</>}</Translation></button>
 				      </ModalFooter>
 			      </Modal>
 
