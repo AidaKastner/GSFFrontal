@@ -8,6 +8,7 @@ import { faInfo, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icon
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
+import '../css/Button.css';
 import { Translation, useTranslation } from 'react-i18next';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
@@ -140,9 +141,9 @@ class VerEditCarTrams extends Component{
       <div>
         {/*<button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>*/}
         {"  "}
-        <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalDescaragr: true})}}><FontAwesomeIcon icon={faDownload}/></button>
+        <button className="btn btn-primary btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalDescaragr: true})}}><FontAwesomeIcon icon={faDownload}/></button>
         {"  "}
-        <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+        <button className="btn btn-danger btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
       </div>              
 
       );
@@ -155,9 +156,9 @@ ButtonsAccionesTr = (cell, row, rowIndex) => {
 
 return (
   <div>
-    <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalRedirigir: true})}}><FontAwesomeIcon icon={faInfo}/></button>
+    <button className="btn btn-primary btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalRedirigir: true})}}><FontAwesomeIcon icon={faInfo}/></button>
     {"  "}
-    <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+    <button className="btn btn-danger btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
   </div>              
 
   );

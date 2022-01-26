@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
+import '../css/Button.css';
 import { Trans } from 'react-i18next';
 import { Translation } from 'react-i18next';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -146,7 +147,7 @@ modalVerificar=()=>{
           <Modal isOpen={this.state.modalImportar}>
                 <ModalHeader style={{display: 'block'}}>
                 <span style={{float: 'right'}}>
-                    <button className="btn btn-danger" onClick={()=>{this.modalVerificar();}}>x</button>
+                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalVerificar();}}>x</button>
                 </span>
                 </ModalHeader>
                 <ModalBody>
@@ -165,8 +166,8 @@ modalVerificar=()=>{
               <br /><br />     			        
 				      </ModalBody>
 				      <ModalFooter>                            
-				        <button className="btn btn-danger" size="sm" onClick={()=>{this.setState({modalVerificar: false, modalInsertar: false}); this.peticionGet()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
-                <button className="btn btn-primary" size="sm" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('Permanecer')}</>}</Translation></button>
+				        <button className="btn btn-danger btn-sm" onClick={()=>{this.setState({modalVerificar: false, modalInsertar: false}); this.peticionGet()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                <button className="btn btn-primary btn-sm" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('Permanecer')}</>}</Translation></button>
 				      </ModalFooter>
 			    </Modal>
           </div>

@@ -9,6 +9,7 @@ import '../css/Pagination.css';
 import CargarExcel from "../components/CargarExcel";
 import CrearEditarActuacion from "../components/CrearEditarActuacion";
 import InfoActuacion from "../components/InfoActuaciones";
+import '../css/Button.css';
 import '../css/Menu.css';
 import { Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -107,11 +108,11 @@ class VerActuaciones extends Component{
            
     return (
       <div>    
-      <button className="btn btn-primary" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInfo: true})}}><FontAwesomeIcon icon={faInfo}/></button>
+      <button className="btn btn-primary btn-sm" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInfo: true})}}><FontAwesomeIcon icon={faInfo}/></button>
       {"  "}
-      <button className="btn btn-primary" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInsertar: true, tipoModal: 'Actualizar', tipoModalV: ''})}}><FontAwesomeIcon icon={faEdit}/></button>
+      <button className="btn btn-primary btn-sm" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalInsertar: true, tipoModal: 'Actualizar', tipoModalV: ''})}}><FontAwesomeIcon icon={faEdit}/></button>
       {"  "}
-      <button className="btn btn-danger" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+      <button className="btn btn-danger btn-sm" onClick={()=>{this.seleccionarActuacion(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
       </div>              
       );
   };
@@ -232,7 +233,7 @@ seleccionarActuacion=(actuacion)=>{
           <Modal isOpen={this.state.modalImportar}>
                 <ModalHeader style={{display: 'block'}}>
                   <span style={{float: 'right'}}>
-                    <button className="btn btn-danger" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Importar', tipoModal: ''})}}>x</button>
+                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Importar', tipoModal: ''})}}>x</button>
                   </span>
                 </ModalHeader>
                 <ModalBody>
@@ -256,7 +257,7 @@ seleccionarActuacion=(actuacion)=>{
           <Modal size="lg" style={{maxWidth: '1600px', width: '80%'}} isOpen={this.state.modalInsertar}>
                 <ModalHeader style={{display: 'block'}}>
                   <span style={{float: 'right'}}>
-                    <button className="btn btn-danger" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Guardar'})}}>x</button>
+                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Guardar'})}}>x</button>
                   </span>
                 </ModalHeader>
                 <ModalBody>
@@ -288,8 +289,8 @@ seleccionarActuacion=(actuacion)=>{
               <br /><br />     			        
 				      </ModalBody>
 				      <ModalFooter>                            
-				        <button className="btn btn-danger" size="sm" onClick={()=>{this.setState({modalVerificar: false, modalInsertar: false}); this.peticionGet()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
-                <button className="btn btn-primary" size="sm" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('Permanecer')}</>}</Translation></button>
+				        <button className="btn btn-danger btn-sm" size="sm" onClick={()=>{this.setState({modalVerificar: false, modalInsertar: false}); this.peticionGet()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                <button className="btn btn-primary btn-sm" size="sm" onClick={()=>this.setState({modalVerificar: false})}><Translation ns= "global">{(t) => <>{t('Permanecer')}</>}</Translation></button>
 				      </ModalFooter>
 			    </Modal>
 

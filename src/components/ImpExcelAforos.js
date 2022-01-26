@@ -151,8 +151,9 @@ function ImpExcelAforos(){
     <div>
       <br/> 
         <h1><Translation ns= "global">{(t) => <>{t('ImpAfr')}</>}</Translation></h1>
-        <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />      
-        <button className="btn btn-primario" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+        <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
+        <br />
+        <button className="btn btn-primario btn-sm" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
        <br/><br/>
 
        { msgOutBoolOK ? 
