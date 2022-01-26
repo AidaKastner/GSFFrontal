@@ -24,6 +24,7 @@ import Spinner from "../components/Spinner";
 const url1 = "https://localhost:44301/Carreteras";
 const url2 = "https://localhost:44301/Tramos/combo";
 const url3 = "https://localhost:44301/Tramos/baja";
+const url4 = "https://localhost:44301/Tramos/";
 
 var paramIndex = 0;
 let yearIni = 1979;
@@ -78,6 +79,7 @@ class VerEditCarTrams extends Component{
       setMsgOutBoolKO: false,
       setMsgOutBoolOK: false,
       form:{
+        tramo:'',
         id:'',
         codigo:'',
         nombre:'',
@@ -330,6 +332,7 @@ peticionGet2=()=>{
 });
 }    
 
+
 /*Insertar registro*/
 modalInsertar=()=>{
   this.setState({modalInsertar: !this.state.modalInsertar});
@@ -345,7 +348,7 @@ modalVerificarEd=()=>{
   this.setState({modalVerificarEd: !this.state.modalVerificarEd});
 }
 
-/*Descargar ZIP del registro*/
+/*Descargar PDF del registro*/
 modalDescaragr=()=>{
   this.setState({modalDescaragr: !this.state.modalDescaragr});
 }
@@ -355,8 +358,9 @@ modalEditar=()=>{
   this.setState({modalEditar: !this.state.modalEditar});
 }
 
-/*Editar registro*/
+/*Editar registro de Tramos*/
 modalRedirigir=()=>{
+  console.log("Modal redirigir");
   this.setState({modalRedirigir: !this.state.modalRedirigir});
 }
 
@@ -572,7 +576,8 @@ seleccionarTramo=(CarTram)=>{
       nombre: CarTram.nombre,
       comentario: CarTram.comentario,
       idGrafo: CarTram.idGrafo,
-      rutaKml: CarTram.rutaKml
+      rutaKml: CarTram.rutaKml,
+      tramo: CarTram
     }
   })
 
@@ -715,15 +720,16 @@ seleccionarTramo=(CarTram)=>{
             <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#252831'}}  isOpen={this.state.modalRedirigir}>
                <ModalHeader style={{display: 'block', backgroundColor: '#252831'}}>
                 <span style={{float: 'right', backgroundColor: '#252831'}}>
-                  <button  onClick={()=>this.modalRedirigir()}>X</button>
+                  <button onClick={()=>{this.modalRedirigir()}}>X</button>
                 </span>
                 </ModalHeader>
                 { indice.activeIndex != 0  ?
                 <ModalBody style={{backgroundColor: '#e1e9fc'}}>
                   <div style={{marginRight:'1%', marginTop: '5%', backgroundColor: '#e1e9fc'}}> 
-                    <h1><Translation ns= "global">{(t) => <>{t('VisInfTra')}</>}</Translation></h1>               
+                    <h1><Translation ns= "global">{(t) => <>{t('VisInfTra')}</>}</Translation></h1>              
                     <VerCarTramDet 
-                       id={this.state.form.id}
+                       id = {url4 + (this.state.form.id)}
+                       //tramos= {this.peticionGet3(this.state.form?.id)}
                     />
                   </div>    
                 </ModalBody>

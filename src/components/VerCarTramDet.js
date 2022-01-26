@@ -17,6 +17,7 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import Tab from "./Tab";
 import Spinner from "../components/Spinner"; 
 import GoogleMapComponent from "../components/GoogleMapComponent";
+import EditTramDet from "../components/VerCarTramDet";
 
 
 const url = "https://localhost:44301/Tramos/";
@@ -168,6 +169,93 @@ return (
   );
 };
 
+peticionSet=(urlTram)=>{
+  console.log("Tramo escogido: ",urlTram);
+  
+  
+  axios.get(urlTram).then(response=>{
+      console.log("TRAMO Data", response.data);
+
+      config = {
+        headers: {
+            'Authorization': sessionStorage.getItem("JWT"),
+            'Accept': 'application/json',
+            'content-type': 'application/json'
+        }
+      };
+
+      var data = response.data.carriles;
+      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+      var dataAct = response.data.actuacionesTramos;
+      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+      console.log("Data actuaciones", dataAct);
+
+      if (data == null) {
+        this.state.setMsgOutBoolKO(true)
+      };
+
+     if (dataAct == null) {
+        this.state.setMsgOutActKO(true)
+      };
+
+      this.setState({
+        orgtableData: response.data,
+        tableData: slice,
+        tableAforos: slice,
+        tableAct: sliceAct,
+        content: response
+      })
+     
+
+    }).catch(error=>{
+      console.log("KO");
+      console.log("URL ENTRADA para GET Tramo:", urlTram);
+      console.log(error); 
+    });
+
+    return (
+      <EditTramDet 
+        urlSel={urlTram}
+      />,
+      alert("POPUP")
+    )
+  }    
+
+peticionSel=({urlTram})=>{
+  console.log("llegamos AQUÍ"); 
+  //Llamada al controlador para obtener  el tramo
+  //const peticionSeleccionar=async e=>{
+  
+    console.log("TRAMO A EDITAR: ")
+    //const data = new FormData();
+    console.log("peticionSeleccionar");   
+  
+    //await axios.get(url, data, config)
+    //authToken = sessionStorage.getItem("JWT");
+    //console.log('AutToken Act:', authToken);
+    //axios.get(urlTram, { headers: {"Authorization" : authToken} })
+    //.then(response =>{
+        //console.log("OK1");
+        //console.log(response.data);
+  
+        //var datos = response.data.result;
+        //console.log("response.data.result", response.data.result)
+  
+  
+    //}).catch(error=>{
+      //  console.log("error tramos:", error.response.data); 
+      //})   
+  
+   // }
+    //peticionSeleccionar();
+    ////return (
+      //<EditTramDet 
+        //urlSel={urlTram}
+      ///>
+  
+    //)
+  }
+
   //Maneja la edición e inserción en los forms
   handleChange=async e=>{
     e.persist();
@@ -203,7 +291,7 @@ return (
 peticionGet=()=>{
   console.log("Tramo escogido: ",this.state.idTramSel);
   
-  axios.get(url+this.state.idTramSel).then(response=>{
+  axios.get(this.state.idTramSel).then(response=>{
       console.log("MIRAR AQUI Data", response.data);
 
       config = {
@@ -236,6 +324,7 @@ peticionGet=()=>{
         content: response
       })
      
+      this.state.form.id=this.state.orgtableData.id;
       this.state.form.nombre=this.state.orgtableData.carretera.nombre;
       this.state.form.codigo=this.state.orgtableData.carretera.codigo;
       this.state.form.comentario=this.state.orgtableData.comentario;
@@ -297,109 +386,7 @@ peticionGet=()=>{
       
     }).catch(error=>{
       console.log("KO");
-      console.log("URL para GET Tramo:", url+this.state.idTramSel);
-      console.log(error); 
-    });
-  }    
-
-/*Obtención de Tramo Seleccionado*/
-peticionGetSel=(urlSel)=>{
-  console.log("Tramo escogido: ",this.state.idTramSel);
-  
-  axios.get(urlSel+this.state.idTramSel).then(response=>{
-      console.log("Data", response.data);
-      config = {
-        headers: {
-            'Authorization': sessionStorage.getItem("JWT"),
-            'Accept': 'application/json',
-            'content-type': 'application/json'
-        }
-      };
-
-      var data = response.data.carriles;
-      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-      var dataAct = response.data.actuacionesTramos;
-      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
-      console.log("Data actuaciones", dataAct);
-
-      if (data == null) {
-        this.state.setMsgOutBoolKO(true)
-      };
-
-     if (dataAct == null) {
-        this.state.setMsgOutActKO(true)
-      };
-
-      this.setState({
-        orgtableData: response.data,
-        tableData: slice,
-        tableAforos: slice,
-        tableAct: sliceAct,
-        content: response
-      })
-
-      this.state.form.nombre=this.state.orgtableData.carretera.nombre;
-      this.state.form.codigo=this.state.orgtableData.carretera.codigo;
-      this.state.form.comentario=this.state.orgtableData.comentario;
-      this.state.form.longitud=this.state.orgtableData.longitud;
-      this.state.form.fechaAlta=this.state.orgtableData.fechaAlta.substr(0, 10);
-      //this.state.fechaAltaFor = this.state.form.fechaAlta.getFullYear() + '-' + this.state.form.fechaAlta.getMonth() + '-' + this.state.form.fechaAlta.getDate()
-      this.state.form.fechaBaja=this.state.orgtableData.fechaBaja;
-      this.state.estadoTram=this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo';
-      this.state.form.idDdTiposCalzada=this.state.orgtableData.idDdTiposCalzada;
-      this.state.form.pkIni=this.state.orgtableData.puntoIni.pk;
-      this.state.form.mIni=this.state.orgtableData.puntoIni.m;
-      this.state.form.descIni=this.state.orgtableData.puntoIni.descripcion;
-      this.state.form.pkFin=this.state.orgtableData.puntoFin.pk;
-      this.state.form.mFin=this.state.orgtableData.puntoFin.m;
-      this.state.form.descFin=this.state.orgtableData.puntoFin.descripcion;
-      this.state.form.idDdCodTecReal=this.state.orgtableData.idDdCodTecReal;
-      this.state.form.idDdRedesNombre=this.state.orgtableData.ddRede.nombre;
-      this.state.form.ddCodTecRealNombre=this.state.orgtableData.ddCodTecRealModel.nombre;
-      this.state.form.ddOrganismosNombre=this.state.orgtableData.ddOrganismos.nombre;
-      this.state.form.ddRegimenExplotacionNombre=this.state.orgtableData.ddRegimenExplotacion.nombre;
-      this.state.form.ddRegimenGestionNombre=this.state.orgtableData.ddRegimenGestion.nombre;
-      this.state.form.ddZonasTermicaNombre=this.state.orgtableData.ddZonasTermica.codigo;
-      this.state.form.ddZonasPluvNombre=this.state.orgtableData.ddZonasPluviometrica.codigo;
-      this.state.form.firmesTramoNombre=this.state.orgtableData.firmesTramo.idCarrilDdTiposFirmesTramo;
-      this.state.form.firmesTramoInfl=this.state.orgtableData.firmesTramo.idDdNivelesInfluencia;
-      this.state.form.firmesTramoCpa=this.state.orgtableData.firmesTramo.cpa;
-      this.state.form.firmesTramoAnchCar=this.state.orgtableData.firmesTramo.anchuraCarril;
-      this.state.form.firmesTramoAnchArc=this.state.orgtableData.firmesTramo.anchuraArcen;
-      this.state.form.firmesTramoMpd=this.state.orgtableData.firmesTramo.TipoLogModeloEvolMpd;
-      
-      this.state.form.firmesTramoCarRod=this.state.orgtableData.firmesTramo.idCarrilDdCapasRodadura;
-      this.state.form.firmesTramoCarInter=this.state.orgtableData.firmesTramo.idCarrilDdCapasIntermedia;
-      this.state.form.firmesTramoCarBase=this.state.orgtableData.firmesTramo.idCarrilDdCapasBase;
-      this.state.form.firmesTramoCarSubBase=this.state.orgtableData.firmesTramo.idCarrilDdCapasSubbase;
-      
-      this.state.form.firmesTramoArcRod=this.state.orgtableData.firmesTramo.idArcenDdCapasRodadura; 
-      this.state.form.firmesTramoArcInt=this.state.orgtableData.firmesTramo.idArcenDdCapasIntermedia; 
-      this.state.form.firmesTramoArcBas=this.state.orgtableData.firmesTramo.idArcenDdCapasBase; 
-      this.state.form.firmesTramoArcSub=this.state.orgtableData.firmesTramo.idArcenDdCapasSubbase;
-
-      this.state.form.firmesTramoespRodCar=this.state.orgtableData.firmesTramo.espesorRodaduraCarril;
-      this.state.form.firmesTramoespIntdCar=this.state.orgtableData.firmesTramo.espesorIntermediaCarril;
-      this.state.form.firmesTramoespBasCar=this.state.orgtableData.firmesTramo.espesorBaseCarril;
-      this.state.form.firmesTramoespSubBasCar=this.state.orgtableData.firmesTramo.espesorSubbaseCarril;
-      
-      this.state.form.firmesTramoespRodArc=this.state.orgtableData.firmesTramo.espesorRodaduraArcen;
-      this.state.form.firmesTramoespIntArc=this.state.orgtableData.firmesTramo.espesorIntermediaArcen;
-      this.state.form.firmesTramoespespBasArc=this.state.orgtableData.firmesTramo.espesorBaseArcen;
-      this.state.form.firmesTramoespSubBasArc=this.state.orgtableData.firmesTramo.espesorSubbaseArcen;
-     
-      this.state.form.explTrTerNat=this.state.orgtableData.explanadasTramo.idDdTerrenosNaturales;
-      this.state.form.explTrTerNatCbr=this.state.orgtableData.explanadasTramo.terrenoNaturalCbr;
-      
-      this.state.form.explCatExpl=this.state.orgtableData.explanadasTramo.idDdCategoriasExplanadas;
-      this.state.form.explRelleno=this.state.orgtableData.explanadasTramo.relleno;
-      this.state.form.explRellenoCbr=this.state.orgtableData.explanadasTramo.rellenoCbr;
-      this.state.form.explCoronacion=this.state.orgtableData.explanadasTramo.coronacion;
-      this.state.form.explCoronacionCbr=this.state.orgtableData.explanadasTramo.coronacionCbr;
-
-    }).catch(error=>{
-      console.log("KO");
-      console.log("urlSel para GET Tramo:", url+this.state.idTramSel);
+      console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
       console.log(error); 
     });
   }    
@@ -453,29 +440,6 @@ peticionPut=()=>{
 }
 
 
-/*Eliminar registro*/
-peticionDelete=()=>{
-  config = {
-    headers: {
-        'Authorization': sessionStorage.getItem("JWT"),
-        'Accept': 'application/json',
-        'content-type': 'application/json'
-    }
-  };
-  console.log("Codigo a eliminar: ", this.state.form.id);
-  console.log("URL Delete: ", url);
-  axios.delete(url+"/"+this.state.form.id,config).then(response=>{
-    console.log("eliminar");
-    this.setState({modalEliminar: false});
-    this.peticionGet();
-  }).catch(error=>{
-    console.log("KO Delete");
-    console.log(url);
-    console.log(this.state.form.id);
-    console.log(error);    
-    alert("Error mientras se eliminaban datos. Pongase en contacto con elservicio técnico");    
-})   
-}
 
 
 
@@ -836,18 +800,18 @@ seleccionarTramo=(CarTram)=>{
           <form>
           <div className="container" style={{maxWidth: '800px', width: '100%', float:'center'}}>
             <div>
-                <button width="300px" className="btn btn-primary"  onClick={()=>this.peticionGetSel(urlTrAntCrec)}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
+                <button width="300px" className="btn btn-primary"  onClick={()=>{this.peticionSet(urlTrAntCrec + this.state.form.id)}}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
                 <span class="input-group-addon"> </span>                
-                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionGetSel(urlTramGemelo)}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
+                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTramGemelo + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
                 <span class="input-group-addon"> </span>
-                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionGetSel(urlTrPosCrec)}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
+                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTrPosCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
             </div>
             <div>
-                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionGetSel(urlTrAntDeCrec)}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
+                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTrAntDeCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
                 <span class="input-group-addon"> </span>
                 <button type="submit" width="300px" className="btn btn-primary" >{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
                 <span class="input-group-addon"> </span>
-                <button type="submit" width="300px" className="btn btn-primary"  onClick={()=>this.peticionGetSel(urlTrPosDeCrec)}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
+                <button type="submit" width="300px" className="btn btn-primary"  onClick={()=>this.peticionSet(urlTrPosDeCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
             </div>
           </div>
 
