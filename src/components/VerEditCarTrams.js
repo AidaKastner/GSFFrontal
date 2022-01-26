@@ -312,7 +312,6 @@ peticionGet2=()=>{
         'content-type': 'application/json'
     }
   };
-
   //axios.get(url2+"/"+this.state.comboSel,{ headers: {"Authorization" : authToken} }).then(response2=>{
   axios.get(url2+"/"+this.state.comboSel,config).then(response2=>{
 

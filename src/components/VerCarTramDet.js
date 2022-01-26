@@ -172,7 +172,6 @@ return (
 peticionSet=(urlTram)=>{
   console.log("Tramo escogido: ",urlTram);
   
-  
   axios.get(urlTram).then(response=>{
       console.log("TRAMO Data", response.data);
 
