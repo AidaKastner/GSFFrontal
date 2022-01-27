@@ -4,7 +4,7 @@ import React, { Component, useState , Fragment} from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
@@ -20,7 +20,10 @@ import Tab from "./Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import Select from 'react-select';
 import VerCarTramDet from "../components/VerCarTramDet";
+import VerEditCarTramDet from "../pages/VerEditCarTramDet";
 import Spinner from "../components/Spinner"; 
+import Sidebar from "../components/Sidebar";
+import SidebarBack from "../components/SidebarBack";
 
 const url1 = "https://localhost:44301/Carreteras";
 const url2 = "https://localhost:44301/Tramos/combo";
@@ -156,13 +159,45 @@ ButtonsAccionesTr = (cell, row, rowIndex) => {
 
 return (
   <div>
-    <button className="btn btn-primary btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalRedirigir: true})}}><FontAwesomeIcon icon={faInfo}/></button>
+    <button className="btn btn-primary btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalRedirigir: true})}}><FontAwesomeIcon icon={faEdit}/></button>
     {"  "}
     <button className="btn btn-danger btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
   </div>              
 
   );
 };
+
+/*
+//Pantallade edición de tramos Tramos
+EditarTramo = (tramoSel) => {
+  this.setState({
+    tipoModal: 'Seleccionar',
+    form: {
+      id: tramoSel.id
+    }
+  })
+  console.log("URL a pasar: ", url4 + tramoSel.id);
+
+return (
+  
+<div>      
+  <div>
+    <SidebarBack />
+    <Sidebar />
+  </div>
+  <div style={{marginLeft:'15%'}}>         
+    <div style={{marginRight:'10%', marginTop: '5%'}}> 
+      <h1><Translation ns= "global">{(t) => <>{t('verEditCyT')}</>}</Translation></h1>               
+        <VerCarTramDet 
+          id = {url4 + tramoSel.id}
+        />
+      </div>          
+  </div>
+</div>
+
+  );
+};
+*/
 
   //Maneja la edición e inserción en los forms
   handleChange=async e=>{
@@ -717,16 +752,14 @@ seleccionarTramo=(CarTram)=>{
 				        </ModalFooter>
 			      </Modal>
 
-            <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#252831'}}  isOpen={this.state.modalRedirigir}>
-               <ModalHeader style={{display: 'block', backgroundColor: '#252831'}}>
-                <span style={{float: 'right', backgroundColor: '#252831'}}>
-                  <button onClick={()=>{this.modalRedirigir()}}>X</button>
-                </span>
+            <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#FFFFFF'}}  isOpen={this.state.modalRedirigir}>
+               <ModalHeader style={{display: 'block', backgroundColor: '#FFFFFF'}}>
+                <h1><Translation ns= "global">{(t) => <>{t('VisInfTra')}</>}</Translation></h1>  
                 </ModalHeader>
                 { indice.activeIndex != 0  ?
-                <ModalBody style={{backgroundColor: '#e1e9fc'}}>
-                  <div style={{marginRight:'1%', marginTop: '5%', backgroundColor: '#e1e9fc'}}> 
-                    <h1><Translation ns= "global">{(t) => <>{t('VisInfTra')}</>}</Translation></h1>              
+                <ModalBody style={{backgroundColor: '#FFFFFF'}}>
+                  <div style={{marginRight:'1%', marginTop: '1%', backgroundColor: '#FFFFFF'}}> 
+                               
                     <VerCarTramDet 
                        id = {url4 + (this.state.form.id)}
                        //tramos= {this.peticionGet3(this.state.form?.id)}
@@ -736,7 +769,13 @@ seleccionarTramo=(CarTram)=>{
                 :
                    <div></div>
                 }
+                <ModalFooter>
+                  <span style={{float: 'right', backgroundColor: '#FFFFFF'}}>
+                    <button className="btn btn-danger" onClick={()=>{this.modalRedirigir()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                  </span>
+                </ModalFooter>
             </Modal>
+ 
 			      <Modal isOpen={this.state.modalEliminar}>
 				      <ModalBody>
               { indice.activeIndex != 0  ?
