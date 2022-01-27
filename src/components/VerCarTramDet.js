@@ -15,7 +15,10 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import Tab from "./Tab";
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Spinner from "../components/Spinner"; 
+import Container from 'react-bootstrap/Container'
 import GoogleMapComponent from "../components/GoogleMapComponent";
 import EditTramDet from "../components/VerCarTramDet";
 
@@ -205,6 +208,65 @@ peticionSet=(urlTram)=>{
         content: response
       })
      
+      this.state.form.id=this.state.orgtableData.id;
+      this.state.form.nombre=this.state.orgtableData.carretera.nombre;
+      this.state.form.codigo=this.state.orgtableData.carretera.codigo;
+      this.state.form.comentario=this.state.orgtableData.comentario;
+      this.state.form.longitud=this.state.orgtableData.longitud;
+      this.state.form.fechaAlta=this.state.orgtableData.fechaAlta.substr(0, 10);
+      //this.state.fechaAltaFor = this.state.form.fechaAlta.getFullYear() + '-' + this.state.form.fechaAlta.getMonth() + '-' + this.state.form.fechaAlta.getDate()
+      this.state.form.fechaBaja=this.state.orgtableData.fechaBaja;
+      this.state.estadoTram=this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo';
+      this.state.form.idDdTiposCalzada=this.state.orgtableData.idDdTiposCalzada;
+      this.state.form.pkIni=this.state.orgtableData.puntoIni.pk;
+      this.state.form.mIni=this.state.orgtableData.puntoIni.m;
+      this.state.form.descIni=this.state.orgtableData.puntoIni.descripcion;
+      this.state.form.pkFin=this.state.orgtableData.puntoFin.pk;
+      this.state.form.mFin=this.state.orgtableData.puntoFin.m;
+      this.state.form.descFin=this.state.orgtableData.puntoFin.descripcion;
+      this.state.form.idDdCodTecReal=this.state.orgtableData.idDdCodTecReal;
+      this.state.form.idDdRedesNombre=this.state.orgtableData.ddRede.nombre;
+      this.state.form.ddCodTecRealNombre=this.state.orgtableData.ddCodTecRealModel.nombre;
+      this.state.form.ddOrganismosNombre=this.state.orgtableData.ddOrganismos.nombre;
+      this.state.form.ddRegimenExplotacionNombre=this.state.orgtableData.ddRegimenExplotacion.nombre;
+      this.state.form.ddRegimenGestionNombre=this.state.orgtableData.ddRegimenGestion.nombre;
+      this.state.form.ddZonasTermicaNombre=this.state.orgtableData.ddZonasTermica.codigo;
+      this.state.form.ddZonasPluvNombre=this.state.orgtableData.ddZonasPluviometrica.codigo;
+      this.state.form.firmesTramoNombre=this.state.orgtableData.firmesTramo.idCarrilDdTiposFirmesTramo;
+      this.state.form.firmesTramoInfl=this.state.orgtableData.firmesTramo.idDdNivelesInfluencia;
+      this.state.form.firmesTramoCpa=this.state.orgtableData.firmesTramo.cpa;
+      this.state.form.firmesTramoAnchCar=this.state.orgtableData.firmesTramo.anchuraCarril;
+      this.state.form.firmesTramoAnchArc=this.state.orgtableData.firmesTramo.anchuraArcen;
+      this.state.form.firmesTramoMpd=this.state.orgtableData.firmesTramo.TipoLogModeloEvolMpd;
+      
+      this.state.form.firmesTramoCarRod=this.state.orgtableData.firmesTramo.idCarrilDdCapasRodadura;
+      this.state.form.firmesTramoCarInter=this.state.orgtableData.firmesTramo.idCarrilDdCapasIntermedia;
+      this.state.form.firmesTramoCarBase=this.state.orgtableData.firmesTramo.idCarrilDdCapasBase;
+      this.state.form.firmesTramoCarSubBase=this.state.orgtableData.firmesTramo.idCarrilDdCapasSubbase;
+      
+      this.state.form.firmesTramoArcRod=this.state.orgtableData.firmesTramo.idArcenDdCapasRodadura; 
+      this.state.form.firmesTramoArcInt=this.state.orgtableData.firmesTramo.idArcenDdCapasIntermedia; 
+      this.state.form.firmesTramoArcBas=this.state.orgtableData.firmesTramo.idArcenDdCapasBase; 
+      this.state.form.firmesTramoArcSub=this.state.orgtableData.firmesTramo.idArcenDdCapasSubbase;
+
+      this.state.form.firmesTramoespRodCar=this.state.orgtableData.firmesTramo.espesorRodaduraCarril;
+      this.state.form.firmesTramoespIntdCar=this.state.orgtableData.firmesTramo.espesorIntermediaCarril;
+      this.state.form.firmesTramoespBasCar=this.state.orgtableData.firmesTramo.espesorBaseCarril;
+      this.state.form.firmesTramoespSubBasCar=this.state.orgtableData.firmesTramo.espesorSubbaseCarril;
+      
+      this.state.form.firmesTramoespRodArc=this.state.orgtableData.firmesTramo.espesorRodaduraArcen;
+      this.state.form.firmesTramoespIntArc=this.state.orgtableData.firmesTramo.espesorIntermediaArcen;
+      this.state.form.firmesTramoespespBasArc=this.state.orgtableData.firmesTramo.espesorBaseArcen;
+      this.state.form.firmesTramoespSubBasArc=this.state.orgtableData.firmesTramo.espesorSubbaseArcen;
+     
+      this.state.form.explTrTerNat=this.state.orgtableData.explanadasTramo.idDdTerrenosNaturales;
+      this.state.form.explTrTerNatCbr=this.state.orgtableData.explanadasTramo.terrenoNaturalCbr;
+      
+      this.state.form.explCatExpl=this.state.orgtableData.explanadasTramo.idDdCategoriasExplanadas;
+      this.state.form.explRelleno=this.state.orgtableData.explanadasTramo.relleno;
+      this.state.form.explRellenoCbr=this.state.orgtableData.explanadasTramo.rellenoCbr;
+      this.state.form.explCoronacion=this.state.orgtableData.explanadasTramo.coronacion;
+      this.state.form.explCoronacionCbr=this.state.orgtableData.explanadasTramo.coronacionCbr;
 
     }).catch(error=>{
       console.log("KO");
@@ -212,12 +274,12 @@ peticionSet=(urlTram)=>{
       console.log(error); 
     });
 
-    return (
+    /*return (
       <EditTramDet 
         urlSel={urlTram}
       />,
       alert("POPUP")
-    )
+    )*/
   }    
 
 peticionSel=({urlTram})=>{
@@ -794,164 +856,224 @@ seleccionarTramo=(CarTram)=>{
         </div>
       );
       return(
-       
-        <div className="app" style={{ backgroundColor: '#e1e9fc', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
+        
+        <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
           <form>
-          <div className="container" style={{maxWidth: '800px', width: '100%', float:'center'}}>
-            <div>
-                <button width="300px" className="btn btn-primary"  onClick={()=>{this.peticionSet(urlTrAntCrec + this.state.form.id)}}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
-                <span class="input-group-addon"> </span>                
-                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTramGemelo + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
-                <span class="input-group-addon"> </span>
-                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTrPosCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
-            </div>
-            <div>
-                <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTrAntDeCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
-                <span class="input-group-addon"> </span>
-                <button type="submit" width="300px" className="btn btn-primary" >{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
-                <span class="input-group-addon"> </span>
-                <button type="submit" width="300px" className="btn btn-primary"  onClick={()=>this.peticionSet(urlTrPosDeCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
-            </div>
-          </div>
-
-          <div className="container" style={{maxWidth: '700px', width: '200%', float:'left', backgroundColor: '#e1e9fc'}} >
-          <div>
-            <label><Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="carretera"
-                    className="col m3 s12"
-                    placeholder= {this.state.form.nombre}
-                    //onChange={actualizarState}
-                    value={this.state.form.nombre}
-                />
-
-              <label><Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="codigo"
-                    className="u-full-width"
-                    placeholder= {this.state.orgtableData.codigo}
-                    //onChange={actualizarState}
-                    value={this.state.form.codigo}
-                />
-               <label><Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="comentario"
-                    className="u-full-width"
-                    placeholder= {this.state.form.comentario}
-                    //onChange={actualizarState}
-                    value={this.state.form.comentario}
-                />
-               <label><Translation ns= "global">{(t) => <>{t('long')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="longitud"
-                    className="u-full-width"
-                    placeholder={this.state.form.longitud}
-                    //onChange={actualizarState}
-                    value={this.state.form.longitud}
-                />
-               <label><Translation ns= "global">{(t) => <>{t('FechAlt')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="fechaalta"
-                    className="u-full-width"                  
-                    //onChange={actualizarState}
-                    value={this.state.form.fechaAlta}
-                />
-               <label><Translation ns= "global">{(t) => <>{t('FechBaj')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="fechabaja"
-                    className="u-full-width"
-                    placeholder={this.state.estadoTram}
-                    //onChange={actualizarState}
-                    value={this.state.estadoTram}
-                />
-
-              <label><Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="idDdTiposCalzada"
-                    className="u-full-width"
-                    placeholder={this.state.form.idDdTiposCalzada}
-                    //onChange={actualizarState}
-                    value={this.state.form.idDdTiposCalzada}
-                />
+            <Container>
+              <Row>
+                <div className="container" style={{maxWidth: '800px', width: '100%', float:'center'}}>
+                  <div>
+                    <button width="300px" className="btn btn-primary"  onClick={()=>{this.peticionSet(urlTrAntCrec + this.state.form.id)}}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
+                      <span class="input-group-addon"> </span>                
+                    <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTramGemelo + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
+                      <span class="input-group-addon"> </span>
+                    <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTrPosCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
+                  </div>
+                  <div>
+                    <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTrAntDeCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
+                      <span class="input-group-addon"> </span>
+                    <button type="submit" width="300px" className="btn btn-primary" >{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
+                      <span class="input-group-addon"> </span>
+                    <button type="submit" width="300px" className="btn btn-primary"  onClick={()=>this.peticionSet(urlTrPosDeCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
+                  </div>
                 </div>
-                <div className="container">
-                  <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
-                </div>
+                <br />
+              </Row>
+            </Container>
+            <Container>
+            <div style={{backgroundColor: '#FFFFFF'}} > 
+              <Row>         
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="carretera"
+                      className="col m3 s12"
+                      placeholder= {this.state.form.nombre}
+                      //onChange={actualizarState}
+                      value={this.state.form.nombre}
+                    />
+                </Col>               
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('FechAlt')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="fechaalta"
+                      className="u-full-width"                  
+                      //onChange={actualizarState}
+                      value={this.state.form.fechaAlta}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="pkIni"
+                      className="u-full-width"
+                      placeholder={this.state.form.pkIni}
+                      //onChange={actualizarState}
+                      value={this.state.form.pkIni}
+                    />     
+                </Col>               
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="pkFin"
+                      className="u-full-width"
+                      placeholder={this.state.form.pkFin}
+                      //onChange={actualizarState}
+                      value={this.state.form.pkFin}
+                    />     
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="codigo"
+                      className="u-full-width"
+                      placeholder= {this.state.orgtableData.codigo}
+                      //onChange={actualizarState}
+                      value={this.state.form.codigo}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('FechBaj')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="fechabaja"
+                      className="u-full-width"
+                      placeholder={this.state.estadoTram}
+                      //onChange={actualizarState}
+                      value={this.state.estadoTram}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="mIni"
+                      className="u-full-width"
+                      placeholder={this.state.form.mIni}
+                      //onChange={actualizarState}
+                      value={this.state.form.mIni}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="mFin"
+                      className="u-full-width"
+                      placeholder={this.state.form.mFin}
+                      //onChange={actualizarState}
+                      value={this.state.form.mFin}
+                    />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="comentario"
+                      className="u-full-width"
+                      placeholder= {this.state.form.comentario}
+                      //onChange={actualizarState}
+                      value={this.state.form.comentario}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="idDdTiposCalzada"
+                      className="u-full-width"
+                      placeholder={this.state.form.idDdTiposCalzada}
+                      //onChange={actualizarState}
+                      value={this.state.form.idDdTiposCalzada}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="descIni"
+                      className="u-full-width"
+                      placeholder={this.state.form.descIni}
+                      //onChange={actualizarState}
+                      value={this.state.form.descIni}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="descFin"
+                      className="u-full-width"
+                      placeholder={this.state.form.descFin}
+                      //onChange={actualizarState}
+                      value={this.state.form.descFin}
+                    />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('long')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="longitud"
+                      className="u-full-width"
+                      placeholder={this.state.form.longitud}
+                      //onChange={actualizarState}
+                      value={this.state.form.longitud}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="PosIni"
+                      className="u-full-width"
+                      readOnly = {true}
+                      //placeholder={this.state.form.descFin}
+                      //onChange={actualizarState}
+                      //value={this.state.form.descFin}
+                    />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
+                    <input
+                      type="text"
+                      name="PosFin"
+                      className="u-full-width"
+                      readOnly = {true}
+                      //placeholder={this.state.form.descFin}
+                      //onChange={actualizarState}
+                      //value={this.state.form.descFin}
+                    />
+                </Col>
+              </Row>
             </div>
-            <div className="container" style={{maxWidth: '400px', width: '100%', float:'left'}}>
-            <label><Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="pkIni"
-                    className="u-full-width"
-                    placeholder={this.state.form.pkIni}
-                    //onChange={actualizarState}
-                    value={this.state.form.pkIni}
-                />     
-                <label><Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="mIni"
-                    className="u-full-width"
-                    placeholder={this.state.form.mIni}
-                    //onChange={actualizarState}
-                    value={this.state.form.mIni}
-                />
-                <label><Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="descIni"
-                    className="u-full-width"
-                    placeholder={this.state.form.descIni}
-                    //onChange={actualizarState}
-                    value={this.state.form.descIni}
-                />
-                <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
-            </div>
-
-            <div className="container" style={{maxWidth: '400px', width: '100%', float:'left'}}>
-            <label><Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="pkFin"
-                    className="u-full-width"
-                    placeholder={this.state.form.pkFin}
-                    //onChange={actualizarState}
-                    value={this.state.form.pkFin}
-                />     
-                <label><Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="mFin"
-                    className="u-full-width"
-                    placeholder={this.state.form.mFin}
-                    //onChange={actualizarState}
-                    value={this.state.form.mFin}
-                />
-                <label><Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="descFin"
-                    className="u-full-width"
-                    placeholder={this.state.form.descFin}
-                    //onChange={actualizarState}
-                    value={this.state.form.descFin}
-                />
-                <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
-            </div>
-              <div>
-                
-              </div>
-            </form>
-            </div>
-         
+            </Container>
+            <Container>
+              <Row>
+                <Col xs={7}>
+                  <div className="container">
+                    <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
+                  </div>
+                </Col>
+                <Col xs={6}>
+                  <div className="container">
+                  
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </form>
+        </div>
       )
     }
 }
