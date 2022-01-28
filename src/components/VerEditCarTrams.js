@@ -20,7 +20,6 @@ import Tab from "./Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import Select from 'react-select';
 import VerCarTramDet from "../components/VerCarTramDet";
-import VerEditCarTramDet from "../pages/VerEditCarTramDet";
 import Spinner from "../components/Spinner"; 
 import Sidebar from "../components/Sidebar";
 import SidebarBack from "../components/SidebarBack";
@@ -771,7 +770,7 @@ seleccionarTramo=(CarTram)=>{
                 }
                 <ModalFooter>
                   <span style={{float: 'right', backgroundColor: '#FFFFFF'}}>
-                    <button className="btn btn-danger" onClick={()=>{this.modalRedirigir()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalRedirigir()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
                   </span>
                 </ModalFooter>
             </Modal>
