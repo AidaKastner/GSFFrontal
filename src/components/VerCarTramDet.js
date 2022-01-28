@@ -174,113 +174,97 @@ return (
 
 peticionSet=(urlTram)=>{
   console.log("Tramo escogido: ",urlTram);
-  
-  axios.get(urlTram).then(response=>{
-      console.log("TRAMO Data", response.data);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
 
-      config = {
-        headers: {
-            'Authorization': sessionStorage.getItem("JWT"),
-            'Accept': 'application/json',
-            'content-type': 'application/json'
-        }
-      };
+  axios.get(urlTram, config).then(response=>{
+    console.log("TRAMO Data", response.data);
+    var data = response.data.carriles;
+    slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+    var dataAct = response.data.actuacionesTramos;
+    sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+    console.log("Data actuaciones", dataAct);
 
-      var data = response.data.carriles;
-      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-      var dataAct = response.data.actuacionesTramos;
-      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
-      console.log("Data actuaciones", dataAct);
+    if (data == null) {
+      this.state.setMsgOutBoolKO(true)
+    };
 
-      if (data == null) {
-        this.state.setMsgOutBoolKO(true)
-      };
+    if (dataAct == null) {
+      this.state.setMsgOutActKO(true)
+    };
 
-     if (dataAct == null) {
-        this.state.setMsgOutActKO(true)
-      };
-
-      this.setState({
-        orgtableData: response.data,
-        tableData: slice,
-        tableAforos: slice,
-        tableAct: sliceAct,
-        content: response
-      })
-     
-      this.state.form.id=this.state.orgtableData.id;
-      this.state.form.nombre=this.state.orgtableData.carretera.nombre;
-      this.state.form.codigo=this.state.orgtableData.carretera.codigo;
-      this.state.form.comentario=this.state.orgtableData.comentario;
-      this.state.form.longitud=this.state.orgtableData.longitud;
-      this.state.form.fechaAlta=this.state.orgtableData.fechaAlta.substr(0, 10);
-      //this.state.fechaAltaFor = this.state.form.fechaAlta.getFullYear() + '-' + this.state.form.fechaAlta.getMonth() + '-' + this.state.form.fechaAlta.getDate()
-      this.state.form.fechaBaja=this.state.orgtableData.fechaBaja;
-      this.state.estadoTram=this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo';
-      this.state.form.idDdTiposCalzada=this.state.orgtableData.idDdTiposCalzada;
-      this.state.form.pkIni=this.state.orgtableData.puntoIni.pk;
-      this.state.form.mIni=this.state.orgtableData.puntoIni.m;
-      this.state.form.descIni=this.state.orgtableData.puntoIni.descripcion;
-      this.state.form.pkFin=this.state.orgtableData.puntoFin.pk;
-      this.state.form.mFin=this.state.orgtableData.puntoFin.m;
-      this.state.form.descFin=this.state.orgtableData.puntoFin.descripcion;
-      this.state.form.idDdCodTecReal=this.state.orgtableData.idDdCodTecReal;
-      this.state.form.idDdRedesNombre=this.state.orgtableData.ddRede.nombre;
-      this.state.form.ddCodTecRealNombre=this.state.orgtableData.ddCodTecRealModel.nombre;
-      this.state.form.ddOrganismosNombre=this.state.orgtableData.ddOrganismos.nombre;
-      this.state.form.ddRegimenExplotacionNombre=this.state.orgtableData.ddRegimenExplotacion.nombre;
-      this.state.form.ddRegimenGestionNombre=this.state.orgtableData.ddRegimenGestion.nombre;
-      this.state.form.ddZonasTermicaNombre=this.state.orgtableData.ddZonasTermica.codigo;
-      this.state.form.ddZonasPluvNombre=this.state.orgtableData.ddZonasPluviometrica.codigo;
-      this.state.form.firmesTramoNombre=this.state.orgtableData.firmesTramo.idCarrilDdTiposFirmesTramo;
-      this.state.form.firmesTramoInfl=this.state.orgtableData.firmesTramo.idDdNivelesInfluencia;
-      this.state.form.firmesTramoCpa=this.state.orgtableData.firmesTramo.cpa;
-      this.state.form.firmesTramoAnchCar=this.state.orgtableData.firmesTramo.anchuraCarril;
-      this.state.form.firmesTramoAnchArc=this.state.orgtableData.firmesTramo.anchuraArcen;
-      this.state.form.firmesTramoMpd=this.state.orgtableData.firmesTramo.TipoLogModeloEvolMpd;
-      
-      this.state.form.firmesTramoCarRod=this.state.orgtableData.firmesTramo.idCarrilDdCapasRodadura;
-      this.state.form.firmesTramoCarInter=this.state.orgtableData.firmesTramo.idCarrilDdCapasIntermedia;
-      this.state.form.firmesTramoCarBase=this.state.orgtableData.firmesTramo.idCarrilDdCapasBase;
-      this.state.form.firmesTramoCarSubBase=this.state.orgtableData.firmesTramo.idCarrilDdCapasSubbase;
-      
-      this.state.form.firmesTramoArcRod=this.state.orgtableData.firmesTramo.idArcenDdCapasRodadura; 
-      this.state.form.firmesTramoArcInt=this.state.orgtableData.firmesTramo.idArcenDdCapasIntermedia; 
-      this.state.form.firmesTramoArcBas=this.state.orgtableData.firmesTramo.idArcenDdCapasBase; 
-      this.state.form.firmesTramoArcSub=this.state.orgtableData.firmesTramo.idArcenDdCapasSubbase;
-
-      this.state.form.firmesTramoespRodCar=this.state.orgtableData.firmesTramo.espesorRodaduraCarril;
-      this.state.form.firmesTramoespIntdCar=this.state.orgtableData.firmesTramo.espesorIntermediaCarril;
-      this.state.form.firmesTramoespBasCar=this.state.orgtableData.firmesTramo.espesorBaseCarril;
-      this.state.form.firmesTramoespSubBasCar=this.state.orgtableData.firmesTramo.espesorSubbaseCarril;
-      
-      this.state.form.firmesTramoespRodArc=this.state.orgtableData.firmesTramo.espesorRodaduraArcen;
-      this.state.form.firmesTramoespIntArc=this.state.orgtableData.firmesTramo.espesorIntermediaArcen;
-      this.state.form.firmesTramoespespBasArc=this.state.orgtableData.firmesTramo.espesorBaseArcen;
-      this.state.form.firmesTramoespSubBasArc=this.state.orgtableData.firmesTramo.espesorSubbaseArcen;
-     
-      this.state.form.explTrTerNat=this.state.orgtableData.explanadasTramo.idDdTerrenosNaturales;
-      this.state.form.explTrTerNatCbr=this.state.orgtableData.explanadasTramo.terrenoNaturalCbr;
-      
-      this.state.form.explCatExpl=this.state.orgtableData.explanadasTramo.idDdCategoriasExplanadas;
-      this.state.form.explRelleno=this.state.orgtableData.explanadasTramo.relleno;
-      this.state.form.explRellenoCbr=this.state.orgtableData.explanadasTramo.rellenoCbr;
-      this.state.form.explCoronacion=this.state.orgtableData.explanadasTramo.coronacion;
-      this.state.form.explCoronacionCbr=this.state.orgtableData.explanadasTramo.coronacionCbr;
-
-    }).catch(error=>{
-      console.log("KO");
-      console.log("URL ENTRADA para GET Tramo:", urlTram);
-      console.log(error); 
+    this.setState({
+      orgtableData: response.data,
+      tableData: slice,
+      tableAforos: slice,
+      tableAct: sliceAct,
+      content: response,
+      estadoTram: this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo',
+      form: {
+        id: response.data.id,
+        nombre: response.data.carretera.nombre,
+        codigo: response.data.carretera.codigo,
+        comentario: response.data.comentario,
+        longitud: response.data.longitud,
+        fechaAlta: response.data.fechaAlta.substr(0, 10),
+        fechaBaja: response.data.fechaBaja,
+        idDdTiposCalzada: response.data.idDdTiposCalzada,
+        pkIni: response.data.puntoIni.pk,
+        mIni: response.data.puntoIni.m,
+        descIni: response.data.puntoIni.descripcion,
+        pkFin: response.data.puntoFin.pk,
+        mFin: response.data.puntoFin.m,
+        descFin: response.data.puntoFin.descripcion,
+        idDdCodTecReal: response.data.idDdCodTecReal,
+        idDdRedesNombre: response.data.ddRede.nombre,
+        ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
+        ddOrganismosNombre: response.data.ddOrganismos.nombre,
+        ddRegimenExplotacionNombre: response.data.ddRegimenExplotacion.nombre,
+        ddRegimenGestionNombre: response.data.ddRegimenGestion.nombre,
+        ddZonasTermicaNombre: response.data.ddZonasTermica.codigo,
+        ddZonasPluvNombre: response.data.ddZonasPluviometrica.codigo,
+        firmesTramoNombre: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
+        firmesTramoInfl: response.data.firmesTramo.idDdNivelesInfluencia,
+        firmesTramoCpa: response.data.firmesTramo.cpa,
+        firmesTramoAnchCar: response.data.firmesTramo.anchuraCarril,
+        firmesTramoAnchArc: response.data.firmesTramo.anchuraArcen,
+        firmesTramoMpd: response.data.firmesTramo.TipoLogModeloEvolMpd,
+        firmesTramoCarRod: response.data.firmesTramo.idCarrilDdCapasRodadura,
+        firmesTramoCarInter: response.data.firmesTramo.idCarrilDdCapasIntermedia,
+        firmesTramoCarBase: response.data.firmesTramo.idCarrilDdCapasBase,
+        firmesTramoCarSubBase: response.data.firmesTramo.idCarrilDdCapasSubbase,
+        firmesTramoArcRod: response.data.firmesTramo.idArcenDdCapasRodadura,
+        firmesTramoArcInt: response.data.firmesTramo.idArcenDdCapasIntermedia,
+        firmesTramoArcBas: response.data.firmesTramo.idArcenDdCapasBase,
+        firmesTramoArcSub: response.data.firmesTramo.idArcenDdCapasSubbase,
+        firmesTramoespRodCar: response.data.firmesTramo.espesorRodaduraCarril,
+        firmesTramoespIntdCar: response.data.firmesTramo.espesorIntermediaCarril,
+        firmesTramoespBasCar: response.data.firmesTramo.espesorBaseCarril,
+        firmesTramoespSubBasCar: response.data.firmesTramo.espesorSubbaseCarril,
+        firmesTramoespRodArc: response.data.firmesTramo.espesorRodaduraArcen,
+        firmesTramoespIntArc: response.data.firmesTramo.espesorIntermediaArcen,
+        firmesTramoespespBasArc: response.data.firmesTramo.espesorBaseArcen,
+        firmesTramoespSubBasArc: response.data.firmesTramo.espesorSubbaseArcen,
+        explTrTerNat: response.data.explanadasTramo.idDdTerrenosNaturales,
+        explTrTerNatCbr: response.data.explanadasTramo.terrenoNaturalCbr,
+        explCatExpl: response.data.explanadasTramo.idDdCategoriasExplanadas,
+        explRelleno: response.data.explanadasTramo.relleno,
+        explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
+        explCoronacion: response.data.explanadasTramo.coronacion,
+        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
+      }
     });
-
-    /*return (
-      <EditTramDet 
-        urlSel={urlTram}
-      />,
-      alert("POPUP")
-    )*/
-  }    
+  }).catch(error=>{
+    console.log("KO");
+    console.log("URL ENTRADA para GET Tramo:", urlTram);
+    console.log(error); 
+  });
+}
 
 peticionSel=({urlTram})=>{
   console.log("llegamos AQUÍ"); 
@@ -351,106 +335,97 @@ peticionSel=({urlTram})=>{
 /*Obtención de Tramo Seleccionado*/
 peticionGet=()=>{
   console.log("Tramo escogido: ",this.state.idTramSel);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
   
-  axios.get(this.state.idTramSel).then(response=>{
-      console.log("MIRAR AQUI Data", response.data);
+  axios.get(this.state.idTramSel, config).then(response=>{
+    console.log("MIRAR AQUI Data", response.data);
+    var data = response.data.carriles;
+    slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+    var dataAct = response.data.actuacionesTramos;
+    sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+    console.log("Data actuaciones", dataAct);
 
-      config = {
-        headers: {
-            'Authorization': sessionStorage.getItem("JWT"),
-            'Accept': 'application/json',
-            'content-type': 'application/json'
-        }
-      };
+    if (data == null) {
+      this.state.setMsgOutBoolKO(true)
+    };
 
-      var data = response.data.carriles;
-      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-      var dataAct = response.data.actuacionesTramos;
-      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
-      console.log("Data actuaciones", dataAct);
+    if (dataAct == null) {
+      this.state.setMsgOutActKO(true)
+    };
 
-      if (data == null) {
-        this.state.setMsgOutBoolKO(true)
-      };
-
-     if (dataAct == null) {
-        this.state.setMsgOutActKO(true)
-      };
-
-      this.setState({
-        orgtableData: response.data,
-        tableData: slice,
-        tableAforos: slice,
-        tableAct: sliceAct,
-        content: response
-      })
-     
-      this.state.form.id=this.state.orgtableData.id;
-      this.state.form.nombre=this.state.orgtableData.carretera.nombre;
-      this.state.form.codigo=this.state.orgtableData.carretera.codigo;
-      this.state.form.comentario=this.state.orgtableData.comentario;
-      this.state.form.longitud=this.state.orgtableData.longitud;
-      this.state.form.fechaAlta=this.state.orgtableData.fechaAlta.substr(0, 10);
-      //this.state.fechaAltaFor = this.state.form.fechaAlta.getFullYear() + '-' + this.state.form.fechaAlta.getMonth() + '-' + this.state.form.fechaAlta.getDate()
-      this.state.form.fechaBaja=this.state.orgtableData.fechaBaja;
-      this.state.estadoTram=this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo';
-      this.state.form.idDdTiposCalzada=this.state.orgtableData.idDdTiposCalzada;
-      this.state.form.pkIni=this.state.orgtableData.puntoIni.pk;
-      this.state.form.mIni=this.state.orgtableData.puntoIni.m;
-      this.state.form.descIni=this.state.orgtableData.puntoIni.descripcion;
-      this.state.form.pkFin=this.state.orgtableData.puntoFin.pk;
-      this.state.form.mFin=this.state.orgtableData.puntoFin.m;
-      this.state.form.descFin=this.state.orgtableData.puntoFin.descripcion;
-      this.state.form.idDdCodTecReal=this.state.orgtableData.idDdCodTecReal;
-      this.state.form.idDdRedesNombre=this.state.orgtableData.ddRede.nombre;
-      this.state.form.ddCodTecRealNombre=this.state.orgtableData.ddCodTecRealModel.nombre;
-      this.state.form.ddOrganismosNombre=this.state.orgtableData.ddOrganismos.nombre;
-      this.state.form.ddRegimenExplotacionNombre=this.state.orgtableData.ddRegimenExplotacion.nombre;
-      this.state.form.ddRegimenGestionNombre=this.state.orgtableData.ddRegimenGestion.nombre;
-      this.state.form.ddZonasTermicaNombre=this.state.orgtableData.ddZonasTermica.codigo;
-      this.state.form.ddZonasPluvNombre=this.state.orgtableData.ddZonasPluviometrica.codigo;
-      this.state.form.firmesTramoNombre=this.state.orgtableData.firmesTramo.idCarrilDdTiposFirmesTramo;
-      this.state.form.firmesTramoInfl=this.state.orgtableData.firmesTramo.idDdNivelesInfluencia;
-      this.state.form.firmesTramoCpa=this.state.orgtableData.firmesTramo.cpa;
-      this.state.form.firmesTramoAnchCar=this.state.orgtableData.firmesTramo.anchuraCarril;
-      this.state.form.firmesTramoAnchArc=this.state.orgtableData.firmesTramo.anchuraArcen;
-      this.state.form.firmesTramoMpd=this.state.orgtableData.firmesTramo.TipoLogModeloEvolMpd;
-      
-      this.state.form.firmesTramoCarRod=this.state.orgtableData.firmesTramo.idCarrilDdCapasRodadura;
-      this.state.form.firmesTramoCarInter=this.state.orgtableData.firmesTramo.idCarrilDdCapasIntermedia;
-      this.state.form.firmesTramoCarBase=this.state.orgtableData.firmesTramo.idCarrilDdCapasBase;
-      this.state.form.firmesTramoCarSubBase=this.state.orgtableData.firmesTramo.idCarrilDdCapasSubbase;
-      
-      this.state.form.firmesTramoArcRod=this.state.orgtableData.firmesTramo.idArcenDdCapasRodadura; 
-      this.state.form.firmesTramoArcInt=this.state.orgtableData.firmesTramo.idArcenDdCapasIntermedia; 
-      this.state.form.firmesTramoArcBas=this.state.orgtableData.firmesTramo.idArcenDdCapasBase; 
-      this.state.form.firmesTramoArcSub=this.state.orgtableData.firmesTramo.idArcenDdCapasSubbase;
-
-      this.state.form.firmesTramoespRodCar=this.state.orgtableData.firmesTramo.espesorRodaduraCarril;
-      this.state.form.firmesTramoespIntdCar=this.state.orgtableData.firmesTramo.espesorIntermediaCarril;
-      this.state.form.firmesTramoespBasCar=this.state.orgtableData.firmesTramo.espesorBaseCarril;
-      this.state.form.firmesTramoespSubBasCar=this.state.orgtableData.firmesTramo.espesorSubbaseCarril;
-      
-      this.state.form.firmesTramoespRodArc=this.state.orgtableData.firmesTramo.espesorRodaduraArcen;
-      this.state.form.firmesTramoespIntArc=this.state.orgtableData.firmesTramo.espesorIntermediaArcen;
-      this.state.form.firmesTramoespespBasArc=this.state.orgtableData.firmesTramo.espesorBaseArcen;
-      this.state.form.firmesTramoespSubBasArc=this.state.orgtableData.firmesTramo.espesorSubbaseArcen;
-     
-      this.state.form.explTrTerNat=this.state.orgtableData.explanadasTramo.idDdTerrenosNaturales;
-      this.state.form.explTrTerNatCbr=this.state.orgtableData.explanadasTramo.terrenoNaturalCbr;
-      
-      this.state.form.explCatExpl=this.state.orgtableData.explanadasTramo.idDdCategoriasExplanadas;
-      this.state.form.explRelleno=this.state.orgtableData.explanadasTramo.relleno;
-      this.state.form.explRellenoCbr=this.state.orgtableData.explanadasTramo.rellenoCbr;
-      this.state.form.explCoronacion=this.state.orgtableData.explanadasTramo.coronacion;
-      this.state.form.explCoronacionCbr=this.state.orgtableData.explanadasTramo.coronacionCbr;
-      
-    }).catch(error=>{
-      console.log("KO");
-      console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
-      console.log(error); 
+    this.setState({
+      orgtableData: response.data,
+      tableData: slice,
+      tableAforos: slice,
+      tableAct: sliceAct,
+      content: response,
+      estadoTram: this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo',
+      form: {
+        id: response.data.id,
+        nombre: response.data.carretera.nombre,
+        codigo: response.data.carretera.codigo,
+        comentario: response.data.comentario,
+        longitud: response.data.longitud,
+        fechaAlta: response.data.fechaAlta.substr(0, 10),
+        fechaBaja: response.data.fechaBaja,
+        idDdTiposCalzada: response.data.idDdTiposCalzada,
+        pkIni: response.data.puntoIni.pk,
+        mIni: response.data.puntoIni.m,
+        descIni: response.data.puntoIni.descripcion,
+        pkFin: response.data.puntoFin.pk,
+        mFin: response.data.puntoFin.m,
+        descFin: response.data.puntoFin.descripcion,
+        idDdCodTecReal: response.data.idDdCodTecReal,
+        idDdRedesNombre: response.data.ddRede.nombre,
+        ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
+        ddOrganismosNombre: response.data.ddOrganismos.nombre,
+        ddRegimenExplotacionNombre: response.data.ddRegimenExplotacion.nombre,
+        ddRegimenGestionNombre: response.data.ddRegimenGestion.nombre,
+        ddZonasTermicaNombre: response.data.ddZonasTermica.codigo,
+        ddZonasPluvNombre: response.data.ddZonasPluviometrica.codigo,
+        firmesTramoNombre: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
+        firmesTramoInfl: response.data.firmesTramo.idDdNivelesInfluencia,
+        firmesTramoCpa: response.data.firmesTramo.cpa,
+        firmesTramoAnchCar: response.data.firmesTramo.anchuraCarril,
+        firmesTramoAnchArc: response.data.firmesTramo.anchuraArcen,
+        firmesTramoMpd: response.data.firmesTramo.TipoLogModeloEvolMpd,
+        firmesTramoCarRod: response.data.firmesTramo.idCarrilDdCapasRodadura,
+        firmesTramoCarInter: response.data.firmesTramo.idCarrilDdCapasIntermedia,
+        firmesTramoCarBase: response.data.firmesTramo.idCarrilDdCapasBase,
+        firmesTramoCarSubBase: response.data.firmesTramo.idCarrilDdCapasSubbase,
+        firmesTramoArcRod: response.data.firmesTramo.idArcenDdCapasRodadura,
+        firmesTramoArcInt: response.data.firmesTramo.idArcenDdCapasIntermedia,
+        firmesTramoArcBas: response.data.firmesTramo.idArcenDdCapasBase,
+        firmesTramoArcSub: response.data.firmesTramo.idArcenDdCapasSubbase,
+        firmesTramoespRodCar: response.data.firmesTramo.espesorRodaduraCarril,
+        firmesTramoespIntdCar: response.data.firmesTramo.espesorIntermediaCarril,
+        firmesTramoespBasCar: response.data.firmesTramo.espesorBaseCarril,
+        firmesTramoespSubBasCar: response.data.firmesTramo.espesorSubbaseCarril,
+        firmesTramoespRodArc: response.data.firmesTramo.espesorRodaduraArcen,
+        firmesTramoespIntArc: response.data.firmesTramo.espesorIntermediaArcen,
+        firmesTramoespespBasArc: response.data.firmesTramo.espesorBaseArcen,
+        firmesTramoespSubBasArc: response.data.firmesTramo.espesorSubbaseArcen,
+        explTrTerNat: response.data.explanadasTramo.idDdTerrenosNaturales,
+        explTrTerNatCbr: response.data.explanadasTramo.terrenoNaturalCbr,
+        explCatExpl: response.data.explanadasTramo.idDdCategoriasExplanadas,
+        explRelleno: response.data.explanadasTramo.relleno,
+        explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
+        explCoronacion: response.data.explanadasTramo.coronacion,
+        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
+      }
     });
-  }    
+  }).catch(error=>{
+    console.log("KO");
+    console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
+    console.log(error); 
+  });
+}
 
 
 
@@ -863,18 +838,35 @@ seleccionarTramo=(CarTram)=>{
               <Row>
                 <div className="container" style={{maxWidth: '800px', width: '100%', float:'center'}}>
                   <div>
-                    <button width="300px" className="btn btn-primary"  onClick={()=>{this.peticionSet(urlTrAntCrec + this.state.form.id)}}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
+                    <button width="300px" className="btn btn-primary" onClick={(e)=>{
+                        e.preventDefault();
+                        this.peticionSet(urlTrAntCrec + this.state.form.id);
+                      }}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
                       <span class="input-group-addon"> </span>                
-                    <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTramGemelo + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
+                    <button width="300px" className="btn btn-primary" onClick={(e)=>{
+                        e.preventDefault();
+                        this.peticionSet(urlTramGemelo + (this.state.form.id));
+                      }}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
                       <span class="input-group-addon"> </span>
-                    <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTrPosCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
+                    <button width="300px" className="btn btn-primary" onClick={(e)=>{
+                        e.preventDefault();
+                        this.peticionSet(urlTrPosCrec + (this.state.form.id));
+                      }}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
                   </div>
                   <div>
-                    <button type="submit" width="300px" className="btn btn-primary" onClick={()=>this.peticionSet(urlTrAntDeCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
+                    <button width="300px" className="btn btn-primary" onClick={(e)=>{
+                        e.preventDefault();
+                        this.peticionSet(urlTrAntDeCrec + (this.state.form.id));
+                      }}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
                       <span class="input-group-addon"> </span>
-                    <button type="submit" width="300px" className="btn btn-primary" >{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
+                    <button width="300px" className="btn btn-primary" onClick={(e) => {
+                        e.preventDefault();
+                      }}>{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
                       <span class="input-group-addon"> </span>
-                    <button type="submit" width="300px" className="btn btn-primary"  onClick={()=>this.peticionSet(urlTrPosDeCrec + (this.state.form.id))}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
+                    <button width="300px" className="btn btn-primary" onClick={(e)=> {
+                        e.preventDefault();
+                        this.peticionSet(urlTrPosDeCrec + (this.state.form.id));
+                      }}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
                   </div>
                 </div>
                 <br />
