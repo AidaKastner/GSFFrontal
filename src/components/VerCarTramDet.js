@@ -881,6 +881,7 @@ seleccionarTramo=(CarTram)=>{
               </Row>
             </Container>
             <Container>
+            <br />
             <div style={{backgroundColor: '#FFFFFF'}} > 
               <Row>         
                 <Col xs={3} style={{textAlign: "left"}}>
