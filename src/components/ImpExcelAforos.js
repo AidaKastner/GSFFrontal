@@ -21,6 +21,7 @@ function ImpExcelAforos(){
   const [msgOut, guardarMsgOut] = useState();
   const [msgOutErr, guardarMsgOutErr] = useState();
   const [msgOutErr1, guardarMsgOutErr1] = useState([]);
+  const [msgOutErrAf, guardarMsgOutErrAf] = useState();
   const [msgOutBoolOK, setMsgOutBoolOK] = useState(false);
   const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
  
@@ -43,6 +44,7 @@ function ImpExcelAforos(){
       guardarMsgOut("");
       guardarMsgOutErr(""); 
       guardarMsgOutErr1([]);
+      guardarMsgOutErrAf("");
       setMsgOutBoolOK(false);
       setMsgOutBoolKO(false);
       var Id=0;
@@ -73,38 +75,49 @@ function ImpExcelAforos(){
 
         }else{
 
-          FilasConError += 1; 
-          console.log("FilasConError: ", FilasConError)
-          guardarMsgOutErr(msgKO);
-          setMsgOutBoolKO(true); 
+          if(response?.data[i]?.item1 != 9999){
 
-          console.log("error ", response?.data[i].item2, "FILA: ", response?.data[i].item1);
+              FilasConError += 1; 
+              console.log("FilasConError: ", FilasConError)
+              console.log("FILA(response?.data[i]?.item1): ", response?.data[i]?.item1)
+              console.log("ERROR(response?.data[i]?.item2): ", response?.data[i]?.item2)
+              guardarMsgOutErr(msgKO);
+              setMsgOutBoolKO(true); 
 
-          //Mensajes de error por cada fila
-          switch(response?.data[i].item2){
-          case 1:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('RegionKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>
-            break;
-          case 2:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('CodigoKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-            break;
-          case 3:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('CarreteraKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-            break;
-         case 4:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('PkIniKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-            break;
-          case 5:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('PkFinKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-            break;
-          default:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation> 
-          }
-      
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: Id, name: msgKO}]);
+              console.log("error ", response?.data[i].item2, "FILA: ", response?.data[i].item1);
 
-            Id += 1;
-            console.log(Id);
+              //Mensajes de error por cada fila
+              switch(response?.data[i].item2){
+              case 1:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('RegionKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>
+                break;
+              case 2:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('CodigoKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                break;
+              case 3:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('CarreteraKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                break;
+            case 4:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('PkIniKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                break;
+              case 5:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('PkFinKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                break;
+              default:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation> 
+              }
+          
+                guardarMsgOutErr1(oldArray => [...oldArray, {id: Id, name: msgKO}]);
+
+                Id += 1;
+                console.log(Id);
+            }
+        }
+
+        if(response?.data[i]?.item1 == 9999 && response?.data[i].item2 > 0){
+          var msgKO = <Translation ns= "global">{(t) => <>{t('ProcAforosKO')}</>}</Translation>
+          guardarMsgOutErrAf(msgKO);
+          console.log("error procesar aforos");
         }
       }
 
@@ -112,6 +125,8 @@ function ImpExcelAforos(){
         var msgKO = <Translation ns= "global">{(t) => <>{t('FilasNoCargadasAf', { NFilasKO: FilasConError })}</>}</Translation>
         guardarMsgOutErr(msgKO);
       }
+
+
 
     }).catch(error=>{
 
@@ -173,6 +188,8 @@ function ImpExcelAforos(){
           {msgOutErr1.map(msgOutErr1 => (
           <li key={msgOutErr1.id}>{msgOutErr1.name}</li>
         ))}
+        <br/>
+        {msgOutErrAf}
       </div>
       </div>
       : ""}

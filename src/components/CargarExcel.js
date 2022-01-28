@@ -95,6 +95,39 @@ function CargarExcel(){
           case 3:
             var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
             break;
+          case 4:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('TramificarKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 5:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('TipoActuacionKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 6:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('TerrenoNaturalKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 7:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('CategExplanadaKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 8:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('TipoFirmeKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 10:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('TipoFirmeKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 9:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('CapasFirmeKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 11:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('NivelInfluenciaKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 12:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('PksKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 13:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('TramosActivosKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
+          case 14:
+            var msgKO= <Translation ns= "global">{(t) => <>{t('SentidoKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+            break;
           default:
             var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation> 
           }
@@ -140,14 +173,70 @@ function CargarExcel(){
     })        
   }
 
+  const config2 = {
+    responseType: 'arraybuffer',
+    body: 'data',
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-disposition': 'attachment',
+        'content-type': 'application/octet-stream',
+        'Access-Control-Allow-Origin': '*',
+        'server': 'Microsoft-IIS/10.0', 
+        'x-powered-by': 'ASP.NET' 
+    }
+  };
+  
+    /*Descargar Excel plantilla*/
+    const peticionDownload=async()=>{
+  
+      axios.post(url + "/" + 1, config2, {responseType: 'arraybuffer'},  {body: 'data'}, 
+      {  headers: {
+            'Authorization': sessionStorage.getItem("JWT"),
+            'Accept': 'application/json',
+            'content-disposition': 'attachment',
+            'content-type': 'application/octet-stream',
+            'Access-Control-Allow-Origin': '*',
+            'server': 'Microsoft-IIS/10.0', 
+            'x-powered-by': 'ASP.NET' 
+        }
+        }).then(response=>{
+          console.log("OK-response",response);
+
+          setMsgOutBoolOK(false);
+          setMsgOutBoolKO(false);
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'file.xlsx'); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+
+      }).catch(error=>{
+        console.log("KO Download");
+        console.log(url);
+        console.log(error);
+        console.log("Error response", error.response);
+        console.log("Error response data", error.response?.data);
+        console.log("Error response data byteLength", error.response?.data.byteLength);
+
+        setMsgOutBoolOK(false);
+        setMsgOutBoolKO(true);
+        var msg= <Translation ns= "global">{(t) => <>{t('DescargarPlantillaKO')}</>}</Translation>
+        guardarMsgOutErr(msg); 
+    })   
+}
 
   return (
     <div>
       <br/>
         <h1><Translation ns= "global">{(t) => <>{t('ImpActs')}</>}</Translation></h1>    
           <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
-          <br />
-          <button className="btn btn-primario btn-sm" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+          <br /><br/>
+          {/*<button className="btn btn-primario btn-sm" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>*/}
+          <button className="btn btn-primario btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+          <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button>
+          
           <br/><br/><br/>
 
        { msgOutBoolOK ? 
