@@ -73,7 +73,7 @@ function InfoActuaciones({Actuacion}){
 
           <Row> 
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Importe"><Translation ns= "global">{(t) => <>{t('Importe')}</>}</Translation></label></Col>            
-            <Col xs={1}>{Actuacion.importe + '€'}</Col>
+            <Col xs={1}>{Actuacion.importe + ' €'}</Col>
 
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Observaciones"><Translation ns= "global">{(t) => <>{t('Observaciones')}</>}</Translation></label></Col>            
             <Col xs={4}>{Actuacion.observaciones}</Col>        
@@ -106,7 +106,7 @@ function InfoActuaciones({Actuacion}){
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="TipoFirme"><Translation ns= "global">{(t) => <>{t('TipoFirme')}</>}</Translation></label></Col>            
             <Col xs={1}>{Actuacion.actuacionesFirme?.idCarrilDdTiposFirmesTramo}</Col>
          
-            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="fresado"><Translation ns= "global">{(t) => <>{t('fresado')}</>}</Translation></label></Col>            
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="fresado"><Translation ns= "global">{(t) => <>{t('Fresado')}</>}</Translation></label></Col>            
             <Col xs={1}>{Actuacion.actuacionesFirme?.fresado}</Col>
           </Row>
 
