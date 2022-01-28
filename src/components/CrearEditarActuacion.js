@@ -38,7 +38,7 @@ function CrearEditarActuacion({Actuacion, Data}){
         PkIni: Actuacion?Actuacion.puntoIni.pk: '', PkFin: Actuacion?Actuacion.puntoFin.pk: '', MIni: Actuacion?Actuacion.puntoIni.m: '', MFin: Actuacion?Actuacion.puntoFin.m: '',
         //Campos Actuación
         ClaveObra: Actuacion? Actuacion.claveObra: '', Importe: Actuacion?.importe > 0 ? Actuacion.importe: '', Fecha: Actuacion? Actuacion.fecha: '', Creciente: Actuacion?Actuacion.sentido?.includes("C")?true: false:true, Decreciente: Actuacion?Actuacion.sentido?.includes("D")?true: false:true, Observaciones: Actuacion?Actuacion.observaciones: '',
-        TipoCalz: '', Carril1: Actuacion?Actuacion.carriles?.substring(0,1): '', Carril2: Actuacion?Actuacion.carriles?.substring(2,3): '', CarreteraAnt: Actuacion.carreteraAntigua != null ? Actuacion.carreteraAntigua: '', Calzada: Actuacion?.calzada != null ? Actuacion.calzada: '', Gestion: Actuacion.gestion != null ? Actuacion.gestion: '', Utilizada: Actuacion.utilizada != null ? Actuacion.utilizada: '', Longitud: Actuacion?.longitud > 0 ? Actuacion.longitud: '',
+        TipoCalz: '', Carril1: Actuacion?.carriles != null ? Actuacion.carriles?.substring(0,1): '', Carril2: Actuacion?.carriles != null ? Actuacion.carriles?.substring(2,3): '', CarreteraAnt: Actuacion.carreteraAntigua != null ? Actuacion.carreteraAntigua: '', Calzada: Actuacion?.calzada != null ? Actuacion.calzada: '', Gestion: Actuacion.gestion != null ? Actuacion.gestion: '', Utilizada: Actuacion.utilizada != null ? Actuacion.utilizada: '', Longitud: Actuacion?.longitud > 0 ? Actuacion.longitud: '',
         //Pestaña Firmes
         TipoFirmeTramo: Actuacion?.actuacionesFirme?.idCarrilDdTiposFirmesTramo != null ? Actuacion.actuacionesFirme.idCarrilDdTiposFirmesTramo: '', NivelesInfluencia: Actuacion?.actuacionesFirme?.idDdNivelesInfluencia != null ? Actuacion.actuacionesFirme.idDdNivelesInfluencia: '', CPA: Actuacion?.actuacionesFirme?.cpa > 0 ? Actuacion.actuacionesFirme.cpa: '', 
         AnchCarril: Actuacion?.actuacionesFirme?.anchuraCarril > 0 ? Actuacion.actuacionesFirme?.anchuraCarril: '', AnchArcen: Actuacion?.actuacionesFirme?.anchuraArcen > 0 ? Actuacion.actuacionesFirme.anchuraArcen: '', Fresado: Actuacion?.actuacionesFirme?.fresado > 0 ? Actuacion.actuacionesFirme.fresado: '',
@@ -678,6 +678,9 @@ function CrearEditarActuacion({Actuacion, Data}){
             case 6:
                 var msg= <Translation ns= "global">{(t) => <>{t('EspesorKO')}</>}</Translation>
                 break;
+            case 7:
+                var msg= <Translation ns= "global">{(t) => <>{t('TramificarKO')}</>}</Translation>
+                break;
             default:
                 console.log("error actuac");
                 var msg= <Translation ns= "global">{(t) => <>{t('GuardarActuacionKO')}</>}</Translation>
@@ -689,6 +692,7 @@ function CrearEditarActuacion({Actuacion, Data}){
 
       })   
     }
+
 
 
     //Pestañas Firme/Explanada/Clasificaciones

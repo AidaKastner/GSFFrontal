@@ -21,12 +21,67 @@ function ImpExcelAforos(){
   const [msgOut, guardarMsgOut] = useState();
   const [msgOutErr, guardarMsgOutErr] = useState();
   const [msgOutErr1, guardarMsgOutErr1] = useState([]);
+  const [msgOutErrAf, guardarMsgOutErrAf] = useState();
   const [msgOutBoolOK, setMsgOutBoolOK] = useState(false);
   const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
  
 
   const subirArchivos=e=>{
     setArchivo(e);
+  }
+
+  const config2 = {
+    responseType: 'arraybuffer',
+    body: 'data',
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-disposition': 'attachment',
+        'content-type': 'application/octet-stream',
+        'Access-Control-Allow-Origin': '*',
+        'server': 'Microsoft-IIS/10.0', 
+        'x-powered-by': 'ASP.NET' 
+    }
+  };
+  
+    /*Descargar Excel plantilla*/
+    const peticionDownload=async()=>{
+  
+      axios.post(url + "/" + 1, config2, {responseType: 'arraybuffer'},  {body: 'data'}, 
+      {  headers: {
+            'Authorization': sessionStorage.getItem("JWT"),
+            'Accept': 'application/json',
+            'content-disposition': 'attachment',
+            'content-type': 'application/octet-stream',
+            'Access-Control-Allow-Origin': '*',
+            'server': 'Microsoft-IIS/10.0', 
+            'x-powered-by': 'ASP.NET' 
+        }
+        }).then(response=>{
+          console.log("OK-response",response);
+
+          setMsgOutBoolOK(false);
+          setMsgOutBoolKO(false);
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'PlantillaAforaments.xlsx'); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+
+      }).catch(error=>{
+        console.log("KO Download");
+        console.log(url);
+        console.log(error);
+        console.log("Error response", error.response);
+        console.log("Error response data", error.response?.data);
+        console.log("Error response data byteLength", error.response?.data.byteLength);
+
+        setMsgOutBoolOK(false);
+        setMsgOutBoolKO(true);
+        var msg= <Translation ns= "global">{(t) => <>{t('DescargarPlantillaKO')}</>}</Translation>
+        guardarMsgOutErr(msg); 
+    })   
   }
 
   const insertarArchivos=async()=>{
@@ -43,6 +98,7 @@ function ImpExcelAforos(){
       guardarMsgOut("");
       guardarMsgOutErr(""); 
       guardarMsgOutErr1([]);
+      guardarMsgOutErrAf("");
       setMsgOutBoolOK(false);
       setMsgOutBoolKO(false);
       var Id=0;
@@ -73,38 +129,49 @@ function ImpExcelAforos(){
 
         }else{
 
-          FilasConError += 1; 
-          console.log("FilasConError: ", FilasConError)
-          guardarMsgOutErr(msgKO);
-          setMsgOutBoolKO(true); 
+          if(response?.data[i]?.item1 != 9999){
 
-          console.log("error ", response?.data[i].item2, "FILA: ", response?.data[i].item1);
+              FilasConError += 1; 
+              console.log("FilasConError: ", FilasConError)
+              console.log("FILA(response?.data[i]?.item1): ", response?.data[i]?.item1)
+              console.log("ERROR(response?.data[i]?.item2): ", response?.data[i]?.item2)
+              guardarMsgOutErr(msgKO);
+              setMsgOutBoolKO(true); 
 
-          //Mensajes de error por cada fila
-          switch(response?.data[i].item2){
-          case 1:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('RegionKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>
-            break;
-          case 2:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('CodigoKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-            break;
-          case 3:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('CarreteraKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-            break;
-         case 4:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('PkIniKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-            break;
-          case 5:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('PkFinKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-            break;
-          default:
-            var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation> 
-          }
-      
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: Id, name: msgKO}]);
+              console.log("error ", response?.data[i].item2, "FILA: ", response?.data[i].item1);
 
-            Id += 1;
-            console.log(Id);
+              //Mensajes de error por cada fila
+              switch(response?.data[i].item2){
+              case 1:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('RegionKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>
+                break;
+              case 2:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('CodigoKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                break;
+              case 3:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('CarreteraKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                break;
+            case 4:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('PkIniKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                break;
+              case 5:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('PkFinKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                break;
+              default:
+                var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation> 
+              }
+          
+                guardarMsgOutErr1(oldArray => [...oldArray, {id: Id, name: msgKO}]);
+
+                Id += 1;
+                console.log(Id);
+            }
+        }
+
+        if(response?.data[i]?.item1 == 9999 && response?.data[i].item2 > 0){
+          var msgKO = <Translation ns= "global">{(t) => <>{t('ProcAforosKO')}</>}</Translation>
+          guardarMsgOutErrAf(msgKO);
+          console.log("error procesar aforos");
         }
       }
 
@@ -112,6 +179,8 @@ function ImpExcelAforos(){
         var msgKO = <Translation ns= "global">{(t) => <>{t('FilasNoCargadasAf', { NFilasKO: FilasConError })}</>}</Translation>
         guardarMsgOutErr(msgKO);
       }
+
+
 
     }).catch(error=>{
 
@@ -152,8 +221,9 @@ function ImpExcelAforos(){
       <br/> 
         <h1><Translation ns= "global">{(t) => <>{t('ImpAfr')}</>}</Translation></h1>
         <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
-        <br />
-        <button className="btn btn-primario btn-sm" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+        <br /><br/>
+        <button className="btn btn-primario btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+        <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button>
        <br/><br/>
 
        { msgOutBoolOK ? 
@@ -173,6 +243,8 @@ function ImpExcelAforos(){
           {msgOutErr1.map(msgOutErr1 => (
           <li key={msgOutErr1.id}>{msgOutErr1.name}</li>
         ))}
+        <br/>
+        {msgOutErrAf}
       </div>
       </div>
       : ""}

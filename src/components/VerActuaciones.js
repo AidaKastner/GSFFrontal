@@ -248,8 +248,8 @@ seleccionarActuacion=(actuacion)=>{
             <Translation ns= "global">{(t) => <>{t( 'ElimAct')}</>}</Translation>
             </ModalBody>
             <ModalFooter>
-              <button className="btn btn-danger" onClick={()=>this.peticionDelete()}>Sí</button>
-              <button className="btn btn-secundary" onClick={()=>this.setState({modalEliminar: false})}>No</button>
+              <button className="btn btn-danger btn-sm" onClick={()=>this.peticionDelete()}>Sí</button>
+              <button className="btn btn-secundary btn-sm" onClick={()=>this.setState({modalEliminar: false})}>No</button>
             </ModalFooter>
           </Modal>
 
@@ -307,7 +307,7 @@ seleccionarActuacion=(actuacion)=>{
                 </ModalBody>
                 <ModalFooter>                            
                   <span style={{float: 'right'}}>
-                      <button className="btn btn-danger" onClick={()=>{this.modalInfo();}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                      <button className="btn btn-danger btn-sm" onClick={()=>{this.modalInfo();}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
                   </span> 
                 </ModalFooter>
           </Modal>
