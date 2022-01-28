@@ -44,10 +44,7 @@ var slice;
 var sliceAct;
 var msgOut = "No se han encontrado registros.";
 
-
-
-class VerCarTramDet extends Component{
-  
+class VerCarTramDet extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -132,8 +129,8 @@ class VerCarTramDet extends Component{
   }
 
   this.columns = [
-    {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
-    {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true}
+    {dataField: 'ordenCarrile', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
+    {dataField: 'sentidoCarril', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true}
    ]
 
    this.columns2 = [
@@ -186,6 +183,13 @@ peticionSet=(urlTram)=>{
     console.log("TRAMO Data", response.data);
     var data = response.data.carriles;
     slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+    var dataCarriles = [];
+    slice.forEach((carrile) => {
+      dataCarriles.push({
+        ordenCarrile: carrile.ordenCarril,
+        sentidoCarril: carrile.sentido
+      });
+    });
     var dataAct = response.data.actuacionesTramos;
     sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
     console.log("Data actuaciones", dataAct);
@@ -200,7 +204,7 @@ peticionSet=(urlTram)=>{
 
     this.setState({
       orgtableData: response.data,
-      tableData: slice,
+      tableData: dataCarriles,
       tableAforos: slice,
       tableAct: sliceAct,
       content: response,
@@ -347,6 +351,13 @@ peticionGet=()=>{
     console.log("MIRAR AQUI Data", response.data);
     var data = response.data.carriles;
     slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+    var dataCarriles = [];
+    slice.forEach((carrile) => {
+      dataCarriles.push({
+        ordenCarrile: carrile.ordenCarril,
+        sentidoCarril: carrile.sentido
+      });
+    });
     var dataAct = response.data.actuacionesTramos;
     sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
     console.log("Data actuaciones", dataAct);
@@ -361,7 +372,7 @@ peticionGet=()=>{
 
     this.setState({
       orgtableData: response.data,
-      tableData: slice,
+      tableData: dataCarriles,
       tableAforos: slice,
       tableAct: sliceAct,
       content: response,
@@ -495,223 +506,212 @@ seleccionarTramo=(CarTram)=>{
 
   console.log("Id seleccionado: ", CarTram.id);
 
-}   
-    //Devolvemos las Tabs con datos
-    render(){
-        
-        const { activeIndex } = this.state;
-            const tabs = [
-      {
-        label: <Translation ns= "global">{(t) => <>{t('Clasif')}</>}</Translation>,
-        
-        content: (
-          <div>             
-              {"  "}
-              <br /><br />
-              <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="ClasFunRedes"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.idDdRedesNombre}
-                />
+}
 
-              <label><Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="ClasTecReal"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddCodTecRealNombre}
-                />
-               <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="OrgCons"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddOrganismosNombre}
-                />
-               <label><Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="OrgCom"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddRegimenExplotacionNombre}
-                />
-               <label><Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="RegGest"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddRegimenGestionNombre}
-                />
-               <label><Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="RegExpl"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddRegimenExplotacionNombre}
-                />
-
-              <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="zonTer"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddZonasTermicaNombre}
-                />
-            <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="zonTer"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddZonasPluvNombre}
-                />
-
-          </div>
-        ),
-        disabled: false
-      },
-      {
-        label: <Translation ns= "global">{(t) => <>{t('Firme')}</>}</Translation>,
-        content: (
-
-            <div>
-              {"  "}
-              <br /><br />
-              <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="TipFirTram"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoNombre}
-                />
-              <label><Translation ns= "global">{(t) => <>{t('NilInf')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="NilInf"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoInfl}
-                />
-
-              <label><Translation ns= "global">{(t) => <>{t('CPA')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="CPA"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoCpa}
-                />
-              <label><Translation ns= "global">{(t) => <>{t('AnchCar')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="AnchCar"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoAnchCar}
-                />
-              <label><Translation ns= "global">{(t) => <>{t('AnchArc')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="AnchArc"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoAnchArc}
-                />
-              <label><Translation ns= "global">{(t) => <>{t('MPD')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="MPD"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoMpd}
-                />
-              <MDBTable>
-                <MDBTableHead>
-                  <tr>
-                    <th scope='col'> </th>
-                    <th scope='col'><Translation ns= "global">{(t) => <>{t('Carril')}</>}</Translation></th>
-                    <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
-                    <th scope='col'><Translation ns= "global">{(t) => <>{t('arcen')}</>}</Translation></th>
-                    <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
-                  </tr>
-                </MDBTableHead>
-              <MDBTableBody>
-                  <tr>
-                    <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaRod')}</>}</Translation></th>
-                    <td>{this.state.form.firmesTramoCarRod}</td>
-                    <td>{this.state.form.firmesTramoespRodCar}</td>
-                    <td>{this.state.form.firmesTramoArcRod}</td>
-                    <td>{this.state.form.firmesTramoespRodArc}</td>
-                  </tr>
-                  <tr>
-                    <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaInter')}</>}</Translation></th>
-                    <td>{this.state.form.firmesTramoCarInter}</td>
-                    <td>{this.state.form.firmesTramoespIntdCar}</td>
-                    <td>{this.state.form.firmesTramoArcInt}</td> 
-                    <td>{this.state.form.firmesTramoespIntArc}</td>
-                  </tr>
-                  <tr>
-                    <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaBase')}</>}</Translation></th>
-                    <td>{this.state.form.firmesTramoCarBase}</td>
-                    <td>{this.state.form.firmesTramoespBasCar}</td>
-                    <td>{this.state.form.firmesTramoArcBas}</td> 
-                    <td>{this.state.form.firmesTramoespespBasArc}</td>
-                  </tr>
-                  <tr>
-                    <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaSubb')}</>}</Translation></th>
-                    <td>{this.state.form.firmesTramoCarSubBase}</td>
-                    <td>{this.state.form.firmesTramoespSubBasCar}</td>
-                    <td>{this.state.form.firmesTramoArcSub}</td>
-                    <td>{this.state.form.firmesTramoespSubBasArc}</td>
-                  </tr>
-                </MDBTableBody>
-              </MDBTable>
-            </div>
-          
-        ),
-        disabled: false
-      },
- 
-      {
-        label: <Translation ns= "global">{(t) => <>{t('Expl')}</>}</Translation>,
-        content: (
-          <div>
-             {"  "}
-            <br /><br />
-            <MDBTable>
-              <MDBTableHead>
-                <tr>
-                  <th scope='col'><Translation ns= "global">{(t) => <>{t('terrnat')}</>}</Translation></th>
-                  <th scope='col'><Translation ns= "global">{(t) => <>{t('cbr')}</>}</Translation></th>
-                </tr>
-              </MDBTableHead>
-            <MDBTableBody>
-              <tr>        
-                <td>{this.state.form.explTrTerNat}</td>
-                <td>{this.state.form.explTrTerNatCbr}</td>
-              </tr>
+//Devolvemos las Tabs con datos
+render() {
+  const { activeIndex } = this.state;
+  const tabs = [{
+    label: <Translation ns= "global">{(t) => <>{t('Clasif')}</>}</Translation>,        
+    content: (
+      <div>             
+        {"  "}
+        <br /><br />
+        <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>
+          <input
+              type="text"
+              name="ClasFunRedes"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.idDdRedesNombre}
+          />
+        <label><Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation></label>
+        <input
+            type="text"
+            name="ClasTecReal"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.ddCodTecRealNombre}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
+        <input
+            type="text"
+            name="OrgCons"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.ddOrganismosNombre}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation></label>
+        <input
+            type="text"
+            name="OrgCom"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.ddRegimenExplotacionNombre}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation></label>
+        <input
+            type="text"
+            name="RegGest"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.ddRegimenGestionNombre}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation></label>
+        <input
+            type="text"
+            name="RegExpl"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.ddRegimenExplotacionNombre}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
+        <input
+            type="text"
+            name="zonTer"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.ddZonasTermicaNombre}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
+        <input
+            type="text"
+            name="zonTer"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.ddZonasPluvNombre}
+        />
+      </div>
+    ),
+    disabled: false
+  }, {
+    label: <Translation ns= "global">{(t) => <>{t('Firme')}</>}</Translation>,
+    content: (
+      <div>
+        {"  "}
+        <br /><br />
+        <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
+        <input
+            type="text"
+            name="TipFirTram"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.firmesTramoNombre}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('NilInf')}</>}</Translation></label>
+        <input
+            type="text"
+            name="NilInf"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.firmesTramoInfl}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('CPA')}</>}</Translation></label>
+          <input
+              type="text"
+              name="CPA"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.firmesTramoCpa}
+          />
+        <label><Translation ns= "global">{(t) => <>{t('AnchCar')}</>}</Translation></label>
+        <input
+            type="text"
+            name="AnchCar"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.firmesTramoAnchCar}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('AnchArc')}</>}</Translation></label>
+        <input
+            type="text"
+            name="AnchArc"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.firmesTramoAnchArc}
+        />
+        <label><Translation ns= "global">{(t) => <>{t('MPD')}</>}</Translation></label>
+        <input
+            type="text"
+            name="MPD"
+            className="u-full-width"
+            //onChange={actualizarState}
+            value={this.state.form.firmesTramoMpd}
+        />
+        <MDBTable>
+          <MDBTableHead>
+            <tr>
+              <th scope='col'> </th>
+              <th scope='col'><Translation ns= "global">{(t) => <>{t('Carril')}</>}</Translation></th>
+              <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
+              <th scope='col'><Translation ns= "global">{(t) => <>{t('arcen')}</>}</Translation></th>
+              <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            <tr>
+              <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaRod')}</>}</Translation></th>
+              <td>{this.state.form.firmesTramoCarRod}</td>
+              <td>{this.state.form.firmesTramoespRodCar}</td>
+              <td>{this.state.form.firmesTramoArcRod}</td>
+              <td>{this.state.form.firmesTramoespRodArc}</td>
+            </tr>
+            <tr>
+              <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaInter')}</>}</Translation></th>
+              <td>{this.state.form.firmesTramoCarInter}</td>
+              <td>{this.state.form.firmesTramoespIntdCar}</td>
+              <td>{this.state.form.firmesTramoArcInt}</td> 
+              <td>{this.state.form.firmesTramoespIntArc}</td>
+            </tr>
+            <tr>
+              <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaBase')}</>}</Translation></th>
+              <td>{this.state.form.firmesTramoCarBase}</td>
+              <td>{this.state.form.firmesTramoespBasCar}</td>
+              <td>{this.state.form.firmesTramoArcBas}</td> 
+              <td>{this.state.form.firmesTramoespespBasArc}</td>
+            </tr>
+            <tr>
+              <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaSubb')}</>}</Translation></th>
+              <td>{this.state.form.firmesTramoCarSubBase}</td>
+              <td>{this.state.form.firmesTramoespSubBasCar}</td>
+              <td>{this.state.form.firmesTramoArcSub}</td>
+              <td>{this.state.form.firmesTramoespSubBasArc}</td>
+            </tr>
+          </MDBTableBody>
+        </MDBTable>
+      </div>
+    ),
+    disabled: false
+  }, {
+    label: <Translation ns= "global">{(t) => <>{t('Expl')}</>}</Translation>,
+    content: (
+      <div>
+        {"  "}
+        <br /><br />
+        <MDBTable>
+          <MDBTableHead>
+            <tr>
+              <th scope='col'><Translation ns= "global">{(t) => <>{t('terrnat')}</>}</Translation></th>
+              <th scope='col'><Translation ns= "global">{(t) => <>{t('cbr')}</>}</Translation></th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            <tr>        
+              <td>{this.state.form.explTrTerNat}</td>
+              <td>{this.state.form.explTrTerNatCbr}</td>
+            </tr>
             {"  "}
             <br /><br />
             <label><Translation ns= "global">{(t) => <>{t('CategExpl')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="MPD"
-                    style={{maxWidth: '200px', width: '100%', float:'right'}}
-                    //onChange={actualizarState}
-                    value={this.state.form.explCatExpl}
-                />
-             {"  "}
-             <br /><br />
+            <input
+                type="text"
+                name="MPD"
+                style={{maxWidth: '200px', width: '100%', float:'right'}}
+                //onChange={actualizarState}
+                value={this.state.form.explCatExpl}
+            />
+            {"  "}
+            <br /><br />
             <MDBTable>
               <MDBTableHead>
                 <tr>
@@ -735,340 +735,346 @@ seleccionarTramo=(CarTram)=>{
             </MDBTable> 
           </MDBTableBody>
         </MDBTable>
-        </div>
-        ),
-        disabled: false
-      },
-      {
-        label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
-        content: (
-          <div style={{marginLeft:'30%'}}>
-            {"  "}
-          <br /><br />
-          <BootstrapTable 
-            bootstrap4 
-            wrapperClasses="table-responsive"
-            keyField='ordenCarril' 
-            columns={this.columns} 
-            data={this.state.tableData}
-            bordered={ false }
-            filter={filterFactory()}
-            headerWrapperClasses="table-responsive"
-            classes="w-auto text-nowrap"
-          >
-        </BootstrapTable>
-          </div>
-        ),
-        disabled: false
-      },
-      {
-        label: <Translation ns= "global">{(t) => <>{t('Afr')}</>}</Translation>,
-        content: (
-          <Fragment>
-           { !this.state.setMsgOutBoolKO ? 
-          <div>
-             {"  "}
-            <br /><br />
-            <BootstrapTable 
-              bootstrap4 
-              wrapperClasses="table-responsive"
-              keyField='campanya' 
-              columns={this.columns2} 
-              data={this.state.tableAforos}
-              bordered={ false }
-              filter={filterFactory()}
-              headerWrapperClasses="table-responsive"
-              classes="w-auto text-nowrap"
+      </div>
+    ),
+    disabled: false
+  }, {
+    label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
+    content: (
+      <Fragment>
+        { !this.state.setMsgOutBoolKO
+          ? <div style={{marginLeft:'30%'}}>
+              {"  "}
+              <br /><br />
+              <BootstrapTable
+                id='tableCarriles'
+                bootstrap4 
+                wrapperClasses="table-responsive"
+                keyField='ordenCarril'
+                columns={this.columns} 
+                data={this.state.tableData}
+                bordered={ false }
+                filter={filterFactory()}
+                headerWrapperClasses="table-responsive"
+                classes="w-auto text-nowrap"
+                key={activeIndex}
               >
               </BootstrapTable>
             </div>
-          :
-            <div class="alert alert-danger">
+          : <div class="alert alert-danger">
               {msgOut}
-            </div>        
-          }
-          </Fragment>
-        ),
-        disabled: false
-      },
-      {
-        label: <Translation ns= "global">{(t) => <>{t('Act')}</>}</Translation>,
-        content: (
-          <Fragment>
-          { !this.state.setMsgOutActKO ? 
-          <div>
-             {"  "}
-            <br /><br />
-            <BootstrapTable 
-              bootstrap4 
-              wrapperClasses="table-responsive"
-              keyField='campanya' 
-              columns={this.columns3} 
-              data={this.state.tableAct}
-              bordered={ false }
-              filter={filterFactory()}
-              headerWrapperClasses="table-responsive"
-              classes="w-auto text-nowrap"
-              >
+            </div>
+        }
+      </Fragment>
+    ),
+    disabled: false
+  }, {
+    label: <Translation ns= "global">{(t) => <>{t('Afr')}</>}</Translation>,
+    content: (
+      <Fragment>
+        { !this.state.setMsgOutBoolKO
+          ? <div>
+              {"  "}
+              <br /><br />
+              <BootstrapTable
+                id='tableAfr'
+                bootstrap4 
+                wrapperClasses="table-responsive"
+                keyField='campanya'
+                columns={this.columns2} 
+                data={this.state.tableAforos}
+                bordered={ false }
+                filter={filterFactory()}
+                headerWrapperClasses="table-responsive"
+                classes="w-auto text-nowrap"
+                key={activeIndex}
+                >
               </BootstrapTable>
             </div>
-          :
-            <div class="alert alert-danger">
+          : <div class="alert alert-danger">
               {msgOut}
-            </div>        
-          }
-          </Fragment>
-        ),
-        disabled: false
-      },
+            </div>
+        }
+      </Fragment>
+    ),
+    disabled: false
+  }, {
+    label: <Translation ns= "global">{(t) => <>{t('Act')}</>}</Translation>,
+    content: (
+      <Fragment>
+        { !this.state.setMsgOutActKO
+          ? <div>
+              {"  "}
+              <br /><br />
+              <BootstrapTable
+                id='tableAct'
+                bootstrap4 
+                wrapperClasses="table-responsive"
+                keyField='actuacione.claveObra'
+                columns={this.columns3} 
+                data={this.state.tableAct}
+                bordered={ false }
+                filter={filterFactory()}
+                headerWrapperClasses="table-responsive"
+                classes="w-auto text-nowrap"
+                key={activeIndex}
+                >
+              </BootstrapTable>
+            </div>
+          : <div class="alert alert-danger">
+              {msgOut}
+            </div>
+        }
+      </Fragment>
+    ),
+    disabled: false
+  }];
+        
+  if (!this.state.content) 
+    return (
+      <div className="u-full-width" style={{marginLeft:'50%'}}>
+        <Spinner /> 
+      </div>
+    );
 
-    ];
-        
-      if (!this.state.content) 
-      return (
-        <div className="u-full-width" style={{marginLeft:'50%'}}>
-          <Spinner /> 
-        </div>
-      );
-      return(
-        
-        <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
-          <form>
-            <Container>
-              <Row>
-                <div className="container" style={{maxWidth: '800px', width: '100%', float:'center'}}>
-                  <div>
-                    <button width="300px" className="btn btn-primary" onClick={(e)=>{
-                        e.preventDefault();
-                        this.peticionSet(urlTrAntCrec + this.state.form.id);
-                      }}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
-                      <span class="input-group-addon"> </span>                
-                    <button width="300px" className="btn btn-primary" onClick={(e)=>{
-                        e.preventDefault();
-                        this.peticionSet(urlTramGemelo + (this.state.form.id));
-                      }}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
-                      <span class="input-group-addon"> </span>
-                    <button width="300px" className="btn btn-primary" onClick={(e)=>{
-                        e.preventDefault();
-                        this.peticionSet(urlTrPosCrec + (this.state.form.id));
-                      }}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
-                  </div>
-                  <div>
-                    <button width="300px" className="btn btn-primary" onClick={(e)=>{
-                        e.preventDefault();
-                        this.peticionSet(urlTrAntDeCrec + (this.state.form.id));
-                      }}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
-                      <span class="input-group-addon"> </span>
-                    <button width="300px" className="btn btn-primary" onClick={(e) => {
-                        e.preventDefault();
-                      }}>{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
-                      <span class="input-group-addon"> </span>
-                    <button width="300px" className="btn btn-primary" onClick={(e)=> {
-                        e.preventDefault();
-                        this.peticionSet(urlTrPosDeCrec + (this.state.form.id));
-                      }}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
-                  </div>
+    return (
+      <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
+        <form>
+          <Container>
+            <Row>
+              <div className="container" style={{maxWidth: '950px', width: '100%', float:'center'}}>
+                <div style={{'text-align': 'center'}}>
+                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=>{
+                      e.preventDefault();
+                      this.peticionSet(urlTrAntCrec + this.state.form.id);
+                    }}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
+                    <span class="input-group-addon"> </span>
+                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=>{
+                      e.preventDefault();
+                      this.peticionSet(urlTramGemelo + (this.state.form.id));
+                    }}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
+                    <span class="input-group-addon"> </span>
+                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=>{
+                      e.preventDefault();
+                      this.peticionSet(urlTrPosCrec + (this.state.form.id));
+                    }}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
                 </div>
-                <br />
-              </Row>
-            </Container>
-            <Container>
-            <br />
-            <div style={{backgroundColor: '#FFFFFF'}} > 
-              <Row>         
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="carretera"
-                      className="col m3 s12"
-                      placeholder= {this.state.form.nombre}
-                      //onChange={actualizarState}
-                      value={this.state.form.nombre}
-                    />
-                </Col>               
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('FechAlt')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="fechaalta"
-                      className="u-full-width"                  
-                      //onChange={actualizarState}
-                      value={this.state.form.fechaAlta}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="pkIni"
-                      className="u-full-width"
-                      placeholder={this.state.form.pkIni}
-                      //onChange={actualizarState}
-                      value={this.state.form.pkIni}
-                    />     
-                </Col>               
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="pkFin"
-                      className="u-full-width"
-                      placeholder={this.state.form.pkFin}
-                      //onChange={actualizarState}
-                      value={this.state.form.pkFin}
-                    />     
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="codigo"
-                      className="u-full-width"
-                      placeholder= {this.state.orgtableData.codigo}
-                      //onChange={actualizarState}
-                      value={this.state.form.codigo}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('FechBaj')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="fechabaja"
-                      className="u-full-width"
-                      placeholder={this.state.estadoTram}
-                      //onChange={actualizarState}
-                      value={this.state.estadoTram}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="mIni"
-                      className="u-full-width"
-                      placeholder={this.state.form.mIni}
-                      //onChange={actualizarState}
-                      value={this.state.form.mIni}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="mFin"
-                      className="u-full-width"
-                      placeholder={this.state.form.mFin}
-                      //onChange={actualizarState}
-                      value={this.state.form.mFin}
-                    />
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="comentario"
-                      className="u-full-width"
-                      placeholder= {this.state.form.comentario}
-                      //onChange={actualizarState}
-                      value={this.state.form.comentario}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="idDdTiposCalzada"
-                      className="u-full-width"
-                      placeholder={this.state.form.idDdTiposCalzada}
-                      //onChange={actualizarState}
-                      value={this.state.form.idDdTiposCalzada}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="descIni"
-                      className="u-full-width"
-                      placeholder={this.state.form.descIni}
-                      //onChange={actualizarState}
-                      value={this.state.form.descIni}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="descFin"
-                      className="u-full-width"
-                      placeholder={this.state.form.descFin}
-                      //onChange={actualizarState}
-                      value={this.state.form.descFin}
-                    />
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('long')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="longitud"
-                      className="u-full-width"
-                      placeholder={this.state.form.longitud}
-                      //onChange={actualizarState}
-                      value={this.state.form.longitud}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="PosIni"
-                      className="u-full-width"
-                      readOnly = {true}
-                      //placeholder={this.state.form.descFin}
-                      //onChange={actualizarState}
-                      //value={this.state.form.descFin}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="PosFin"
-                      className="u-full-width"
-                      readOnly = {true}
-                      //placeholder={this.state.form.descFin}
-                      //onChange={actualizarState}
-                      //value={this.state.form.descFin}
-                    />
-                </Col>
-              </Row>
-            </div>
-            </Container>
-            <Container>
-              <Row>
-                <Col xs={7}>
-                  <div className="container">
-                    <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
-                  </div>
-                </Col>
-                <Col xs={6}>
-                  <div className="container">
-                  
-                  </div>
-                </Col>
-              </Row>
-            </Container>
-          </form>
-        </div>
-      )
-    }
+                <div style={{'text-align': 'center'}}>
+                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=>{
+                      e.preventDefault();
+                      this.peticionSet(urlTrAntDeCrec + (this.state.form.id));
+                    }}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
+                    <span class="input-group-addon"> </span>
+                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e) => {
+                      e.preventDefault();
+                    }}>{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
+                    <span class="input-group-addon"> </span>
+                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=> {
+                      e.preventDefault();
+                      this.peticionSet(urlTrPosDeCrec + (this.state.form.id));
+                    }}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
+                </div>
+              </div>
+              <br />
+            </Row>
+          </Container>
+          <br />
+          <Container>
+          <div style={{backgroundColor: '#FFFFFF'}} > 
+            <Row>         
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="carretera"
+                    className="col m3 s12"
+                    placeholder= {this.state.form.nombre}
+                    //onChange={actualizarState}
+                    value={this.state.form.nombre}
+                  />
+              </Col>               
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('FechAlt')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="fechaalta"
+                    className="u-full-width"                  
+                    //onChange={actualizarState}
+                    value={this.state.form.fechaAlta}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="pkIni"
+                    className="u-full-width"
+                    placeholder={this.state.form.pkIni}
+                    //onChange={actualizarState}
+                    value={this.state.form.pkIni}
+                  />     
+              </Col>               
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="pkFin"
+                    className="u-full-width"
+                    placeholder={this.state.form.pkFin}
+                    //onChange={actualizarState}
+                    value={this.state.form.pkFin}
+                  />     
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="codigo"
+                    className="u-full-width"
+                    placeholder= {this.state.orgtableData.codigo}
+                    //onChange={actualizarState}
+                    value={this.state.form.codigo}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('FechBaj')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="fechabaja"
+                    className="u-full-width"
+                    placeholder={this.state.estadoTram}
+                    //onChange={actualizarState}
+                    value={this.state.estadoTram}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="mIni"
+                    className="u-full-width"
+                    placeholder={this.state.form.mIni}
+                    //onChange={actualizarState}
+                    value={this.state.form.mIni}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="mFin"
+                    className="u-full-width"
+                    placeholder={this.state.form.mFin}
+                    //onChange={actualizarState}
+                    value={this.state.form.mFin}
+                  />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="comentario"
+                    className="u-full-width"
+                    placeholder= {this.state.form.comentario}
+                    //onChange={actualizarState}
+                    value={this.state.form.comentario}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="idDdTiposCalzada"
+                    className="u-full-width"
+                    placeholder={this.state.form.idDdTiposCalzada}
+                    //onChange={actualizarState}
+                    value={this.state.form.idDdTiposCalzada}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="descIni"
+                    className="u-full-width"
+                    placeholder={this.state.form.descIni}
+                    //onChange={actualizarState}
+                    value={this.state.form.descIni}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="descFin"
+                    className="u-full-width"
+                    placeholder={this.state.form.descFin}
+                    //onChange={actualizarState}
+                    value={this.state.form.descFin}
+                  />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('long')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="longitud"
+                    className="u-full-width"
+                    placeholder={this.state.form.longitud}
+                    //onChange={actualizarState}
+                    value={this.state.form.longitud}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="PosIni"
+                    className="u-full-width"
+                    readOnly = {true}
+                    //placeholder={this.state.form.descFin}
+                    //onChange={actualizarState}
+                    //value={this.state.form.descFin}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="PosFin"
+                    className="u-full-width"
+                    readOnly = {true}
+                    //placeholder={this.state.form.descFin}
+                    //onChange={actualizarState}
+                    //value={this.state.form.descFin}
+                  />
+              </Col>
+            </Row>
+          </div>
+          </Container>
+          <Container>
+            <Row>
+              <Col xs={7}>
+                <div className="container">
+                  <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
+                </div>
+              </Col>
+              <Col xs={6}>
+                <div className="container">
+                
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </form>
+      </div>
+    )
+  }
 }
 
 
