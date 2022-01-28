@@ -715,14 +715,10 @@ seleccionarTramo=(CarTram)=>{
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation></label>
-                    <input
-                      type="text"
-                      name="idDdTiposCalzada"
-                      className="u-full-width"
-                      placeholder={this.state.form.idDdTiposCalzada}
-                      //onChange={actualizarState}
-                      value={this.state.form.idDdTiposCalzada}
-                    />
+                  <select onChange={this.handleTipCal}>
+                    <option value="Anada">Anada</option>
+                    <option value="Tornada">Tornada</option>               
+                  </select>
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation></label>
