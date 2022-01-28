@@ -208,7 +208,7 @@ function CargarExcel(){
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement('a');
           link.href = url;
-          link.setAttribute('download', 'file.xlsx'); //or any other extension
+          link.setAttribute('download', 'PlantillaActuacions.xlsx'); //or any other extension
           document.body.appendChild(link);
           link.click();
 
@@ -225,7 +225,7 @@ function CargarExcel(){
         var msg= <Translation ns= "global">{(t) => <>{t('DescargarPlantillaKO')}</>}</Translation>
         guardarMsgOutErr(msg); 
     })   
-}
+  }
 
   return (
     <div>
@@ -235,8 +235,7 @@ function CargarExcel(){
           <br /><br/>
           {/*<button className="btn btn-primario btn-sm" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>*/}
           <button className="btn btn-primario btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
-          <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button>
-          
+          <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button> 
           <br/><br/><br/>
 
        { msgOutBoolOK ? 

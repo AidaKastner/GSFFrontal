@@ -30,6 +30,60 @@ function ImpExcelAforos(){
     setArchivo(e);
   }
 
+  const config2 = {
+    responseType: 'arraybuffer',
+    body: 'data',
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-disposition': 'attachment',
+        'content-type': 'application/octet-stream',
+        'Access-Control-Allow-Origin': '*',
+        'server': 'Microsoft-IIS/10.0', 
+        'x-powered-by': 'ASP.NET' 
+    }
+  };
+  
+    /*Descargar Excel plantilla*/
+    const peticionDownload=async()=>{
+  
+      axios.post(url + "/" + 1, config2, {responseType: 'arraybuffer'},  {body: 'data'}, 
+      {  headers: {
+            'Authorization': sessionStorage.getItem("JWT"),
+            'Accept': 'application/json',
+            'content-disposition': 'attachment',
+            'content-type': 'application/octet-stream',
+            'Access-Control-Allow-Origin': '*',
+            'server': 'Microsoft-IIS/10.0', 
+            'x-powered-by': 'ASP.NET' 
+        }
+        }).then(response=>{
+          console.log("OK-response",response);
+
+          setMsgOutBoolOK(false);
+          setMsgOutBoolKO(false);
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'PlantillaAforaments.xlsx'); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+
+      }).catch(error=>{
+        console.log("KO Download");
+        console.log(url);
+        console.log(error);
+        console.log("Error response", error.response);
+        console.log("Error response data", error.response?.data);
+        console.log("Error response data byteLength", error.response?.data.byteLength);
+
+        setMsgOutBoolOK(false);
+        setMsgOutBoolKO(true);
+        var msg= <Translation ns= "global">{(t) => <>{t('DescargarPlantillaKO')}</>}</Translation>
+        guardarMsgOutErr(msg); 
+    })   
+  }
+
   const insertarArchivos=async()=>{
     const f = new FormData();
     console.log(archivo);
@@ -167,8 +221,9 @@ function ImpExcelAforos(){
       <br/> 
         <h1><Translation ns= "global">{(t) => <>{t('ImpAfr')}</>}</Translation></h1>
         <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
-        <br />
-        <button className="btn btn-primario btn-sm" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+        <br /><br/>
+        <button className="btn btn-primario btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+        <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button>
        <br/><br/>
 
        { msgOutBoolOK ? 
