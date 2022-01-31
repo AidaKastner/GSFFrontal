@@ -1,10 +1,7 @@
-import React, { Component, useState , Fragment} from 'react';
+import React, { Component, Fragment} from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
@@ -20,7 +17,7 @@ import Col from 'react-bootstrap/Col'
 import Spinner from "../components/Spinner"; 
 import Container from 'react-bootstrap/Container'
 import GoogleMapComponent from "../components/GoogleMapComponent";
-import EditTramDet from "../components/VerCarTramDet";
+import EditarTramo from "../components/EditarTramo";
 
 
 const url = "https://localhost:44301/Tramos/";
@@ -150,25 +147,9 @@ class VerCarTramDet extends Component {
     {dataField: 'actuacione.sentido', text:<Translation ns= "global">{(t) => <>{t('Sentido')}</>}</Translation>, sort: true}
   ]
    
-
-
   }
 
-
-//Botones de las rows Tramos
-ButtonsAccionesTr = (cell, row, rowIndex) => {
-  console.log("row: ", row);
-
-return (
-  <div>
-  <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>
-  {"  "}
-  <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
-</div>              
-
-  );
-};
-
+// Llamada para cargar desde la API los tramos elegidos en los botones
 peticionSet=(urlTram)=>{
   console.log("Tramo escogido: ",urlTram);
   config = {
@@ -270,41 +251,6 @@ peticionSet=(urlTram)=>{
   });
 }
 
-peticionSel=({urlTram})=>{
-  console.log("llegamos AQUÍ"); 
-  //Llamada al controlador para obtener  el tramo
-  //const peticionSeleccionar=async e=>{
-  
-    console.log("TRAMO A EDITAR: ")
-    //const data = new FormData();
-    console.log("peticionSeleccionar");   
-  
-    //await axios.get(url, data, config)
-    //authToken = sessionStorage.getItem("JWT");
-    //console.log('AutToken Act:', authToken);
-    //axios.get(urlTram, { headers: {"Authorization" : authToken} })
-    //.then(response =>{
-        //console.log("OK1");
-        //console.log(response.data);
-  
-        //var datos = response.data.result;
-        //console.log("response.data.result", response.data.result)
-  
-  
-    //}).catch(error=>{
-      //  console.log("error tramos:", error.response.data); 
-      //})   
-  
-   // }
-    //peticionSeleccionar();
-    ////return (
-      //<EditTramDet 
-        //urlSel={urlTram}
-      ///>
-  
-    //)
-  }
-
   //Maneja la edición e inserción en los forms
   handleChange=async e=>{
     e.persist();
@@ -319,7 +265,7 @@ peticionSel=({urlTram})=>{
 
     }
 
-  
+  // Monta el Form al cargar la página
   componentDidMount(){
     this.peticionGet();
     
@@ -336,7 +282,7 @@ peticionSel=({urlTram})=>{
 
 
 
-/*Obtención de Tramo Seleccionado*/
+/*Obtención de Tramo Seleccionado desde la pantalla anterior de Carreteras Tramos*/
 peticionGet=()=>{
   console.log("Tramo escogido: ",this.state.idTramSel);
   config = {
@@ -348,7 +294,7 @@ peticionGet=()=>{
   };
   
   axios.get(this.state.idTramSel, config).then(response=>{
-    console.log("MIRAR AQUI Data", response.data);
+    console.log("Data", response.data);
     var data = response.data.carriles;
     slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
     var dataCarriles = [];
@@ -438,73 +384,27 @@ peticionGet=()=>{
   });
 }
 
-
-
-/*Verificar Insertar registro*/
-modalVerificar=()=>{
-  this.setState({modalVerificar: !this.state.modalVerificar});
-}
-
-/*Verificar Editar registro*/
-modalVerificarEd=()=>{
-  this.setState({modalVerificarEd: !this.state.modalVerificarEd});
-}
-
 /*Editar registro*/
 modalEditar=()=>{
   this.setState({modalEditar: !this.state.modalEditar});
 }
 
-/*Editar registro*/
-peticionPut=()=>{
-  const data = new FormData();
-
-  console.log("Codigo a editar: ", this.state.form.id);
-  console.log("URL escogida: ", url);
-  config = {
-    headers: {
-        'Authorization': sessionStorage.getItem("JWT"),
-        'Accept': 'application/json',
-        'content-type': 'application/json'
-    }
-  };
-
-  axios.put(url,this.state.form,config).then(response=>{
-    console.log("OK PUT");
-    this.setState({modalEditar: false});
-    this.peticionGet();
-    this.setState({modalVerificarEd: false});
-  }).catch(error=>{
-    this.setState({modalVerificarEd: false});
-    console.log("KO");
-    console.log("URL para PUT:", url);
-    console.log(data);
-    console.log(config);
-    console.log("ERROR PUT");
-    console.log(error);        
-    alert("Error mientras se modificaban datos. Pongase en contacto con elservicio técnico"); 
-})   
-}
-
-
-
-
 
 //Selecciona una row
-seleccionarTramo=(CarTram)=>{
-  console.log("Carretera Tramo",CarTram);
+seleccionarTramo=(tramoEdit)=>{
+  console.log("Tramo Edición", tramoEdit);
   this.setState({
     tipoModal: 'Seleccionar',
     form: {
-      id: CarTram.id,
-      codigo: CarTram.codigo,
-      nombre: CarTram.nombre,
-      comentario: CarTram.comentario,
-      idGrafo: CarTram.idGrafo
+      id: tramoEdit.id,
+      codigo: tramoEdit.codigo,
+      nombre: tramoEdit.nombre,
+      comentario: tramoEdit.comentario,
+      idGrafo: tramoEdit.idGrafo
     }
   })
 
-  console.log("Id seleccionado: ", CarTram.id);
+  console.log("Id Tramos edición seleccionado: ", tramoEdit.id);
 
 }
 
@@ -838,6 +738,7 @@ render() {
     );
 
     return (
+      // Retornamos el formulario
       <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
         <form>
           <Container>
@@ -865,7 +766,7 @@ render() {
                       this.peticionSet(urlTrAntDeCrec + (this.state.form.id));
                     }}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
                     <span class="input-group-addon"> </span>
-                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e) => {
+                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e) => {this.seleccionarTramo(this.state.form); this.setState({modalEditar: true});
                       e.preventDefault();
                     }}>{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
                     <span class="input-group-addon"> </span>
@@ -1072,6 +973,25 @@ render() {
             </Row>
           </Container>
         </form>
+        <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#FFFFFF'}}  isOpen={this.state.modalEditar}>
+          <ModalHeader style={{display: 'block', backgroundColor: '#FFFFFF'}}>
+            <h1><Translation ns= "global">{(t) => <>{t('EditTramo')}</>}</Translation></h1>  
+          </ModalHeader>
+          <ModalBody style={{backgroundColor: '#FFFFFF'}}>
+            <div style={{marginRight:'1%', marginTop: '1%', backgroundColor: '#FFFFFF'}}>                                  
+              <EditarTramo 
+                id = {url + (this.state.form.id)}
+              />
+            </div>    
+          </ModalBody>
+          <ModalFooter>
+            <span style={{float: 'right', backgroundColor: '#FFFFFF'}}>
+              <button className="btn btn-success btn-sm" onClick={()=>this.peticionPut(this.state.url)}><Translation ns= "global">{(t) => <>{t('Aceptar')}</>}</Translation></button>
+               {"  "}
+              <button className="btn btn-danger btn-sm" onClick={()=>{this.modalRedirigir()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+            </span>
+          </ModalFooter>
+        </Modal>
       </div>
     )
   }
