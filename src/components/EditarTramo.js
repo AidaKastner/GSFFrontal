@@ -4,9 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
 import { Translation, useTranslation, Trans } from 'react-i18next';
@@ -20,7 +18,6 @@ import Col from 'react-bootstrap/Col'
 import Spinner from "./Spinner"; 
 import Container from 'react-bootstrap/Container'
 import GoogleMapComponent from "./GoogleMapComponent";
-import EditTramDet from "./VerCarTramDet";
 
 
 const url = "https://localhost:44301/Tramos/";
@@ -154,21 +151,6 @@ class VerCarTramDet extends Component{
   }
 
 
-//Botones de las rows Tramos
-ButtonsAccionesTr = (row) => {
-  console.log("row: ", row);
-
-return (
-  <div>
-  <button className="btn btn-primary" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEditar: true})}}><FontAwesomeIcon icon={faEdit}/></button>
-  {"  "}
-  <button className="btn btn-danger" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
-</div>              
-
-  );
-};
-
-
 
   //Maneja la edición e inserción en los forms
   handleChange=async e=>{
@@ -200,7 +182,7 @@ return (
 
 /*Obtención de Tramo Seleccionado*/
 peticionGet=()=>{
-  console.log("Tramo escogido: ",this.state.idTramSel);
+  console.log("Tramo escogido en Edición: ",this.state.idTramSel);
   config = {
     headers: {
         'Authorization': sessionStorage.getItem("JWT"),
@@ -210,7 +192,7 @@ peticionGet=()=>{
   };
   
   axios.get(this.state.idTramSel, config).then(response=>{
-    console.log("Data", response.data);
+    console.log("Data Edición", response.data);
     var data = response.data.carriles;
     slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
     var dataAct = response.data.actuacionesTramos;
@@ -575,22 +557,31 @@ seleccionarTramo=(CarTram)=>{
       {
         label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
         content: (
-          <div style={{marginLeft:'30%'}}>
+          <div style={{marginLeft:'10%'}}>
             {"  "}
-          <br /><br />
-          <BootstrapTable 
-            bootstrap4 
-            wrapperClasses="table-responsive"
-            keyField='ordenCarril' 
-            columns={this.columns} 
-            data={this.state.tableData}
-            bordered={ false }
-            filter={filterFactory()}
-            headerWrapperClasses="table-responsive"
-            classes="w-auto text-nowrap"
-          >
-        </BootstrapTable>
-          </div>
+            <br /><br />
+            <Row>
+            <Col xs={5} style={{textAlign: "left"}}>
+              <BootstrapTable 
+                bootstrap4 
+                wrapperClasses="table-responsive"
+                keyField='ordenCarril' 
+                columns={this.columns} 
+                data={this.state.tableData}
+                bordered={ false }
+                filter={filterFactory()}
+                headerWrapperClasses="table-responsive"
+                classes="w-auto text-nowrap"
+              >
+            </BootstrapTable>
+          </Col>
+          <Col xs={2} style={{textAlign: "left"}}>
+            <button className="btn btn-primary btn-sm" style={{width: '300px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('AddLaneFast')}</>}</Translation>}</button>
+              {"  "}
+            <button className="btn btn-primary btn-sm" style={{width: '300px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('AddLaneSlow')}</>}</Translation>}</button>
+          </Col>
+          </Row>
+        </div>
         ),
         disabled: false
       }
@@ -623,13 +614,14 @@ seleccionarTramo=(CarTram)=>{
                     />
                 </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('FechAlt')}</>}</Translation></label>
+                  <label><Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation></label>
                     <input
                       type="text"
-                      name="fechaalta"
-                      className="u-full-width"                  
+                      name="comentario"
+                      className="u-full-width"
+                      placeholder= {this.state.form.comentario}
                       //onChange={actualizarState}
-                      value={this.state.form.fechaAlta}
+                      value={this.state.form.comentario}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -666,16 +658,16 @@ seleccionarTramo=(CarTram)=>{
                       //onChange={actualizarState}
                       value={this.state.form.codigo}
                     />
-                </Col>
+                </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('FechBaj')}</>}</Translation></label>
+                  <label><Translation ns= "global">{(t) => <>{t('long')}</>}</Translation></label>
                     <input
                       type="text"
-                      name="fechabaja"
+                      name="longitud"
                       className="u-full-width"
-                      placeholder={this.state.estadoTram}
+                      placeholder={this.state.form.longitud}
                       //onChange={actualizarState}
-                      value={this.state.estadoTram}
+                      value={this.state.form.longitud}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -702,15 +694,14 @@ seleccionarTramo=(CarTram)=>{
                 </Col>
               </Row>
               <Row>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation></label>
+              <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('FechAlt')}</>}</Translation></label>
                     <input
                       type="text"
-                      name="comentario"
-                      className="u-full-width"
-                      placeholder= {this.state.form.comentario}
+                      name="fechaalta"
+                      className="u-full-width"                  
                       //onChange={actualizarState}
-                      value={this.state.form.comentario}
+                      value={this.state.form.fechaAlta}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -744,16 +735,19 @@ seleccionarTramo=(CarTram)=>{
                 </Col>
               </Row>
               <Row>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('long')}</>}</Translation></label>
+              <Col xs={3} style={{textAlign: "left"}}>
+                  <label><Translation ns= "global">{(t) => <>{t('FechBaj')}</>}</Translation></label>
                     <input
                       type="text"
-                      name="longitud"
+                      name="fechabaja"
                       className="u-full-width"
-                      placeholder={this.state.form.longitud}
+                      placeholder={this.state.estadoTram}
                       //onChange={actualizarState}
-                      value={this.state.form.longitud}
+                      value={this.state.estadoTram}
                     />
+                </Col>
+                <Col xs={3} style={{textAlign: "left"}}>
+                  <button className="btn btn-primary btn-sm" style={{width: '300px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('DarBaja')}</>}</Translation>}</button>
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
