@@ -166,38 +166,6 @@ return (
   );
 };
 
-/*
-//Pantallade edición de tramos Tramos
-EditarTramo = (tramoSel) => {
-  this.setState({
-    tipoModal: 'Seleccionar',
-    form: {
-      id: tramoSel.id
-    }
-  })
-  console.log("URL a pasar: ", url4 + tramoSel.id);
-
-return (
-  
-<div>      
-  <div>
-    <SidebarBack />
-    <Sidebar />
-  </div>
-  <div style={{marginLeft:'15%'}}>         
-    <div style={{marginRight:'10%', marginTop: '5%'}}> 
-      <h1><Translation ns= "global">{(t) => <>{t('verEditCyT')}</>}</Translation></h1>               
-        <VerCarTramDet 
-          id = {url4 + tramoSel.id}
-        />
-      </div>          
-  </div>
-</div>
-
-  );
-};
-*/
-
   //Maneja la edición e inserción en los forms
   handleChange=async e=>{
     e.persist();
@@ -382,7 +350,7 @@ modalVerificarEd=()=>{
   this.setState({modalVerificarEd: !this.state.modalVerificarEd});
 }
 
-/*Descargar PDF del registro*/
+/*Descargar ZIP del registro*/
 modalDescaragr=()=>{
   this.setState({modalDescaragr: !this.state.modalDescaragr});
 }
