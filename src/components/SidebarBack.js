@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import '../css/Sidebar.css';
 import {SidebarData} from './SidebarData';
 import SubMenuBack from './SubMenuBack';
@@ -9,22 +10,28 @@ import styled from 'styled-components';
 const SidebarBack = () => {
 
 
-    const [sidebarBack, setSidebar] = useState(true);
+  const [sidebarBack, setSidebar] = useState(true);
 
-    return (
-      <>
-          <SidebarNav sidebar={sidebarBack}>
-          <div className="SidebarWrap">          
- 
-              {SidebarData.map((item, index) => {
-                return <SubMenuBack item={item} key={index} />;
-              })}
-         
-            </div> 
-          </SidebarNav>
-      </>
-    );
-  };
+  const routerHistory = useHistory();
+
+  const setSidebarBackActive = () => {
+    routerHistory.push('/menu', {showSidebar: true});
+  }
+
+  return (
+    <>
+      <SidebarNav sidebar={sidebarBack} onClick={() => { setSidebarBackActive(); }}>
+        <div className="SidebarWrap">
+
+          {SidebarData.map((item, index) => {
+            return <SubMenuBack item={item} key={index} />;
+          })}
+
+        </div> 
+      </SidebarNav>
+    </>
+  );
+};
 
 
 const SidebarNav = styled.nav`

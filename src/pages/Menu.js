@@ -32,7 +32,7 @@ function Menu(props){
             <div>
                 {/*Cargamos el menú lateral*/}
                 <SidebarBack />
-                <Sidebar /> 
+                <Sidebar showSidebar={props.location.state != null ? props.location.state.showSidebar : null} />
             </div>
  
         </div>

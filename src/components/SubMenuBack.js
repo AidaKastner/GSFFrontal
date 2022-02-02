@@ -2,38 +2,54 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+class SubMenuBack extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      subnav: false,
+      item: props.item
+    };
+  }
 
-const SubMenuBack = ({ item }) => {
+  componentWillReceiveProps() {
+    this.setState({
+      subnav: false
+    });
+  }
 
-  const [subnav, setSubnav] = useState(false);
+  showSubnav() {
+    this.setState({
+      subnav: !this.state.subnav
+    });
+  }
 
-  const showSubnav = () => setSubnav(!subnav);
-
-  return (
-    <>
-      <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
-        <div>
-          {item.icon}
-        </div>
-        <div>
-          {item.subNav && subnav
-            ? item.iconOpened
-            : item.subNav
-            ? item.iconClosed
-            : null}
-        </div>
-      </SidebarLink>
-      {subnav &&
-        item.subNav.map((item, index) => {
-          return (
-            <DropdownLink to={item.path} key={index}>
-              {item.icon}
-            </DropdownLink>
-          );
-        })}
-    </>
-  );
-};
+  render() {
+    return (
+      <>
+        <SidebarLink to={this.state.item.path} onClick={() => { this.showSubnav(); }}>
+          <div>
+            {this.state.item.icon}
+          </div>
+          <div>
+            {this.state.item.subNav && this.state.subnav
+              ? this.state.item.iconOpened
+              : this.state.item.subNav
+              ? this.state.item.iconClosed
+              : null}
+          </div>
+        </SidebarLink>
+        {this.state.subnav &&
+          this.state.item.subNav.map((item, index) => {
+            return (
+              <DropdownLink to={item.path} key={index}>
+                {item.icon}
+              </DropdownLink>
+            );
+          })}
+      </>
+    );
+  }
+}
 
 const SidebarLink = styled(Link)`
   display: flex;
