@@ -367,7 +367,7 @@ modalRedirigir=()=>{
 }
 
 
-/*Editar registro*/
+/*Editar registro. No se usa. Lo mantenemos por si el usuario decidiese recuperarlo*/
 peticionPut=()=>{
   const data = new FormData();
 
@@ -401,7 +401,7 @@ if (this.state.setBtnInsertar==true){
 }
 
 
-/*Editar registro*/
+/*Dar de Baja Tramo*/
 peticionPutBaja=()=>{
   console.log("Acción baja");
   console.log("rutaKml", this.state.form.rutaKml);
