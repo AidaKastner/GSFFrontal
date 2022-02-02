@@ -9,6 +9,8 @@ import { NavLink } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import '../css/Sidebar.css';
 
+let showSidebarClick = false;
+
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +27,7 @@ class Sidebar extends React.Component {
 
   showSidebar = () => {
     this.setState({ sidebar: !this.state.sidebar });
+    showSidebarClick = true;
   }
 
   componentDidMount() {
@@ -35,30 +38,37 @@ class Sidebar extends React.Component {
     window.addEventListener("resize", this.handleResize);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!showSidebarClick && nextProps.showSidebar != null) {
+      this.setState({ sidebar: nextProps.showSidebar });
+    }
+    showSidebarClick = false;
+  }
+
   render() {
     return (
       <>
         <IconContext.Provider value={{ color: '#fff' }}>
-        <div className="Nav">   
-          <div className="Navicon">   
-            <NavLink to='#'>      
-                <FaIcons.FaBars onClick={() => { this.showSidebar(); }} />
-            </NavLink> 
-          </div>
-          <Idioma />
-        </div>
-          <SidebarNav sidebar={this.state.sidebar}>
-          <div className="SidebarWrap">          
+          <div className="Nav">   
             <div className="Navicon">   
-              <NavLink to='#'>
-                <AiIcons.AiOutlineClose onClick={() => { this.showSidebar(); }} />
-              </NavLink>  
-            </div> 
+              <NavLink to='#'>      
+                  <FaIcons.FaBars onClick={() => { this.showSidebar(); }} />
+              </NavLink> 
+            </div>
+            <Idioma />
+          </div>
+          <SidebarNav sidebar={this.state.sidebar}>
+            <div className="SidebarWrap">
+              <div className="Navicon">
+                <NavLink to='#'>
+                  <AiIcons.AiOutlineClose onClick={() => { this.showSidebar(); }} />
+                </NavLink>  
+              </div>
               {SidebarData.map((item, index) => {
                 return <SubMenu item={item} key={index} />;
               })}
-          
-            </div> 
+
+            </div>
           </SidebarNav>
         </IconContext.Provider>
       </>
