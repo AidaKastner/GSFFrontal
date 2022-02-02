@@ -91,58 +91,58 @@ class VerEditTrams extends Component{
   //Carga de datos de las tablas
   this.columns = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.columns2 = [
     {dataField: 'acciones', text: <Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.columns3 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.columns4 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.columns5 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'nombre', text:<Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.columns6 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'idDdTiposFirmesTramo', text:<Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdTiposFirmesTramo', text:<Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.state.columnaCapa = this.columns6
 
   this.columns7 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'idDdTiposFirmesTramo', text:<Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdTiposFirmesTramo', text:<Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.columns8 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'idDdTiposFirmesTramo', text: <Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdTiposFirmesTramo', text: <Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.columns9 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})},
-    {dataField: 'idDdTiposFirmesTramo', text:<Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'})}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdTiposFirmesTramo', text:<Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation>, sort: true, filter: textFilter({ placeholder: 'Buscar'}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   //Paginación
@@ -207,6 +207,20 @@ class VerEditTrams extends Component{
 
       );
   };
+
+  columnStyle = () => {
+    return {
+      textAlign: 'center'
+    }
+  }
+  
+  formatText = (cell) => {
+    return (
+      <div style={{display: 'inline-block', textAlign: 'left'}}>
+        {cell}
+      </div>
+    );
+  }
 
   //Maneja la edición e inserción en los forms
   handleChange=async e=>{

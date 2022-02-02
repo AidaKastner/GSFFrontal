@@ -42,23 +42,23 @@ class VerImpAforos extends Component{
 
   /*Tabla de Aforos*/
   this.columns = [
-    {dataField: 'region', text:<Translation ns= "global">{(t) => <>{t('region')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'codigo', text: <Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'carretera', text: <Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'pk', text: <Translation ns= "global">{(t) => <>{t('pk')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'poblacion', text: <Translation ns= "global">{(t) => <>{t('poblacion')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'tipoEstacion', text: <Translation ns= "global">{(t) => <>{t('tipo_estacion')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'carriles', text: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'fuenteDatos', text: <Translation ns= "global">{(t) => <>{t('fuente_datos')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'definicionTramo', text: <Translation ns= "global">{(t) => <>{t('definicion_tramo')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'ifa', text: <Translation ns= "global">{(t) => <>{t( 'ifa')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'imd', text: <Translation ns= "global">{(t) => <>{t( 'imd')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'porcPesados', text: <Translation ns= "global">{(t) => <>{t( 'porc_pesados')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'velocidad', text: <Translation ns= "global">{(t) => <>{t( 'velocidad')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'pkIni', text: <Translation ns= "global">{(t) => <>{t( 'PKIni')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'pkFin', text: <Translation ns= "global">{(t) => <>{t( 'PKFin')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'anyomedida', text: <Translation ns= "global">{(t) => <>{t( 'anyomedida')}</>}</Translation>, sort: true, filter: textFilter()},
-    {dataField: 'campanya', text: <Translation ns= "global">{(t) => <>{t( 'campanya')}</>}</Translation>, sort: true, filter: textFilter()}
+    {dataField: 'region', text:<Translation ns= "global">{(t) => <>{t('region')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'codigo', text: <Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'carretera', text: <Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'pk', text: <Translation ns= "global">{(t) => <>{t('pk')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'poblacion', text: <Translation ns= "global">{(t) => <>{t('poblacion')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'tipoEstacion', text: <Translation ns= "global">{(t) => <>{t('tipo_estacion')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'carriles', text: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'fuenteDatos', text: <Translation ns= "global">{(t) => <>{t('fuente_datos')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'definicionTramo', text: <Translation ns= "global">{(t) => <>{t('definicion_tramo')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'ifa', text: <Translation ns= "global">{(t) => <>{t( 'ifa')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'imd', text: <Translation ns= "global">{(t) => <>{t( 'imd')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'porcPesados', text: <Translation ns= "global">{(t) => <>{t( 'porc_pesados')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'velocidad', text: <Translation ns= "global">{(t) => <>{t( 'velocidad')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'pkIni', text: <Translation ns= "global">{(t) => <>{t( 'PKIni')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'pkFin', text: <Translation ns= "global">{(t) => <>{t( 'PKFin')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'anyomedida', text: <Translation ns= "global">{(t) => <>{t( 'anyomedida')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'campanya', text: <Translation ns= "global">{(t) => <>{t( 'campanya')}</>}</Translation>, sort: true, filter: textFilter(), style: this.columnStyle, formatter: this.formatText}
   ]
 
 
@@ -76,6 +76,20 @@ class VerImpAforos extends Component{
   })
 
 
+  }
+
+  columnStyle = () => {
+    return {
+      textAlign: 'center'
+    }
+  }
+  
+  formatText = (cell) => {
+    return (
+      <div style={{display: 'inline-block', textAlign: 'left'}}>
+        {cell}
+      </div>
+    );
   }
 
   componentDidMount(){
