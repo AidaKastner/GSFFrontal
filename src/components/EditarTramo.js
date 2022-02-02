@@ -19,9 +19,10 @@ import Spinner from "./Spinner";
 import Container from 'react-bootstrap/Container'
 import GoogleMapComponent from "./GoogleMapComponent";
 
-
+var msg = '';
 const url = "https://localhost:44301/Tramos/";
-
+const url2 = "https://localhost:44301/Tramos/baja";
+const url3 = "https://localhost:44301/Tramos/alta";
 
 let authToken = sessionStorage.getItem("JWT");
 
@@ -37,9 +38,14 @@ var slice;
 var sliceAct;
 var msgOut = "No se han encontrado registros.";
 
+var today = new Date();
+var dd = String(today. getDate()). padStart(2, '0');
+var mm = String(today. getMonth() + 1). padStart(2, '0'); //January is 0!
+var yyyy = today. getFullYear();
 
+today = yyyy + '-' + mm + '-' + dd;
 
-class VerCarTramDet extends Component{
+class EditarTramo extends Component{
   
   constructor(props) {
     super(props);
@@ -62,7 +68,7 @@ class VerCarTramDet extends Component{
       Index: 0,
       url:'',
       comboSel:'Activos',
-      currentYear: new Date(),
+      currentYear: today,
       fechaAltaFor:'',
       content: null,
       setMsgOutBoolKO: false,
@@ -125,8 +131,10 @@ class VerCarTramDet extends Component{
   }
 
   this.columns = [
+    {dataField: 'remove', formatter: this.ButtonsEliminaCarr},
     {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
-    {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true}
+    {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true},
+    {dataField: 'auscul', text:<Translation ns= "global">{(t) => <>{t('auscul')}</>}</Translation>, formatter: this.ButtonsAccionesCarr}
    ]
 
    this.columns2 = [
@@ -145,11 +153,69 @@ class VerCarTramDet extends Component{
     {dataField: 'actuacione.fecha', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, sort: true},
     {dataField: 'actuacione.sentido', text:<Translation ns= "global">{(t) => <>{t('Sentido')}</>}</Translation>, sort: true}
   ]
-   
-
-
+  
   }
 
+
+//Boton de auscultaciones
+ButtonsAccionesCarr = (row) => {
+  console.log("row: ", row);
+
+return (
+  <div>
+    <button className="btn btn-danger btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+  </div>              
+
+  );
+};
+
+//Boton de auscultaciones
+ButtonsEliminaCarr = (row) => {
+  console.log("row: ", row);
+
+return (
+  <div>
+    <button className="btn btn-danger btn-sm" onClick={()=>{this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+  </div>              
+
+  );
+};
+
+
+//Control mensaje de errores baja tramo
+controlErrBaja=(controlErrorTramo)=>{
+  console.log("Control de errores Baja Tramo: ", controlErrorTramo);
+
+  switch(controlErrorTramo) {
+
+    case 0: msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMKO00')}</>}</Translation>;
+    break;
+
+    case 1: msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMKO01')}</>}</Translation>;
+    break;
+
+    default: msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMKO00')}</>}</Translation>;
+    break;
+
+    }
+
+}
+
+//Control mensaje de errores baja tramo
+controlErrAlta=(controlErrorTramo)=>{
+  console.log("Control de errores Baja Tramo: ", controlErrorTramo);
+
+  switch(controlErrorTramo) {
+
+    case 0: msg= <Translation ns= "global">{(t) => <>{t('ALTATRAMKO00')}</>}</Translation>;
+    break;
+
+    default: msg= <Translation ns= "global">{(t) => <>{t('ALTATRAMKO00')}</>}</Translation>;
+    break;
+
+    }
+
+}
 
 
   //Maneja la edición e inserción en los forms
@@ -213,7 +279,7 @@ peticionGet=()=>{
       tableAforos: slice,
       tableAct: sliceAct,
       content: response,
-      estadoTram: this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo',
+      estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
       form: {
         id: response.data.id,
         nombre: response.data.carretera.nombre,
@@ -267,12 +333,77 @@ peticionGet=()=>{
         explCoronacion: response.data.explanadasTramo.coronacion,
         explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
       }
+      
     });
   }).catch(error=>{
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
     console.log(error); 
   });
+}
+
+/*Dar de Baja Tramo*/
+peticionPutBaja=(baja)=>{
+  console.log("Acción baja tramo", baja);
+  console.log("rutaKml", this.state.form.rutaKml);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  axios.put(baja,config).then(response=>{    
+    this.setState({modalEliminar: false});
+    this.setState({setMsgOutBoolOK: true});
+    this.setState({setMsgOutBoolKO: false});
+    msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMOK')}</>}</Translation>;
+    //this.peticionGet();
+  }).catch(error=>{
+    this.setState({setMsgOutBoolKO: true});
+    this.setState({setMsgOutBoolOK: false});
+    console.log(baja);
+    console.log(this.state.form.id);
+    console.log(error);    
+    console.log("Error response", error.response);
+    console.log("Error response data", error.response?.data);
+    this.controlErrBaja(error.response?.data); 
+    this.setState({modalEliminar: false});
+    this.peticionGet(); 
+})   
+
+}
+
+/*Dar de Baja Tramo*/
+peticionPutAlta=(alta)=>{
+  console.log("Acción baja tramo", alta);
+  console.log("rutaKml", this.state.form.rutaKml);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  axios.put(alta,config).then(response=>{    
+    this.setState({modalEliminar: false});
+    this.setState({setMsgOutBoolOK: true});
+    this.setState({setMsgOutBoolKO: false});
+    msg= <Translation ns= "global">{(t) => <>{t('ALTATRAMOK')}</>}</Translation>;
+    //this.peticionGet();
+  }).catch(error=>{
+    this.setState({setMsgOutBoolKO: true});
+    this.setState({setMsgOutBoolOK: false});
+    console.log(alta);
+    console.log(this.state.form.id);
+    console.log(error);    
+    console.log("Error response", error.response);
+    console.log("Error response data", error.response?.data);
+    this.controlErrBaja(error.response?.data); 
+    this.setState({modalEliminar: false});
+    this.peticionGet(); 
+})   
+
 }
 
 
@@ -561,7 +692,7 @@ seleccionarTramo=(CarTram)=>{
             {"  "}
             <br /><br />
             <Row>
-            <Col xs={5} style={{textAlign: "left"}}>
+            <Col xs={6} style={{textAlign: "left"}}>
               <BootstrapTable 
                 bootstrap4 
                 wrapperClasses="table-responsive"
@@ -573,13 +704,13 @@ seleccionarTramo=(CarTram)=>{
                 headerWrapperClasses="table-responsive"
                 classes="w-auto text-nowrap"
               >
-            </BootstrapTable>
-          </Col>
-          <Col xs={2} style={{textAlign: "left"}}>
-            <button className="btn btn-primary btn-sm" style={{width: '300px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('AddLaneFast')}</>}</Translation>}</button>
-              {"  "}
-            <button className="btn btn-primary btn-sm" style={{width: '300px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('AddLaneSlow')}</>}</Translation>}</button>
-          </Col>
+              </BootstrapTable>
+            </Col>
+            <Col xs={1} style={{textAlign: "left"}}>
+              <button className="btn btn-primary btn-sm" style={{width: '300px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('AddLaneFast')}</>}</Translation>}</button>
+                {"  "}
+              <button className="btn btn-primary btn-sm" style={{width: '300px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('AddLaneSlow')}</>}</Translation>}</button>
+            </Col>
           </Row>
         </div>
         ),
@@ -597,6 +728,24 @@ seleccionarTramo=(CarTram)=>{
       return(
         
         <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
+          
+          { this.state.setMsgOutBoolOK ? 
+          <div><br/><br/>
+              <div className="alert alert-success">
+                {/*Mostramos mensaje*/}
+                {msg}
+              </div>
+            </div>
+            : ""}
+          { this.state.setMsgOutBoolKO ? 
+            <div><br/>
+             <div class="alert alert-danger">
+                {/*Mostramos mensaje*/}
+                {msg}
+            </div>
+            </div>
+            : ""}
+          
           <form>
             <Container>
             <br />
@@ -747,7 +896,16 @@ seleccionarTramo=(CarTram)=>{
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
-                  <button className="btn btn-primary btn-sm" style={{width: '300px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('DarBaja')}</>}</Translation>}</button>
+                  {console.log("Año actual", this.state.currentYear)}
+                  {console.log("Fecha baja",  this.state.form.fechaBaja)}
+                    {
+                      this.state.currentYear > this.state.form.fechaBaja 
+                      ? 
+                        <button className="btn btn-success btn-sm" style={{width: '300px', marginTop:'9%'}} onClick={(e)=>{e.preventDefault(); this.peticionPutAlta(url3+"/"+this.state.form.id);}}>{<Translation ns= "global">{(t) => <>{t('DarAlta')}</>}</Translation>}</button> 
+                      : 
+                        <button className="btn btn-danger btn-sm" style={{width: '300px', marginTop:'9%'}} onClick={(e)=>{e.preventDefault(); this.peticionPutBaja(url2+"/"+this.state.form.id);}}>{<Translation ns= "global">{(t) => <>{t('DarBaja')}</>}</Translation>}</button>
+                    }
+                  
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
@@ -797,4 +955,4 @@ seleccionarTramo=(CarTram)=>{
 }
 
 
-export default VerCarTramDet;
+export default EditarTramo;
