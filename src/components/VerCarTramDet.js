@@ -41,6 +41,13 @@ var slice;
 var sliceAct;
 var msgOut = "No se han encontrado registros.";
 
+var today = new Date();
+var dd = String(today. getDate()). padStart(2, '0');
+var mm = String(today. getMonth() + 1). padStart(2, '0'); //January is 0!
+var yyyy = today. getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+
 class VerCarTramDet extends Component {
   constructor(props) {
     super(props);
@@ -63,7 +70,7 @@ class VerCarTramDet extends Component {
       Index: 0,
       url:'',
       comboSel:'Activos',
-      currentYear: new Date(),
+      currentYear: today,
       fechaAltaFor:'',
       content: null,
       setMsgOutBoolKO: false,
@@ -189,7 +196,7 @@ peticionSet=(urlTram)=>{
       tableAforos: slice,
       tableAct: sliceAct,
       content: response,
-      estadoTram: this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo',
+      estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
       form: {
         id: response.data.id,
         nombre: response.data.carretera.nombre,
@@ -322,7 +329,7 @@ peticionGet=()=>{
       tableAforos: slice,
       tableAct: sliceAct,
       content: response,
-      estadoTram: this.state.currentYear > this.state.form.fechaBaja ? 'Inactivo' : 'Activo',
+      estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
       form: {
         id: response.data.id,
         nombre: response.data.carretera.nombre,
@@ -988,7 +995,7 @@ render() {
             <span style={{float: 'right', backgroundColor: '#FFFFFF'}}>
               <button className="btn btn-success btn-sm" onClick={()=>this.peticionPut(this.state.url)}><Translation ns= "global">{(t) => <>{t('Aceptar')}</>}</Translation></button>
                {"  "}
-              <button className="btn btn-danger btn-sm" onClick={()=>{this.modalRedirigir()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+              <button className="btn btn-danger btn-sm" onClick={()=>{this.modalEditar()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
             </span>
           </ModalFooter>
         </Modal>
