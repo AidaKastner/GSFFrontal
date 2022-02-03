@@ -20,9 +20,7 @@ import Tab from "./Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import Select from 'react-select';
 import VerCarTramDet from "../components/VerCarTramDet";
-import Spinner from "../components/Spinner"; 
-import Sidebar from "../components/Sidebar";
-import SidebarBack from "../components/SidebarBack";
+import Spinner from "../components/Spinner";
 
 const url1 = "https://localhost:44301/Carreteras";
 const url2 = "https://localhost:44301/Tramos/combo";
@@ -97,27 +95,27 @@ class VerEditCarTrams extends Component{
   //Carga de datos de las tablas
   this.columns = [
     {dataField: 'accionesTram', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones},
-    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'comentario', text:<Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText}
+    {dataField: 'codigo', text:<Translation ns= "global">{(t) => <>{t('codigo')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'comentario', text:<Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   this.columns2 = [
     {dataField: 'acciones', text:<Translation ns= "global">{(t) => <>{t('Acciones')}</>}</Translation>, formatter: this.ButtonsAccionesTr},
-    {dataField: 'carretera.nombre', text:<Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('Tramo')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'puntoIni.m', text: <Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'puntoIni.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'puntoFin.m', text: <Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'puntoFin.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'idDdCodTecReal', text: <Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'idDdRedes', text: <Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'idDdOrganismoCompetente', text: <Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'idDdOrganismoConservacion', text: <Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'idDdRegimenExplotacion', text: <Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'idDdRegimenGestion', text: <Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation>, sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText},
-    {dataField: 'idDdTiposCalzada', text: <Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation>,sort: true, filter: textFilter({placeholder: 'Buscar...'}), style: this.columnStyle, formatter: this.formatText}
+    {dataField: 'carretera.nombre', text:<Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'nombre', text: <Translation ns= "global">{(t) => <>{t('Tramo')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'puntoIni.pk', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'puntoIni.m', text: <Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'puntoIni.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'puntoFin.pk', text: <Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'puntoFin.m', text: <Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'puntoFin.descripcion', text: <Translation ns= "global">{(t) => <>{t('DescFin')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdCodTecReal', text: <Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdRedes', text: <Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdOrganismoCompetente', text: <Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdOrganismoConservacion', text: <Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdRegimenExplotacion', text: <Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdRegimenGestion', text: <Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'idDdTiposCalzada', text: <Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation>,sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText}
   ]
 
   //Paginación
@@ -670,7 +668,7 @@ seleccionarTramo=(CarTram)=>{
                   /> 
               </span>
             <br /><br />
-            <BootstrapTable  
+            <BootstrapTable
             bootstrap4 
             keyField='id' 
             wrapperClasses="table-responsive"

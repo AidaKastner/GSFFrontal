@@ -1,38 +1,30 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import '../css/Sidebar.css';
 import {SidebarData} from './SidebarData';
 import SubMenuBack from './SubMenuBack';
 import styled from 'styled-components';
 
-
-
-const SidebarBack = () => {
-
-
+const SidebarBack = (props) => {
   const [sidebarBack, setSidebar] = useState(true);
-
-  const routerHistory = useHistory();
+  const [prevLocation, setPrevLocation] = useState(props.prevLocation);
+  const [routerHistory, setRouterHistory] = useState(props.routerHistory);
 
   const setSidebarBackActive = () => {
-    routerHistory.push('/menu', {showSidebar: true});
+    routerHistory.push('/menu', {showSidebar: true, prevLocation: prevLocation});
   }
 
   return (
     <>
       <SidebarNav sidebar={sidebarBack} onClick={() => { setSidebarBackActive(); }}>
         <div className="SidebarWrap">
-
           {SidebarData.map((item, index) => {
             return <SubMenuBack item={item} key={index} />;
           })}
-
         </div> 
       </SidebarNav>
     </>
   );
 };
-
 
 const SidebarNav = styled.nav`
   background: #15171c;
@@ -47,5 +39,4 @@ const SidebarNav = styled.nav`
   z-index: 10;
 `;
 
-
-export default SidebarBack
+export default SidebarBack;
