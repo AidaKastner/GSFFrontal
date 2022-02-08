@@ -35,8 +35,11 @@ function CargarActuaciones(props){
     return(
       <div>               
             <div>
-              <SidebarBack />
-              <Sidebar />
+              <SidebarBack routerHistory={routerHistory}
+                prevLocation={props.location.state != null ? props.location.state.prevLocation : routerHistory.location.pathname} />
+              <Sidebar routerHistory={routerHistory}
+                showSidebar={props.location.state != null ? props.location.state.showSidebar : null}
+                prevLocation={props.location.state != null ? props.location.state.prevLocation : null} />
             </div>
             <div style={{marginLeft:'15%'}}>                     
               <div style={{marginRight:'10%', marginTop: '5%'}}> 

@@ -11,10 +11,11 @@ class SubMenuBack extends React.Component {
     };
   }
 
-  componentWillReceiveProps() {
-    this.setState({
-      subnav: false
-    });
+  static getDerivedStateFromProps(props, state) {
+    return {
+      subnav: false,
+      item: props.item
+    };
   }
 
   showSubnav() {

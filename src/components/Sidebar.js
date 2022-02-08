@@ -15,7 +15,9 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sidebar: window.innerWidth > 1300
+      sidebar: window.innerWidth > 1300,
+      routerHistory: props.routerHistory,
+      prevLocation: props.prevLocation
     };
   }
 
@@ -32,17 +34,25 @@ class Sidebar extends React.Component {
 
   componentDidMount() {
     window.addEventListener("resize", this.handleResize);
+    if (this.state.prevLocation != null && this.state.prevLocation) {
+      this.state.routerHistory.push(this.state.prevLocation);
+    }
   }
 
   componentWillUnmount() {
     window.addEventListener("resize", this.handleResize);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!showSidebarClick && nextProps.showSidebar != null) {
-      this.setState({ sidebar: nextProps.showSidebar });
-    }
+  static getDerivedStateFromProps(props) {
     showSidebarClick = false;
+    if (!showSidebarClick && props.showSidebar != null) {
+      return {
+        sidebar: props.showSidebar,
+        routerHistory: props.routerHistory,
+        prevLocation: props.prevLocation
+      };
+    }
+    return null;
   }
 
   render() {
@@ -65,6 +75,9 @@ class Sidebar extends React.Component {
                 </NavLink>  
               </div>
               {SidebarData.map((item, index) => {
+                if (item.subNav !== undefined) {
+                  item.path = this.state.routerHistory === undefined ? item.path : this.state.routerHistory.location.pathname;
+                }
                 return <SubMenu item={item} key={index} />;
               })}
 

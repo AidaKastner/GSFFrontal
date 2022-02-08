@@ -6,6 +6,7 @@ import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
+import '../css/Table.css';
 import { Translation, useTranslation, Trans } from 'react-i18next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
@@ -660,6 +661,7 @@ render() {
       <Fragment>
         {console.log("SENTIDO",SentCarril)},
         { !this.state.setMsgOutBoolKO
+
           ? <div style={{marginLeft:'30%'}}>
                { SentCarril === "Decreixent" ? <Translation ns= "global">{(t) => <>{t('SentDecre')}</>}</Translation>
                : <Translation ns= "global">{(t) => <>{t('SentCre')}</>}</Translation>
@@ -676,7 +678,7 @@ render() {
                 bordered={ false }
                 filter={filterFactory()}
                 headerWrapperClasses="table-responsive"
-                classes="w-auto text-nowrap"
+                classes="w-auto text-nowrap table-center"
                 key={activeIndex}
               >
               </BootstrapTable>
@@ -706,7 +708,7 @@ render() {
                 bordered={ false }
                 filter={filterFactory()}
                 headerWrapperClasses="table-responsive"
-                classes="w-auto text-nowrap"
+                classes="w-auto text-nowrap table-center"
                 key={activeIndex}
                 >
               </BootstrapTable>
@@ -736,7 +738,7 @@ render() {
                 bordered={ false }
                 filter={filterFactory()}
                 headerWrapperClasses="table-responsive"
-                classes="w-auto text-nowrap"
+                classes="w-auto text-nowrap table-center"
                 key={activeIndex}
                 >
               </BootstrapTable>
@@ -761,44 +763,51 @@ render() {
       // Retornamos el formulario
       <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
         <form>
-          <Container>
-            <Row>
-              <div className="container" style={{maxWidth: '950px', width: '100%', float:'center'}}>
-                <div style={{'text-align': 'center'}}>
-                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=>{
-                      e.preventDefault();
-                      this.peticionSet(urlTrAntCrec + this.state.form.id);
-                    }}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
-                    <span class="input-group-addon"> </span>
-                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=>{
-                      e.preventDefault();
-                      this.peticionSet(urlTramGemelo + (this.state.form.id));
-                    }}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
-                    <span class="input-group-addon"> </span>
-                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=>{
-                      e.preventDefault();
-                      this.peticionSet(urlTrPosCrec + (this.state.form.id));
-                    }}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
-                </div>
-                <div style={{'text-align': 'center'}}>
-                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=>{
-                      e.preventDefault();
-                      this.peticionSet(urlTrAntDeCrec + (this.state.form.id));
-                    }}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
-                    <span class="input-group-addon"> </span>
-                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e) => {this.seleccionarTramo(this.state.form); this.setState({modalEditar: true});
-                      e.preventDefault();
-                    }}>{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
-                    <span class="input-group-addon"> </span>
-                  <button className="btn btn-primary" style={{width: '300px'}} onClick={(e)=> {
-                      e.preventDefault();
-                      this.peticionSet(urlTrPosDeCrec + (this.state.form.id));
-                    }}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
-                </div>
-              </div>
-              <br />
+          <div class="container" style={{maxWidth: '950px', width: '100%', float:'center'}}>
+            <Row style={{paddingBottom: '0.5rem'}}>
+              <Col xs={4} style={{textAlign: "center"}}>
+                <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=>{
+                  e.preventDefault();
+                  this.peticionSet(urlTrAntCrec + this.state.form.id);
+                }}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
+                <span class="input-group-addon"> </span>
+              </Col>
+              <Col xs={4} style={{textAlign: "center"}}>
+                <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=>{
+                  e.preventDefault();
+                  this.peticionSet(urlTramGemelo + (this.state.form.id));
+                }}>{<Translation ns= "global">{(t) => <>{t('TramSentCont')}</>}</Translation>}</button>
+                <span class="input-group-addon"> </span>
+              </Col>
+              <Col xs={4} style={{textAlign: "center"}}>
+                <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=>{
+                  e.preventDefault();
+                  this.peticionSet(urlTrPosCrec + (this.state.form.id));
+                }}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
+              </Col>
             </Row>
-          </Container>
+            <Row>
+              <Col xs={4} style={{textAlign: "center"}}>
+                <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=>{
+                  e.preventDefault();
+                  this.peticionSet(urlTrAntDeCrec + (this.state.form.id));
+                }}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
+                <span class="input-group-addon"> </span>
+              </Col>
+              <Col xs={4} style={{textAlign: "center"}}>
+                <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e) => {this.seleccionarTramo(this.state.form); this.setState({modalEditar: true});
+                  e.preventDefault();
+                }}>{<Translation ns= "global">{(t) => <>{t('Editar')}</>}</Translation>}</button>
+                <span class="input-group-addon"> </span>
+              </Col>
+              <Col xs={4} style={{textAlign: "center"}}>
+                <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=> {
+                  e.preventDefault();
+                  this.peticionSet(urlTrPosDeCrec + (this.state.form.id));
+                }}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
+              </Col>
+            </Row>
+          </div>
           <br />
           <Container>
           <div style={{backgroundColor: '#FFFFFF'}} > 
@@ -980,16 +989,7 @@ render() {
           </Container>
           <Container>
             <Row>
-              <Col xs={7}>
-                <div className="container">
-                  <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
-                </div>
-              </Col>
-              <Col xs={6}>
-                <div className="container">
-                
-                </div>
-              </Col>
+              <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
             </Row>
           </Container>
         </form>

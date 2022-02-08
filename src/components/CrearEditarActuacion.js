@@ -347,21 +347,29 @@ function CrearEditarActuacion({Actuacion, Data}){
                CalzadaValue = 'Única';
            }
     }
-    
 
-    actualizarFormActuacion({
-        ...FormActuacion,
-        [name]: e.value,
-        Calzada: CalzadaValue  
-    });
-
-
-
-    if(name == 'TipoFirmeTramo'){
-        FormActuacion.CapaBaseArcen = ''; FormActuacion.CapaBaseCarril = '';
-        FormActuacion.CapaSubbaseArcen = ''; 
+    if (name == 'TipoFirmeTramo' && FormActuacion.TipoFirmeTramo != '' && e.value != FormActuacion.TipoFirmeTramo) {
+        actualizarFormActuacion({
+            ...FormActuacion,
+            [name]: e.value,
+            Calzada: CalzadaValue,
+            CapaRodaduraCarril: '',
+            CapaRodaduraArcen: '',
+            CapaIntermediaCarril: '',
+            CapaIntermediaArcen: '',
+            CapaBaseCarril: '',
+            CapaBaseArcen: '',
+            CapaSubbaseCarril: '',
+            CapaSubbaseArcen: ''
+        });
+    } else {
+        actualizarFormActuacion({
+            ...FormActuacion,
+            [name]: e.value,
+            Calzada: CalzadaValue  
+        });
     }
-
+    
     console.log("FORM ACTUACIONES: ", FormActuacion);
 
 }
@@ -719,6 +727,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={2} style={{textAlign: "right"}}><label htmlFor="TipoFirme"><Translation ns= "global">{(t) => <>{t('TipoFirme')}</>}</Translation></label></Col>            
                 <Col xs={2}>
                     <Select name="TipoFirmeTramo" 
+                    key='TipoFirmeTramo'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -731,6 +740,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={2} style={{textAlign: "right"}}><label htmlFor="NivelesInfluencia"><Translation ns= "global">{(t) => <>{t('NivelesInfluencia')}</>}</Translation></label></Col>            
                 <Col xs={2}>
                     <Select name="NivelesInfluencia" 
+                    key='NivelesInfluencia'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -759,6 +769,7 @@ function CrearEditarActuacion({Actuacion, Data}){
             <Col xs={2} style={{textAlign: "right"}}><label htmlFor="TipoFirme"><Translation ns= "global">{(t) => <>{t('TipoFirme')}</>}</Translation></label></Col>            
             <Col xs={2}>
                 <Select name="TipoFirmeTramo" 
+                key='TipoFirmeTramo'
                 onChange={handleSelectChange}
                 labelKey='codigo'
                 valueKey='codigo'
@@ -771,6 +782,7 @@ function CrearEditarActuacion({Actuacion, Data}){
             <Col xs={2} style={{textAlign: "right"}}><label htmlFor="NivelesInfluencia"><Translation ns= "global">{(t) => <>{t('NivelesInfluencia')}</>}</Translation></label></Col>            
             <Col xs={2}>
                 <Select name="NivelesInfluencia" 
+                key='NivelesInfluencia'
                 onChange={handleSelectChange}
                 labelKey='codigo'
                 valueKey='codigo'
@@ -815,11 +827,13 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {/*Desplegable Capa Rodadura Carril*/}
                 <Col xs={2}>
                     <Select name="CapaRodaduraCarril" 
+                    key='CapaRodaduraCarril'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCapaRodaduraFilter}
-                    defaultValue={{value:FormActuacion.CapaRodaduraCarril, label: FormActuacion.CapaRodaduraCarril? optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraCarril)[0]?.label: ''}}>               
+                    value={{value:FormActuacion.CapaRodaduraCarril, label: FormActuacion.CapaRodaduraCarril? optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraCarril)[0]?.label: ''}}
+                    defaultValue={{value:FormActuacion.CapaRodaduraCarril, label: FormActuacion.CapaRodaduraCarril? optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraCarril)[0]?.label: ''}}>
                     </Select>
                 <br /></Col>
 
@@ -829,10 +843,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {/*Desplegable Capa Rodadura Arcén*/}
                 <Col xs={2}>
                     <Select name="CapaRodaduraArcen" 
+                    key='CapaRodaduraArcen'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCapaRodaduraFilter}
+                    value={{value:FormActuacion.CapaRodaduraArcen, label: FormActuacion.CapaRodaduraArcen? optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraArcen)[0]?.label: ''}}
                     defaultValue={{value:FormActuacion.CapaRodaduraArcen, label: FormActuacion.CapaRodaduraArcen? optionsCapaRodadura.filter(x=>x.value == FormActuacion.CapaRodaduraArcen)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
@@ -847,10 +863,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {/*Desplegable Capa Intermedia Carril*/}
                 <Col xs={2}>
                     <Select name="CapaIntermediaCarril" 
+                    key='CapaIntermediaCarril'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCapaIntermediaFilter}
+                    value={{value:FormActuacion.CapaIntermediaCarril, label: FormActuacion.CapaIntermediaCarril? optionsCapaIntermedia.filter(x=>x.value == FormActuacion.CapaIntermediaCarril)[0]?.label: ''}}
                     defaultValue={{value:FormActuacion.CapaIntermediaCarril, label: FormActuacion.CapaIntermediaCarril? optionsCapaIntermedia.filter(x=>x.value == FormActuacion.CapaIntermediaCarril)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
@@ -861,10 +879,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {/*Desplegable Capa Intermedia Arcén*/}
                 <Col xs={2}>
                     <Select name="CapaIntermediaArcen" 
+                    key='CapaIntermediaArcen'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCapaIntermediaFilter}
+                    value={{value:FormActuacion.CapaIntermediaArcen, label: FormActuacion.CapaIntermediaArcen? optionsCapaIntermedia.filter(x=>x.value == FormActuacion.CapaIntermediaArcen)[0]?.label: ''}}
                     defaultValue={{value:FormActuacion.CapaIntermediaArcen, label: FormActuacion.CapaIntermediaArcen? optionsCapaIntermedia.filter(x=>x.value == FormActuacion.CapaIntermediaArcen)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
@@ -879,10 +899,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {/*Desplegable Capa Base Carril*/}
                 <Col xs={2}>
                     <Select name="CapaBaseCarril" 
+                    key='CapaBaseCarril'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCapaBaseFilter}
+                    value={{value:FormActuacion.CapaBaseCarril, label: FormActuacion.CapaBaseCarril? optionsCapaBase.filter(x=>x.value == FormActuacion.CapaBaseCarril)[0]?.label: ''}}
                     defaultValue={{value:FormActuacion.CapaBaseCarril, label: FormActuacion.CapaBaseCarril? optionsCapaBase.filter(x=>x.value == FormActuacion.CapaBaseCarril)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
@@ -893,10 +915,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {/*Desplegable Capa Base Arcén*/}
                 <Col xs={2}>
                     <Select name="CapaBaseArcen" 
+                    key='CapaBaseArcen'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCapaBaseFilter}
+                    value={{value:FormActuacion.CapaBaseArcen, label: FormActuacion.CapaBaseArcen? optionsCapaBase.filter(x=>x.value == FormActuacion.CapaBaseArcen)[0]?.label: ''}}
                     defaultValue={{value:FormActuacion.CapaBaseArcen, label: FormActuacion.CapaBaseArcen? optionsCapaBase.filter(x=>x.value == FormActuacion.CapaBaseArcen)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
@@ -911,10 +935,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {/*Desplegable Capa Subbase Carril*/}
                 <Col xs={2}>
                     <Select name="CapaSubbaseCarril" 
+                    key='CapaSubbaseCarril'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCapaSubbaseFilter}
+                    value={{value:FormActuacion.CapaSubbaseCarril, label: FormActuacion.CapaSubbaseCarril? optionsCapaSubbase.filter(x=>x.value == FormActuacion.CapaSubbaseCarril)[0]?.label: ''}}
                     defaultValue={{value:FormActuacion.CapaSubbaseCarril, label: FormActuacion.CapaSubbaseCarril? optionsCapaSubbase.filter(x=>x.value == FormActuacion.CapaSubbaseCarril)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
@@ -925,10 +951,12 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {/*Desplegable Capa Subbase Arcén*/}
                 <Col xs={2}>
                     <Select name="CapaSubbaseArcen" 
+                    key='CapaSubbaseArcen'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
                     options={optionsCapaSubbaseFilter}
+                    value={{value:FormActuacion.CapaSubbaseArcen, label: FormActuacion.CapaSubbaseArcen? optionsCapaSubbase.filter(x=>x.value == FormActuacion.CapaSubbaseArcen)[0]?.label: ''}}
                     defaultValue={{value:FormActuacion.CapaSubbaseArcen, label: FormActuacion.CapaSubbaseArcen? optionsCapaSubbase.filter(x=>x.value == FormActuacion.CapaSubbaseArcen)[0]?.label: ''}}>               
                     </Select>
                 <br /></Col>
@@ -954,6 +982,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={2} style={{textAlign: "right"}}><label htmlFor="TerrenoNatural"><Translation ns= "global">{(t) => <>{t('TerrenoNatural')}</>}</Translation></label></Col>            
                 <Col xs={2}>
                     <Select name="TerrenoNatural" 
+                    key='TerrenoNatural'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -966,6 +995,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={2} style={{textAlign: "right"}}><label htmlFor="CategoriaExplanada"><Translation ns= "global">{(t) => <>{t('CategoriaExplanada')}</>}</Translation></label></Col>            
                 <Col xs={2}>
                     <Select name="CategoriaExplanada" 
+                    key='CategoriaExplanada'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -1009,6 +1039,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={3} style={{textAlign: "right"}}><label htmlFor="Redes"><Translation ns= "global">{(t) => <>{t('ClasifFuncRealRed')}</>}</Translation></label></Col>            
                 <Col xs={3}>
                     <Select name="Redes" 
+                    key='Redes'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -1021,6 +1052,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={3} style={{textAlign: "right"}}><label htmlFor="ClasifTecReal"><Translation ns= "global">{(t) => <>{t('ClasifTecReal')}</>}</Translation></label></Col>            
                 <Col xs={3}>
                     <Select name="ClasifTecReal" 
+                    key='ClasifTecReal'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -1035,6 +1067,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={3} style={{textAlign: "right"}}><label htmlFor="OrgConservacion"><Translation ns= "global">{(t) => <>{t('OrgConservacion')}</>}</Translation></label></Col>            
                 <Col xs={3}>
                     <Select name="OrgConservacion" 
+                    key='OrgConservacion'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -1047,6 +1080,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={3} style={{textAlign: "right"}}><label htmlFor="OrgCompetente"><Translation ns= "global">{(t) => <>{t('OrgCompetente')}</>}</Translation></label></Col>            
                 <Col xs={3}>
                     <Select name="OrgCompetente" 
+                    key='OrgCompetente'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -1061,6 +1095,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={3} style={{textAlign: "right"}}><label htmlFor="RegGestion"><Translation ns= "global">{(t) => <>{t('RegGestion')}</>}</Translation></label></Col>            
                 <Col xs={3}>
                     <Select name="RegGestion" 
+                    key='RegGestion'
                     onChange={handleSelectChange}
                     labelKey='nombre'
                     valueKey='codigo'
@@ -1073,6 +1108,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={3} style={{textAlign: "right"}}><label htmlFor="RegExplot"><Translation ns= "global">{(t) => <>{t('RegExplot')}</>}</Translation></label></Col>            
                 <Col xs={3}>
                     <Select name="RegExplot" 
+                    key='RegExplot'
                     onChange={handleSelectChange}
                     labelKey='nombre'
                     valueKey='codigo'
@@ -1087,6 +1123,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={3} style={{textAlign: "right"}}><label htmlFor="ZonaTermica"><Translation ns= "global">{(t) => <>{t('ZonaTermica')}</>}</Translation></label></Col>            
                 <Col xs={3}>
                     <Select name="ZonaTermica" 
+                    key='ZonaTermica'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -1099,6 +1136,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={3} style={{textAlign: "right"}}><label htmlFor="ZonaPluv"><Translation ns= "global">{(t) => <>{t('ZonaPluv')}</>}</Translation></label></Col>            
                 <Col xs={3}>
                     <Select name="ZonaPluv" 
+                    key='ZonaPluv'
                     onChange={handleSelectChange}
                     labelKey='codigo'
                     valueKey='codigo'
@@ -1129,6 +1167,7 @@ function CrearEditarActuacion({Actuacion, Data}){
              <Col xs={2} style={{textAlign: "right"}}><label htmlFor="TipoActuacion"><Translation ns= "global">{(t) => <>{t('TipoAct')}</>}</Translation></label></Col>
              <Col xs={4}>
                  <Select name="TipoActuacion" 
+                 key='TipoActuacion'
                 onChange={handleSelectChange}
                 labelKey='nombre'
                 valueKey='codigo'   
@@ -1167,6 +1206,7 @@ function CrearEditarActuacion({Actuacion, Data}){
              <Col xs={2} style={{textAlign: "right"}}><label htmlFor="Carretera"><Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation></label></Col>            
              <Col xs={4}>
                 <Select name="Carretera" 
+                    key='Carretera'
                     onChange={handleSelectChange}
                     labelKey='nombre'
                     valueKey='id'
@@ -1301,6 +1341,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {MostrarCampos.ShowTipoCalzada == true ?<Col xs={2} style={{textAlign: "right"}}><label htmlFor="TipoCalz"><Translation ns= "global">{(t) => <>{t('TipoCalzada')}</>}</Translation></label></Col>: null} 
                 {MostrarCampos.ShowTipoCalzada == true ?<Col xs={2}>
                                                             <Select name="TipoCalz" 
+                                                                key='TipoCalz'
                                                                 onChange={handleSelectChange}
                                                                 options={FormActuacion.TipoActuacion == 'D'? optionsTipoCalz.filter(x=>x.value=='Anada/Tornada') : optionsTipoCalz}
                                                                 defaultValue={{value: FormActuacion.TipoCalz}}>                   
@@ -1312,6 +1353,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {MostrarCampos.ShowCarriles == true ?<Col xs={2} style={{textAlign: "right"}}><label htmlFor="Carriles"><Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation></label></Col>: null} 
                 {MostrarCampos.ShowCarriles == true ?<Col xs={1}>
                                                         <Select name="Carril1" 
+                                                            key='Carril1'
                                                             onChange={handleSelectChange}
                                                             options={optionsCarriles}
                                                             defaultValue={{value:FormActuacion.Carril1, label: FormActuacion.Carril1? optionsCarriles.filter(x=>x.value == FormActuacion.Carril1)[0]?.label: ''}}>                  
@@ -1319,6 +1361,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                                                     </Col>: null} 
                 {MostrarCampos.ShowCarriles == true ?<Col xs={1}>
                                                         <Select name="Carril2" 
+                                                            key='Carril2'
                                                             onChange={handleSelectChange}
                                                             options={optionsCarriles}
                                                             defaultValue={{value:FormActuacion.Carril2, label: FormActuacion.Carril2? optionsCarriles.filter(x=>x.value == FormActuacion.Carril2)[0]?.label: ''}}>                 
@@ -1343,6 +1386,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 {MostrarCampos.ShowUtilizada == true ?<Col xs={2} style={{textAlign: "right"}}><label htmlFor="Utilizada"><Translation ns= "global">{(t) => <>{t('Utilizada')}</>}</Translation></label></Col>: null}   
                 {MostrarCampos.ShowUtilizada == true ?<Col xs={2}>
                                                         <Select name="Utilizada" 
+                                                            key='Utilizada'
                                                             onChange={handleSelectChange}
                                                             options={optionsUtilizada}
                                                             defaultValue={{value:FormActuacion.Utilizada, label: FormActuacion.Utilizada? optionsUtilizada.filter(x=>x.value == FormActuacion.Utilizada)[0]?.label: ''}}>                   
