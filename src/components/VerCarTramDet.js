@@ -27,6 +27,8 @@ const urlTrPosCrec = "https://localhost:44301/Tramos/tramopostcrec/";
 const urlTrAntDeCrec = "https://localhost:44301/Tramos/tramoantdecrec/";
 const urlTrPosDeCrec = "https://localhost:44301/Tramos/tramopostdecrec/";
 
+let SentCarril="";
+
 let authToken = sessionStorage.getItem("JWT");
 
 let config = {
@@ -128,7 +130,8 @@ class VerCarTramDet extends Component {
         carSent:'',
         carrOrd:'',
         idGrafo:'',
-        IdCarreteras:''
+        IdCarreteras:'',
+        sentido:''
       } 
   }
 
@@ -250,7 +253,10 @@ peticionSet=(urlTram)=>{
         explCoronacion: response.data.explanadasTramo.coronacion,
         explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
       }
-    });
+      
+    }); 
+    SentCarril=this.state.tableData[0].sentidoCarril;
+    console.log("Primer sentido", this.state.tableData[0].sentidoCarril);
   }).catch(error=>{
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", urlTram);
@@ -382,8 +388,11 @@ peticionGet=()=>{
         explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
         explCoronacion: response.data.explanadasTramo.coronacion,
         explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
+        
       }
-    });
+    });  
+    SentCarril=this.state.tableData[0].sentidoCarril;
+    console.log("Primer sentido", this.state.tableData[0].sentidoCarril);
   }).catch(error=>{
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
@@ -649,8 +658,12 @@ render() {
     label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
     content: (
       <Fragment>
+        {console.log("SENTIDO",SentCarril)},
         { !this.state.setMsgOutBoolKO
           ? <div style={{marginLeft:'30%'}}>
+               { SentCarril === "Decreixent" ? <Translation ns= "global">{(t) => <>{t('SentDecre')}</>}</Translation>
+               : <Translation ns= "global">{(t) => <>{t('SentCre')}</>}</Translation>
+               }
               {"  "}
               <br /><br />
               <BootstrapTable
