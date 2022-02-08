@@ -20,11 +20,14 @@ import Spinner from "./Spinner";
 import Container from 'react-bootstrap/Container'
 import GoogleMapComponent from "./GoogleMapComponent";
 
+let SentCarril="";
+
 var msg = '';
 const url = "https://localhost:44301/Tramos/";
 const url2 = "https://localhost:44301/Tramos/baja";
 const url3 = "https://localhost:44301/Tramos/alta";
 const urlDel = "https://localhost:44301/Carriles";
+const urlDelAus = "https://localhost:44301/api/Auscultaciones/carrilaus";
 
 let authToken = sessionStorage.getItem("JWT");
 
@@ -38,7 +41,6 @@ let config = {
 
 var slice;
 var sliceAct;
-var msgOut = "No se han encontrado registros.";
 
 var today = new Date();
 var dd = String(today. getDate()). padStart(2, '0');
@@ -162,11 +164,9 @@ class EditarTramo extends Component{
 
 //Boton de auscultaciones
 ButtonsAccionesCarr = (cell, row, rowIndex) => {
-  console.log("row: ", row);
-
 return (
   <div>
-    <button className="btn btn-danger btn-sm" onClick={(e)=>{e.preventDefault(); this.seleccionarTramo(row); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+    <button className="btn btn-danger btn-sm" onClick={(e)=>{e.preventDefault(); this.seleccionarCarril(row); this.setState({modalEliminarAusc: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
   </div>              
 
   );
@@ -174,8 +174,6 @@ return (
 
 //Boton de eliminación de Carriles
 ButtonsEliminaCarr = (cell, row, rowIndex) => {
-  console.log("ELIMINAR carriles, row: ", row);
-
 return (
   <div>
     <button className="btn btn-danger btn-sm" onClick={(e)=>{e.preventDefault(); this.seleccionarCarril(row); this.setState({modalEliminarCarril: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
@@ -267,6 +265,13 @@ peticionGet=()=>{
     var dataAct = response.data.actuacionesTramos;
     sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
     console.log("Data actuaciones", dataAct);
+    var dataCarriles = [];
+    slice.forEach((carrile) => {
+      dataCarriles.push({
+        ordenCarrile: carrile.ordenCarril,
+        sentidoCarril: carrile.sentido
+      });
+    });
 
     if (data == null) {
       this.state.setMsgOutBoolKO(true)
@@ -338,6 +343,10 @@ peticionGet=()=>{
       }
       
     });
+    //console.log("CARRILES", this.state.data.carriles);
+    console.log("CARRILES ARRAY", dataCarriles[0]);
+    SentCarril=dataCarriles[0].sentidoCarril;
+    console.log("Primer sentido", SentCarril);
   }).catch(error=>{
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
@@ -437,15 +446,31 @@ peticionDelete=()=>{
 }
  
 
-
-/*Verificar Insertar registro*/
-modalVerificar=()=>{
-  this.setState({modalVerificar: !this.state.modalVerificar});
-}
-
-/*Verificar Editar registro*/
-modalVerificarEd=()=>{
-  this.setState({modalVerificarEd: !this.state.modalVerificarEd});
+/*Eliminar Auscultación*/
+peticionDeleteAus=()=>{
+  console.log("Carril a eliminar: ", this.state.form.IdCarril);
+  console.log("URL Delete: ", urlDel);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  axios.delete(urlDelAus+"/"+this.state.form.IdCarril,config).then(response=>{
+    console.log("eliminar");
+    this.setState({modalEliminarAusc: false});
+    msg= <Translation ns= "global">{(t) => <>{t('DELCARRILOK')}</>}</Translation>;   
+    this.peticionGet();
+  }).catch(error=>{
+    console.log("KO Delete");
+    console.log(urlDel);
+    console.log(this.state.form.IdCarril);
+    console.log(error);    
+    msg= <Translation ns= "global">{(t) => <>{t('DELCARRILKO')}</>}</Translation>; 
+    this.setState({modalEliminarAusc: false});
+    this.peticionGet();
+})   
 }
 
 /*Editar registro*/
@@ -453,7 +478,15 @@ modalEditar=()=>{
   this.setState({modalEditar: !this.state.modalEditar});
 }
 
+/*Eliminar Auscultaciones*/
+modalEliminarAusc=()=>{
+  this.setState({modalEliminarAusc: !this.state.modalEliminarAusc});
+}
 
+/*Eliminar Auscultaciones*/
+modalEliminarCarril=()=>{
+  this.setState({modalEliminarCarril: !this.state.modalEliminarCarril});
+}
 
 //Selecciona una row
 seleccionarTramo=(CarTram)=>{
@@ -483,10 +516,25 @@ seleccionarCarril=(carril)=>{
       IdCarril: carril.id
     }
   })
-
   console.log("Id seleccionado: ", carril.id);
 
 }  
+
+
+
+  // Añadir carril rápido (Orden Carril 2) o carril lento (1)
+  AddLane=(sent, ordCarril)=>{
+    this.state.tableData.push({
+      ordenCarril: ordCarril,
+      sentido: sent,
+      idTramos: this.state.id
+    });
+    console.log("Tabledata After", this.state.tableData);
+    console.log("Tabledata Lenght After", this.state.tableData.length);
+  }
+
+
+
     //Devolvemos las Tabs con datos
     render(){
         
@@ -688,8 +736,20 @@ seleccionarCarril=(carril)=>{
               </MDBTableHead>
             <MDBTableBody>
               <tr>        
-                <td>{this.state.form.explTrTerNat}</td>
-                <td>{this.state.form.explTrTerNatCbr}</td>
+                <td>
+                  <input
+                    type="text"
+                    name="explTrTerNat"
+                    value={this.state.form.explTrTerNat}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    name="explTrTerNatCbr"
+                    value={this.state.form.explTrTerNatCbr}
+                  />
+                </td>
               </tr>
             {"  "}
             <br /><br />
@@ -714,13 +774,37 @@ seleccionarCarril=(carril)=>{
               <MDBTableBody>
                 <tr>
                   <th scope='row'><Translation ns= "global">{(t) => <>{t('relleno')}</>}</Translation></th>
-                  <td>{this.state.form.explRelleno}</td>
-                  <td>{this.state.form.explRellenoCbr}</td>
+                  <th> 
+                    <input
+                      type="text"
+                      name="explRelleno"
+                      value={this.state.form.explRelleno}
+                    />
+                 </th>
+                  <td>
+                    <input
+                      type="text"
+                      name="explRellenoCbr"
+                      value={this.state.form.explRellenoCbr}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <th scope='row'><Translation ns= "global">{(t) => <>{t('coronacion')}</>}</Translation></th>
-                  <td>{this.state.form.explCoronacion}</td>
-                  <td>{this.state.form.explCoronacionCbr}</td>
+                  <td>
+                    <input
+                      type="text"
+                      name="explCoronacion"
+                      value={this.state.form.explCoronacion}
+                    />                   
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="explCoronacionCbr"
+                      value={this.state.form.explCoronacionCbr}
+                    />                              
+                  </td>
                 </tr>
               </MDBTableBody>
             </MDBTable> 
@@ -734,6 +818,9 @@ seleccionarCarril=(carril)=>{
         label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
         content: (
           <div style={{marginLeft:'0%'}}>
+              { SentCarril === "Decreixent" ? <Translation ns= "global">{(t) => <>{t('SentDecre')}</>}</Translation>
+               : <Translation ns= "global">{(t) => <>{t('SentCre')}</>}</Translation>
+               }
             {"  "}
             <br /><br />
             <Row>
@@ -752,9 +839,9 @@ seleccionarCarril=(carril)=>{
               </BootstrapTable>
             </Col>
             <Col xs={1} style={{textAlign: "left", width: '250px'}}>
-              <button className="btn btn-primary btn-sm" style={{width: '200px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('AddLaneFast')}</>}</Translation>}</button>
+              <button className="btn btn-primary btn-sm" style={{width: '200px'}} onClick={(e)=>{e.preventDefault(); this.AddLane(SentCarril, 2)}}>{<Translation ns= "global">{(t) => <>{t('AddLaneFast')}</>}</Translation>}</button>
                 {"  "}
-              <button className="btn btn-primary btn-sm" style={{width: '200px'}} onClick={()=>{}}>{<Translation ns= "global">{(t) => <>{t('AddLaneSlow')}</>}</Translation>}</button>
+              <button className="btn btn-primary btn-sm" style={{width: '200px'}} onClick={(e)=>{e.preventDefault(); this.AddLane(SentCarril, 1)}}>{<Translation ns= "global">{(t) => <>{t('AddLaneSlow')}</>}</Translation>}</button>
             </Col>
           </Row>
         </div>
@@ -994,13 +1081,24 @@ seleccionarCarril=(carril)=>{
               </Row>
             </Container>
           </form>
+
           <Modal isOpen={this.state.modalEliminarCarril}>
 				      <ModalBody>
               <Translation ns= "global">{(t) => <>{t('eliReg')}</>}</Translation>			        
 				      </ModalBody>
 				      <ModalFooter>
-				        <button className="btn btn-danger" onClick={()=>this.peticionDelete(this.state.url)}>Sí</button>
+				        <button className="btn btn-danger" onClick={()=>this.peticionDelete()}>Sí</button>
 				        <button className="btn btn-primary" onClick={()=>this.setState({modalEliminarCarril: false})}>No</button>
+				      </ModalFooter>
+			      </Modal>
+
+            <Modal isOpen={this.state.modalEliminarAusc}>
+				      <ModalBody>
+              <Translation ns= "global">{(t) => <>{t('eliReg')}</>}</Translation>			        
+				      </ModalBody>
+				      <ModalFooter>
+				        <button className="btn btn-danger" onClick={()=>this.peticionDeleteAus()}>Sí</button>
+				        <button className="btn btn-primary" onClick={()=>this.setState({modalEliminarAusc: false})}>No</button>
 				      </ModalFooter>
 			      </Modal>
         </div>
