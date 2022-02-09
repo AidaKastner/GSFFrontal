@@ -11,6 +11,7 @@ function CargarExcel(){
   
   const { t, i18n } = useTranslation();
   const url = "https://localhost:44301/api/cargaractuaciones";
+  const urlStatistics = "https://localhost:44301/api/CargarActuaciones/statistics";
 
   const config = {
     headers: {
@@ -24,6 +25,8 @@ function CargarExcel(){
   const [msgOutErr1, guardarMsgOutErr1] = useState([]);
   const [msgOutBoolOK, setMsgOutBoolOK] = useState(false);
   const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
+  const [showProgressBar, setShowProgressBar] = useState(false);
+  const [progressBarValue, setProgressBarValue] = useState(0);
 
   const [items, setItems] = useState([]);
  
@@ -32,16 +35,23 @@ function CargarExcel(){
     setArchivo(e);
   }
 
+  const getStatistics = () => {
+    axios.get(urlStatistics).then(response => {
+      setProgressBarValue(response.data.finishedCount / response.data.totalCount * 100);
+    });
+  }
+
   const insertarArchivos=async()=>{
+    setShowProgressBar(!showProgressBar);
     const f = new FormData();
     console.log(archivo);
     f.append('Fichero',archivo);
     console.log(f);
-    
+   
+    const myInterval = setInterval(getStatistics, 1000);
    
     await axios.post(url, f, config)
     .then(response =>{
-
       //Se inicializan mensajes salida
       guardarMsgOut("");
       guardarMsgOutErr(""); 
@@ -143,9 +153,10 @@ function CargarExcel(){
         var msgKO = <Translation ns= "global">{(t) => <>{t('FilasNoCargadasAct', { NFilasKO: FilasConError })}</>}</Translation>
         guardarMsgOutErr(msgKO);
       }
-
+      setShowProgressBar(showProgressBar);
+      clearInterval(myInterval);
+      setProgressBarValue(0);
     }).catch(error=>{
-
       //Se inicializan mensajes salida
       guardarMsgOut("");
       guardarMsgOutErr(""); 
@@ -170,6 +181,9 @@ function CargarExcel(){
       }
       
       guardarMsgOutErr(msg); 
+      setShowProgressBar(showProgressBar);
+      clearInterval(myInterval);
+      setProgressBarValue(0);
     })        
   }
 
@@ -232,7 +246,14 @@ function CargarExcel(){
       <br/>
         <h1><Translation ns= "global">{(t) => <>{t('ImpActs')}</>}</Translation></h1>    
           <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
-          <br /><br/>
+          {
+            showProgressBar
+              ? <div className="progress" style={{marginTop: '1rem', height: '1.5rem', fontSize: '1.1rem'}}>
+                  <div className="progress-bar bg-danger progress-bar-striped progress-bar-animated" role={"progressbar"} style={{width: `${progressBarValue}%`}} aria-valuenow={progressBarValue} aria-valuemin="0" aria-valuemax="100">{progressBarValue}%</div>
+                </div>
+              : ""
+          }
+          <br />
           {/*<button className="btn btn-primario btn-sm" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>*/}
           <button className="btn btn-primario btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
           <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button> 
