@@ -39,6 +39,7 @@ let config = {
   }
 }
 
+var msgOut = "No se han encontrado registros.";
 var slice;
 var sliceAct;
 
@@ -347,7 +348,6 @@ peticionGet=()=>{
       }
       
     });
-    //console.log("CARRILES", this.state.data.carriles);
     console.log("CARRILES ARRAY", dataCarriles[0]);
     SentCarril = dataCarriles[0] == undefined ? '' : dataCarriles[0].sentidoCarril;
     console.log("Primer sentido", SentCarril);
@@ -824,17 +824,26 @@ seleccionarCarril=(carril)=>{
       {
         label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
         content: (
-            <div style={{marginLeft:'0%'}}>
+          <Fragment>
+          {
+          !this.state.setMsgOutBoolKO
+          ? <div style={{marginLeft:'0%'}}>
               {
                 SentCarril === ""
                   ? ''
                   : SentCarril === "Decreixent"
                       ? <Translation ns= "global">{(t) => <>{t('SentDecre')}</>}</Translation>
                       : <Translation ns= "global">{(t) => <>{t('SentCre')}</>}</Translation>
+                    }
+                    </div>
+                  : ''
               }
+ 
             {"  "}
             <br /><br />
             <Row>
+            { !this.state.setMsgOutBoolKO
+              ? 
             <Col xs={7} style={{textAlign: "left"}}>
               <BootstrapTable 
                 bootstrap4 
@@ -849,13 +858,20 @@ seleccionarCarril=(carril)=>{
               >
               </BootstrapTable>
             </Col>
-            <Col xs={1} style={{textAlign: "left", width: '250px'}}>
-              <button className="btn btn-primary btn-sm" style={{width: '200px'}} onClick={(e)=>{e.preventDefault(); this.AddLane(SentCarril, 2)}}>{<Translation ns= "global">{(t) => <>{t('AddLaneFast')}</>}</Translation>}</button>
-                {"  "}
-              <button className="btn btn-primary btn-sm" style={{width: '200px'}} onClick={(e)=>{e.preventDefault(); this.AddLane(SentCarril, 1)}}>{<Translation ns= "global">{(t) => <>{t('AddLaneSlow')}</>}</Translation>}</button>
+  
+            : <div class="alert alert-danger">
+                {msgOut}
+              </div>
+                  
+          }    
+            <Col xs={1} style={{textAlign: "right", width: '250px', marginTop:'5%'}}>
+                  <button className="btn btn-primary btn-sm" style={{width: '200px'}} onClick={(e)=>{e.preventDefault(); this.AddLane(SentCarril, 2)}}>{<Translation ns= "global">{(t) => <>{t('AddLaneFast')}</>}</Translation>}</button>
+                    {"  "}
+                  <button className="btn btn-primary btn-sm" style={{width: '200px'}} onClick={(e)=>{e.preventDefault(); this.AddLane(SentCarril, 1)}}>{<Translation ns= "global">{(t) => <>{t('AddLaneSlow')}</>}</Translation>}</button>
             </Col>
           </Row>
-        </div>
+
+      </Fragment>
         ),
         disabled: false
       }
