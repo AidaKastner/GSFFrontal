@@ -39,7 +39,7 @@ let config = {
   }
 }
 
-var msgOut = "No se han encontrado registros.";
+var msgOut = <Translation ns= "global">{(t) => <>{t('NoReg')}</>}</Translation>;
 var slice;
 var sliceAct;
 
