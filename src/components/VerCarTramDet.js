@@ -42,7 +42,7 @@ let config = {
 
 var slice;
 var sliceAct;
-var msgOut = "No se han encontrado registros.";
+var msgOut = <Translation ns= "global">{(t) => <>{t('NoReg')}</>}</Translation>;
 
 var today = new Date();
 var dd = String(today. getDate()). padStart(2, '0');
@@ -132,7 +132,8 @@ class VerCarTramDet extends Component {
         carrOrd:'',
         idGrafo:'',
         IdCarreteras:'',
-        sentido:''
+        sentido:'',
+        numCarriles:''
       } 
   }
 
@@ -262,7 +263,8 @@ peticionSet=(urlTram)=>{
         explRelleno: response.data.explanadasTramo.relleno,
         explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
         explCoronacion: response.data.explanadasTramo.coronacion,
-        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
+        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr,
+        numCarriles: dataCarriles.length
       }
       
     }); 
@@ -401,8 +403,8 @@ peticionGet=()=>{
         explRelleno: response.data.explanadasTramo.relleno,
         explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
         explCoronacion: response.data.explanadasTramo.coronacion,
-        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
-        
+        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr,
+        numCarriles: dataCarriles.length       
       }
     });
     SentCarril = this.state.tableData[0] == undefined ? '' : this.state.tableData[0].sentidoCarril;
@@ -840,7 +842,6 @@ render() {
                     name="carretera"
                     className="col m3 s12"
                     placeholder= {this.state.form.nombre}
-                    //onChange={actualizarState}
                     value={this.state.form.nombre}
                   />
               </Col>               
@@ -850,7 +851,6 @@ render() {
                     type="text"
                     name="fechaalta"
                     className="u-full-width"                  
-                    //onChange={actualizarState}
                     value={this.state.form.fechaAlta}
                   />
               </Col>
@@ -861,7 +861,6 @@ render() {
                     name="pkIni"
                     className="u-full-width"
                     placeholder={this.state.form.pkIni}
-                    //onChange={actualizarState}
                     value={this.state.form.pkIni}
                   />     
               </Col>               
@@ -872,7 +871,6 @@ render() {
                     name="pkFin"
                     className="u-full-width"
                     placeholder={this.state.form.pkFin}
-                    //onChange={actualizarState}
                     value={this.state.form.pkFin}
                   />     
               </Col>
@@ -885,7 +883,6 @@ render() {
                     name="codigo"
                     className="u-full-width"
                     placeholder= {this.state.orgtableData.codigo}
-                    //onChange={actualizarState}
                     value={this.state.form.codigo}
                   />
               </Col>
@@ -896,7 +893,6 @@ render() {
                     name="fechabaja"
                     className="u-full-width"
                     placeholder={this.state.estadoTram}
-                    //onChange={actualizarState}
                     value={this.state.estadoTram}
                   />
               </Col>
@@ -907,7 +903,6 @@ render() {
                     name="mIni"
                     className="u-full-width"
                     placeholder={this.state.form.mIni}
-                    //onChange={actualizarState}
                     value={this.state.form.mIni}
                   />
               </Col>
@@ -918,7 +913,6 @@ render() {
                     name="mFin"
                     className="u-full-width"
                     placeholder={this.state.form.mFin}
-                    //onChange={actualizarState}
                     value={this.state.form.mFin}
                   />
               </Col>
@@ -931,7 +925,6 @@ render() {
                     name="comentario"
                     className="u-full-width"
                     placeholder= {this.state.form.comentario}
-                    //onChange={actualizarState}
                     value={this.state.form.comentario}
                   />
               </Col>
@@ -942,7 +935,6 @@ render() {
                     name="idDdTiposCalzada"
                     className="u-full-width"
                     placeholder={this.state.form.idDdTiposCalzada}
-                    //onChange={actualizarState}
                     value={this.state.form.idDdTiposCalzada}
                   />
               </Col>
@@ -953,7 +945,6 @@ render() {
                     name="descIni"
                     className="u-full-width"
                     placeholder={this.state.form.descIni}
-                    //onChange={actualizarState}
                     value={this.state.form.descIni}
                   />
               </Col>
@@ -964,7 +955,6 @@ render() {
                     name="descFin"
                     className="u-full-width"
                     placeholder={this.state.form.descFin}
-                    //onChange={actualizarState}
                     value={this.state.form.descFin}
                   />
               </Col>
@@ -977,8 +967,17 @@ render() {
                     name="longitud"
                     className="u-full-width"
                     placeholder={this.state.form.longitud}
-                    //onChange={actualizarState}
                     value={this.state.form.longitud}
+                  />
+              </Col>
+              <Col xs={3} style={{textAlign: "left"}}>
+                <label><Translation ns= "global">{(t) => <>{t('NumCarrils')}</>}</Translation></label>
+                  <input
+                    type="text"
+                    name="NumCarr"
+                    className="u-full-width"
+                    readOnly = {true}
+                    value={this.state.form.numCarriles}
                   />
               </Col>
               <Col xs={3} style={{textAlign: "left"}}>
@@ -989,7 +988,6 @@ render() {
                     className="u-full-width"
                     readOnly = {true}
                     //placeholder={this.state.form.descFin}
-                    //onChange={actualizarState}
                     //value={this.state.form.descFin}
                   />
               </Col>
@@ -1001,7 +999,6 @@ render() {
                     className="u-full-width"
                     readOnly = {true}
                     //placeholder={this.state.form.descFin}
-                    //onChange={actualizarState}
                     //value={this.state.form.descFin}
                   />
               </Col>
