@@ -173,25 +173,29 @@ peticionSet=(urlTram)=>{
 
   axios.get(urlTram, config).then(response=>{
     console.log("TRAMO Data", response.data);
-    var data = response.data.carriles;
-    slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
     var dataCarriles = [];
-    slice.forEach((carrile) => {
-      dataCarriles.push({
-        ordenCarrile: carrile.ordenCarril,
-        sentidoCarril: carrile.sentido
+    var data = response.data.carriles;
+    if (data != null) {
+      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+      slice.forEach((carrile) => {
+        dataCarriles.push({
+          ordenCarrile: carrile.ordenCarril,
+          sentidoCarril: carrile.sentido
+        });
       });
-    });
+    }
     var dataAct = response.data.actuacionesTramos;
-    sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+    if (dataAct != null) {
+      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+    }
     console.log("Data actuaciones", dataAct);
 
     if (data == null) {
-      this.state.setMsgOutBoolKO(true)
+      this.setState({ setMsgOutBoolKO: true });
     };
 
     if (dataAct == null) {
-      this.state.setMsgOutActKO(true)
+      this.setState({ setMsgOutActKO: true });
     };
 
     this.setState({
@@ -256,8 +260,7 @@ peticionSet=(urlTram)=>{
       }
       
     }); 
-    SentCarril=this.state.tableData[0].sentidoCarril;
-    console.log("Primer sentido", this.state.tableData[0].sentidoCarril);
+    SentCarril = this.state.tableData[0] == undefined ? '' : this.state.tableData[0].sentidoCarril;
   }).catch(error=>{
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", urlTram);
@@ -309,25 +312,29 @@ peticionGet=()=>{
   
   axios.get(this.state.idTramSel, config).then(response=>{
     console.log("Data", response.data);
-    var data = response.data.carriles;
-    slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
     var dataCarriles = [];
-    slice.forEach((carrile) => {
-      dataCarriles.push({
-        ordenCarrile: carrile.ordenCarril,
-        sentidoCarril: carrile.sentido
+    var data = response.data.carriles;
+    if (data != null) {
+      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+      slice.forEach((carrile) => {
+        dataCarriles.push({
+          ordenCarrile: carrile.ordenCarril,
+          sentidoCarril: carrile.sentido
+        });
       });
-    });
+    }
     var dataAct = response.data.actuacionesTramos;
-    sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+    if (dataAct != null) {
+      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+    }
     console.log("Data actuaciones", dataAct);
 
     if (data == null) {
-      this.state.setMsgOutBoolKO(true)
+      this.setState({ setMsgOutBoolKO: true });
     };
 
     if (dataAct == null) {
-      this.state.setMsgOutActKO(true)
+      this.setState({ setMsgOutActKO: true });
     };
 
     this.setState({
@@ -391,9 +398,8 @@ peticionGet=()=>{
         explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
         
       }
-    });  
-    SentCarril=this.state.tableData[0].sentidoCarril;
-    console.log("Primer sentido", this.state.tableData[0].sentidoCarril);
+    });
+    SentCarril = this.state.tableData[0] == undefined ? '' : this.state.tableData[0].sentidoCarril;
   }).catch(error=>{
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
@@ -659,15 +665,24 @@ render() {
     label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
     content: (
       <Fragment>
-        {console.log("SENTIDO",SentCarril)},
+        {console.log("SENTIDO",SentCarril)}
+        {
+          !this.state.setMsgOutBoolKO
+            ? <div style={{textAlign: 'center'}}>
+                {
+                  SentCarril === ""
+                    ? ''
+                    : SentCarril === "Decreixent"
+                      ? <Translation ns= "global">{(t) => <>{t('SentDecre')}</>}</Translation>
+                      : <Translation ns= "global">{(t) => <>{t('SentCre')}</>}</Translation>
+                }
+              </div>
+            : ''
+        }
         { !this.state.setMsgOutBoolKO
-
-          ? <div style={{marginLeft:'30%'}}>
-               { SentCarril === "Decreixent" ? <Translation ns= "global">{(t) => <>{t('SentDecre')}</>}</Translation>
-               : <Translation ns= "global">{(t) => <>{t('SentCre')}</>}</Translation>
-               }
+          ? <div>
               {"  "}
-              <br /><br />
+              <br />
               <BootstrapTable
                 id='tableCarriles'
                 bootstrap4 

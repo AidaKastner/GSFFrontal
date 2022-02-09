@@ -137,8 +137,8 @@ class EditarTramo extends Component{
 
   this.columns = [
     {dataField: 'remove', formatter: this.ButtonsEliminaCarr},
-    {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
-    {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true},
+    {dataField: 'ordenCarrile', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
+    {dataField: 'sentidoCarril', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true},
     {dataField: 'auscul', text:<Translation ns= "global">{(t) => <>{t('auscul')}</>}</Translation>, formatter: this.ButtonsAccionesCarr}
    ]
 
@@ -260,30 +260,34 @@ peticionGet=()=>{
   
   axios.get(this.state.idTramSel, config).then(response=>{
     console.log("Data Edición", response.data);
-    var data = response.data.carriles;
-    slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-    var dataAct = response.data.actuacionesTramos;
-    sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
-    console.log("Data actuaciones", dataAct);
     var dataCarriles = [];
-    slice.forEach((carrile) => {
-      dataCarriles.push({
-        ordenCarrile: carrile.ordenCarril,
-        sentidoCarril: carrile.sentido
+    var data = response.data.carriles;
+    if (data != null) {
+      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+      slice.forEach((carrile) => {
+        dataCarriles.push({
+          ordenCarrile: carrile.ordenCarril,
+          sentidoCarril: carrile.sentido
+        });
       });
-    });
+    }
+    var dataAct = response.data.actuacionesTramos;
+    if (dataAct != null) {
+      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+    }
+    console.log("Data actuaciones", dataAct);
 
     if (data == null) {
-      this.state.setMsgOutBoolKO(true)
+      this.setState({ setMsgOutBoolKO: true });
     };
 
     if (dataAct == null) {
-      this.state.setMsgOutActKO(true)
+      this.setState({ setMsgOutActKO: true });
     };
 
     this.setState({
       orgtableData: response.data,
-      tableData: slice,
+      tableData: dataCarriles,
       tableAforos: slice,
       tableAct: sliceAct,
       content: response,
@@ -345,7 +349,7 @@ peticionGet=()=>{
     });
     //console.log("CARRILES", this.state.data.carriles);
     console.log("CARRILES ARRAY", dataCarriles[0]);
-    SentCarril=dataCarriles[0].sentidoCarril;
+    SentCarril = dataCarriles[0] == undefined ? '' : dataCarriles[0].sentidoCarril;
     console.log("Primer sentido", SentCarril);
   }).catch(error=>{
     console.log("KO");
@@ -525,12 +529,15 @@ seleccionarCarril=(carril)=>{
   // Añadir carril rápido (Orden Carril 2) o carril lento (1)
   AddLane=(sent, ordCarril)=>{
     this.state.tableData.push({
-      ordenCarril: ordCarril,
-      sentido: sent,
+      ordenCarrile: ordCarril,
+      sentidoCarril: sent,
       idTramos: this.state.id
     });
     console.log("Tabledata After", this.state.tableData);
     console.log("Tabledata Lenght After", this.state.tableData.length);
+    this.setState({
+      tableData: this.state.tableData
+    });
   }
 
 
@@ -817,10 +824,14 @@ seleccionarCarril=(carril)=>{
       {
         label: <Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation>,
         content: (
-          <div style={{marginLeft:'0%'}}>
-              { SentCarril === "Decreixent" ? <Translation ns= "global">{(t) => <>{t('SentDecre')}</>}</Translation>
-               : <Translation ns= "global">{(t) => <>{t('SentCre')}</>}</Translation>
-               }
+            <div style={{marginLeft:'0%'}}>
+              {
+                SentCarril === ""
+                  ? ''
+                  : SentCarril === "Decreixent"
+                      ? <Translation ns= "global">{(t) => <>{t('SentDecre')}</>}</Translation>
+                      : <Translation ns= "global">{(t) => <>{t('SentCre')}</>}</Translation>
+              }
             {"  "}
             <br /><br />
             <Row>
