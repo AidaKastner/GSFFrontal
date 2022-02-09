@@ -163,6 +163,12 @@ class VerCarTramDet extends Component {
 // Llamada para cargar desde la API los tramos elegidos en los botones
 peticionSet=(urlTram)=>{
   console.log("Tramo escogido: ",urlTram);
+  
+  this.setState({
+    setMsgOutBoolKO: false,
+    setMsgOutActKO: false
+  });
+
   config = {
     headers: {
         'Authorization': sessionStorage.getItem("JWT"),
