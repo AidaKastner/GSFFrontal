@@ -74,6 +74,7 @@ class Sidebar extends React.Component {
                   </Fragment>
                 : ''
             }
+            <div className='mail-logged-in'>{sessionStorage.getItem("mail")}</div>
             <Idioma />
           </div>
           <SidebarNav sidebar={this.state.sidebar}>

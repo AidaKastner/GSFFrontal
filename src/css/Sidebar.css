@@ -1,30 +1,30 @@
 .Nav{
-    background: #3f3f3f;
-    height: 80px;
-    display: flex;
-    align-items: center;
+  background: #3f3f3f;
+  height: 80px;
+  display: flex;
+  align-items: center;
 }
 
 .Navicon{
-    margin-left: 2rem;
-    font-size: 2rem;
-    height: 80px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  margin-left: 2rem;
+  font-size: 2rem;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .SidebarWrap{
-    background: #3f3f3f;
-    width: 100%;
-    justify-content: flex-start;
+  background: #3f3f3f;
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .SidebarWrap a:hover{
-    background: #9a9ca5;
-    border-left: 4px solid #a11510;
-    cursor: pointer;
-    color: #a11510;
+  background: #9a9ca5;
+  border-left: 4px solid #a11510;
+  cursor: pointer;
+  color: #a11510;
 }
 
 .SidebarLink { 
@@ -41,8 +41,18 @@
 }
 
 .SidebarLink a:hover{
-    background: #9a9ca5;
-    border-left: 4px solid #a11510;
-    cursor: pointer;
-    color: #a11510;
+  background: #9a9ca5;
+  border-left: 4px solid #a11510;
+  cursor: pointer;
+  color: #a11510;
+}
+
+.mail-logged-in {
+  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 0.3rem;
+  margin-right: 2rem;
+  color: #a11510;
 }
