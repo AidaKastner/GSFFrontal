@@ -133,33 +133,33 @@ class EditarTramo extends Component{
         idGrafo:'',
         IdCarreteras:'',
         IdCarril:''
-      } 
-  }
+      }
+    }
 
-  this.columns = [
-    {dataField: 'remove', formatter: this.ButtonsEliminaCarr},
-    {dataField: 'ordenCarrile', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
-    {dataField: 'sentidoCarril', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true},
-    {dataField: 'auscul', text:<Translation ns= "global">{(t) => <>{t('auscul')}</>}</Translation>, formatter: this.ButtonsAccionesCarr}
-   ]
+    this.columns = [
+      {dataField: 'remove', formatter: this.ButtonsEliminaCarr},
+      {dataField: 'ordenCarrile', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
+      {dataField: 'sentidoCarril', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true},
+      {dataField: 'auscul', text:<Translation ns= "global">{(t) => <>{t('auscul')}</>}</Translation>, formatter: this.ButtonsAccionesCarr}
+    ]
 
-   this.columns2 = [
-    {dataField: 'campanya', text:<Translation ns= "global">{(t) => <>{t('campanya')}</>}</Translation>, sort: true},
-    {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
-    {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true},
-    {dataField: 'imd', text:<Translation ns= "global">{(t) => <>{t('imd')}</>}</Translation>, sort: true},
-    {dataField: 'porcPesados', text:<Translation ns= "global">{(t) => <>{t('porc_pesados')}</>}</Translation>, sort: true},
-    {dataField: 'modelosEvolCrtCarril.imdPesados', text:<Translation ns= "global">{(t) => <>{t('imdp')}</>}</Translation>, sort: true},
-    {dataField: 'idDdCategoriasTrafico', text:<Translation ns= "global">{(t) => <>{t('CatTraf')}</>}</Translation>, sort: true}
-  ]
+    this.columns2 = [
+      {dataField: 'campanya', text:<Translation ns= "global">{(t) => <>{t('campanya')}</>}</Translation>, sort: true},
+      {dataField: 'ordenCarril', text:<Translation ns= "global">{(t) => <>{t('orden')}</>}</Translation>, sort: true},
+      {dataField: 'sentido', text: <Translation ns= "global">{(t) => <>{t('sentido')}</>}</Translation>, sort: true},
+      {dataField: 'imd', text:<Translation ns= "global">{(t) => <>{t('imd')}</>}</Translation>, sort: true},
+      {dataField: 'porcPesados', text:<Translation ns= "global">{(t) => <>{t('porc_pesados')}</>}</Translation>, sort: true},
+      {dataField: 'modelosEvolCrtCarril.imdPesados', text:<Translation ns= "global">{(t) => <>{t('imdp')}</>}</Translation>, sort: true},
+      {dataField: 'idDdCategoriasTrafico', text:<Translation ns= "global">{(t) => <>{t('CatTraf')}</>}</Translation>, sort: true}
+    ]
    
-  this.columns3 = [
-    {dataField: 'actuacione.claveObra', text:<Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, sort: true},
-    {dataField: 'actuacione.idDdTipoActuaciones', text:<Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation>, sort: true},
-    {dataField: 'actuacione.fecha', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, sort: true},
-    {dataField: 'actuacione.sentido', text:<Translation ns= "global">{(t) => <>{t('Sentido')}</>}</Translation>, sort: true}
-  ]
-  
+    this.columns3 = [
+      {dataField: 'actuacione.claveObra', text:<Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, sort: true},
+      {dataField: 'actuacione.idDdTipoActuaciones', text:<Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation>, sort: true},
+      {dataField: 'actuacione.fecha', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, sort: true},
+      {dataField: 'actuacione.sentido', text:<Translation ns= "global">{(t) => <>{t('Sentido')}</>}</Translation>, sort: true}
+    ]
+
   }
 
 
@@ -237,7 +237,7 @@ controlErrAlta=(controlErrorTramo)=>{
   
   componentDidMount(){
     this.peticionGet();
-    
+
   }
 
   // Cambia el índice de la Tab
@@ -536,6 +536,7 @@ seleccionarCarril=(carril)=>{
     console.log("Tabledata After", this.state.tableData);
     console.log("Tabledata Lenght After", this.state.tableData.length);
     this.setState({
+      setMsgOutBoolKO: false,
       tableData: this.state.tableData
     });
   }
