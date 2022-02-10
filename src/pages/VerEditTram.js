@@ -33,11 +33,12 @@ function VerEditTram(props){
             prevLocation={props.location.state != null ? props.location.state.prevLocation : routerHistory.location.pathname} />
           <Sidebar routerHistory={routerHistory}
             showSidebar={props.location.state != null ? props.location.state.showSidebar : null}
-            prevLocation={props.location.state != null ? props.location.state.prevLocation : null} />
+            prevLocation={props.location.state != null ? props.location.state.prevLocation : null}
+            t={t} />
         </div>
         <div style={{marginLeft:'15%'}}>         
-          <div style={{marginRight:'10%', marginTop: '5%'}}> 
-            <h1>{ t('VerDicTram') }</h1>                            
+          <div style={{marginRight:'10%', marginTop: '1%'}}> 
+            <h1 style={{textAlign: 'left', marginLeft: '1%'}}>{ t('VerDicTram') }</h1>                            
               <VerEditTrams />
             </div>          
         </div>

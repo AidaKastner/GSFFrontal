@@ -6,6 +6,7 @@ import CargarActuaciones from '../pages/CargarActuaciones';
 import VerEditTram from '../pages/VerEditTram';
 import VerImpAfor from '../pages/VerImpAfor';
 import VerEditCarTram from '../pages/VerEditCarTram';
+import GestioAuscultacio from '../pages/GestioAuscultacio';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/cargaractuaciones" component={CargarActuaciones}/>
         <Route exact path="/VerEditTram" component={VerEditTram}/>
         <Route exact path="/VerImpAfor" component={VerImpAfor}/>
+        <Route exact path='/GestioAuscultacio' component={GestioAuscultacio} />
       </Switch>
     </BrowserRouter>
 

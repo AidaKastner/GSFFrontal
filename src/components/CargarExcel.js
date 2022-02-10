@@ -9,7 +9,7 @@ import { Translation } from 'react-i18next';
 
 function CargarExcel(){
   
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(['global']);
   const url = "https://localhost:44301/api/cargaractuaciones";
   const urlStatistics = "https://localhost:44301/api/CargarActuaciones/statistics";
 

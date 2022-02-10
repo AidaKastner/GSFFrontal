@@ -64,7 +64,7 @@ const Idioma = () => {
         setLanguageSel(languageSel);
     }
 
-    const { i18n } = useTranslation();
+    const { i18n } = useTranslation(['global']);
 
     if (idimoSel !== undefined && idimoSel !== '1' && languageSel === 'CAT') {
         setLangauge(idimoSel);

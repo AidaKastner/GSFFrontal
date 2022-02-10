@@ -46,7 +46,7 @@ export const SidebarData = [
     {
         title: <Translation ns= "global">{(t) => <>{t('gestAusc')}</>}</Translation>, 
         icon: <CarRepairIcon sx = {{fontSize: 30}}/>,
-        path: '/menu'
+        path: '/GestioAuscultacio'
     },
     {
         title: <Translation ns= "global">{(t) => <>{t('comsDat')}</>}</Translation>, 

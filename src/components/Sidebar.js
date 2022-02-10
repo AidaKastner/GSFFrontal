@@ -3,7 +3,7 @@ import * as FaIcons from 'react-icons/fa';
 import Idioma from "../components/Idioma";
 import styled from 'styled-components';
 import SubMenu from './SubMenu';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { IconContext } from 'react-icons/lib';
 import { NavLink } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
@@ -56,23 +56,40 @@ class Sidebar extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <>
         <IconContext.Provider value={{ color: '#fff' }}>
-          <div className="Nav">   
-            <div className="Navicon">   
+          <div className="Nav">
+            <div className="Navicon">
               <NavLink to='#'>      
                   <FaIcons.FaBars onClick={() => { this.showSidebar(); }} />
-              </NavLink> 
+              </NavLink>
             </div>
+            {
+              !this.state.sidebar
+                ? <Fragment>
+                    <img src={'/logo.png'} style={{width: '7rem', height: '7rem', marginLeft: '3rem'}} />
+                    <h3 style={{color: 'white', marginLeft: '3rem'}}>{ t('applicationName') }</h3>
+                  </Fragment>
+                : ''
+            }
             <Idioma />
           </div>
           <SidebarNav sidebar={this.state.sidebar}>
             <div className="SidebarWrap">
-              <div className="Navicon">
+              <div className="Navicon" style={{width: 'max-content'}}>
                 <NavLink to='#'>
                   <AiIcons.AiOutlineClose onClick={() => { this.showSidebar(); }} />
-                </NavLink>  
+                </NavLink>
+                {
+                  this.state.sidebar
+                    ? <Fragment>
+                        <img src={'/logo.png'} style={{width: '7rem', height: '7rem', marginLeft: '3rem'}} />
+                        <h3 style={{color: 'white', marginLeft: '3rem'}}>{ t('applicationName') }</h3>
+                      </Fragment>
+                    : ''
+                }
               </div>
               {SidebarData.map((item, index) => {
                 if (item.subNav !== undefined) {
