@@ -18,6 +18,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from "./Spinner"; 
 import Container from 'react-bootstrap/Container'
+import Select from 'react-select';
 import GoogleMapComponent from "./GoogleMapComponent";
 
 let SentCarril="";
@@ -28,6 +29,84 @@ const url2 = "https://localhost:44301/Tramos/baja";
 const url3 = "https://localhost:44301/Tramos/alta";
 const urlDel = "https://localhost:44301/Carriles";
 const urlDelAus = "https://localhost:44301/api/Auscultaciones/carrilaus";
+
+//Combo Terrenos naturales
+const comboTerNat = [{ label: "Roca", value: "Roca" }, 
+    { label: "Sòl adequat", value: "Sòl adequat" },
+    { label: "Sòl inadequat", value: "Sòl inadequat" },
+    { label: "Sòl marginal", value: "Sòl marginal" },
+    { label: "Sòl seleccionat", value: "Sòl seleccionat" },
+    { label: "Sòl tolerable", value: "Sòl tolerable" }
+];
+
+//Combo Explanadas
+const comboExplanada = [{ label: "E1", value: "E1" }, 
+    { label: "E2", value: "E2" },
+    { label: "E3E", value: "E3E" },
+    { label: "E3G", value: "E3G" }
+];
+
+//Combo Tipos Firmes
+const comboTipoFirme = [{ label: "Flexible", value: "Flexible" }, 
+    { label: "Rígid", value: "Rígid" },
+    { label: "Semirrígid", value: "Semirrígid" }
+];
+
+//Combo Nivel Influencia
+const comboNivelInfluencia = [{ label: "0", value: "0" }, 
+    { label: "1", value: "1" },
+    { label: "2", value: "2" },
+    { label: "3", value: "3" },
+    { label: "4", value: "4" },
+    { label: "5", value: "5" },
+    { label: "6", value: "6" },
+    { label: "7", value: "7" },
+    { label: "8", value: "8" },
+    { label: "9", value: "9" },
+    { label: "S1", value: "S1" },
+    { label: "S2", value: "S2" },
+    { label: "S3", value: "S3" }
+];
+
+
+//Combo Tipologia MPD
+const comboTipoMPD = [{ label: "Seleccionar", value: "" }, 
+    { label: "Ascendente", value: "Ascendente" },
+    { label: "Descendente", value: "Descendente" }
+];
+
+//Combo RodaduraFlex 
+const comboRodFlex = [{ label: "Seleccionar", value: "" }, 
+    { label: "AC16 surf D", value: "AC16 surf D" },
+    { label: "AC16 surf S", value: "AC16 surf S" },
+    { label: "AC22 surf D", value: "AC22 surf D" },
+    { label: "AC22 surf S", value: "AC22 surf S" },
+    { label: "BBTM 11A", value: "BBTM 11A" },
+    { label: "BBTM 11B", value: "BBTM 11B" },
+    { label: "BBTM 8A", value: "BBTM 8A" },
+    { label: "BBTM 8B", value: "BBTM 8B" },
+    { label: "PA11", value: "PA11" },
+    { label: "PA16", value: "PA16" }
+];
+
+//Combo RodaduraSemi 
+const comboRodSemi = [{ label: "Seleccionar", value: "" }, 
+    { label: "AC16 surf D", value: "AC16 surf D" },
+    { label: "AC16 surf S", value: "AC16 surf S" },
+    { label: "AC22 surf D", value: "AC22 surf D" },
+    { label: "AC22 surf S", value: "AC22 surf S" },
+    { label: "PA11", value: "PA11" },
+    { label: "PA16", value: "PA16" }
+];
+
+
+//Combo RodaduraRigid 
+const comboRodRigid = [{ label: "Seleccionar", value: "" }, 
+    { label: "HF", value: "HF" }
+];
+
+//Combo Rodadura 
+let comboRod = [{ label: "Seleccionar", value: "" }];
 
 let authToken = sessionStorage.getItem("JWT");
 
@@ -78,6 +157,7 @@ class EditarTramo extends Component{
       content: null,
       setMsgOutBoolKO: false,
       setMsgOutActKO: false,
+      ComboTipFirme: '',
       form:{
         id:'',
         codigo:'',
@@ -220,7 +300,7 @@ controlErrAlta=(controlErrorTramo)=>{
 }
 
 
-  //Maneja la edición e inserción en los forms
+  //Maneja la edición  en los forms
   handleChange=async e=>{
     e.persist();
     await this.setState({
@@ -233,6 +313,20 @@ controlErrAlta=(controlErrorTramo)=>{
     console.log("Indice: ",this.state.Index);
 
     }
+
+    handleComboTipFirme = async e => {
+      console.log("EVENTO COMBO: ", e.value);
+      //e.persist();
+      await this.setState({
+        form:{
+          ...this.state.form,
+        },
+        ComboTipFirme: e.value
+      });
+      console.log("Combo Tipo Firme: ", this.state.ComboTipFirme);
+      this.getComboRodadura(this.state.ComboTipFirme);
+      this.peticionRefresh(comboRod, this.state.ComboTipFirme);
+    };
 
   
   componentDidMount(){
@@ -293,6 +387,7 @@ peticionGet=()=>{
       tableAct: sliceAct,
       content: response,
       estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
+      ComboTipFirme: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
       form: {
         id: response.data.id,
         nombre: response.data.carretera.nombre,
@@ -321,7 +416,7 @@ peticionGet=()=>{
         firmesTramoCpa: response.data.firmesTramo.cpa,
         firmesTramoAnchCar: response.data.firmesTramo.anchuraCarril,
         firmesTramoAnchArc: response.data.firmesTramo.anchuraArcen,
-        firmesTramoMpd: response.data.firmesTramo.TipoLogModeloEvolMpd,
+        firmesTramoMpd: response.data.firmesTramo.tipoLogModeloEvolMpd,
         firmesTramoCarRod: response.data.firmesTramo.idCarrilDdCapasRodadura,
         firmesTramoCarInter: response.data.firmesTramo.idCarrilDdCapasIntermedia,
         firmesTramoCarBase: response.data.firmesTramo.idCarrilDdCapasBase,
@@ -351,6 +446,121 @@ peticionGet=()=>{
     console.log("CARRILES ARRAY", dataCarriles[0]);
     SentCarril = dataCarriles[0] == undefined ? '' : dataCarriles[0].sentidoCarril;
     console.log("Primer sentido", SentCarril);
+    this.getComboRodadura(this.state.ComboTipFirme);
+    console.log("COMBO ROD GET", comboRod);
+  }).catch(error=>{
+    console.log("KO");
+    console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
+    console.log(error); 
+  });
+}
+
+/*Refresh Tramo Seleccionado*/
+peticionRefresh=(comboSelect, tipoFirm)=>{
+  console.log("Tramo escogido en Edición: ",this.state.idTramSel);
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  
+  axios.get(this.state.idTramSel, config).then(response=>{
+    console.log("Data Edición", response.data);
+    var dataCarriles = [];
+    var data = response.data.carriles;
+    if (data != null) {
+      slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+      slice.forEach((carrile) => {
+        dataCarriles.push({
+          ordenCarrile: carrile.ordenCarril,
+          sentidoCarril: carrile.sentido
+        });
+      });
+    }
+    var dataAct = response.data.actuacionesTramos;
+    if (dataAct != null) {
+      sliceAct = dataAct.slice(this.state.offset, this.state.offset + this.state.perPage);
+    }
+    console.log("Data actuaciones", dataAct);
+
+    if (data == null) {
+      this.setState({ setMsgOutBoolKO: true });
+    };
+
+    if (dataAct == null) {
+      this.setState({ setMsgOutActKO: true });
+    };
+
+    this.setState({
+      orgtableData: response.data,
+      tableData: dataCarriles,
+      tableAforos: slice,
+      tableAct: sliceAct,
+      content: response,
+      estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
+      ComboTipFirme: tipoFirm,
+      form: {
+        id: response.data.id,
+        nombre: response.data.carretera.nombre,
+        codigo: response.data.carretera.codigo,
+        comentario: response.data.comentario,
+        longitud: response.data.longitud,
+        fechaAlta: response.data.fechaAlta.substr(0, 10),
+        fechaBaja: response.data.fechaBaja,
+        idDdTiposCalzada: response.data.idDdTiposCalzada,
+        pkIni: response.data.puntoIni.pk,
+        mIni: response.data.puntoIni.m,
+        descIni: response.data.puntoIni.descripcion,
+        pkFin: response.data.puntoFin.pk,
+        mFin: response.data.puntoFin.m,
+        descFin: response.data.puntoFin.descripcion,
+        idDdCodTecReal: response.data.idDdCodTecReal,
+        idDdRedesNombre: response.data.ddRede.nombre,
+        ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
+        ddOrganismosNombre: response.data.ddOrganismos.nombre,
+        ddRegimenExplotacionNombre: response.data.ddRegimenExplotacion.nombre,
+        ddRegimenGestionNombre: response.data.ddRegimenGestion.nombre,
+        ddZonasTermicaNombre: response.data.ddZonasTermica.codigo,
+        ddZonasPluvNombre: response.data.ddZonasPluviometrica.codigo,
+        firmesTramoNombre: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
+        firmesTramoInfl: response.data.firmesTramo.idDdNivelesInfluencia,
+        firmesTramoCpa: response.data.firmesTramo.cpa,
+        firmesTramoAnchCar: response.data.firmesTramo.anchuraCarril,
+        firmesTramoAnchArc: response.data.firmesTramo.anchuraArcen,
+        firmesTramoMpd: response.data.firmesTramo.tipoLogModeloEvolMpd,
+        firmesTramoCarRod: response.data.firmesTramo.idCarrilDdCapasRodadura,
+        firmesTramoCarInter: response.data.firmesTramo.idCarrilDdCapasIntermedia,
+        firmesTramoCarBase: response.data.firmesTramo.idCarrilDdCapasBase,
+        firmesTramoCarSubBase: response.data.firmesTramo.idCarrilDdCapasSubbase,
+        firmesTramoArcRod: response.data.firmesTramo.idArcenDdCapasRodadura,
+        firmesTramoArcInt: response.data.firmesTramo.idArcenDdCapasIntermedia,
+        firmesTramoArcBas: response.data.firmesTramo.idArcenDdCapasBase,
+        firmesTramoArcSub: response.data.firmesTramo.idArcenDdCapasSubbase,
+        firmesTramoespRodCar: response.data.firmesTramo.espesorRodaduraCarril,
+        firmesTramoespIntdCar: response.data.firmesTramo.espesorIntermediaCarril,
+        firmesTramoespBasCar: response.data.firmesTramo.espesorBaseCarril,
+        firmesTramoespSubBasCar: response.data.firmesTramo.espesorSubbaseCarril,
+        firmesTramoespRodArc: response.data.firmesTramo.espesorRodaduraArcen,
+        firmesTramoespIntArc: response.data.firmesTramo.espesorIntermediaArcen,
+        firmesTramoespespBasArc: response.data.firmesTramo.espesorBaseArcen,
+        firmesTramoespSubBasArc: response.data.firmesTramo.espesorSubbaseArcen,
+        explTrTerNat: response.data.explanadasTramo.idDdTerrenosNaturales,
+        explTrTerNatCbr: response.data.explanadasTramo.terrenoNaturalCbr,
+        explCatExpl: response.data.explanadasTramo.idDdCategoriasExplanadas,
+        explRelleno: response.data.explanadasTramo.relleno,
+        explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
+        explCoronacion: response.data.explanadasTramo.coronacion,
+        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
+      }
+      
+    });
+    console.log("CARRILES ARRAY", dataCarriles[0]);
+    SentCarril = dataCarriles[0] == undefined ? '' : dataCarriles[0].sentidoCarril;
+    console.log("Primer sentido", SentCarril);
+    comboRod=comboSelect;
+    console.log("COMBO ROD GET", comboRod);
   }).catch(error=>{
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
@@ -533,13 +743,31 @@ seleccionarCarril=(carril)=>{
       sentidoCarril: sent,
       idTramos: this.state.id
     });
-    console.log("Tabledata After", this.state.tableData);
-    console.log("Tabledata Lenght After", this.state.tableData.length);
     this.setState({
       setMsgOutBoolKO: false,
       tableData: this.state.tableData
     });
   }
+
+
+  getComboRodadura=(tipo)=>{
+    switch (tipo) {
+      case 'Flexible':
+        comboRod = comboRodFlex;
+        break;
+      case 'Semirrígid':
+        comboRod = comboRodSemi;
+        break;
+      case 'Rígid':
+        comboRod = comboRodRigid;
+        break;
+      default:
+        comboRod = comboRodFlex;
+        break;
+    }
+    console.log("Combo seleccionado", comboRod);
+  }
+
 
 
 
@@ -634,22 +862,19 @@ seleccionarCarril=(carril)=>{
               {"  "}
               <br /><br />
               <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="TipFirTram"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoNombre}
-                />
+                <Select name="TipoFirmeTramo" 
+                  key='TipoFirmeTramo'
+                  options={ comboTipoFirme } 
+                  onChange={this.handleComboTipFirme} 
+                  defaultValue={comboTipoFirme.find(obj => obj.value === this.state.form.firmesTramoNombre)}
+                /> 
               <label><Translation ns= "global">{(t) => <>{t('NilInf')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="NilInf"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoInfl}
-                />
-
+                <Select name="NivelInfluencia" 
+                  key='NivelInfluencia'
+                  options={ comboNivelInfluencia } 
+                  //onChange={this.handleCombo} 
+                  defaultValue={comboNivelInfluencia.find(obj => obj.value === this.state.form.firmesTramoInfl)}
+                  /> 
               <label><Translation ns= "global">{(t) => <>{t('CPA')}</>}</Translation></label>
                 <input
                     type="text"
@@ -675,13 +900,12 @@ seleccionarCarril=(carril)=>{
                     value={this.state.form.firmesTramoAnchArc}
                 />
               <label><Translation ns= "global">{(t) => <>{t('MPD')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="MPD"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.firmesTramoMpd}
-                />
+                <Select 
+                  options={ comboTipoMPD } 
+                  //onChange={this.handleCombo} 
+                  defaultValue={comboTipoMPD.find(obj => obj.value === this.state.form.firmesTramoMpd)}
+                  /> 
+              
               <MDBTable>
                 <MDBTableHead>
                   <tr>
@@ -695,7 +919,14 @@ seleccionarCarril=(carril)=>{
               <MDBTableBody>
                   <tr>
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaRod')}</>}</Translation></th>
-                    <td>{this.state.form.firmesTramoCarRod}</td>
+                    <td>
+                      <Select name="CapaRodadura" 
+                        key='CapaRodadura'
+                        options={ comboRod } 
+                        defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramoCarRod)}
+                      /> 
+                    </td>
+                    
                     <td>{this.state.form.firmesTramoespRodCar}</td>
                     <td>{this.state.form.firmesTramoArcRod}</td>
                     <td>{this.state.form.firmesTramoespRodArc}</td>
@@ -745,11 +976,12 @@ seleccionarCarril=(carril)=>{
             <MDBTableBody>
               <tr>        
                 <td>
-                  <input
-                    type="text"
-                    name="explTrTerNat"
-                    value={this.state.form.explTrTerNat}
-                  />
+                <Select 
+                  options={ comboTerNat } 
+                  //onChange={this.handleCombo} 
+                  defaultValue={comboTerNat.find(obj => obj.value === this.state.form.explTrTerNat)}
+                  /> 
+                 
                 </td>
                 <td>
                   <input
@@ -762,13 +994,11 @@ seleccionarCarril=(carril)=>{
             {"  "}
             <br /><br />
             <label><Translation ns= "global">{(t) => <>{t('CategExpl')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="MPD"
-                    style={{maxWidth: '200px', width: '100%', float:'right'}}
-                    //onChange={actualizarState}
-                    value={this.state.form.explCatExpl}
-                />
+                <Select 
+                  options={ comboExplanada } 
+                  //onChange={this.handleCombo} 
+                  defaultValue={comboExplanada.find(obj => obj.value === this.state.form.explCatExpl)}
+                  />
              {"  "}
              <br /><br />
             <MDBTable>
