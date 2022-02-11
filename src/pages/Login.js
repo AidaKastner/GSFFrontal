@@ -46,7 +46,8 @@ function Foo() {
         const token = 'Bearer ' + response.data;
         axios.defaults.headers.common["Authorization"] = token;
         sessionStorage.setItem("JWT", token);
-        return response.data;            
+        sessionStorage.setItem("mail", form.mail);
+        return response.data;
       }).then(response=>{              
         //Usuario y contraseña correctos -> Se entra al menú principal              
         var respuesta=response[0];            
