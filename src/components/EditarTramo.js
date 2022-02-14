@@ -30,6 +30,290 @@ const url3 = "https://localhost:44301/Tramos/alta";
 const urlDel = "https://localhost:44301/Carriles";
 const urlDelAus = "https://localhost:44301/api/Auscultaciones/carrilaus";
 
+//Combo Redes
+const comboRedes = [
+{ label: "Xarxa local", value: "Xarxa local" },
+{ label: "Xarxa comarcal secundària", value: "Xarxa comarcal secundària" },
+{ label: "Xarxa comarcal primària", value: "Xarxa comarcal primària" },
+{ label: "Xarxa comarcal", value: "Xarxa comarcal" },
+{ label: "Xarxa bàsica transeuropea", value: "Xarxa bàsica transeuropea" },
+{ label: "Xarxa bàsica secundària", value: "Xarxa bàsica secundària" },
+{ label: "Xarxa bàsica restant", value: "Xarxa bàsica restant" },
+{ label: "Xarxa bàsica primària transeuropea", value: "Xarxa bàsica primària transeuropea" },
+{ label: "Xarxa bàsica primària", value: "Xarxa bàsica primària" },
+{ label: "Xarxa bàsica", value: "Xarxa bàsica" },
+{ label: "No informat", value: "No informat" },
+{ label: "Desconegut", value: "Desconegut" },
+{ label: "Carrils Adicionals", value: "Carrils Adicionals" },
+{ label: "Altres (AL)", value: "Altres (AL)" },
+{ label: "Altres (A)", value: "Altres (A)" },
+{ label: "Altres", value: "Altres" }
+];
+
+
+//Combo Organismos
+const comboOrg = [
+  {label: "Altres", value: "Altres" },
+{label: "Autopistes, Concesionaria Española, S.A.", value: "Autopistes, Concesionaria Española, S.A." },
+{label: "Autopistes Concessionària Espanyola SA", value: "Autopistes Concessionària Espanyola SA" },
+{label: "AcesaMediterrani", value: "AcesaMediterrani" },
+{label: "Ajuntament", value: "Ajuntament" },
+{label: "Altres", value: "Altres" },
+{label: "Àrea Metropolitana de Barcelona", value: "Àrea Metropolitana de Barcelona" },
+{label: "Parc d'Argentona", value: "Parc d'Argentona" },
+{label: "Argentona", value: "Argentona" },
+{label: "Autopistes de Catalunya, S.A.", value: "Autopistes de Catalunya, S.A." },
+{label: "Autopista Pau Casals", value: "Autopista Pau Casals" },
+{label: "Autopistes del Marenostrum", value: "Autopistes del Marenostrum" },
+{label: "AumarMediterraniSud", value: "AumarMediterraniSud" },
+{label: "Autopista Terrassa - Manresa, S.A.", value: "Autopista Terrassa - Manresa, S.A." },
+{label: "Eix del Llobregat Sud", value: "Eix del Llobregat Sud" },
+{label: "Parc de Berga", value: "Parc de Berga" },
+{label: "Berga", value: "Berga" },
+{label: "Parc de Bianya", value: "Parc de Bianya" },
+{label: "Bianya", value: "Bianya" },
+{label: "Cadi", value: "Cadi" },
+{label: "Catalunya", value: "Catalunya" },
+{label: "Centre de control de Vic", value: "Centre de control de Vic" },
+{label: "Consell Comarcal del Barcelonès", value: "Consell Comarcal del Barcelonès" },
+{label: "Centre de Control de Vic", value: "Centre de Control de Vic" },
+{label: "Cedinsa d'Aro Concesionaria de la Generalitat de Catalunya", value: "Cedinsa d'Aro Concesionaria de la Generalitat de Catalunya" },
+{label: "Concessió i Explotació d'Infraestructures, S.A.", value: "Concessió i Explotació d'Infraestructures, S.A." },
+{label: "Eix del Llobregat Centre", value: "Eix del Llobregat Centre" },
+{label: "Eix Congost - Ter Nord", value: "Eix Congost - Ter Nord" },
+{label: "Eix Transversal Est", value: "Eix Transversal Est" },
+{label: "Eix Transversal Oest", value: "Eix Transversal Oest" },
+{label: "Maçanet - Platja d'Aro", value: "Maçanet - Platja d'Aro" },
+{label: "Cedinsa Eix Transversal", value: "Cedinsa Eix Transversal" },
+{label: "Cedinsa Ter Concesionaria de la Generalitat de Catalunya", value: "Cedinsa Ter Concesionaria de la Generalitat de Catalunya" },
+{label: "Concessionàries", value: "Concessionàries" },
+{label: "Demarcación de Carreteras del Estado en Catalunya", value: "Demarcación de Carreteras del Estado en Catalunya" },
+{label: "Desconegut", value: "Desconegut" },
+{label: "Diputació de Barcelona", value: "Diputació de Barcelona" },
+{label: "Diputació de Girona", value: "Diputació de Girona" },
+{label: "Diputació de Lleida", value: "Diputació de Lleida" },
+{label: "Diputacions", value: "Diputacions" },
+{label: "DipBarcelona", value: "DipBarcelona" },
+{label: "DipGirona", value: "DipGirona" },
+{label: "DipLleida", value: "DipLleida" },
+{label: "DipTarragona", value: "DipTarragona" },
+{label: "Gestionat per la pròpia Administració", value: "Gestionat per la pròpia Administració" },
+{label: "Diputació de Tarragona", value: "Diputació de Tarragona" },
+{label: "Diputació de Terol (Aragó)", value: "Diputació de Terol (Aragó)" },
+{label: "Eix Diagonal, Concessionària de la Generalitat de Catalunya, SA", value: "Eix Diagonal, Concessionària de la Generalitat de Catalunya, SA" },
+{label: "Parc d'Esterri d'Aneu", value: "Parc d'Esterri d'Aneu" },
+{label: "Estat", value: "Estat" },
+{label: "Administració de l'Estat a Catalunya", value: "Administració de l'Estat a Catalunya" },
+{label: "Carreteres de l'Estat Barcelona", value: "Carreteres de l'Estat Barcelona" },
+{label: "Esterri d'Aneu", value: "Esterri d'Aneu" },
+{label: "Esterri d'Aneu", value: "Esterri d'Aneu" },
+{label: "Carreteres de l'Estat Girona", value: "Carreteres de l'Estat Girona" },
+{label: "Carreteres de l'Estat Lleida", value: "Carreteres de l'Estat Lleida" },
+{label: "Carreteres de l'Estat Tarragona", value: "Carreteres de l'Estat Tarragona" },
+{label: "Generalitat de Catalunya", value: "Generalitat de Catalunya" },
+{label: "Generalitat / Diputació de Barcelona", value: "Generalitat / Diputació de Barcelona" },
+{label: "Generalitat / Demarcación Carreteres", value: "Generalitat / Demarcación Carreteres" },
+{label: "Generalitat de Catalunya", value: "Generalitat de Catalunya" },
+{label: "Parc de Girona", value: "Parc de Girona" },
+{label: "Girona", value: "Girona" },
+{label: "Gestió d'Infraestructures, S.A.", value: "Gestió d'Infraestructures, S.A." },
+{label: "Conservació integral carreteres alta intensitat", value: "Conservació integral carreteres alta intensitat" },
+{label: "Conservació integral carreteres centro control de Vic", value: "Conservació integral carreteres centro control de Vic" },
+{label: "Parc d'Igualada", value: "Parc d'Igualada" },
+{label: "Igualada", value: "Igualada" },
+{label: "Conservació integral carreteres Manresa", value: "Conservació integral carreteres Manresa" },
+{label: "Contracte integral de manteniment", value: "Contracte integral de manteniment" },
+{label: "Infraestructures Viàries de Catalunya, S.A.", value: "Infraestructures Viàries de Catalunya, S.A." },
+{label: "Autopista del Maresme", value: "Autopista del Maresme" },
+{label: "Barcelona - Montmeló", value: "Barcelona - Montmeló" },
+{label: "Eix Diagonal", value: "Eix Diagonal" },
+{label: "Reus - Alcover", value: "Reus - Alcover" },
+{label: "Parc de Lleida", value: "Parc de Lleida" },
+{label: "Llagostera", value: "Llagostera" },
+{label: "Lleida", value: "Lleida" },
+{label: "Barcelona Oest", value: "Barcelona Oest" },
+{label: "Ministeri de Foment", value: "Ministeri de Foment" },
+{label: "Montblanc", value: "Montblanc" },
+{label: "NoInformat", value: "NoInformat" },
+{label: "Parc de Ponts", value: "Parc de Ponts" },
+{label: "Ponts", value: "Ponts" },
+{label: "PremiaDeMar", value: "PremiaDeMar" },
+{label: "PuigReig", value: "PuigReig" },
+{label: "Reus -  Alcover concessionaria de la Generalitat de Catalunya S.A.", value: "Reus -  Alcover concessionaria de la Generalitat de Catalunya S.A." },
+{label: "Parc de Reus", value: "Parc de Reus" },
+{label: "Reus", value: "Reus" },
+{label: "Parc de Reus Nord", value: "Parc de Reus Nord" },
+{label: "Parc de Sabadell", value: "Parc de Sabadell" },
+{label: "Sabadell", value: "Sabadell" },
+{label: "SantaSusanna", value: "SantaSusanna" },
+{label: "SantVicenç", value: "SantVicenç" },
+{label: "Servició de Conservación y Explotación de Carreteras de Barcelona", value: "Servició de Conservación y Explotación de Carreteras de Barcelona" },
+{label: "Sense definir-ne la titulació", value: "Sense definir-ne la titulació" },
+{label: "Servei d'Equipaments i Dades Viàries", value: "Servei d'Equipaments i Dades Viàries" },
+{label: "SelvaDelCamp", value: "SelvaDelCamp" },
+{label: "Servei d'Instal.lacions i Equipaments Viaris", value: "Servei d'Instal.lacions i Equipaments Viaris" },
+{label: "Parc de Solsona", value: "Parc de Solsona" },
+{label: "Solsona", value: "Solsona" },
+{label: "Servei Territorial de Carreteres de Barcelona", value: "Servei Territorial de Carreteres de Barcelona" },
+{label: "Servei Territorial de Carreteres de Terres de l'Ebre", value: "Servei Territorial de Carreteres de Terres de l'Ebre" },
+{label: "Servei Territorial de Carreteres de Girona", value: "Servei Territorial de Carreteres de Girona" },
+{label: "Servei Territorial de Carreteres de Lleida", value: "Servei Territorial de Carreteres de Lleida" },
+{label: "Servei Territorial de Carreteres de Tarragona", value: "Servei Territorial de Carreteres de Tarragona" },
+{label: "Servei Territorial de Mobilitat de Terres de l'Ebre", value: "Servei Territorial de Mobilitat de Terres de l'Ebre" },
+{label: "Tunels i Accessos de Barcelona, S.A.", value: "Tunels i Accessos de Barcelona, S.A." },
+{label: "Túnels Barcelona Cadi SA", value: "Túnels Barcelona Cadi SA" },
+{label: "Tunel del Cadi", value: "Tunel del Cadi" },
+{label: "TerCongost", value: "TerCongost" },
+{label: "Barcelona Est", value: "Barcelona Est" },
+{label: "Terrassa", value: "Terrassa" },
+{label: "Parc de Tortosa", value: "Parc de Tortosa" },
+{label: "Tortosa", value: "Tortosa" },
+{label: "Parc de Tremp", value: "Parc de Tremp" },
+{label: "TransversalEst", value: "TransversalEst" },
+{label: "TransversalOest", value: "TransversalOest" },
+{label: "Tremp", value: "Tremp" },
+{label: "Tùnels", value: "Tùnels" },
+{label: "Túnel del Cadí", value: "Túnel del Cadí" },
+{label: "Túnels de Vallvidrera", value: "Túnels de Vallvidrera" },
+{label: "Unidad de Carreteras de Girona", value: "Unidad de Carreteras de Girona" },
+{label: "Unidad de Carreteras de Lleida", value: "Unidad de Carreteras de Lleida" },
+{label: "Unidad de Carreteras de Tarragona", value: "Unidad de Carreteras de Tarragona" },
+{label: "Vallcarca", value: "Vallcarca" },
+{label: "Vallvidrera", value: "Vallvidrera" },
+{label: "Parc de Vidreres", value: "Parc de Vidreres" },
+{label: "Parc de Vic", value: "Parc de Vic" },
+{label: "Vic", value: "Vic" },
+{label: "Vidreres", value: "Vidreres" },
+{label: "Viladecans", value: "Viladecans" },
+{label: "Vilafranca", value: "Vilafranca" },
+{label: "Parc de Viladecans", value: "Parc de Viladecans" }
+  
+];
+
+
+//Combo Org. Explo
+const comboExplo = [
+{ label: "AcesaMediterrani", value: "AcesaMediterrani" },
+{ label: "AMB", value: "AMB" },
+{ label: "Argentona", value: "Argentona" },
+{ label: "AumarMediterraniSud", value: "AumarMediterraniSud" },
+{ label: "Berga", value: "Berga" },
+{ label: "Bianya", value: "Bianya" },
+{ label: "Cadi", value: "Cadi" },
+{ label: "Concessió amb cànon", value: "Concessió amb cànon" },
+{ label: "Concessió lliure de peatge", value: "Concessió lliure de peatge" },
+{ label: "Concessió amb peatge", value: "Concessió amb peatge" },
+{ label: "Desconegut", value: "Desconegut" },
+{ label: "DipBarcelona", value: "DipBarcelona" },
+{ label: "DipGirona", value: "DipGirona" },
+{ label: "DipLleida", value: "DipLleida" },
+{ label: "DipTarragona", value: "DipTarragona" },
+{ label: "Encàrrec de gestió", value: "Encàrrec de gestió" },
+{ label: "Estat", value: "Estat" },
+{ label: "Estat", value: "Estat" },
+{ label: "Esterri", value: "Esterri" },
+{ label: "Esterri d'Aneu", value: "Esterri d'Aneu" },
+{ label: "Girona", value: "Girona" },
+{ label: "Igualada", value: "Igualada" },
+{ label: "Llagostera", value: "Llagostera" },
+{ label: "Lleida", value: "Lleida" },
+{ label: "Manresa", value: "Manresa" },
+{ label: "Montblanc", value: "Montblanc" },
+{ label: "Ponts", value: "Ponts" },
+{ label: "PremiaDeMar", value: "PremiaDeMar" },
+{ label: "Públic", value: "Públic" },
+{ label: "PuigReig", value: "PuigReig" },
+{ label: "Reus", value: "Reus" },
+{ label: "Sabadell", value: "Sabadell" },
+{ label: "SantaSusanna", value: "SantaSusanna" },
+{ label: "SantVicenç", value: "SantVicenç" },
+{ label: "SelvaDelCamp", value: "SelvaDelCamp" },
+{ label: "Solsona", value: "Solsona" },
+{ label: "TerCongost", value: "TerCongost" },
+{ label: "Terrassa", value: "Terrassa" },
+{ label: "Tortosa", value: "Tortosa" },
+{ label: "TransversalEst", value: "TransversalEst" },
+{ label: "TransversalOest", value: "TransversalOest" },
+{ label: "Tremp", value: "Tremp" },
+{ label: "Tunels", value: "Tunels" },
+{ label: "Vallcarca", value: "Vallcarca" },
+{ label: "Vallvidrera", value: "Vallvidrera" },
+{ label: "Vic", value: "Vic" },
+{ label: "Vidreres", value: "Vidreres" },
+{ label: "Viladecans", value: "Viladecans" },
+{ label: "Vilafranca", value: "Vilafranca" }
+];
+
+
+//Combo Gestión
+const comboGest = [
+  {label: "Autopistes, Concessionària espanyola, S.A.", value: "Autopistes, Concessionària espanyola, S.A." },
+  {label: "Altres", value: "Altres" },
+  {label: "Autopistes de Catalunya S.A.", value: "Autopistes de Catalunya S.A." },
+  {label: "Autopista del Marenostrum", value: "Autopista del Marenostrum" },
+  {label: "Autopista Terrassa-Manresa, S.A.", value: "Autopista Terrassa-Manresa, S.A." },
+  {label: "Consell comarcal Barcelonés", value: "Consell comarcal Barcelonés" },
+  {label: "Cedinsa d'Aro Concesionaria de la Generalitat de Catalunya", value: "Cedinsa d'Aro Concesionaria de la Generalitat de Catalunya" },
+  {label: "Cedida", value: "Cedida" },
+  {label: "Cedinsa Eix Transversal", value: "Cedinsa Eix Transversal" },
+  {label: "CEDINSA Eix Llobregat", value: "CEDINSA Eix Llobregat" },
+  {label: "Cedinsa Ter Concessionaria de la Generalitat de Catalunya", value: "Cedinsa Ter Concessionaria de la Generalitat de Catalunya" },
+  {label: "IndConcessio", value: "IndConcessio" },
+  {label: "Desconegut", value: "Desconegut" },
+  {label: "Directament per la pròpia administració competent", value: "Directament per la pròpia administració competent" },
+  {label: "Directa", value: "Directa" },
+  {label: "Directa", value: "Directa" },
+  {label: "Eix Diagonal concessionària de la Generalitat de Catalunya", value: "Eix Diagonal concessionària de la Generalitat de Catalunya" },
+  {label: "Indirecta de peatge implícit o per cánon", value: "Indirecta de peatge implícit o per cánon" },
+  {label: "Indirecta de peatge explícit, per concessió", value: "Indirecta de peatge explícit, per concessió" },
+  {label: "Indirecta conveniada", value: "Indirecta conveniada" },
+  {label: "Indirecta de peatge explícit, per encàrrec de gestió", value: "Indirecta de peatge explícit, per encàrrec de gestió" },
+  {label: "Indirecta de peatge explícit, sense pagament", value: "Indirecta de peatge explícit, sense pagament" },
+  {label: "INVICAT (Infraestructures Viàries de Catalunya S.A.)", value: "INVICAT (Infraestructures Viàries de Catalunya S.A.)" },
+  {label: "No informat", value: "No informat" },
+  {label: "Reus - Alcover concessionaria de la Generalitat de Catalunya S.A.", value: "Reus - Alcover concessionaria de la Generalitat de Catalunya S.A." },
+  {label: "Túnels i Accessos a Barcelona, S.A.", value: "Túnels i Accessos a Barcelona, S.A." },
+  {label: "Túnels Barcelona Cadi SA", value: "Túnels Barcelona Cadi SA" },
+  {label: "Túnel  del Cadí", value: "Túnel  del Cadí" }
+];
+
+//Combo Zona térmica
+const comboZonTer = [
+{label: "ZT1", value: "ZT1" },
+{label: "ZT2", value: "ZT2" },
+{label: "ZT3", value: "ZT3" }
+];
+
+//Combo Zona Pluviométrica
+const comboZonPluv = [
+  {label: "ZPH", value: "ZPH" },
+  {label: "ZPS", value: "ZPS" }
+  ];
+
+//Combo tec Real
+const comboTecReal = [
+{ label: "Autopista (A)", value: "Autopista (A)"},
+{ label: "Altres", value: "Altres"},
+{ label: "Autopista", value: "Autopista"},
+{ label: "Autovia o via preferent de doble calçada", value: "Autovia o via preferent de doble calçada"},
+{ label: "Autovia", value: "Autovia"},
+{ label: "Carretera amb limitació d'accessos de doble calçada", value: "Carretera amb limitació d'accessos de doble calçada"},
+{ label: "Convencional", value: "Convencional"},
+{ label: "Carretera amb limitació d'accessos", value: "Carretera amb limitació d'accessos"},
+{ label: "Carretera convencional", value: "Carretera convencional"},
+{ label: "Calçada lateral", value: "Calçada lateral"},
+{ label: "Carretera de calçada única", value: "Carretera de calçada única"},
+{ label: "Desconegut (DES)", value: "Desconegut (DES)"},
+{ label: "Carretera multicarril", value: "Carretera multicarril"},
+{ label: "No informat", value: "No informat"},
+{ label: "PreferentUna", value: "PreferentUna"},
+{ label: "Preferent 2 calç.", value: "Preferent 2 calç."},
+{ label: "Via preferent d'una calçada", value: "Via preferent d'una calçada"},
+{ label: "Reus - Alcover concessionaria de la Generalitat de Catalunya S.A.", value: "Reus - Alcover concessionaria de la Generalitat de Catalunya S.A."},
+{ label: "Travessera", value: "Travessera"},
+{ label: "Via per automòbils", value: "Via per automòbils"}
+];
+
 //Combo Terrenos naturales
 const comboTerNat = [{ label: "Roca", value: "Roca" }, 
     { label: "Sòl adequat", value: "Sòl adequat" },
@@ -107,6 +391,86 @@ const comboRodRigid = [{ label: "Seleccionar", value: "" },
 
 //Combo Rodadura 
 let comboRod = [{ label: "Seleccionar", value: "" }];
+
+//Combo IntermediaFlex 
+const comboIntFlex = [{ label: "Seleccionar", value: "" }, 
+    { label: "AC16 bin S", value: "AC16 bin S" },
+    { label: "AC22 bin D", value: "AC22 bin D" },
+    { label: "AC22 bin G", value: "AC22 bin G" },
+    { label: "AC22 bin S", value: "AC22 bin S" },
+    { label: "AC22 bin S MAM", value: "AC22 bin S MAM" },
+    { label: "AC32 bin S", value: "AC32 bin S" }
+];
+
+//Combo IntermediaSemi 
+const comboIntSemi = [{ label: "Seleccionar", value: "" }, 
+    { label: "AC22 base G", value: "AC22 base G" },
+    { label: "AC22 bin S MAM", value: "AC22 bin S MAM" },
+    { label: "AC22 surf S", value: "AC22 surf S" },
+    { label: "AC32 surf S", value: "AC32 surf S" }
+];
+
+
+//Combo IntermediaRigid 
+const comboIntRigid = [{ label: "Seleccionar", value: "" }
+];
+
+//Combo Intermedia 
+let comboInt = [{ label: "Seleccionar", value: "" }];
+
+
+//Combo BaseFlex 
+const comboBaseFlex = [{ label: "Seleccionar", value: "" }, 
+    { label: "AC22 base G", value: "AC22 base G" },
+    { label: "AC22 base S MAM", value: "AC22 base S MAM" },
+    { label: "AC32 base G", value: "AC32 base G" },
+    { label: "AC32 base S", value: "AC32 base S" }
+];
+
+//Combo BaseSemi 
+const comboBaseSemi = [{ label: "Seleccionar", value: "" }, 
+    { label: "AC22 base G", value: "AC22 base G" },
+    { label: "AC22 bin S MAM", value: "AC22 bin S MAM" },
+    { label: "AC32 base G", value: "AC32 base G" },
+    { label: "AC32 surf S", value: "AC32 surf S" }
+];
+
+
+//Combo BaseRigid 
+const comboBaseRigid = [{ label: "Seleccionar", value: "" }, 
+{ label: "HM", value: "HM" },
+{ label: "ZA", value: "ZA" }
+];
+
+//Combo Base 
+let comboBase = [{ label: "Seleccionar", value: "" }];
+
+
+
+//Combo SubBaseFlex 
+const comboSubBaseFlex = [{ label: "Seleccionar", value: "" }, 
+    { label: "AC22 base G", value: "AC22 base G" },
+    { label: "GC", value: "GC" },
+    { label: "HM", value: "HM" },
+    { label: "SC", value: "SC" },
+    { label: "ZA", value: "ZA" },
+    { label: "ZN", value: "ZN" }
+];
+
+//Combo SubBaseSemi 
+const comboSubBaseSemi = [{ label: "Seleccionar", value: "" }, 
+    { label: "GC", value: "GC" },
+    { label: "SC", value: "SC" }
+];
+
+
+//Combo SubBaseRigid 
+const comboSubBaseRigid = [{ label: "Seleccionar", value: "" }
+];
+
+//Combo SubBase 
+let comboSubBase = [{ label: "Seleccionar", value: "" }];
+
 
 let authToken = sessionStorage.getItem("JWT");
 
@@ -754,15 +1118,27 @@ seleccionarCarril=(carril)=>{
     switch (tipo) {
       case 'Flexible':
         comboRod = comboRodFlex;
+        comboInt = comboIntFlex;
+        comboBase = comboBaseFlex;
+        comboSubBase = comboSubBaseFlex;
         break;
       case 'Semirrígid':
         comboRod = comboRodSemi;
+        comboInt = comboIntSemi;
+        comboBase = comboBaseSemi;
+        comboSubBase = comboSubBaseSemi;
         break;
       case 'Rígid':
         comboRod = comboRodRigid;
+        comboInt = comboIntRigid;
+        comboBase = comboBaseRigid;
+        comboSubBase = comboSubBaseRigid;
         break;
       default:
         comboRod = comboRodFlex;
+        comboInt = comboIntFlex;
+        comboBase = comboBaseFlex;
+        comboSubBase = comboSubBaseFlex;
         break;
     }
     console.log("Combo seleccionado", comboRod);
@@ -783,72 +1159,66 @@ seleccionarCarril=(carril)=>{
           <div>             
               {"  "}
               <br /><br />
-              <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="ClasFunRedes"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.idDdRedesNombre}
-                />
+              <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>             
+              <Select name="ClasFunRedes" 
+                  key='ClasFunRedes'
+                  options={ comboRedes } 
+                  defaultValue={comboRedes.find(obj => obj.value === this.state.form.idDdRedesNombre)}
+                /> 
 
               <label><Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="ClasTecReal"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddCodTecRealNombre}
-                />
+              
+              <Select name="ClasTecReal" 
+                  key='ClasTecReal'
+                  options={ comboTecReal } 
+                  defaultValue={comboTecReal.find(obj => obj.value === this.state.form.ddCodTecRealNombre)}
+                /> 
                <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="OrgCons"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddOrganismosNombre}
-                />
+               
+               <Select name="OrgCons" 
+                  key='OrgCons'
+                  options={ comboOrg } 
+                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismosNombre)}
+                /> 
+
                <label><Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="OrgCom"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddRegimenExplotacionNombre}
-                />
+               
+               <Select name="OrgCom" 
+                  key='OrgCom'
+                  options={ comboOrg } 
+                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismosNombre)}
+                /> 
+
                <label><Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="RegGest"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddRegimenGestionNombre}
-                />
+               <Select name="RegGest" 
+                  key='RegGest'
+                  options={ comboGest } 
+                  defaultValue={comboGest.find(obj => obj.value === this.state.form.ddRegimenGestionNombre)}
+                /> 
+
                <label><Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="RegExpl"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddRegimenExplotacionNombre}
-                />
+               
+               <Select name="RegExpl" 
+                  key='RegExpl'
+                  options={ comboExplo } 
+                  defaultValue={comboExplo.find(obj => obj.value === this.state.form.ddRegimenExplotacionNombre)}
+                /> 
 
               <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="zonTer"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddZonasTermicaNombre}
-                />
-            <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
-                <input
-                    type="text"
-                    name="zonTer"
-                    className="u-full-width"
-                    //onChange={actualizarState}
-                    value={this.state.form.ddZonasPluvNombre}
-                />
+
+              <Select name="zonTer" 
+                  key='zonTer'
+                  options={ comboZonTer } 
+                  defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermicaNombre)}
+                /> 
+
+            <label><Translation ns= "global">{(t) => <>{t('ZonaPluv')}</>}</Translation></label>
+
+            <Select name="ZonaPluv" 
+              key='ZonaPluv'
+              options={ comboZonPluv } 
+              defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluvNombre)}
+              /> 
 
           </div>
         ),
@@ -928,28 +1298,70 @@ seleccionarCarril=(carril)=>{
                     </td>
                     
                     <td>{this.state.form.firmesTramoespRodCar}</td>
-                    <td>{this.state.form.firmesTramoArcRod}</td>
+                    <td>
+                      <Select name="CapaRodaduraArc" 
+                        key='CapaRodaduraArc'
+                        options={ comboRod } 
+                        defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramoArcRod)}
+                      /> 
+                    </td>
                     <td>{this.state.form.firmesTramoespRodArc}</td>
                   </tr>
                   <tr>
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaInter')}</>}</Translation></th>
-                    <td>{this.state.form.firmesTramoCarInter}</td>
+                    <td>
+                      <Select name="CapaIntermedia" 
+                        key='CapaIntermedia'
+                        options={ comboInt } 
+                        defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramoCarInter)}
+                      /> 
+                    </td>
                     <td>{this.state.form.firmesTramoespIntdCar}</td>
-                    <td>{this.state.form.firmesTramoArcInt}</td> 
+                    <td>
+                      <Select name="CapaIntermediaArc" 
+                        key='CapaIntermediaArc'
+                        options={ comboInt } 
+                        defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramoArcInt)}
+                      /> 
+                    </td> 
                     <td>{this.state.form.firmesTramoespIntArc}</td>
                   </tr>
                   <tr>
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaBase')}</>}</Translation></th>
-                    <td>{this.state.form.firmesTramoCarBase}</td>
+                    <td>
+                      <Select name="CapaBase" 
+                        key='CapaBase'
+                        options={ comboBase } 
+                        defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramoCarBase)}
+                      /> 
+                    </td>
                     <td>{this.state.form.firmesTramoespBasCar}</td>
-                    <td>{this.state.form.firmesTramoArcBas}</td> 
+                    <td>
+                      <Select name="CapaBaseArc" 
+                        key='CapaBaseArc'
+                        options={ comboBase } 
+                        defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramoArcBas)}
+                      /> 
+                    </td> 
                     <td>{this.state.form.firmesTramoespespBasArc}</td>
                   </tr>
                   <tr>
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaSubb')}</>}</Translation></th>
-                    <td>{this.state.form.firmesTramoCarSubBase}</td>
+                    <td>
+                      <Select name="CapaSubBase" 
+                        key='CapaSubBase'
+                        options={ comboSubBase } 
+                        defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramoCarSubBase)}
+                      /> 
+                    </td>
                     <td>{this.state.form.firmesTramoespSubBasCar}</td>
-                    <td>{this.state.form.firmesTramoArcSub}</td>
+                    <td>
+                      <Select name="CapaSubBaseArc" 
+                        key='CapaSubBaseArc'
+                        options={ comboSubBase } 
+                        defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramoArcSub)}
+                      /> 
+                    </td>
                     <td>{this.state.form.firmesTramoespSubBasArc}</td>
                   </tr>
                 </MDBTableBody>
