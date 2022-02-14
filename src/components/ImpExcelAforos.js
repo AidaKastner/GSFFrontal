@@ -81,7 +81,7 @@ function ImpExcelAforos() {
 
   const getStatistics = () => {
     axios.get(urlStatistics).then(response => {
-      setProgressBarValue(response.data.finishedCount / response.data.totalCount * 100);
+      setProgressBarValue(Math.round(response.data.finishedCount / response.data.totalCount * 100));
     });
   }
 
@@ -112,53 +112,55 @@ function ImpExcelAforos() {
       }
 
       for (var i = 0; i < NumFilas; i++) {
-        if (response?.data[i].item2 == 0) {
-          FilasCargadas += 1; 
-          console.log("FilasCargadas: ", FilasCargadas)
-          var msgOK = <Translation ns= "global">{(t) => <>{t('FilasCargadasAf', { NFilas: FilasCargadas})}</>}</Translation>
-          guardarMsgOut(msgOK);
-          setMsgOutBoolOK(true);
-        } else {
-          if (response?.data[i]?.item1 != 9999) {
-            FilasConError += 1; 
-            console.log("FilasConError: ", FilasConError)
-            console.log("FILA(response?.data[i]?.item1): ", response?.data[i]?.item1)
-            console.log("ERROR(response?.data[i]?.item2): ", response?.data[i]?.item2)
-            guardarMsgOutErr(msgKO);
-            setMsgOutBoolKO(true); 
+        if (response?.data[i]?.item1 != 9999) {
+          if (response?.data[i].item2 == 0) {
+            FilasCargadas += 1; 
+            console.log("FilasCargadas: ", FilasCargadas)
+            var msgOK = <Translation ns= "global">{(t) => <>{t('FilasCargadasAf', { NFilas: FilasCargadas})}</>}</Translation>
+            guardarMsgOut(msgOK);
+            setMsgOutBoolOK(true);
+          } else {
+            
+              FilasConError += 1; 
+              console.log("FilasConError: ", FilasConError)
+              console.log("FILA(response?.data[i]?.item1): ", response?.data[i]?.item1)
+              console.log("ERROR(response?.data[i]?.item2): ", response?.data[i]?.item2)
+              guardarMsgOutErr(msgKO);
+              setMsgOutBoolKO(true); 
 
-            console.log("error ", response?.data[i].item2, "FILA: ", response?.data[i].item1);
+              console.log("error ", response?.data[i].item2, "FILA: ", response?.data[i].item1);
 
-            //Mensajes de error por cada fila
-            switch(response?.data[i].item2){
-              case 1:
-                var msgKO= <Translation ns= "global">{(t) => <>{t('RegionKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>
-                break;
-              case 2:
-                var msgKO= <Translation ns= "global">{(t) => <>{t('CodigoKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-                break;
-              case 3:
-                var msgKO= <Translation ns= "global">{(t) => <>{t('CarreteraKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-                break;
-              case 4:
-                var msgKO= <Translation ns= "global">{(t) => <>{t('PkIniKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-                break;
-              case 5:
-                var msgKO= <Translation ns= "global">{(t) => <>{t('PkFinKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
-                break;
-              default:
-                var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation> 
-            }
-        
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: Id, name: msgKO}]);
+              //Mensajes de error por cada fila
+              switch(response?.data[i].item2){
+                case 1:
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('RegionKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>
+                  break;
+                case 2:
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('CodigoKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                  break;
+                case 3:
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('CarreteraKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                  break;
+                case 4:
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('PkIniKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                  break;
+                case 5:
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('PkFinKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation>        
+                  break;
+                default:
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('BBDDKO', { FilaKO: response?.data[i]?.item1 })}</>}</Translation> 
+              }
+          
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: Id, name: msgKO}]);
 
-            Id += 1;
-            console.log(Id);
+              Id += 1;
+              console.log(Id);
           }
         }
 
         if (response?.data[i]?.item1 == 9999 && response?.data[i].item2 > 0) {
           var msgKO = <Translation ns= "global">{(t) => <>{t('ProcAforosKO')}</>}</Translation>
+          setMsgOutBoolKO(true); 
           guardarMsgOutErrAf(msgKO);
           console.log("error procesar aforos");
         }
@@ -208,7 +210,6 @@ function ImpExcelAforos() {
   return (
     <div>
       <br/> 
-        <h1><Translation ns= "global">{(t) => <>{t('ImpAfr')}</>}</Translation></h1>
         <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
         {
           showProgressBar
@@ -217,9 +218,9 @@ function ImpExcelAforos() {
               </div>
             : ""
         }
-        <br />
-        <button className="btn btn-primario btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
-        <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button>
+        <br /><br />
+        <button className="btn btn-primario btn-sm" style={{float: 'right', marginRight: '5px', marginBottom:'10px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+        <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px', marginBottom:'10px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button>
        <br/><br/>
 
        { msgOutBoolOK ? 

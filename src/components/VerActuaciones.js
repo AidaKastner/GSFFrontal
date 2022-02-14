@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faInfo } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import ModalTitle from "react-bootstrap/ModalTitle";
 import ReactPaginate from 'react-paginate';
 import '../css/Pagination.css';
 import CargarExcel from "../components/CargarExcel";
@@ -68,7 +69,7 @@ class VerActuaciones extends Component{
 
   {/*Tabla de Actuaciones*/}
   this.columns = [
-    {dataField: 'acciones', text: <Translation ns= "global">{(t) => <>{t( 'Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones, style: this.columnStyle, formatter: this.formatText},
+    {dataField: 'acciones', text: <Translation ns= "global">{(t) => <>{t( 'Acciones')}</>}</Translation>, formatter: this.ButtonsAcciones, style: this.columnStyle, formatter: this.ButtonsAcciones},
     {dataField: 'ddTipoActuacione.nombre', text:<Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
     {dataField: 'carretera.nombre', text: <Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
     {dataField: 'claveObra', text: <Translation ns= "global">{(t) => <>{t('Clave')}</>}</Translation>, sort: true, filter: textFilter({placeholder: ' '}), style: this.columnStyle, formatter: this.formatText},
@@ -99,12 +100,7 @@ class VerActuaciones extends Component{
 
   
 
-
-
   ButtonsAcciones = (cell, row, rowIndex) => {
-    //console.log("cell :", cell);
-    //console.log("row: ", row);
-    //console.log("rowindex ", rowIndex);
            
     return (
       <div>    
@@ -225,7 +221,7 @@ seleccionarActuacion=(actuacion)=>{
         return(
           
             <div className="App" >            
-            <button className="btn btn-primario" onClick={()=>{this.setState({form: null}); this.modalImportar()}}><Trans ns= "global">ImpAct</Trans></button>       
+            <button className="btn btn-primario" onClick={()=>{this.setState({form: null}); this.modalImportar()}}><Trans ns= "global">ImpActs</Trans></button>       
             {"  "}
             <button className="btn btn-primario" onClick={()=>{this.setState({form: null, tipoModal: 'Insertar', tipoModalV: ''}); this.modalInsertar()}}><Trans ns= "global">AddAct</Trans></button>      
           <br /><br />
@@ -242,19 +238,18 @@ seleccionarActuacion=(actuacion)=>{
             classes="w-auto text-nowrap"
           />
 
-
           {/*Modal para cargar un Excel de actuaciones*/}
           <Modal isOpen={this.state.modalImportar}>
                 <ModalHeader style={{display: 'block'}}>
                   <span style={{float: 'right'}}>
                     <button className="btn btn-danger btn-sm" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Importar', tipoModal: ''})}}>x</button>
                   </span>
+                  <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('ImpActs')}</>}</Translation></ModalTitle>
                 </ModalHeader>
                 <ModalBody>
                   <CargarExcel/>
                 </ModalBody>
-          </Modal>
-       
+          </Modal>     
 
           {/*Modal para Eliminar la Actuación*/}
           <Modal isOpen={this.state.modalEliminar}>
@@ -273,6 +268,11 @@ seleccionarActuacion=(actuacion)=>{
                   <span style={{float: 'right'}}>
                     <button className="btn btn-danger btn-sm" onClick={()=>{this.modalVerificar(); this.setState({tipoModalV: 'Guardar'})}}>x</button>
                   </span>
+                  {this.state.tipoModal=='Actualizar'?
+                  <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('EditAct')}</>}</Translation></ModalTitle>
+                  :
+                  <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('AddAct')}</>}</Translation></ModalTitle>
+                }  
                 </ModalHeader>
                 <ModalBody>
                 {this.state.tipoModal=='Actualizar'?
@@ -288,8 +288,6 @@ seleccionarActuacion=(actuacion)=>{
                   }                   
                 </ModalBody>
           </Modal>
-
-          
 
           {/*Modal para verificar si se quiere salir de Crear/Editar o de Importar*/}
           <Modal isOpen={this.state.modalVerificar}>
@@ -312,18 +310,16 @@ seleccionarActuacion=(actuacion)=>{
           {/*Modal para mostrar la información de una Actuación*/}
           <Modal size="lg" style={{maxWidth: '1600px', width: '80%'}} isOpen={this.state.modalInfo}>
                 <ModalHeader style={{display: 'block'}}>
-                  <h1 style={{marginBottom: '0%'}}><Translation ns= "global">{(t) => <>{t('InfoAct')}</>}</Translation></h1> 
+                <span style={{float: 'right'}}>           
+                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalInfo();}}>x</button>
+                </span>
+                <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('InfoAct')}</>}</Translation></ModalTitle>
                 </ModalHeader>
-                <ModalBody>
+                <ModalBody style={{marginBottom: '20px'}}>
                   <InfoActuacion                
                     Actuacion = {this.state.form?.actuacion}
                   />                   
                 </ModalBody>
-                <ModalFooter>                            
-                  <span style={{float: 'right'}}>
-                      <button className="btn btn-danger btn-sm" onClick={()=>{this.modalInfo();}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
-                  </span> 
-                </ModalFooter>
           </Modal>
           </div>
         )

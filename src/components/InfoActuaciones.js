@@ -17,12 +17,10 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 function InfoActuaciones({Actuacion}){
     console.log("Actuacion: ", Actuacion);
 
-
-
-
     return(
 
         <div>  
+          {/*DATOS GENERALES*/}
           <Container>
           <Row> 
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Carretera"><Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation></label><br /></Col>            
@@ -31,14 +29,15 @@ function InfoActuaciones({Actuacion}){
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="ClaveObra"><Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation></label></Col>            
             <Col xs={2}>{Actuacion.claveObra}</Col>
 
-            <Col xs={1} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Fecha"><Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation></label></Col>            
+            <Col xs={1} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Tipo"><Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation></label></Col>            
+            <Col xs={1}>{Actuacion.ddTipoActuacione.nombre}</Col>
+
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Fecha"><Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation></label></Col>            
             <Col xs={1}>{Actuacion.fecha.substring(0,10)}</Col>
 
-            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Sentido"><Translation ns= "global">{(t) => <>{t('Sentido')}</>}</Translation></label></Col>            
-            <Col xs={1}>{Actuacion.sentido == 'C'? 'Creixent': Actuacion.sentido == 'D'? 'Decreixent' : 'Creixent/Decreixent'}</Col>
+            
             <br />
           </Row>
-
 
           <Row> 
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="PkIni"><Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation></label></Col>            
@@ -55,7 +54,6 @@ function InfoActuaciones({Actuacion}){
           
           </Row>
 
-
           <Row>           
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Carriles"><Translation ns= "global">{(t) => <>{t('Carriles')}</>}</Translation></label></Col>            
             <Col xs={1}>{Actuacion.carriles}</Col>
@@ -70,21 +68,26 @@ function InfoActuaciones({Actuacion}){
             <Col xs={1}>{Actuacion.utilizada}</Col>
           </Row>
 
+          <Row>          
+          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Sentido"><Translation ns= "global">{(t) => <>{t('Sentido')}</>}</Translation></label></Col>            
+          <Col xs={1}>{Actuacion.sentido == 'C'? 'Creixent': Actuacion.sentido == 'D'? 'Decreixent' : 'Creixent/Decreixent'}</Col>
 
-          <Row>           
-            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Observaciones"><Translation ns= "global">{(t) => <>{t('Observaciones')}</>}</Translation></label></Col>            
-            <Col xs={10}>{Actuacion.observaciones}</Col>        
+          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="Observaciones"><Translation ns= "global">{(t) => <>{t('Observaciones')}</>}</Translation></label></Col>            
+          <Col xs={7}>{Actuacion.observaciones}</Col>        
           </Row>
 
           <Row>
           <br /><hr width="70%"></hr> <br />
           </Row>
+          </Container> 
 
-        <Row>
+          {/*DATOS FIRME*/}
+          <Container>
+          <Row>
          <h3><Col xs={2} style={{textAlign: "right", fontWeight: 'bold', color: '#a11510'}}><label htmlFor="DatosFirme"><Translation ns= "global">{(t) => <>{t('DatosFirme')}</>}</Translation></label></Col>  </h3> 
-        </Row>
+          </Row>
 
-        <Row> 
+          <Row> 
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="AnchArcen"><Translation ns= "global">{(t) => <>{t('AnchArcen')}</>}</Translation></label></Col>            
             <Col xs={1}>{Actuacion.actuacionesFirme?.anchuraArcen <= 0? '': Actuacion.actuacionesFirme?.anchuraArcen + ' m.'}</Col>
 
@@ -97,7 +100,6 @@ function InfoActuaciones({Actuacion}){
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="NilInf"><Translation ns= "global">{(t) => <>{t('NilInf')}</>}</Translation></label></Col>            
             <Col xs={1}>{Actuacion.actuacionesFirme?.idDdNivelesInfluencia}</Col>
           </Row>
-
 
           <Row> 
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="TipoFirme"><Translation ns= "global">{(t) => <>{t('TipoFirme')}</>}</Translation></label></Col>            
@@ -155,9 +157,7 @@ function InfoActuaciones({Actuacion}){
 
             <Col xs={1} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspesorSubBaseArc"><Translation ns= "global">{(t) => <>{t('Esps')}</>}</Translation></label></Col>            
             <Col xs={1}>{Actuacion.actuacionesFirme?.espesorSubbaseArcen <= 0? '': Actuacion.actuacionesFirme.espesorSubbaseArcen + ' cm.'}</Col>
-          </Row>
-
-      
+          </Row>     
 
           <Row>      
             <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CapRodArc"><Translation ns= "global">{(t) => <>{t('CapaRodArc')}</>}</Translation></label></Col>            
@@ -173,39 +173,46 @@ function InfoActuaciones({Actuacion}){
             <Col xs={1}>{Actuacion.actuacionesFirme?.espesorSubbaseArcen <= 0? '': Actuacion.actuacionesFirme?.espesorSubbaseArcen + ' cm.'}</Col>
           </Row>
 
-          <Row>
-          <br /><hr width="70%"></hr> <br />
-          </Row>
+          
+          </Container>
 
-          <Row>
-          <h3><Col xs={2} style={{textAlign: "right", fontWeight: 'bold', color: '#a11510'}}><label htmlFor="DatosExplanada"><Translation ns= "global">{(t) => <>{t('DatosExplanada')}</>}</Translation></label></Col>  </h3> 
+          {/*DATOS EXPLANADA*/}
+          {Actuacion.idDdTipoActuaciones != 'M' && Actuacion.idDdTipoActuaciones != 'R' ?
+            <Container>
+            <Row>
+            <br /><hr width="70%"></hr> <br />
+            </Row>
+            <Row>
+            <h3><Col xs={2} style={{textAlign: "right", fontWeight: 'bold', color: '#a11510'}}><label htmlFor="DatosExplanada"><Translation ns= "global">{(t) => <>{t('DatosExplanada')}</>}</Translation></label></Col>  </h3> 
+            </Row>
+
+            <Row>       
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspCoronacion"><Translation ns= "global">{(t) => <>{t('EspCoronacion')}</>}</Translation></label></Col>            
+            <Col xs={1}>{(Actuacion.actuacionesExplanada?.coronacion <= 0 || Actuacion.actuacionesExplanada == null) ? '': Actuacion.actuacionesExplanada?.coronacion + ' cm.'}</Col>
+
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRCoronacion"><Translation ns= "global">{(t) => <>{t('CBRCoronacion')}</>}</Translation></label></Col>            
+            <Col xs={1}>{Actuacion.actuacionesExplanada?.coronacionCbr}</Col>
+
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspRelleno"><Translation ns= "global">{(t) => <>{t('EspRelleno')}</>}</Translation></label></Col>            
+            <Col xs={1}>{(Actuacion.actuacionesExplanada?.relleno <= 0 || Actuacion.actuacionesExplanada == null)? '': Actuacion.actuacionesExplanada?.relleno + ' cm.'}</Col>
+
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRRelleno"><Translation ns= "global">{(t) => <>{t('CBRRelleno')}</>}</Translation></label></Col>            
+            <Col xs={1}>{Actuacion.actuacionesExplanada?.rellenoCbr}</Col>
           </Row>
 
           <Row>       
-          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspCoronacion"><Translation ns= "global">{(t) => <>{t('EspCoronacion')}</>}</Translation></label></Col>            
-          <Col xs={1}>{(Actuacion.actuacionesExplanada?.coronacion <= 0 || Actuacion.actuacionesExplanada == null) ? '': Actuacion.actuacionesExplanada?.coronacion + ' cm.'}</Col>
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspTerreno"><Translation ns= "global">{(t) => <>{t('EspTerreno')}</>}</Translation></label></Col>            
+            <Col xs={1}>{(Actuacion.actuacionesExplanada?.relleno <= 0 || Actuacion.actuacionesExplanada == null)? '': Actuacion.actuacionesExplanada?.relleno + ' cm.'}</Col>
 
-          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRCoronacion"><Translation ns= "global">{(t) => <>{t('CBRCoronacion')}</>}</Translation></label></Col>            
-          <Col xs={1}>{Actuacion.actuacionesExplanada?.coronacionCbr}</Col>
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRTerreno"><Translation ns= "global">{(t) => <>{t('CBRTerreno')}</>}</Translation></label></Col>            
+            <Col xs={1}>{Actuacion.actuacionesExplanada?.rellenoCbr}</Col>
 
-          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspRelleno"><Translation ns= "global">{(t) => <>{t('EspRelleno')}</>}</Translation></label></Col>            
-          <Col xs={1}>{(Actuacion.actuacionesExplanada?.relleno <= 0 || Actuacion.actuacionesExplanada == null)? '': Actuacion.actuacionesExplanada?.relleno + ' cm.'}</Col>
-
-          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRRelleno"><Translation ns= "global">{(t) => <>{t('CBRRelleno')}</>}</Translation></label></Col>            
-          <Col xs={1}>{Actuacion.actuacionesExplanada?.rellenoCbr}</Col>
-        </Row>
-
-        <Row>       
-          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="EspTerreno"><Translation ns= "global">{(t) => <>{t('EspTerreno')}</>}</Translation></label></Col>            
-          <Col xs={1}>{(Actuacion.actuacionesExplanada?.relleno <= 0 || Actuacion.actuacionesExplanada == null)? '': Actuacion.actuacionesExplanada?.relleno + ' cm.'}</Col>
-
-          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CBRTerreno"><Translation ns= "global">{(t) => <>{t('CBRTerreno')}</>}</Translation></label></Col>            
-          <Col xs={1}>{Actuacion.actuacionesExplanada?.rellenoCbr}</Col>
-
-          <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CategoriaExpl"><Translation ns= "global">{(t) => <>{t('CategoriaExplanada')}</>}</Translation></label></Col>            
-          <Col xs={1}>{Actuacion.actuacionesExplanada?.idDdCategoriasExplanadas != null ? Actuacion.actuacionesExplanada?.idDdCategoriasExplanadas : ''}</Col>
-        </Row>
-        </Container>                                               
+            <Col xs={2} style={{textAlign: "right", fontWeight: 'bold'}}><label htmlFor="CategoriaExpl"><Translation ns= "global">{(t) => <>{t('CategoriaExplanada')}</>}</Translation></label></Col>            
+            <Col xs={1}>{Actuacion.actuacionesExplanada?.idDdCategoriasExplanadas != null ? Actuacion.actuacionesExplanada?.idDdCategoriasExplanadas : ''}</Col>
+          </Row>
+          </Container>  
+        :null}
+                                                     
       </div>
     )
 }

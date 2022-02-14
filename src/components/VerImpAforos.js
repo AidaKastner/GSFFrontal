@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import ModalTitle from "react-bootstrap/ModalTitle";
 import '../css/Pagination.css';
 import '../css/Menu.css';
 import '../css/Button.css';
@@ -158,17 +159,17 @@ modalVerificar=()=>{
 
         </BootstrapTable>
 
+    {/*Modal para Importar excel*/}
           <Modal isOpen={this.state.modalImportar}>
                 <ModalHeader style={{display: 'block'}}>
-                <span style={{float: 'right'}}>
+                <span style={{float: 'right'}}>           
                     <button className="btn btn-danger btn-sm" onClick={()=>{this.modalVerificar();}}>x</button>
                 </span>
+                <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('ImpAfr')}</>}</Translation></ModalTitle>
                 </ModalHeader>
                 <ModalBody>
                   <ImpExcelAforos/>
                 </ModalBody>
-                <ModalFooter>
-                </ModalFooter>
           </Modal>
 
 
