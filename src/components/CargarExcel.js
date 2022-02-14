@@ -37,7 +37,9 @@ function CargarExcel(){
 
   const getStatistics = () => {
     axios.get(urlStatistics).then(response => {
-      setProgressBarValue(response.data.finishedCount / response.data.totalCount * 100);
+      console.log('response.data.finishedCount ', response.data.finishedCount);
+      console.log('response.data.totalCount ', response.data.totalCount);
+      setProgressBarValue(Math.round(response.data.finishedCount / response.data.totalCount * 100));
     });
   }
 
@@ -49,6 +51,7 @@ function CargarExcel(){
     console.log(f);
    
     const myInterval = setInterval(getStatistics, 1000);
+    console.log('getStatistics ', getStatistics);
    
     await axios.post(url, f, config)
     .then(response =>{
@@ -244,7 +247,6 @@ function CargarExcel(){
   return (
     <div>
       <br/>
-        <h1><Translation ns= "global">{(t) => <>{t('ImpActs')}</>}</Translation></h1>    
           <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
           {
             showProgressBar
@@ -253,7 +255,7 @@ function CargarExcel(){
                 </div>
               : ""
           }
-          <br />
+          <br /><br />
           {/*<button className="btn btn-primario btn-sm" style={{float: 'right'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>*/}
           <button className="btn btn-primario btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
           <button className="btn btn-primary btn-sm" style={{float: 'right', marginRight: '5px'}} onClick={()=>peticionDownload()}><Translation ns= "global">{(t) => <>{t('DescargarPlantilla')}</>}</Translation></button> 

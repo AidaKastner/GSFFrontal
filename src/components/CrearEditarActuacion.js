@@ -1155,11 +1155,9 @@ function CrearEditarActuacion({Actuacion, Data}){
 
     return(
 
-        <div>  
-                    
+        <div>                    
           <div className="form-group">       
-          
-            
+                
              {/*Datos iniciales del formulario, para seleccionar los puntos activos.*/} 
              <Container>
              
@@ -1254,22 +1252,39 @@ function CrearEditarActuacion({Actuacion, Data}){
                 </Row>
 
                 <Row>
-             <Col xs={2}></Col>
-             <Col xs={6}>
-                { msgOutBoolKO ? 
-                <div class="alert alert-danger">
-                    {/*Mostramos mensaje*/}
-                    {msgOut}
-                    <br />
-                </div>           
-                : ""}
-            </Col>
-            
-            <br />
-            </Row>
+                <Col xs={2}></Col>
+                <Col xs={6}>
+                    { msgOutBoolKO ? 
+                    <div class="alert alert-danger">
+                        {/*Mostramos mensaje*/}
+                        {msgOut}
+                        <br />
+                    </div>           
+                    : ""}
+                </Col>
+                
+                <br />
+                </Row>
 
             </Container>
-            : null }
+            : 
+            
+            <Container>
+                <Row>
+                <Col xs={2}></Col>
+                <Col xs={6}>
+                    { msgOutBoolKO ? 
+                    <div class="alert alert-danger">
+                        {/*Mostramos mensaje*/}
+                        {msgOut}
+                        <br />
+                    </div>           
+                    : ""}
+                </Col>
+                
+                <br />
+                </Row>
+            </Container>}
             <br />                
             </div>
                 
