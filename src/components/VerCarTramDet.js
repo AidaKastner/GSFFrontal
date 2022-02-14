@@ -478,7 +478,7 @@ render() {
             name="OrgCom"
             className="u-full-width"
             //onChange={actualizarState}
-            value={this.state.form.ddRegimenExplotacionNombre}
+            value={this.state.form.ddOrganismosNombre}
         />
         <label><Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation></label>
         <input
@@ -504,10 +504,10 @@ render() {
             //onChange={actualizarState}
             value={this.state.form.ddZonasTermicaNombre}
         />
-        <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
+        <label><Translation ns= "global">{(t) => <>{t('ZonaPluv')}</>}</Translation></label>
         <input
             type="text"
-            name="zonTer"
+            name="ZonaPluv"
             className="u-full-width"
             //onChange={actualizarState}
             value={this.state.form.ddZonasPluvNombre}
