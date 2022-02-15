@@ -19,6 +19,7 @@ import Spinner from "../components/Spinner";
 import Container from 'react-bootstrap/Container'
 import GoogleMapComponent from "../components/GoogleMapComponent";
 import EditarTramo from "../components/EditarTramo";
+import ModalTitle from "react-bootstrap/ModalTitle";
 
 
 const url = "https://localhost:44301/Tramos/";
@@ -1013,7 +1014,10 @@ render() {
         </form>
         <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#FFFFFF'}}  isOpen={this.state.modalEditar}>
           <ModalHeader style={{display: 'block', backgroundColor: '#FFFFFF'}}>
-            <h1><Translation ns= "global">{(t) => <>{t('EditTramo')}</>}</Translation></h1>  
+              <span style={{float: 'right'}}>
+                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalEditar()}}>x</button>                    
+              </span>
+              <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('EditTramo')}</>}</Translation></ModalTitle>
           </ModalHeader>
           <ModalBody style={{backgroundColor: '#FFFFFF'}}>
             <div style={{marginRight:'1%', marginTop: '1%', backgroundColor: '#FFFFFF'}}>                                  
@@ -1023,11 +1027,6 @@ render() {
             </div>    
           </ModalBody>
           <ModalFooter>
-            <span style={{float: 'right', backgroundColor: '#FFFFFF'}}>
-              <button className="btn btn-success btn-sm" onClick={()=>this.peticionPut(this.state.url)}><Translation ns= "global">{(t) => <>{t('Aceptar')}</>}</Translation></button>
-               {"  "}
-              <button className="btn btn-danger btn-sm" onClick={()=>{this.modalEditar()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
-            </span>
           </ModalFooter>
         </Modal>
       </div>
