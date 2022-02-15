@@ -1765,23 +1765,23 @@ seleccionarCarril=(carril)=>{
             </Container>
             <Container>
               <Row>
-                <Col xs={7}>
+                <Col xs={6}>
                   <div className="container">
                     <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
                   </div>
                 </Col>
-                <Col xs={6}>
-                  <div className="container">
-                  
-                  </div>
+                <Col md={6} style={{marginTop: '5%'}}>
+                  <Row>
+                    <GoogleMapComponent />
+                  </Row>
                 </Col>
               </Row>
             </Container>
-            <span style={{float: 'right', backgroundColor: '#FFFFFF'}}>
-              <button className="btn btn-success btn-sm" onClick={()=>this.peticionPut()}><Translation ns= "global">{(t) => <>{t('Aceptar')}</>}</Translation></button>
+            <span style={{float: 'left', backgroundColor: '#FFFFFF', marginBottom: '1%'}}>
+              <button className="btn btn-success btn-sm" onClick={()=>this.peticionPut()}><Translation ns= "global">{(t) => <>{t('Guardar')}</>}</Translation></button>
             </span>
           </form>
-
+          
           <Modal isOpen={this.state.modalEliminarCarril}>
 				      <ModalBody>
               <Translation ns= "global">{(t) => <>{t('eliReg')}</>}</Translation>			        
