@@ -1255,7 +1255,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={2}></Col>
                 <Col xs={6}>
                     { msgOutBoolKO ? 
-                    <div class="alert alert-danger">
+                    <div className="alert alert-danger">
                         {/*Mostramos mensaje*/}
                         {msgOut}
                         <br />
@@ -1274,7 +1274,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 <Col xs={2}></Col>
                 <Col xs={6}>
                     { msgOutBoolKO ? 
-                    <div class="alert alert-danger">
+                    <div className="alert alert-danger">
                         {/*Mostramos mensaje*/}
                         {msgOut}
                         <br />
@@ -1451,7 +1451,7 @@ function CrearEditarActuacion({Actuacion, Data}){
                 : ""}
 
                 { msgOutBoolKOS ? 
-                <div class="alert alert-danger">
+                <div className="alert alert-danger">
                     {/*Mostramos mensaje*/}
                     {msgOutSave}
                 </div>

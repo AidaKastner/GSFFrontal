@@ -1502,7 +1502,7 @@ seleccionarCarril=(carril)=>{
               </BootstrapTable>
             </Col>
   
-            : <div class="alert alert-danger">
+            : <div className="alert alert-danger">
                 {msgOut}
               </div>
                   
@@ -1541,7 +1541,7 @@ seleccionarCarril=(carril)=>{
             : ""}
           { this.state.setMsgOutBoolKO ? 
             <div><br/>
-             <div class="alert alert-danger">
+             <div className="alert alert-danger">
                 {/*Mostramos mensaje*/}
                 {msg}
             </div>
