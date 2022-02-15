@@ -730,7 +730,10 @@ seleccionarTramo=(CarTram)=>{
 
             <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#FFFFFF'}}  isOpen={this.state.modalRedirigir}>
                <ModalHeader style={{display: 'block', backgroundColor: '#FFFFFF'}}>
-                <h1><Translation ns= "global">{(t) => <>{t('VisInfTra')}</>}</Translation></h1>  
+                  <span style={{float: 'right'}}>
+                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalRedirigir()}}>x</button>                    
+                  </span>
+                  <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('VisInfTra')}</>}</Translation></ModalTitle>
                 </ModalHeader>
                 { indice.activeIndex != 0  ?
                 <ModalBody style={{backgroundColor: '#FFFFFF'}}>
@@ -746,9 +749,7 @@ seleccionarTramo=(CarTram)=>{
                    <div></div>
                 }
                 <ModalFooter>
-                  <span style={{float: 'right', backgroundColor: '#FFFFFF'}}>
-                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalRedirigir()}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
-                  </span>
+                  <span style={{float: 'right', backgroundColor: '#FFFFFF'}}></span>
                 </ModalFooter>
             </Modal>
  
