@@ -272,7 +272,7 @@ function CargarExcel(){
 
       { msgOutBoolKO ? 
       <div><br/>
-       <div class="alert alert-danger">
+       <div className="alert alert-danger">
           {/*Mostramos mensaje*/}
           {msgOutErr}
           {msgOutErr1.map(msgOutErr1 => (

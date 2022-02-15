@@ -614,7 +614,7 @@ seleccionarTramo=(CarTram)=>{
             : ""}
           { this.state.setMsgOutBoolKO ? 
             <div><br/>
-             <div class="alert alert-danger">
+             <div className="alert alert-danger">
                 {/*Mostramos mensaje*/}
                 {msg}
             </div>
@@ -652,7 +652,7 @@ seleccionarTramo=(CarTram)=>{
             : ""}
             { this.state.setMsgOutBoolKO ? 
             <div><br/>
-              <div class="alert alert-danger">
+              <div className="alert alert-danger">
                 {/*Mostramos mensaje*/}
                 {msg}
               </div>

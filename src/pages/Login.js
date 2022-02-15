@@ -69,7 +69,7 @@ function Foo() {
 
   return (
     <div className="form-usuario">
-      <h1 class="application-name">{ t('applicationName') }</h1>
+      <h1 className="application-name">{ t('applicationName') }</h1>
       <div>
         <Idioma />
       </div>

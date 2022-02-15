@@ -1,14 +1,13 @@
-/*import React, { Component } from 'react';
+import React, { Component } from 'react';
  
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
  
 const customizeMap = {
-  width: '100%',
-  height: '100%'
+  width: '38%',
+  height: '47%'
 };
  
 class GoogleMapComponent extends React.Component {
-   
   constructor(props) {
     super(props);
     this.state = {
@@ -20,36 +19,35 @@ class GoogleMapComponent extends React.Component {
         {latitude: 50.0874654, longitude: 14.4212535},
         {latitude: 7.5554942, longitude: 80.7137847},
       ]
-    }
+    };
   }
  
   drawMarker = () => {
     return this.state.cords.map((store, i) => {
       return <Marker key={i} id={i} position={{
-       lat: store.latitude,
-       lng: store.longitude
-     }}
- 
-     onClick={() => console.log("Event Hanlder Called")} />
-    })
+          lat: store.latitude,
+          lng: store.longitude
+        }}
+        onClick={() => console.log("Event Hanlder Called")} />
+    });
   }
  
   render() {
     return (
-        <Map
-          google={this.props.google}
-          style={customizeMap}
-          zoom={6}
-          initialCenter={{ 
-            lat: 9.96233, 
-            lng: 49.80404
-        }}>
-          {this.drawMarker()}
-        </Map>
+      <Map
+        google={this.props.google}
+        style={customizeMap}
+        zoom={6}
+        initialCenter={{ 
+          lat: 9.96233, 
+          lng: 49.80404
+      }}>
+        {this.drawMarker()}
+      </Map>
     );
   }
 }
  
 export default GoogleApiWrapper({
-  apiKey: 'Google Maps API Token'
-})(GoogleMapComponent);*/
+  apiKey: 'AIzaSyB5XqKVMRIVh-YUMhdZMrOCAJcD7tWaOig'
+})(GoogleMapComponent);
