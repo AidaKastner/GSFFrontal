@@ -1051,6 +1051,33 @@ peticionDeleteAus=()=>{
 })   
 }
 
+/*Editar registro. */
+peticionPut=()=>{
+  const data = new FormData();
+
+  config = {
+    headers: {
+        'Authorization': sessionStorage.getItem("JWT"),
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+    }
+  };
+  axios.put(url,this.state.form,config).then(response=>{    
+    this.peticionGet();
+    this.setState({modalVerificarEd: false});
+  }).catch(error=>{
+    this.setState({modalVerificarEd: false});
+    console.log("KO");
+    console.log("URL para PUT:", url);
+    console.log(data);
+    console.log(config);
+    console.log("ERROR PUT");
+    console.log(error);        
+    alert("Error mientras se modificaban datos. Pongase en contacto con elservicio técnico"); 
+})   
+}
+
+
 /*Editar registro*/
 modalEditar=()=>{
   this.setState({modalEditar: !this.state.modalEditar});
@@ -1750,6 +1777,9 @@ seleccionarCarril=(carril)=>{
                 </Col>
               </Row>
             </Container>
+            <span style={{float: 'right', backgroundColor: '#FFFFFF'}}>
+              <button className="btn btn-success btn-sm" onClick={()=>this.peticionPut()}><Translation ns= "global">{(t) => <>{t('Aceptar')}</>}</Translation></button>
+            </span>
           </form>
 
           <Modal isOpen={this.state.modalEliminarCarril}>
