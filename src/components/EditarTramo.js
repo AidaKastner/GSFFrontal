@@ -591,19 +591,22 @@ class EditarTramo extends Component{
         firmesTramoArcInt:'',
         firmesTramoArcBas:'',
         firmesTramoArcSub:'',
-        firmesTramoespSubBasArc:'',
-        explTrTerNat:'',
-        explTrTerNatCbr:'',
-        explCatExpl:'',
-        relleno:'',
-        rellenoCbr:'', 
-        coronacion:'', 
-        coronacionCbr:'', 
+        firmesTramoespSubBasArc:'', 
         carSent:'',
         carrOrd:'',
         idGrafo:'',
         IdCarreteras:'',
         IdCarril:'',
+        explanadasTramo:{
+          idDdTerrenosNaturales: '',
+          terrenoNaturalCbr: '',
+          idDdCategoriasExplanadas: '',
+          relleno: '',
+          rellenoCbr: '',
+          coronacion: '',
+          coronacion: '',
+          id: ''
+        },
         puntoIni:{
           pk:'',
           m:'',
@@ -870,13 +873,16 @@ peticionGet=()=>{
         firmesTramoespIntArc: response.data.firmesTramo.espesorIntermediaArcen,
         firmesTramoespespBasArc: response.data.firmesTramo.espesorBaseArcen,
         firmesTramoespSubBasArc: response.data.firmesTramo.espesorSubbaseArcen,
-        explTrTerNat: response.data.explanadasTramo.idDdTerrenosNaturales,
-        explTrTerNatCbr: response.data.explanadasTramo.terrenoNaturalCbr,
-        explCatExpl: response.data.explanadasTramo.idDdCategoriasExplanadas,
-        explRelleno: response.data.explanadasTramo.relleno,
-        explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
-        explCoronacion: response.data.explanadasTramo.coronacion,
-        coronacionCbr: response.data.explanadasTramo.coronacionCbr,
+        explanadasTramo:{
+          idDdTerrenosNaturales: response.data.explanadasTramo.idDdTerrenosNaturales,
+          terrenoNaturalCbr: response.data.explanadasTramo.terrenoNaturalCbr,
+          idDdCategoriasExplanadas: response.data.explanadasTramo.idDdCategoriasExplanadas,
+          relleno: response.data.explanadasTramo.relleno,
+          rellenoCbr: response.data.explanadasTramo.rellenoCbr,
+          coronacion: response.data.explanadasTramo.coronacion,
+          coronacionCbr: response.data.explanadasTramo.coronacionCbr,
+          id: response.data.explanadasTramo.id
+        },
         puntoIni:{
           pk: response.data.puntoIni.pk,
           m: response.data.puntoIni.m,
@@ -1029,13 +1035,16 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
         firmesTramoespIntArc: response.data.firmesTramo.espesorIntermediaArcen,
         firmesTramoespespBasArc: response.data.firmesTramo.espesorBaseArcen,
         firmesTramoespSubBasArc: response.data.firmesTramo.espesorSubbaseArcen,
-        explTrTerNat: response.data.explanadasTramo.idDdTerrenosNaturales,
-        explTrTerNatCbr: response.data.explanadasTramo.terrenoNaturalCbr,
-        explCatExpl: response.data.explanadasTramo.idDdCategoriasExplanadas,
-        explRelleno: response.data.explanadasTramo.relleno,
-        explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
-        explCoronacion: response.data.explanadasTramo.coronacion,
-        coronacionCbr: response.data.explanadasTramo.coronacionCbr,
+        explanadasTramo:{
+          idDdTerrenosNaturales: response.data.explanadasTramo.idDdTerrenosNaturales,
+          terrenoNaturalCbr: response.data.explanadasTramo.terrenoNaturalCbr,
+          idDdCategoriasExplanadas: response.data.explanadasTramo.idDdCategoriasExplanadas,
+          relleno: response.data.explanadasTramo.relleno,
+          rellenoCbr: response.data.explanadasTramo.rellenoCbr,
+          coronacion: response.data.explanadasTramo.coronacion,
+          coronacionCbr: response.data.explanadasTramo.coronacionCbr,
+          id: response.data.explanadasTramo.id
+        },
         puntoIni:{
           pk: response.data.puntoIni.pk,
           m: response.data.puntoIni.m,
@@ -1587,11 +1596,11 @@ seleccionarCarril=(carril)=>{
                 <td>
                 <Select 
                   type="text"
-                  name="terrnat" 
-                  key="terrnat"
+                  name="idDdTerrenosNaturales" 
+                  key="idDdTerrenosNaturales"
                   options={ comboTerNat } 
                   onChange={this.handleChange}
-                  defaultValue={comboTerNat.find(obj => obj.value === this.state.form.explTrTerNat)}
+                  defaultValue={comboTerNat.find(obj => obj.value === this.state.form.explanadasTramo.idDdTerrenosNaturales)}
                   /> 
                  
                 </td>
@@ -1600,7 +1609,7 @@ seleccionarCarril=(carril)=>{
                     type="text"
                     name="cbr"
                     id="cbr"
-                    value={this.state.form.explTrTerNatCbr}
+                    value={this.state.form.explanadasTramo.terrenoNaturalCbr}
                     onChange={this.handleChange}
                   />
                 </td>
@@ -1610,11 +1619,11 @@ seleccionarCarril=(carril)=>{
             <label><Translation ns= "global">{(t) => <>{t('CategExpl')}</>}</Translation></label>
                 <Select 
                   type="text"
-                  name="CategExpl" 
-                  key="CategExpl"
+                  name="idDdCategoriasExplanadas" 
+                  key="idDdCategoriasExplanadas"
                   options={ comboExplanada } 
                   onChange={this.handleChange}
-                  defaultValue={comboExplanada.find(obj => obj.value === this.state.form.explCatExpl)}
+                  defaultValue={comboExplanada.find(obj => obj.value === this.state.form.explanadasTramo.idDdCategoriasExplanadas)}
                   />
              {"  "}
              <br /><br />
@@ -1632,18 +1641,18 @@ seleccionarCarril=(carril)=>{
                   <th> 
                     <input
                       type="text"
-                      name="explRelleno"
-                      id="explRelleno"
-                      value={this.state.form.explRelleno}
+                      name="relleno"
+                      id="relleno"
+                      value={this.state.form.explanadasTramo.relleno}
                       onChange={this.handleChange}
                     />
                  </th>
                   <td>
                     <input
                       type="text"
-                      name="explRellenoCbr"
-                      id="explRellenoCbr"
-                      value={this.state.form.explRellenoCbr}
+                      name="rellenoCbr"
+                      id="rellenoCbr"
+                      value={this.state.form.explanadasTramo.rellenoCbr}
                       onChange={this.handleChange}
                     />
                   </td>
@@ -1653,18 +1662,18 @@ seleccionarCarril=(carril)=>{
                   <td>
                     <input
                       type="text"
-                      name="explCoronacion"
-                      id="explCoronacion"
-                      value={this.state.form.explCoronacion}
+                      name="coronacion"
+                      id="coronacion"
+                      value={this.state.form.explanadasTramo.coronacion}
                       onChange={this.handleChange}
                     />                   
                   </td>
                   <td>
                     <input
                       type="text"
-                      name="explCoronacionCbr"
-                      id="explCoronacionCbr"
-                      value={this.state.form.coronacionCbr}
+                      name="coronacionCbr"
+                      id="coronacionCbr"
+                      value={this.state.form.explanadasTramo.coronacionCbr}
                       onChange={this.handleChange}
                     />                              
                   </td>
@@ -1770,7 +1779,7 @@ seleccionarCarril=(carril)=>{
                   <label><Translation ns= "global">{(t) => <>{t('Carretera')}</>}</Translation></label>
                     <input
                       type="text"
-                      name="carretera"
+                      name='nombre'
                       className="col m3 s12"
                       readOnly = {false}
                       placeholder= {this.state.form.carretera.nombre}
