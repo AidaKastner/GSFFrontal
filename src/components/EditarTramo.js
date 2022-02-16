@@ -53,7 +53,7 @@ const comboRedes = [
 
 //Combo Organismos
 const comboOrg = [
-  {label: "Altres", value: "Altres" },
+{label: "Altres", value: "Altres" },
 {label: "Autopistes, Concesionaria Española, S.A.", value: "Autopistes, Concesionaria Española, S.A." },
 {label: "Autopistes Concessionària Espanyola SA", value: "Autopistes Concessionària Espanyola SA" },
 {label: "AcesaMediterrani", value: "AcesaMediterrani" },
@@ -524,16 +524,43 @@ class EditarTramo extends Component{
       ComboTipFirme: '',
       form:{
         id:'',
-        codigo:'',
-        nombre:'',
+        carretera:{
+          nombre: '',
+          codigo: '',
+          id: '',              
+          comentario: '',
+          idGrafo: ''
+        },
+        carriles:{
+          idTramos: '',
+          ordenCarril: '',
+          sentido: '',
+          id: ''
+        },
         comentario:'',
         longitud:'',
-        pkIni:'',
-        mIni:'',
-        descIni:'',
-        pkFin:'',
-        mFin:'',
-        descFin:'',
+        idDdTiposCalzada:'',
+        idCarreteras: '',
+        idDdAutoriza:'',
+        codificacionTecnicaReal: '',
+        idTramoGemelo: '',
+        rutaKml: '',
+        idDdTipoVia: '',
+        idDdMotivoActualizacion: '',
+        idDdComarca: '',
+        idPuntosIni: '',
+        idPuntosFin: '',
+        idDdRedes: '',
+        idDdCodTecReal: '',
+        idDdOrganismoConservacion: '',
+        idDdOrganismoCompetente: '',
+        idDdZonasPluviometricas: '',
+        idDdZonasTermicas: '',
+        idDdTiposCalzada: '',
+        idDdRegimenGestion: '',
+        idDdRegimenExplotacion: '',
+        sistemaProyeccion: '',
+        idTramoGemelo: '',
         estadoTram:'',
         idDdCodTecReal:'',
         idDdRedes:'',
@@ -576,7 +603,27 @@ class EditarTramo extends Component{
         carrOrd:'',
         idGrafo:'',
         IdCarreteras:'',
-        IdCarril:''
+        IdCarril:'',
+        puntoIni:{
+          pk:'',
+          m:'',
+          descripcion:'',
+          id: '',
+          x: '',
+          y: '',
+          z: '',
+          idDdPuntosCausaCorte: ''
+        },
+        puntoFin:{
+          pk:'',
+          m:'',
+          descripcion:'',
+          id: '',
+          x: '',
+          y: '',
+          z: '',
+          idDdPuntosCausaCorte: ''
+        }
       }
     }
 
@@ -666,11 +713,11 @@ controlErrAlta=(controlErrorTramo)=>{
 
   //Maneja la edición  en los forms
   handleChange=async e=>{
-    e.persist();
+    //e.persist();
     await this.setState({
       form:{
         ...this.state.form,
-        [e.target.name]: e.target.value
+        //[e.target.name]: e.target.value
       }
     });
     console.log("Funcion Handle",this.state.form);
@@ -754,19 +801,45 @@ peticionGet=()=>{
       ComboTipFirme: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
       form: {
         id: response.data.id,
-        nombre: response.data.carretera.nombre,
-        codigo: response.data.carretera.codigo,
+        carretera:{
+          nombre: response.data.carretera.nombre,
+          codigo: response.data.carretera.codigo,
+          id: response.data.carretera.id,              
+          comentario: response.data.carretera.comentario,
+          idGrafo: response.data.carretera.idGrafo
+        },
+        /*carriles:{
+          idTramos: response.data.carriles.idTramos,
+          ordenCarril: response.data.carriles.ordenCarril,
+          sentido: response.data.carriles.sentido,
+          id: response.data.carriles.id
+        },*/
         comentario: response.data.comentario,
         longitud: response.data.longitud,
         fechaAlta: response.data.fechaAlta.substr(0, 10),
         fechaBaja: response.data.fechaBaja,
         idDdTiposCalzada: response.data.idDdTiposCalzada,
-        pkIni: response.data.puntoIni.pk,
-        mIni: response.data.puntoIni.m,
-        descIni: response.data.puntoIni.descripcion,
-        pkFin: response.data.puntoFin.pk,
-        mFin: response.data.puntoFin.m,
-        descFin: response.data.puntoFin.descripcion,
+        idCarreteras: response.data.idCarreteras,
+        idDdAutoriza: response.data.idDdAutoriza,
+        codificacionTecnicaReal: response.data.codificacionTecnicaReal,
+        idTramoGemelo: response.data.idTramoGemelo,
+        rutaKml: response.data.rutaKml,
+        idDdTipoVia: response.data.idDdTipoVia,
+        idDdMotivoActualizacion: response.data.idDdMotivoActualizacion,
+        idDdComarca: response.data.idDdComarca,
+        idPuntosIni: response.data.idPuntosIni,
+        idPuntosFin: response.data.idPuntosFin,
+        idDdRedes: response.data.idDdRedes,
+        idDdCodTecReal: response.data.idDdCodTecReal,
+        idDdOrganismoConservacion: response.data.idDdOrganismoConservacion,
+        idDdOrganismoCompetente: response.data.idDdOrganismoCompetente,
+        idDdZonasPluviometricas: response.data.idDdZonasPluviometricas,
+        idDdZonasTermicas: response.data.idDdZonasTermicas,
+        idDdTiposCalzada: response.data.idDdTiposCalzada,
+        idDdRegimenGestion: response.data.idDdRegimenGestion,
+        idDdRegimenExplotacion: response.data.idDdRegimenExplotacion,
+        sistemaProyeccion: response.data.sistemaProyeccion,
+
         idDdCodTecReal: response.data.idDdCodTecReal,
         idDdRedesNombre: response.data.ddRede.nombre,
         ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
@@ -803,7 +876,27 @@ peticionGet=()=>{
         explRelleno: response.data.explanadasTramo.relleno,
         explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
         explCoronacion: response.data.explanadasTramo.coronacion,
-        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
+        coronacionCbr: response.data.explanadasTramo.coronacionCbr,
+        puntoIni:{
+          pk: response.data.puntoIni.pk,
+          m: response.data.puntoIni.m,
+          descripcion: response.data.puntoIni.descripcion,
+          id: response.data.puntoIni.id,
+          x: response.data.puntoIni.x,
+          y: response.data.puntoIni.y,
+          z: response.data.puntoIni.z,
+          idDdPuntosCausaCorte: response.data.puntoIni.idDdPuntosCausaCorte
+        },
+        puntoFin:{
+          pk: response.data.puntoFin.pk,
+          m: response.data.puntoFin.m,
+          descripcion: response.data.puntoFin.descripcion,
+          id: response.data.puntoFin.id,
+          x: response.data.puntoFin.x,
+          y: response.data.puntoFin.y,
+          z: response.data.puntoFin.z,
+          idDdPuntosCausaCorte: response.data.puntoFin.idDdPuntosCausaCorte
+        }
       }
       
     });
@@ -867,20 +960,46 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
       ComboTipFirme: tipoFirm,
       form: {
         id: response.data.id,
-        nombre: response.data.carretera.nombre,
-        codigo: response.data.carretera.codigo,
+        carretera:{
+          nombre: response.data.carretera.nombre,
+          codigo: response.data.carretera.codigo,
+          id: response.data.carretera.id,              
+          comentario: response.data.carretera.comentario,
+          idGrafo: response.data.carretera.idGrafo
+        },
+        /*carriles:{
+          idTramos: response.data.carriles.idTramos,
+          ordenCarril: response.data.carriles.ordenCarril,
+          sentido: response.data.carriles.sentido,
+          id: response.data.carriles.id
+        },*/
         comentario: response.data.comentario,
         longitud: response.data.longitud,
         fechaAlta: response.data.fechaAlta.substr(0, 10),
         fechaBaja: response.data.fechaBaja,
         idDdTiposCalzada: response.data.idDdTiposCalzada,
-        pkIni: response.data.puntoIni.pk,
-        mIni: response.data.puntoIni.m,
-        descIni: response.data.puntoIni.descripcion,
-        pkFin: response.data.puntoFin.pk,
-        mFin: response.data.puntoFin.m,
-        descFin: response.data.puntoFin.descripcion,
+        idCarreteras: response.data.idCarreteras,
+        idDdAutoriza: response.data.idDdAutoriza,
+        codificacionTecnicaReal: response.data.codificacionTecnicaReal,
+        idTramoGemelo: response.data.idTramoGemelo,
+        rutaKml: response.data.rutaKml,
+        idDdTipoVia: response.data.idDdTipoVia,
+        idDdMotivoActualizacion: response.data.idDdMotivoActualizacion,
+        idDdComarca: response.data.idDdComarca,
+        idPuntosIni: response.data.idPuntosIni,
+        idPuntosFin: response.data.idPuntosFin,
+        idDdRedes: response.data.idDdRedes,
         idDdCodTecReal: response.data.idDdCodTecReal,
+        idDdOrganismoConservacion: response.data.idDdOrganismoConservacion,
+        idDdOrganismoCompetente: response.data.idDdOrganismoCompetente,
+        idDdZonasPluviometricas: response.data.idDdZonasPluviometricas,
+        idDdZonasTermicas: response.data.idDdZonasTermicas,
+        idDdTiposCalzada: response.data.idDdTiposCalzada,
+        idDdRegimenGestion: response.data.idDdRegimenGestion,
+        idDdRegimenExplotacion: response.data.idDdRegimenExplotacion,
+        sistemaProyeccion: response.data.sistemaProyeccion,
+        idDdCodTecReal: response.data.idDdCodTecReal,
+
         idDdRedesNombre: response.data.ddRede.nombre,
         ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
         ddOrganismosNombre: response.data.ddOrganismos.nombre,
@@ -916,7 +1035,27 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
         explRelleno: response.data.explanadasTramo.relleno,
         explRellenoCbr: response.data.explanadasTramo.rellenoCbr,
         explCoronacion: response.data.explanadasTramo.coronacion,
-        explCoronacionCbr: response.data.explanadasTramo.coronacionCbr
+        coronacionCbr: response.data.explanadasTramo.coronacionCbr,
+        puntoIni:{
+          pk: response.data.puntoIni.pk,
+          m: response.data.puntoIni.m,
+          descripcion: response.data.puntoIni.descripcion,
+          id: response.data.puntoIni.id,
+          x: response.data.puntoIni.x,
+          y: response.data.puntoIni.y,
+          z: response.data.puntoIni.z,
+          idDdPuntosCausaCorte: response.data.puntoIni.idDdPuntosCausaCorte
+        },
+        puntoFin:{
+          pk: response.data.puntoFin.pk,
+          m: response.data.puntoFin.m,
+          descripcion: response.data.puntoFin.descripcion,
+          id: response.data.puntoFin.id,
+          x: response.data.puntoFin.x,
+          y: response.data.puntoFin.y,
+          z: response.data.puntoFin.z,
+          idDdPuntosCausaCorte: response.data.puntoFin.idDdPuntosCausaCorte
+        }
       }
       
     });
@@ -1054,6 +1193,7 @@ peticionDeleteAus=()=>{
 /*Editar registro. */
 peticionPut=()=>{
   const data = new FormData();
+  console.log("Objeto --> API",this.state.form);
 
   config = {
     headers: {
@@ -1062,6 +1202,14 @@ peticionPut=()=>{
         'content-type': 'application/json'
     }
   };
+
+  this.setState({
+    form:{
+      ...this.state.form,
+    }
+  });
+  console.log("Objeto --> API",this.state.form);
+
   axios.put(url,this.state.form,config).then(response=>{    
     this.peticionGet();
     this.setState({modalVerificarEd: false});
@@ -1100,8 +1248,8 @@ seleccionarTramo=(CarTram)=>{
     tipoModal: 'Seleccionar',
     form: {
       id: CarTram.id,
-      codigo: CarTram.codigo,
-      nombre: CarTram.nombre,
+      codigo: CarTram.carretera.codigo,
+      nombre: CarTram.carretera.nombre,
       comentario: CarTram.comentario,
       idGrafo: CarTram.idGrafo
     }
@@ -1188,63 +1336,72 @@ seleccionarCarril=(carril)=>{
               <br /><br />
               <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>             
               <Select name="ClasFunRedes" 
-                  key='ClasFunRedes'
+                  key="ClasFunRedes"
                   options={ comboRedes } 
                   defaultValue={comboRedes.find(obj => obj.value === this.state.form.idDdRedesNombre)}
+                  onChange={this.handleChange}
+                  
                 /> 
 
               <label><Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation></label>
               
               <Select name="ClasTecReal" 
-                  key='ClasTecReal'
+                  key="ClasTecReal"
                   options={ comboTecReal } 
                   defaultValue={comboTecReal.find(obj => obj.value === this.state.form.ddCodTecRealNombre)}
+                  onChange={this.handleChange}
                 /> 
                <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
                
                <Select name="OrgCons" 
-                  key='OrgCons'
+                  key="OrgCons"
                   options={ comboOrg } 
                   defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismosNombre)}
+                  onChange={this.handleChange}
                 /> 
 
                <label><Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation></label>
                
                <Select name="OrgCom" 
-                  key='OrgCom'
+                  key="OrgCom"
                   options={ comboOrg } 
                   defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismosNombre)}
+                  onChange={this.handleChange}
                 /> 
 
                <label><Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation></label>
                <Select name="RegGest" 
-                  key='RegGest'
+                  key="RegGest"
                   options={ comboGest } 
                   defaultValue={comboGest.find(obj => obj.value === this.state.form.ddRegimenGestionNombre)}
+                  onChange={this.handleChange}
                 /> 
 
                <label><Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation></label>
                
                <Select name="RegExpl" 
-                  key='RegExpl'
+                  key="RegExpl"
                   options={ comboExplo } 
                   defaultValue={comboExplo.find(obj => obj.value === this.state.form.ddRegimenExplotacionNombre)}
+                  onChange={this.handleChange}
                 /> 
 
               <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
 
               <Select name="zonTer" 
-                  key='zonTer'
+                  key="zonTer"
                   options={ comboZonTer } 
                   defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermicaNombre)}
+                  onChange={this.handleChange}
                 /> 
 
             <label><Translation ns= "global">{(t) => <>{t('ZonaPluv')}</>}</Translation></label>
 
             <Select name="ZonaPluv" 
-              key='ZonaPluv'
+              key="ZonaPluv"
               options={ comboZonPluv } 
               defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluvNombre)}
+              onChange={this.handleChange}
               /> 
 
           </div>
@@ -1260,46 +1417,51 @@ seleccionarCarril=(carril)=>{
               <br /><br />
               <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
                 <Select name="TipoFirmeTramo" 
-                  key='TipoFirmeTramo'
+                  key="TipoFirmeTramo"
                   options={ comboTipoFirme } 
                   onChange={this.handleComboTipFirme} 
                   defaultValue={comboTipoFirme.find(obj => obj.value === this.state.form.firmesTramoNombre)}
                 /> 
               <label><Translation ns= "global">{(t) => <>{t('NilInf')}</>}</Translation></label>
                 <Select name="NivelInfluencia" 
-                  key='NivelInfluencia'
+                  key="NivelInfluencia"
                   options={ comboNivelInfluencia } 
-                  //onChange={this.handleCombo} 
+                  onChange={this.handleChange}
                   defaultValue={comboNivelInfluencia.find(obj => obj.value === this.state.form.firmesTramoInfl)}
                   /> 
               <label><Translation ns= "global">{(t) => <>{t('CPA')}</>}</Translation></label>
                 <input
+                    id="CPA"
                     type="text"
                     name="CPA"
                     className="u-full-width"
-                    //onChange={actualizarState}
+                    onChange={this.handleChange}
                     value={this.state.form.firmesTramoCpa}
                 />
               <label><Translation ns= "global">{(t) => <>{t('AnchCar')}</>}</Translation></label>
                 <input
+                    id="AnchCar"
                     type="text"
                     name="AnchCar"
                     className="u-full-width"
-                    //onChange={actualizarState}
+                    onChange={this.handleChange}
                     value={this.state.form.firmesTramoAnchCar}
                 />
               <label><Translation ns= "global">{(t) => <>{t('AnchArc')}</>}</Translation></label>
                 <input
+                    id="AnchArc"
                     type="text"
                     name="AnchArc"
                     className="u-full-width"
-                    //onChange={actualizarState}
+                    onChange={this.handleChange}
                     value={this.state.form.firmesTramoAnchArc}
                 />
               <label><Translation ns= "global">{(t) => <>{t('MPD')}</>}</Translation></label>
                 <Select 
+                  name="MPD" 
+                  key="MPD"
                   options={ comboTipoMPD } 
-                  //onChange={this.handleCombo} 
+                  onChange={this.handleChange} 
                   defaultValue={comboTipoMPD.find(obj => obj.value === this.state.form.firmesTramoMpd)}
                   /> 
               
@@ -1318,18 +1480,20 @@ seleccionarCarril=(carril)=>{
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaRod')}</>}</Translation></th>
                     <td>
                       <Select name="CapaRodadura" 
-                        key='CapaRodadura'
+                        key="CapaRodadura"
                         options={ comboRod } 
                         defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramoCarRod)}
+                        onChange={this.handleChange}
                       /> 
                     </td>
                     
                     <td>{this.state.form.firmesTramoespRodCar}</td>
                     <td>
                       <Select name="CapaRodaduraArc" 
-                        key='CapaRodaduraArc'
+                        key="CapaRodaduraArc"
                         options={ comboRod } 
                         defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramoArcRod)}
+                        onChange={this.handleChange}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramoespRodArc}</td>
@@ -1338,17 +1502,19 @@ seleccionarCarril=(carril)=>{
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaInter')}</>}</Translation></th>
                     <td>
                       <Select name="CapaIntermedia" 
-                        key='CapaIntermedia'
+                        key="CapaIntermedia"
                         options={ comboInt } 
                         defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramoCarInter)}
+                        onChange={this.handleChange}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramoespIntdCar}</td>
                     <td>
                       <Select name="CapaIntermediaArc" 
-                        key='CapaIntermediaArc'
+                        key="CapaIntermediaArc"
                         options={ comboInt } 
                         defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramoArcInt)}
+                        onChange={this.handleChange}
                       /> 
                     </td> 
                     <td>{this.state.form.firmesTramoespIntArc}</td>
@@ -1357,17 +1523,19 @@ seleccionarCarril=(carril)=>{
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaBase')}</>}</Translation></th>
                     <td>
                       <Select name="CapaBase" 
-                        key='CapaBase'
+                        key="CapaBase"
                         options={ comboBase } 
                         defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramoCarBase)}
+                        onChange={this.handleChange}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramoespBasCar}</td>
                     <td>
                       <Select name="CapaBaseArc" 
-                        key='CapaBaseArc'
+                        key="CapaBaseArc"
                         options={ comboBase } 
                         defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramoArcBas)}
+                        onChange={this.handleChange}
                       /> 
                     </td> 
                     <td>{this.state.form.firmesTramoespespBasArc}</td>
@@ -1376,17 +1544,19 @@ seleccionarCarril=(carril)=>{
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaSubb')}</>}</Translation></th>
                     <td>
                       <Select name="CapaSubBase" 
-                        key='CapaSubBase'
+                        key="CapaSubBase"
                         options={ comboSubBase } 
                         defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramoCarSubBase)}
+                        onChange={this.handleChange}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramoespSubBasCar}</td>
                     <td>
                       <Select name="CapaSubBaseArc" 
-                        key='CapaSubBaseArc'
+                        key="CapaSubBaseArc"
                         options={ comboSubBase } 
                         defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramoArcSub)}
+                        onChange={this.handleChange}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramoespSubBasArc}</td>
@@ -1416,8 +1586,11 @@ seleccionarCarril=(carril)=>{
               <tr>        
                 <td>
                 <Select 
+                  type="text"
+                  name="terrnat" 
+                  key="terrnat"
                   options={ comboTerNat } 
-                  //onChange={this.handleCombo} 
+                  onChange={this.handleChange}
                   defaultValue={comboTerNat.find(obj => obj.value === this.state.form.explTrTerNat)}
                   /> 
                  
@@ -1425,8 +1598,10 @@ seleccionarCarril=(carril)=>{
                 <td>
                   <input
                     type="text"
-                    name="explTrTerNatCbr"
+                    name="cbr"
+                    id="cbr"
                     value={this.state.form.explTrTerNatCbr}
+                    onChange={this.handleChange}
                   />
                 </td>
               </tr>
@@ -1434,8 +1609,11 @@ seleccionarCarril=(carril)=>{
             <br /><br />
             <label><Translation ns= "global">{(t) => <>{t('CategExpl')}</>}</Translation></label>
                 <Select 
+                  type="text"
+                  name="CategExpl" 
+                  key="CategExpl"
                   options={ comboExplanada } 
-                  //onChange={this.handleCombo} 
+                  onChange={this.handleChange}
                   defaultValue={comboExplanada.find(obj => obj.value === this.state.form.explCatExpl)}
                   />
              {"  "}
@@ -1455,14 +1633,18 @@ seleccionarCarril=(carril)=>{
                     <input
                       type="text"
                       name="explRelleno"
+                      id="explRelleno"
                       value={this.state.form.explRelleno}
+                      onChange={this.handleChange}
                     />
                  </th>
                   <td>
                     <input
                       type="text"
                       name="explRellenoCbr"
+                      id="explRellenoCbr"
                       value={this.state.form.explRellenoCbr}
+                      onChange={this.handleChange}
                     />
                   </td>
                 </tr>
@@ -1472,14 +1654,18 @@ seleccionarCarril=(carril)=>{
                     <input
                       type="text"
                       name="explCoronacion"
+                      id="explCoronacion"
                       value={this.state.form.explCoronacion}
+                      onChange={this.handleChange}
                     />                   
                   </td>
                   <td>
                     <input
                       type="text"
                       name="explCoronacionCbr"
-                      value={this.state.form.explCoronacionCbr}
+                      id="explCoronacionCbr"
+                      value={this.state.form.coronacionCbr}
+                      onChange={this.handleChange}
                     />                              
                   </td>
                 </tr>
@@ -1586,9 +1772,10 @@ seleccionarCarril=(carril)=>{
                       type="text"
                       name="carretera"
                       className="col m3 s12"
-                      placeholder= {this.state.form.nombre}
-                      //onChange={actualizarState}
-                      value={this.state.form.nombre}
+                      readOnly = {false}
+                      placeholder= {this.state.form.carretera.nombre}
+                      onChange={this.handleChange}
+                      //value={this.state.form.carretera.nombre}
                     />
                 </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -1597,31 +1784,36 @@ seleccionarCarril=(carril)=>{
                       type="text"
                       name="comentario"
                       className="u-full-width"
+                      readOnly = {false}
                       placeholder= {this.state.form.comentario}
-                      //onChange={actualizarState}
-                      value={this.state.form.comentario}
+                      onChange={this.handleChange}
+                      //value={this.state.form.comentario}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation></label>
                     <input
-                      type="text"
+                      type="number"
+                      pattern="[0-9]*"
                       name="pkIni"
                       className="u-full-width"
-                      placeholder={this.state.form.pkIni}
-                      //onChange={actualizarState}
-                      value={this.state.form.pkIni}
+                      readOnly = {false}
+                      placeholder={this.state.form.puntoIni.pk}
+                      onChange={this.handleChange}
+                      //value={this.state.form.puntoIni.pk}
                     />     
                 </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('PKFin')}</>}</Translation></label>
                     <input
-                      type="text"
+                      type="number"
                       name="pkFin"
+                      pattern="[0-9]*"
                       className="u-full-width"
-                      placeholder={this.state.form.pkFin}
-                      //onChange={actualizarState}
-                      value={this.state.form.pkFin}
+                      readOnly = {false}
+                      placeholder={this.state.form.puntoFin.pk}
+                      onChange={this.handleChange}
+                      //value={this.state.form.puntoFin.pk}
                     />     
                 </Col>
               </Row>
@@ -1632,42 +1824,49 @@ seleccionarCarril=(carril)=>{
                       type="text"
                       name="codigo"
                       className="u-full-width"
-                      placeholder= {this.state.orgtableData.codigo}
-                      //onChange={actualizarState}
-                      value={this.state.form.codigo}
+                      readOnly = {false}
+                      placeholder= {this.state.form.carretera.codigo}
+                      onChange={this.handleChange}
+                      //value={this.state.form.carretera.codigo}
                     />
                 </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('long')}</>}</Translation></label>
                     <input
-                      type="text"
+                      type="number"
                       name="longitud"
+                      pattern="[0-9]*"
                       className="u-full-width"
+                      readOnly = {false}
                       placeholder={this.state.form.longitud}
-                      //onChange={actualizarState}
-                      value={this.state.form.longitud}
+                      onChange={this.handleChange}
+                      //value={this.state.form.longitud}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('MIni')}</>}</Translation></label>
                     <input
-                      type="text"
+                      type="number"
                       name="mIni"
+                      pattern="[0-9]*"
                       className="u-full-width"
-                      placeholder={this.state.form.mIni}
-                      //onChange={actualizarState}
-                      value={this.state.form.mIni}
+                      readOnly = {false}
+                      placeholder={this.state.form.puntoIni.m}
+                      onChange={this.handleChange}
+                      //value={this.state.form.puntoIni.m}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('MFin')}</>}</Translation></label>
                     <input
-                      type="text"
+                      type="number"
                       name="mFin"
+                      pattern="[0-9]*"
                       className="u-full-width"
-                      placeholder={this.state.form.mFin}
-                      //onChange={actualizarState}
-                      value={this.state.form.mFin}
+                      readOnly = {false}
+                      placeholder={this.state.form.puntoFin.m}
+                      onChange={this.handleChange}
+                      //value={this.state.form.puntoFin.m}
                     />
                 </Col>
               </Row>
@@ -1677,8 +1876,9 @@ seleccionarCarril=(carril)=>{
                     <input
                       type="text"
                       name="fechaalta"
+                      readOnly = {false}
                       className="u-full-width"                  
-                      //onChange={actualizarState}
+                      onChange={this.handleChange}
                       value={this.state.form.fechaAlta}
                     />
                 </Col>
@@ -1695,9 +1895,10 @@ seleccionarCarril=(carril)=>{
                       type="text"
                       name="descIni"
                       className="u-full-width"
-                      placeholder={this.state.form.descIni}
-                      //onChange={actualizarState}
-                      value={this.state.form.descIni}
+                      readOnly = {false}
+                      placeholder={this.state.form.puntoIni.descripcion}
+                      onChange={this.handleChange}
+                      //value={this.state.form.puntoIni.descripcion}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -1706,9 +1907,10 @@ seleccionarCarril=(carril)=>{
                       type="text"
                       name="descFin"
                       className="u-full-width"
-                      placeholder={this.state.form.descFin}
-                      //onChange={actualizarState}
-                      value={this.state.form.descFin}
+                      readOnly = {false}
+                      placeholder={this.state.form.puntoFin.descripcion}
+                      onChange={this.handleChange}
+                      //value={this.state.form.puntoFin.descripcion}
                     />
                 </Col>
               </Row>
@@ -1719,9 +1921,10 @@ seleccionarCarril=(carril)=>{
                       type="text"
                       name="fechabaja"
                       className="u-full-width"
+                      readOnly = {false}
                       placeholder={this.state.estadoTram}
-                      //onChange={actualizarState}
-                      value={this.state.estadoTram}
+                      onChange={this.handleChange}
+                      //value={this.state.estadoTram}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -1739,24 +1942,26 @@ seleccionarCarril=(carril)=>{
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
                     <input
-                      type="text"
+                      type="number"
                       name="PosIni"
+                      pattern="[0-9]*"
                       className="u-full-width"
-                      readOnly = {true}
+                      readOnly = {false}
                       //placeholder={this.state.form.descFin}
-                      //onChange={actualizarState}
+                      onChange={this.handleChange}
                       //value={this.state.form.descFin}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
                     <input
-                      type="text"
+                      type="number"
                       name="PosFin"
+                      pattern="[0-9]*"
                       className="u-full-width"
-                      readOnly = {true}
+
                       //placeholder={this.state.form.descFin}
-                      //onChange={actualizarState}
+                      onChange={this.handleChange}
                       //value={this.state.form.descFin}
                     />
                 </Col>
@@ -1778,7 +1983,7 @@ seleccionarCarril=(carril)=>{
               </Row>
             </Container>
             <span style={{float: 'left', backgroundColor: '#FFFFFF', marginBottom: '1%'}}>
-              <button className="btn btn-success btn-sm" onClick={()=>this.peticionPut()}><Translation ns= "global">{(t) => <>{t('Guardar')}</>}</Translation></button>
+              <button className="btn btn-success btn-sm" onClick={(e)=>{e.preventDefault(); this.peticionPut();}}><Translation ns= "global">{(t) => <>{t('Guardar')}</>}</Translation></button>
             </span>
           </form>
           
