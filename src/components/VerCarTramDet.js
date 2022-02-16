@@ -17,7 +17,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from "../components/Spinner"; 
 import Container from 'react-bootstrap/Container'
-import GoogleMapComponent from "../components/GoogleMapComponent";
+import MapWithAKmlLayer from '../components/MapWithAKmlLayer';
 import EditarTramo from "../components/EditarTramo";
 import ModalTitle from "react-bootstrap/ModalTitle";
 
@@ -534,7 +534,7 @@ render() {
           </Col>
           <Col md={6}>
             <Row>
-              <GoogleMapComponent />
+              <MapWithAKmlLayer />
             </Row>
           </Col>
         </Row>
