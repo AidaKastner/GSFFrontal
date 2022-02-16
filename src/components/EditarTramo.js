@@ -714,16 +714,140 @@ controlErrAlta=(controlErrorTramo)=>{
   //Maneja la edición  en los forms
   handleChange=async e=>{
     e.persist();
-    await this.setState({
-      form:{
-        ...this.state.form,
-        [e.target.name]: e.target.value
-      }
-    });
+    const name = e.target.name;
+    switch (name) {
+      case 'fechabaja':
+        await this.setState({
+          'estadoTram': e.target.value
+        });
+        break;
+      case 'comentario':
+      case 'longitud':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            [e.target.name]: e.target.value
+          }
+        });
+        break;
+      case 'fechaalta':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            'fechaAlta': e.target.value
+          }
+        });
+        break;
+      case 'PosIni':
+      case 'PosFin':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            'descFin': e.target.value
+          }
+        });
+        break;
+      case 'carretera':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            carretera: {
+              ...this.state.form.carretera,
+              'nombre': e.target.value
+            }
+          }
+        });
+        break;
+      case 'codigo':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            carretera: {
+              ...this.state.form.carretera,
+              [e.target.name]: e.target.value
+            }
+          }
+        });
+        break;
+      case 'pkIni':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            puntoIni: {
+              ...this.state.form.puntoIni,
+              'pk': e.target.value
+            }
+          }
+        });
+        break;
+      case 'mIni':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            puntoIni: {
+              ...this.state.form.puntoIni,
+              'm': e.target.value
+            }
+          }
+        });
+        break;
+      case 'descIni':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            puntoIni: {
+              ...this.state.form.puntoIni,
+              'descripcion': e.target.value
+            }
+          }
+        });
+        break;
+      case 'pkFin':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            puntoFin: {
+              ...this.state.form.puntoFin,
+              'pk': e.target.value
+            }
+          }
+        });
+        break;
+      case 'mFin':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            puntoFin: {
+              ...this.state.form.puntoFin,
+              'm': e.target.value
+            }
+          }
+        });
+        break;
+      case 'descFin':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            puntoFin: {
+              ...this.state.form.puntoFin,
+              'descripcion': e.target.value
+            }
+          }
+        });
+        break;
+      default:
+        await this.setState({
+          form:{
+            ...this.state.form,
+            [e.target.name]: e.target.value
+          }
+        });
+        break;
+    }
+    
     console.log("Funcion Handle",this.state.form);
     console.log("Indice: ",this.state.Index);
-
-    }
+  }
 
     handleComboTipFirme = async e => {
       console.log("EVENTO COMBO: ", e.value);
