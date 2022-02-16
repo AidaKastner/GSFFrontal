@@ -524,6 +524,7 @@ class EditarTramo extends Component{
       ComboTipFirme: '',
       form:{
         id:'',
+        nombre:'',
         carretera:{
           nombre: '',
           codigo: '',
@@ -564,13 +565,47 @@ class EditarTramo extends Component{
         estadoTram:'',
         idDdCodTecReal:'',
         idDdRedes:'',
-        idDdRedesNombre:'',
-        ddCodTecRealNombre:'',
-        ddOrganismosNombre:'',
-        ddRegimenExplotacionNombre:'',
-        ddRegimenGestionNombre:'',
-        ddZonasTermicaNombre:'',
-        ddZonasPluvNombre:'',
+
+        ddTiposCalzada:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddRede:{
+          nombre: '',
+          codigo: ''
+        },
+       
+        ddCodTecRealModel:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddOrganismos:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddRegimenExplotacion:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddRegimenGestion:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddZonasTermica:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddZonasPluviometrica:{
+          nombre: '',
+          codigo: ''
+        },
+
         firmesTramo:{
           idCarrilDdTiposFirmesTramo: '',
           idDdNivelesInfluencia: '',
@@ -755,7 +790,7 @@ controlErrAlta=(controlErrorTramo)=>{
           }
         });
         break;
-      case 'carretera':
+      case 'nombre':
         await this.setState({
           form: {
             ...this.state.form,
@@ -933,6 +968,7 @@ peticionGet=()=>{
       ComboTipFirme: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
       form: {
         id: response.data.id,
+        nombre: response.data.nombre,
         carretera:{
           nombre: response.data.carretera.nombre,
           codigo: response.data.carretera.codigo,
@@ -972,14 +1008,48 @@ peticionGet=()=>{
         idDdRegimenExplotacion: response.data.idDdRegimenExplotacion,
         sistemaProyeccion: response.data.sistemaProyeccion,
         idDdCodTecReal: response.data.idDdCodTecReal,
-        
-        idDdRedesNombre: response.data.ddRede.nombre,
-        ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
-        ddOrganismosNombre: response.data.ddOrganismos.nombre,
-        ddRegimenExplotacionNombre: response.data.ddRegimenExplotacion.nombre,
-        ddRegimenGestionNombre: response.data.ddRegimenGestion.nombre,
-        ddZonasTermicaNombre: response.data.ddZonasTermica.codigo,
-        ddZonasPluvNombre: response.data.ddZonasPluviometrica.codigo,
+
+        ddTiposCalzada:{
+          nombre: response.data.ddTiposCalzada.nombre,
+          codigo: response.data.ddTiposCalzada.codigo
+        },
+
+        ddRede:{
+          nombre: response.data.ddRede.nombre,
+          codigo: response.data.ddRede.codigo
+        },
+
+        ddCodTecRealModel:{
+          nombre: response.data.ddCodTecRealModel.nombre,
+          codigo: response.data.ddCodTecRealModel.codigo
+        },
+
+        ddOrganismos:{
+          nombre: response.data.ddOrganismos.nombre,
+          codigo: response.data.ddOrganismos.codigo
+        },
+
+        ddRegimenExplotacion:{
+          nombre: response.data.ddRegimenExplotacion.nombre,
+          codigo: response.data.ddRegimenExplotacion.codigo
+        },
+
+        ddRegimenGestion:{
+          nombre: response.data.ddRegimenGestion.nombre,
+          codigo: response.data.ddRegimenGestion.codigo
+        },
+
+
+        ddZonasTermica:{
+          nombre: response.data.ddZonasTermica.nombre,
+          codigo: response.data.ddZonasTermica.codigo
+        },
+
+        ddZonasPluviometrica:{
+          nombre: response.data.ddZonasPluviometrica.nombre,
+          codigo: response.data.ddZonasPluviometrica.codigo
+        },
+
         firmesTramo:{
           idCarrilDdTiposFirmesTramo: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
           idDdNivelesInfluencia: response.data.firmesTramo.idDdNivelesInfluencia,
@@ -1099,6 +1169,7 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
       ComboTipFirme: tipoFirm,
       form: {
         id: response.data.id,
+        nombre: response.data.nombre,
         carretera:{
           nombre: response.data.carretera.nombre,
           codigo: response.data.carretera.codigo,
@@ -1139,13 +1210,46 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
         sistemaProyeccion: response.data.sistemaProyeccion,
         idDdCodTecReal: response.data.idDdCodTecReal,
 
-        idDdRedesNombre: response.data.ddRede.nombre,
-        ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
-        ddOrganismosNombre: response.data.ddOrganismos.nombre,
-        ddRegimenExplotacionNombre: response.data.ddRegimenExplotacion.nombre,
-        ddRegimenGestionNombre: response.data.ddRegimenGestion.nombre,
-        ddZonasTermicaNombre: response.data.ddZonasTermica.codigo,
-        ddZonasPluvNombre: response.data.ddZonasPluviometrica.codigo,
+        ddTiposCalzada:{
+          nombre: response.data.ddTiposCalzada.nombre,
+          codigo: response.data.ddTiposCalzada.codigo
+        },
+
+        ddRede:{
+          nombre: response.data.ddRede.nombre,
+          codigo: response.data.ddRede.codigo
+        },
+
+        ddCodTecRealModel:{
+          nombre: response.data.ddCodTecRealModel.nombre,
+          codigo: response.data.ddCodTecRealModel.codigo
+        },
+
+        ddOrganismos:{
+          nombre: response.data.ddOrganismos.nombre,
+          codigo: response.data.ddOrganismos.codigo
+        },
+
+        ddRegimenExplotacion:{
+          nombre: response.data.ddRegimenExplotacion.nombre,
+          codigo: response.data.ddRegimenExplotacion.codigo
+        },
+
+        ddRegimenGestion:{
+          nombre: response.data.ddRegimenGestion.nombre,
+          codigo: response.data.ddRegimenGestion.codigo
+        },
+        
+        ddZonasTermica:{
+          nombre: response.data.ddZonasTermica.nombre,
+          codigo: response.data.ddZonasTermica.codigo
+        },
+
+        ddZonasPluviometrica:{
+          nombre: response.data.ddZonasPluviometrica.nombre,
+          codigo: response.data.ddZonasPluviometrica.codigo
+        },
+
         firmesTramo:{
           idCarrilDdTiposFirmesTramo: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
           idDdNivelesInfluencia: response.data.firmesTramo.idDdNivelesInfluencia,
@@ -1485,7 +1589,7 @@ seleccionarCarril=(carril)=>{
               <Select name="ClasFunRedes" 
                   key="ClasFunRedes"
                   options={ comboRedes } 
-                  defaultValue={comboRedes.find(obj => obj.value === this.state.form.idDdRedesNombre)}
+                  defaultValue={comboRedes.find(obj => obj.value === this.state.form.ddRede.nombre)}
                   onChange={this.handleChange}
                   
                 /> 
@@ -1495,7 +1599,7 @@ seleccionarCarril=(carril)=>{
               <Select name="ClasTecReal" 
                   key="ClasTecReal"
                   options={ comboTecReal } 
-                  defaultValue={comboTecReal.find(obj => obj.value === this.state.form.ddCodTecRealNombre)}
+                  defaultValue={comboTecReal.find(obj => obj.value === this.state.form.ddCodTecRealModel.nombre)}
                   onChange={this.handleChange}
                 /> 
                <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
@@ -1503,7 +1607,7 @@ seleccionarCarril=(carril)=>{
                <Select name="OrgCons" 
                   key="OrgCons"
                   options={ comboOrg } 
-                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismosNombre)}
+                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismos.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1512,7 +1616,7 @@ seleccionarCarril=(carril)=>{
                <Select name="OrgCom" 
                   key="OrgCom"
                   options={ comboOrg } 
-                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismosNombre)}
+                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismos.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1520,7 +1624,7 @@ seleccionarCarril=(carril)=>{
                <Select name="RegGest" 
                   key="RegGest"
                   options={ comboGest } 
-                  defaultValue={comboGest.find(obj => obj.value === this.state.form.ddRegimenGestionNombre)}
+                  defaultValue={comboGest.find(obj => obj.value === this.state.form.ddRegimenGestion.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1529,7 +1633,7 @@ seleccionarCarril=(carril)=>{
                <Select name="RegExpl" 
                   key="RegExpl"
                   options={ comboExplo } 
-                  defaultValue={comboExplo.find(obj => obj.value === this.state.form.ddRegimenExplotacionNombre)}
+                  defaultValue={comboExplo.find(obj => obj.value === this.state.form.ddRegimenExplotacion.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1538,7 +1642,7 @@ seleccionarCarril=(carril)=>{
               <Select name="zonTer" 
                   key="zonTer"
                   options={ comboZonTer } 
-                  defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermicaNombre)}
+                  defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermica.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1547,7 +1651,7 @@ seleccionarCarril=(carril)=>{
             <Select name="ZonaPluv" 
               key="ZonaPluv"
               options={ comboZonPluv } 
-              defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluvNombre)}
+              defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluviometrica.nombre)}
               onChange={this.handleChange}
               /> 
 
