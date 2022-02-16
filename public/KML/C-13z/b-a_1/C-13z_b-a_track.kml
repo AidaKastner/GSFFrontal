@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-13z_b_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-13z_b_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">745</SimpleData>
+            <SimpleData name="CARRETERA">C-13z</SimpleData>
+            <SimpleData name="DENOMINACI">Antigues Travesseres</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-13, Vilanova de la Barca (rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI1">Intersecció C-28z/ C-147 (final variant)</SimpleData>
+            <SimpleData name="TRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-13, Talarn (túnel de Feixans)</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-13,  Talarn (túnel de Feixans)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">C-13, Talarn (túnel de Feixans)</SimpleData>
+            <SimpleData name="DESCRIPCI5">C-13,  Talarn (túnel de Feixans)</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="COMARCA">Pallars Jussà</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">1134</SimpleData>
+            <SimpleData name="IDTRAM">56645</SimpleData>
+            <SimpleData name="X_ini">329005.314144416</SimpleData>
+            <SimpleData name="Y_ini">4673586.205646</SimpleData>
+            <SimpleData name="X_fin">329293.316317279</SimpleData>
+            <SimpleData name="Y_fin">4673748.03883766</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">92490</SimpleData>
+            <SimpleData name="EndMeasure1">92957.9</SimpleData>
+            <SimpleData name="Status2">Unable to locate event.  No valid matching marker could be found in the Marker recordset.</SimpleData>
+            <SimpleData name="BeginMarker1" />
+            <SimpleData name="BeginOffset1" />
+            <SimpleData name="EndMarker1" />
+            <SimpleData name="EndOffset1" />
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.92897166931165,42.1957455975364,0
+0.92909559735246,42.1957817606701,0
+0.92916815425954,42.195792499498,0
+0.92924441778742,42.1957868053865,0
+0.92933057006421,42.1957695042019,0
+0.92945550793237,42.1957293321174,0
+0.92958755094398,42.1956657169973,0
+0.92974269286722,42.1955742333358,0
+0.92995315191331,42.1954389628279,0
+0.93016739328909,42.1952849032491,0
+0.93034856952525,42.1951726746157,0
+0.93048702338577,42.1951068170355,0
+0.93059897972128,42.1950758378793,0
+0.93069138980496,42.1950610057164,0
+0.93079616431849,42.1950558250732,0
+0.93091307268684,42.1950673631127,0
+0.93102326075823,42.1950905653738,0
+0.93110138458292,42.1951249746122,0
+0.93118839758948,42.1951784011264,0
+0.93124991297329,42.1952360818094,0
+0.93146160553089,42.1955486833892,0
+0.93168775707208,42.1959039735147,0
+0.93184782538592,42.1961472867418,0
+0.93202552024272,42.1964333457657,0
+0.9321529883446,42.1967043560497,0
+0.93230125126794,42.197018169296,0
+0.93241015032156,42.1972650818961,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

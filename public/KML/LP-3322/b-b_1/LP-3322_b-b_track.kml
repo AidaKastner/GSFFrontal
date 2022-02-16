@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>LP-3322_b_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>LP-3322_b_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1833</SimpleData>
+            <SimpleData name="CARRETERA">LP-3322</SimpleData>
+            <SimpleData name="DENOMINACI"><![CDATA[Mollerussa a Bellcaire d'Urgell]]></SimpleData>
+            <SimpleData name="DESCRIPCIO">N-II, Mollerussa</SimpleData>
+            <SimpleData name="DESCRIPCI1"><![CDATA[C-53,  Bellcaire d'Urgell]]></SimpleData>
+            <SimpleData name="TRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI2"><![CDATA[Límit comarcal el Pla d'Urgell - la Noguera]]></SimpleData>
+            <SimpleData name="DESCRIPCI3"><![CDATA[C-53,  Bellcaire d'Urgell]]></SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica restant</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4"><![CDATA[Bellcaire d'Urgell (inic tram urbà)]]></SimpleData>
+            <SimpleData name="DESCRIPCI5"><![CDATA[C-53,  Bellcaire d'Urgell]]></SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="COMARCA">Noguera</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">1358</SimpleData>
+            <SimpleData name="IDTRAM">10353</SimpleData>
+            <SimpleData name="X_ini">325907.481334045</SimpleData>
+            <SimpleData name="Y_ini">4624757.0709786</SimpleData>
+            <SimpleData name="X_fin">325958.650104304</SimpleData>
+            <SimpleData name="Y_fin">4624971.41191576</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">14794.0302045453</SimpleData>
+            <SimpleData name="EndMeasure1">15017.116</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">14</SimpleData>
+            <SimpleData name="BeginOffset1">137.752804545329</SimpleData>
+            <SimpleData name="EndMarker1">14</SimpleData>
+            <SimpleData name="EndOffset1">360.838599999999</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.90592931207908,41.7555688998543,0
+0.90604575974607,41.755781870458,0
+0.90615132646207,41.7559680649766,0
+0.90618564298542,41.7560335362735,0
+0.90622191001106,41.7561093104229,0
+0.9062540538846,41.7561713197318,0
+0.9063011879404,41.7562643139305,0
+0.9063417481556,41.7563486322561,0
+0.90637579004798,41.756422564519,0
+0.90640443026121,41.7565220664927,0
+0.90643006686801,41.7566436694258,0
+0.90643486796573,41.7567068915778,0
+0.90644089983798,41.7568025591005,0
+0.90644921573535,41.7568982682533,0
+0.90645486146306,41.7570058171715,0
+0.90646093993096,41.7570963519512,0
+0.90646502137749,41.7571817166484,0
+0.90646703824331,41.7572602889841,0
+0.90647117528228,41.7573439434933,0
+0.90647849361806,41.7574703461895,0
+0.90648123837099,41.7575040453947,0
+0.9064816746542,41.7575094018298,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

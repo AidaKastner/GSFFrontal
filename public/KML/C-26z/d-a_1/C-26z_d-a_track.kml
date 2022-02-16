@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-26z_d_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-26z_d_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1143</SimpleData>
+            <SimpleData name="CARRETERA">C-26z</SimpleData>
+            <SimpleData name="DENOMINACI">Antiga C-26</SimpleData>
+            <SimpleData name="DESCRIPCIO">Inici sobrant (PK37+585 C-26)</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-14z, Artesa de Segre</SimpleData>
+            <SimpleData name="TRAM">d</SimpleData>
+            <SimpleData name="DESCRIPCI2">Inici sobrant (PK39+093 C-26)</SimpleData>
+            <SimpleData name="DESCRIPCI3">Final sobrant (PK39+111 C-26)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">Inici sobrant (PK39+093 C-26)</SimpleData>
+            <SimpleData name="DESCRIPCI5">Final sobrant (PK39+111 C-26)</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="COMARCA">Noguera</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">775</SimpleData>
+            <SimpleData name="IDTRAM">66167</SimpleData>
+            <SimpleData name="X_ini">329695.827853537</SimpleData>
+            <SimpleData name="Y_ini">4634881.07072463</SimpleData>
+            <SimpleData name="X_fin">329768.212190329</SimpleData>
+            <SimpleData name="Y_fin">4634995.31841197</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">39093</SimpleData>
+            <SimpleData name="EndMeasure1">39254.829</SimpleData>
+            <SimpleData name="Status2">Unable to locate event.  No valid matching marker could be found in the Marker recordset.</SimpleData>
+            <SimpleData name="BeginMarker1" />
+            <SimpleData name="BeginOffset1" />
+            <SimpleData name="EndMarker1" />
+            <SimpleData name="EndOffset1" />
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.94856326336103,41.8475183861682,0
+0.94871507645531,41.8474830507016,0
+0.94879696142672,41.8474869660161,0
+0.94888454205982,41.8475179636521,0
+0.94897477485773,41.8475686308823,0
+0.94904783205925,41.8476435191874,0
+0.94929072762228,41.8479470966258,0
+0.94939866567252,41.8481624163914,0
+0.94948318463251,41.8483920346392,0
+0.94949964623988,41.8484928928094,0
+0.94946888632619,41.8485315881953,0
+0.94940179239095,41.8485623107868,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

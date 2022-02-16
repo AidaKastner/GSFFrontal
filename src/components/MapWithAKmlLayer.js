@@ -18,14 +18,18 @@ const MapWithAKmlLayer = compose(
   withGoogleMap
 )(props =>
   <GoogleMap
-    defaultZoom={9}
-    defaultCenter={{ lat: 41.9, lng: -87.624 }}
+    defaultZoom={6}
+    defaultCenter={{ lat: 9.96233, lng: 49.80404 }}
   >
-    {console.log('props:', props)}
-    <KmlLayer
-      url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
-      options={{ preserveViewport: true }}
-    />
+    {props.rutaKmls.forEach(rutaKml => {
+      const url = `http://localhost:3000${rutaKml}`;
+      return (
+        <KmlLayer
+          url={url}
+          options={{ preserveViewport: true }}
+        />
+      )
+    })}
   </GoogleMap>
 );
 

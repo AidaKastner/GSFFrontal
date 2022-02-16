@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>GI-633z_a_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>GI-633z_a_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1545</SimpleData>
+            <SimpleData name="CARRETERA">GI-633z</SimpleData>
+            <SimpleData name="DENOMINACI">Travessera de Sant Jordi Desvalls</SimpleData>
+            <SimpleData name="DESCRIPCIO">Sant Jordi Desvalls (pas a nivell, via del tren)</SimpleData>
+            <SimpleData name="DESCRIPCI1">GI-633, Vilopriu</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">Sant Jordi Desvalls (pas a nivell, via del tren)</SimpleData>
+            <SimpleData name="DESCRIPCI3">GI-633, Vilopriu</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">Límit comarcal el Gironès - el Baix Empordà</SimpleData>
+            <SimpleData name="DESCRIPCI5">GI-633, Vilopriu</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="COMARCA">Baix Empordà</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">1765</SimpleData>
+            <SimpleData name="IDTRAM">58516</SimpleData>
+            <SimpleData name="X_ini">497523.951604512</SimpleData>
+            <SimpleData name="Y_ini">4658636.44229895</SimpleData>
+            <SimpleData name="X_fin">497582.996362884</SimpleData>
+            <SimpleData name="Y_fin">4658987.41039149</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">8932.12521118344</SimpleData>
+            <SimpleData name="EndMeasure1">9305.05</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">8</SimpleData>
+            <SimpleData name="BeginOffset1">937.375671183444</SimpleData>
+            <SimpleData name="EndMarker1">9</SimpleData>
+            <SimpleData name="EndOffset1">325.297509999999</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.97006496810971,42.0797965710041,0
+2.97014069552121,42.0799623109257,0
+2.97021267644156,42.0801258882516,0
+2.97024685531837,42.0802038036168,0
+2.97028574459186,42.0802921678093,0
+2.97036147193672,42.0804606095324,0
+2.9704388929386,42.0806276105866,0
+2.97096779139973,42.0818885931906,0
+2.97110013589906,42.082227029069,0
+2.97112532935938,42.0823257361862,0
+2.9711275929623,42.0823671009702,0
+2.97113158799193,42.0824401054865,0
+2.97109998995232,42.0825560321673,0
+2.97104314606198,42.0826907527651,0
+2.9709063693777,42.0828567871771,0
+2.97077735939682,42.0829577625896,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

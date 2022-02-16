@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-31_j-a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-31_j-a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1175</SimpleData>
+            <SimpleData name="CARRETERA">C-31</SimpleData>
+            <SimpleData name="DENOMINACI">EL VENDRELL - FIGUERES (Eix costaner)</SimpleData>
+            <SimpleData name="DESCRIPCIO">N-340, el Vendrell (la Franquesa)</SimpleData>
+            <SimpleData name="DESCRIPCI1"><![CDATA[N-II, el Far d'Empordà]]></SimpleData>
+            <SimpleData name="TRAM">j</SimpleData>
+            <SimpleData name="DESCRIPCI2"><![CDATA[L'Hospitalet (Inici soterrament)]]></SimpleData>
+            <SimpleData name="DESCRIPCI3"><![CDATA[Límit municipal L'Hospitalet de Llobregat - Barcelona]]></SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Autovia o via preferent de doble calçada</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica primaria</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">a_a</SimpleData>
+            <SimpleData name="DESCRIPCI5"><![CDATA[L'Hospitalet (Inici soterrament)]]></SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA">Barcelonès</SimpleData>
+            <SimpleData name="NOMBREDECA">4+4</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">955</SimpleData>
+            <SimpleData name="IDTRAM">18091</SimpleData>
+            <SimpleData name="X_ini">426079.183642793</SimpleData>
+            <SimpleData name="Y_ini">4578026.91239641</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">197593.152233484</SimpleData>
+            <SimpleData name="EndMeasure1"><![CDATA[L'Hospitalet (Inici soterrament)]]></SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">197</SimpleData>
+            <SimpleData name="BeginOffset1">287</SimpleData>
+            <SimpleData name="EndMarker1">198</SimpleData>
+            <SimpleData name="EndOffset1">0</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.11636160969995,41.3503489642258,0
+2.11660432845941,41.3505136392732,0
+2.11870807021905,41.3519545993578,0
+2.11932597546693,41.3524190191098,0
+2.11941159563641,41.352483370751,0
+2.11951861726275,41.3525638136862,0
+2.12004297564292,41.352958001433,0
+2.12083550885747,41.3535538176447,0
+2.12143382856979,41.3540036158985,0
+2.1218611320867,41.3543362082543,0
+2.12197670252289,41.3544261618327,0
+2.12358914586908,41.3555669201787,0
+2.122481894095,41.3547835706704</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

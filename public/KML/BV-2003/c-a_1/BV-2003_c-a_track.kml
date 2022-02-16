@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>BV-2003_c_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>BV-2003_c_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">380</SimpleData>
+            <SimpleData name="CARRETERA">BV-2003</SimpleData>
+            <SimpleData name="DENOMINACI" />
+            <SimpleData name="DESCRIPCIO">BV-2004, PK 5.380, Sant Climent de Llobregat (continuació)</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-245, PK 7.645, Viladecans (avinguda de la Generalitat)</SimpleData>
+            <SimpleData name="TRAM">c</SimpleData>
+            <SimpleData name="DESCRIPCI2">Viladecans (cruïlla amb el carrer de la Mare de Déu de Sales)</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-245, PK 7.645, Viladecans (avinguda de la Generalitat)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Diputació de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">Viladecans (cruïlla amb el carrer de la Mare de Déu de Sales)</SimpleData>
+            <SimpleData name="DESCRIPCI5">C-245, PK 7.645, Viladecans (avinguda de la Generalitat)</SimpleData>
+            <SimpleData name="ORGANISMER">Diputació de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Desconegut</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">353</SimpleData>
+            <SimpleData name="IDTRAM">41985</SimpleData>
+            <SimpleData name="X_ini">417786.665316316</SimpleData>
+            <SimpleData name="Y_ini">4574786.39416705</SimpleData>
+            <SimpleData name="X_fin">418111.19909362</SimpleData>
+            <SimpleData name="Y_fin">4574363.03423494</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">7840</SimpleData>
+            <SimpleData name="EndMeasure1">8377.111</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">8</SimpleData>
+            <SimpleData name="BeginOffset1">-261.47909</SimpleData>
+            <SimpleData name="EndMarker1">8</SimpleData>
+            <SimpleData name="EndOffset1">275.631910000001</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.01768596821572,41.3203598820521,0
+2.0184833219754,41.3192447184264,0
+2.01872281668382,41.3189897676204,0
+2.01920496265988,41.3185496915337,0
+2.02050903988372,41.317459850011,0
+2.02087078290791,41.3171900705294,0
+2.02131479423868,41.3167655248817,0
+2.02162009769445,41.316579948482,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

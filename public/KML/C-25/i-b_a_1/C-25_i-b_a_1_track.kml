@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-25_i-b_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-25_i-b_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1092</SimpleData>
+            <SimpleData name="CARRETERA">C-25</SimpleData>
+            <SimpleData name="DENOMINACI">CERVERA - GIRONA (Eix transversal)</SimpleData>
+            <SimpleData name="DESCRIPCIO">A-2, Cervera</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-65, Cassà de la Selva (GI-663)</SimpleData>
+            <SimpleData name="TRAM">i</SimpleData>
+            <SimpleData name="DESCRIPCI2">N-II / N-156, Riudellots de la Selva (Rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-65, Cassà de la Selva (GI-663)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa comarcal</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">b_a</SimpleData>
+            <SimpleData name="DESCRIPCI5"><![CDATA[Límit comarcal la Selva - el Gironès (l'Onyar)]]></SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA">Gironès</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Comarcal</SimpleData>
+            <SimpleData name="ID1">1241</SimpleData>
+            <SimpleData name="IDTRAM">8005</SimpleData>
+            <SimpleData name="X_ini">484775.41899537</SimpleData>
+            <SimpleData name="Y_ini">4638501.49785241</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">240615.660925215</SimpleData>
+            <SimpleData name="EndMeasure1"><![CDATA[Límit comarcal la Selva - el Gironès (l'Onyar)]]></SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">240</SimpleData>
+            <SimpleData name="BeginOffset1">745</SimpleData>
+            <SimpleData name="EndMarker1">241</SimpleData>
+            <SimpleData name="EndOffset1">840</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.81645935188678,41.8983047028163,0
+2.81653496585386,41.8982957263107,0
+2.8166096130502,41.898287558833,0
+2.8166793159319,41.8982799238511,0
+2.81668450133292,41.8982793916896,0
+2.81684694022231,41.8982616362864,0
+2.81715891272979,41.8982280858212,0
+2.81742542576402,41.8981979751663,0
+2.81745750384348,41.8981943331773,0
+2.81748536095364,41.8981912249048,0
+2.81755614963956,41.8981832308369,0
+2.81795338778032,41.8981377440011,0
+2.81808869504569,41.8981221056214,0
+2.81839560827355,41.8980866523734,0
+2.81857071105572,41.8980665727085,0
+2.8185785496482,41.8980656843642,0
+2.81870215849278,41.898051558008,0
+2.81879163918109,41.8980413408715,0
+2.81883782680338,41.8980360093814,0
+2.81889836446794,41.8980292593286,0
+2.81900967154697,41.8980169146775,0
+2.81933720162363,41.897980410467,0
+2.81983657532289,41.8979248994483,0
+2.8202272950559,41.8978812859893,0
+2.82061801451484,41.8978375811315,0
+2.82109085484733,41.8977853558848,0
+2.82156369442183,41.897733128689,0
+2.82213398088788,41.8976665489579,0
+2.8227040277983,41.8975989752724,0
+2.82294255802208,41.8975721412909,0
+2.82297668538161,41.8975683207703,0
+2.82299120783277,41.897566784399,0
+2.82338620646828,41.8975249956388,0
+2.82344315677789,41.8975140827592,0
+2.82369089604776,41.8974666103198,0
+2.82394717568656,41.8974518976008,0
+2.82412099300291,41.8974296259905,0
+2.82441932209414,41.89740471151,0
+2.82458947748359,41.8973849754007,0
+2.82484488703292,41.8973569021945,0
+2.82510017653904,41.8973285580324,0
+2.8255411810483,41.8972771668265,0
+2.82598218509405,41.8972256838568,0
+2.82625327041113,41.8971957397452,0
+2.82652435353299,41.8971665155373,0
+2.82685537084942,41.8971300851914,0
+2.82718639068859,41.8970925730753,0
+2.82744156868192,41.8970600803929,0
+2.8275691586684,41.8970434285327,0
+2.8276342786318,41.8970355098384,0
+2.8276969865602,41.8970279477754,0
+2.82818199467483,41.8969743604802,0
+2.82866700198516,41.8969207711348,0
+2.82905409191574,41.8968775725783,0
+2.82944118276395,41.8968338323073,0
+2.82953705172804,41.8968227155625,0
+2.829866382853,41.8967843826044,0
+2.8296881994991,41.8968051225057</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

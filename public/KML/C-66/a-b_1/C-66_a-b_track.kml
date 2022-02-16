@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-66_a_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-66_a_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1410</SimpleData>
+            <SimpleData name="CARRETERA">C-66</SimpleData>
+            <SimpleData name="DENOMINACI">PALAFRUGELL - BESALÚ</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-31, Palafrugell (mas Pla)</SimpleData>
+            <SimpleData name="DESCRIPCI1">A-26, Besalú (camp de les Figues)</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-31, Palafrugell (mas Pla)</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-255, Girona (pla de Campdorà)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica primaria</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">Inici de la travessera de Llofriu</SimpleData>
+            <SimpleData name="DESCRIPCI5">Final de la travessera de Llofriu</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="COMARCA">Baix Empordà</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">1902</SimpleData>
+            <SimpleData name="IDTRAM">4681</SimpleData>
+            <SimpleData name="X_ini">510972.237201743</SimpleData>
+            <SimpleData name="Y_ini">4642783.49074003</SimpleData>
+            <SimpleData name="X_fin">510805.563390522</SimpleData>
+            <SimpleData name="Y_fin">4642974.80730101</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">1265.77900311463</SimpleData>
+            <SimpleData name="EndMeasure1">1519.52016313692</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">1</SimpleData>
+            <SimpleData name="BeginOffset1">275.120443114626</SimpleData>
+            <SimpleData name="EndMarker1">1</SimpleData>
+            <SimpleData name="EndOffset1">528.861603136924</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>3.13235614169247,41.9369421334645,0
+3.13222386701756,41.9370556369184,0
+3.13220676826809,41.9370703377529,0
+3.13216161280969,41.9371090290711,0
+3.1319000717375,41.9373333298638,0
+3.13186768019724,41.9373611981959,0
+3.13179386607074,41.9374247811463,0
+3.1317382345696,41.9374727613603,0
+3.13167682283845,41.9375256118683,0
+3.13167610036661,41.9375262431753,0
+3.13166935723332,41.9375321053518,0
+3.13160951059185,41.9375835129354,0
+3.13156194665985,41.9376245485508,0
+3.13155351748453,41.9376317636783,0
+3.13145357259855,41.9377178934342,0
+3.13138312914993,41.9377785000022,0
+3.131207804358,41.9379294719612,0
+3.13106944393617,41.9380486132536,0
+3.13092903704658,41.9381693749792,0
+3.13081849348956,41.9382645230962,0
+3.13074949381838,41.9383238666682,0
+3.13068531093591,41.9383791516394,0
+3.13064822186323,41.9384109879773,0
+3.13049167649694,41.9385452777782,0
+3.13034909919776,41.9386675724154,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

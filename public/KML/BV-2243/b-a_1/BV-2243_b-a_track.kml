@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>BV-2243_b_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>BV-2243_b_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">449</SimpleData>
+            <SimpleData name="CARRETERA">BV-2243</SimpleData>
+            <SimpleData name="DENOMINACI" />
+            <SimpleData name="DESCRIPCIO">B-224, PK 9.790,  Piera</SimpleData>
+            <SimpleData name="DESCRIPCI1">Hostalets de Pierola  (cruïlla amb la ronda de Ponent)</SimpleData>
+            <SimpleData name="TRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI2">B-231, PK 15.045, (rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI3">Hostalets de Pierola  (cruïlla amb la ronda de Ponent)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Diputació de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">B-231, PK 15.045, (rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI5">Hostalets de Pierola  (cruïlla amb la ronda de Ponent)</SimpleData>
+            <SimpleData name="ORGANISMER">Diputació de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Desconegut</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">480</SimpleData>
+            <SimpleData name="IDTRAM">47904</SimpleData>
+            <SimpleData name="X_ini">396676.730901753</SimpleData>
+            <SimpleData name="Y_ini">4598664.54565895</SimpleData>
+            <SimpleData name="X_fin">397000.221638566</SimpleData>
+            <SimpleData name="Y_fin">4598788.7222284</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">1334.39541351945</SimpleData>
+            <SimpleData name="EndMeasure1">1685.51</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">1</SimpleData>
+            <SimpleData name="BeginOffset1">328.382803519453</SimpleData>
+            <SimpleData name="EndMarker1">1</SimpleData>
+            <SimpleData name="EndOffset1">679.49739</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.76142715526765,41.5329652104635,0
+1.7615650402026,41.5330136373522,0
+1.76169916456547,41.5330779517058,0
+1.76177323653465,41.5331204742562,0
+1.76193047157628,41.5332326978466,0
+1.76202147110171,41.5332832826196,0
+1.76217541110287,41.533344927503,0
+1.76231427143029,41.5333854678858,0
+1.76246128787711,41.5334192267232,0
+1.76261054237493,41.5334510936042,0
+1.76277031971997,41.5334868456757,0
+1.76291399053535,41.5335212667986,0
+1.76302778677268,41.5335570778908,0
+1.76309164460231,41.5335777603698,0
+1.76319708424583,41.5336117700877,0
+1.76334503359759,41.5336670432028,0
+1.76350039322607,41.5337234766321,0
+1.7636430407662,41.5337739185856,0
+1.76379689259135,41.5338277233359,0
+1.76393485633205,41.5338723500179,0
+1.76407959348065,41.5339138067258,0
+1.76422780471819,41.533955390641,0
+1.76440135565762,41.5339945443744,0
+1.76450887700358,41.5340200184498,0
+1.76462351053489,41.5340560170986,0
+1.76476119461951,41.5340901914863,0
+1.76490409575372,41.5341084790504,0
+1.76508662766928,41.5341229584863,0
+1.76518745504223,41.5341222393168,0
+1.76528281901545,41.5341251543573,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

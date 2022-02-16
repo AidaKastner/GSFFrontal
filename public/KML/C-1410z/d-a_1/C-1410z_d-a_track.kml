@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-1410z_d_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-1410z_d_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">771</SimpleData>
+            <SimpleData name="CARRETERA">C-1410z</SimpleData>
+            <SimpleData name="DENOMINACI">ANTIGA C-1410</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-55, PK 39,443, Callús Sud (Sant Martí de Torroella)</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-55 / B-420, Cardona (rotonda)</SimpleData>
+            <SimpleData name="TRAM">d</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-55, Sant Mateu de Bages (la Colònia Valls)</SimpleData>
+            <SimpleData name="DESCRIPCI3">BV-3002, Sant Mateu de Bages - Navàs (la Colònia Valls)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">C-55, Sant Mateu de Bages (la Colònia Valls)</SimpleData>
+            <SimpleData name="DESCRIPCI5">BV-3002, Sant Mateu de Bages - Navàs (la Colònia Valls)</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Bages</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">1211</SimpleData>
+            <SimpleData name="IDTRAM">28494</SimpleData>
+            <SimpleData name="X_ini">393891.358776346</SimpleData>
+            <SimpleData name="Y_ini">4633316.98921549</SimpleData>
+            <SimpleData name="X_fin">393727.573031839</SimpleData>
+            <SimpleData name="Y_fin">4633298.26789422</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">19060</SimpleData>
+            <SimpleData name="EndMeasure1">19234.627</SimpleData>
+            <SimpleData name="Status2">Unable to locate event.  No valid matching marker could be found in the Marker recordset.</SimpleData>
+            <SimpleData name="BeginMarker1" />
+            <SimpleData name="BeginOffset1" />
+            <SimpleData name="EndMarker1" />
+            <SimpleData name="EndOffset1" />
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.72188336968089,41.8446433693371,0
+1.72184441433547,41.8446337491936,0
+1.72178854718252,41.8446205183654,0
+1.72165319893549,41.8445873772912,0
+1.72156584667743,41.8445656769874,0
+1.72136196013521,41.8445095694694,0
+1.72124808440599,41.844465125412,0
+1.72116084511595,41.8444330284532,0
+1.7210621144001,41.8443973450727,0
+1.72096331495575,41.8443651192887,0
+1.72086437792244,41.8443398087809,0
+1.72074228587752,41.8443159696135,0
+1.72063479665037,41.8442911830642,0
+1.72051063935241,41.8442898005565,0
+1.72038962256978,41.8443000715001,0
+1.72028285216774,41.8443207685973,0
+1.72020484515211,41.8443426866421,0
+1.72006996464532,41.8443898202606,0
+1.71991434708391,41.8444528218064,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

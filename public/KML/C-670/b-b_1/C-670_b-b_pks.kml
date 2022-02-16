@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>PK 1</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>PK 1</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="CODIEIX">C-670</SimpleData>
+            <SimpleData name="ETIQUETA">PK 1</SimpleData>
+            <SimpleData name="IDTRAM">16020</SimpleData>
+            <SimpleData name="POSICIOPK">521.5149</SimpleData>
+            <SimpleData name="TIPUSPK">Fita Real Única</SimpleData>
+            <SimpleData name="VALORPK">1</SimpleData>
+            <SimpleData name="CarreteraPK">C-670_PK1</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Point>
+          <coordinates>2.09061760777467,41.9034428253308,70.4089565759173</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PK 2</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="CODIEIX">C-670</SimpleData>
+            <SimpleData name="ETIQUETA">PK 2</SimpleData>
+            <SimpleData name="IDTRAM">16020</SimpleData>
+            <SimpleData name="POSICIOPK">1403.22804</SimpleData>
+            <SimpleData name="TIPUSPK">Fita Real Única</SimpleData>
+            <SimpleData name="VALORPK">2</SimpleData>
+            <SimpleData name="CarreteraPK">C-670_PK2</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Point>
+          <coordinates>2.0839467700544,41.9079163957332,62.970616860223</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PK 3</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="CODIEIX">C-670</SimpleData>
+            <SimpleData name="ETIQUETA">PK 3</SimpleData>
+            <SimpleData name="IDTRAM">16020</SimpleData>
+            <SimpleData name="POSICIOPK">2500.43001</SimpleData>
+            <SimpleData name="TIPUSPK">Fita Real Única</SimpleData>
+            <SimpleData name="VALORPK">3</SimpleData>
+            <SimpleData name="CarreteraPK">C-670_PK3</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Point>
+          <coordinates>2.08202765016499,41.9103434257637,11.1833749464136</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PK 4</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="CODIEIX">C-670</SimpleData>
+            <SimpleData name="ETIQUETA">PK 4</SimpleData>
+            <SimpleData name="IDTRAM">16020</SimpleData>
+            <SimpleData name="POSICIOPK">3500.66231</SimpleData>
+            <SimpleData name="TIPUSPK">Fita Real Única</SimpleData>
+            <SimpleData name="VALORPK">4</SimpleData>
+            <SimpleData name="CarreteraPK">C-670_PK4</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Point>
+          <coordinates>2.08568175616068,41.9148749598425,51.0304013312213</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PK 5</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="CODIEIX">C-670</SimpleData>
+            <SimpleData name="ETIQUETA">PK 5</SimpleData>
+            <SimpleData name="IDTRAM">16020</SimpleData>
+            <SimpleData name="POSICIOPK">4445.61767</SimpleData>
+            <SimpleData name="TIPUSPK">Fita Real Única</SimpleData>
+            <SimpleData name="VALORPK">5</SimpleData>
+            <SimpleData name="CarreteraPK">C-670_PK5</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Point>
+          <coordinates>2.07903520791078,41.9189848376078,55.7344861636446</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PK 6</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="CODIEIX">C-670</SimpleData>
+            <SimpleData name="ETIQUETA">PK 6</SimpleData>
+            <SimpleData name="IDTRAM">16020</SimpleData>
+            <SimpleData name="POSICIOPK">5415.27892</SimpleData>
+            <SimpleData name="TIPUSPK">Fita Real Única</SimpleData>
+            <SimpleData name="VALORPK">6</SimpleData>
+            <SimpleData name="CarreteraPK">C-670_PK6</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Point>
+          <coordinates>2.07254670169498,41.9250064819215,58.0572583568666</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PK 7</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="CODIEIX">C-670</SimpleData>
+            <SimpleData name="ETIQUETA">PK 7</SimpleData>
+            <SimpleData name="IDTRAM">16020</SimpleData>
+            <SimpleData name="POSICIOPK">6348.76181</SimpleData>
+            <SimpleData name="TIPUSPK">Fita Real Única</SimpleData>
+            <SimpleData name="VALORPK">7</SimpleData>
+            <SimpleData name="CarreteraPK">C-670_PK7</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Point>
+          <coordinates>2.06274650965093,41.9276025217356,51.913363206712</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PK 8</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="CODIEIX">C-670</SimpleData>
+            <SimpleData name="ETIQUETA">pk 8</SimpleData>
+            <SimpleData name="IDTRAM">16020</SimpleData>
+            <SimpleData name="POSICIOPK">7348.762</SimpleData>
+            <SimpleData name="TIPUSPK">Fita no Existent</SimpleData>
+            <SimpleData name="VALORPK">8</SimpleData>
+            <SimpleData name="CarreteraPK">C-670_PK8</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Point>
+          <coordinates>2.05825132516668,41.9324501908447,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

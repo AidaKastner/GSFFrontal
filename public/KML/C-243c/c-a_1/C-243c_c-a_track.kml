@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-243c_c_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-243c_c_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1042</SimpleData>
+            <SimpleData name="CARRETERA">C-243c</SimpleData>
+            <SimpleData name="DENOMINACI" />
+            <SimpleData name="DESCRIPCIO">Antiga N-II, PK 590.200, Martorell</SimpleData>
+            <SimpleData name="DESCRIPCI1"><![CDATA[Antiga N-150, PK 19.495  (rotonda, rambla d'Egara i accés a la C-16)]]></SimpleData>
+            <SimpleData name="TRAM">c</SimpleData>
+            <SimpleData name="DESCRIPCI2">Terrassa (rotonda de la riera del Palau)</SimpleData>
+            <SimpleData name="DESCRIPCI3"><![CDATA[Antiga N-150, PK 19.495  (rotonda, rambla d'Egara i accés a la C-16)]]></SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Diputació de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">Terrassa (rotonda de la riera del Palau)</SimpleData>
+            <SimpleData name="DESCRIPCI5"><![CDATA[Antiga N-150, PK 19.495  (rotonda, rambla d'Egara i accés a la C-16)]]></SimpleData>
+            <SimpleData name="ORGANISMER">Diputació de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Vallès Occidental</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">1032</SimpleData>
+            <SimpleData name="IDTRAM">38212</SimpleData>
+            <SimpleData name="X_ini">416679.497740047</SimpleData>
+            <SimpleData name="Y_ini">4600878.45221236</SimpleData>
+            <SimpleData name="X_fin">417223.247116944</SimpleData>
+            <SimpleData name="Y_fin">4601046.5266781</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">13093.7950258268</SimpleData>
+            <SimpleData name="EndMeasure1">13667.42</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">13</SimpleData>
+            <SimpleData name="BeginOffset1">750.694665826788</SimpleData>
+            <SimpleData name="EndMarker1">14</SimpleData>
+            <SimpleData name="EndOffset1">334.81112</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.00086129791614,41.5552361227743,0
+2.00116279157985,41.5554109242591,0
+2.00126656571283,41.5554496810813,0
+2.00132361289361,41.5554642432106,0
+2.00149661011065,41.5554995377433,0
+2.00164374300768,41.5555325635545,0
+2.00173614591476,41.5555534908906,0
+2.00311046485314,41.5558647352119,0
+2.00384782406461,41.5560443304007,0
+2.00442050179693,41.5561797117108,0
+2.00449266152921,41.5561972696544,0
+2.00485235305805,41.5562872971112,0
+2.00617975021206,41.5566319007864,0
+2.00653542319851,41.5567225468997,0
+2.0067190550046,41.5567757126377,0
+2.00691706409646,41.5568162114742,0
+2.00699940418041,41.5568233110458,0
+2.00709177064,41.5568312750453,0
+2.00718972888497,41.556824912111,0
+2.00735756883235,41.5568062705876,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

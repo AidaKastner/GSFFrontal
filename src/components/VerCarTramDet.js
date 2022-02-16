@@ -77,6 +77,7 @@ class VerCarTramDet extends Component {
       currentYear: today,
       fechaAltaFor:'',
       content: null,
+      rutaKml: '',
       setMsgOutBoolKO: false,
       setMsgOutActKO: false,
       form:{
@@ -213,6 +214,7 @@ peticionSet=(urlTram)=>{
       tableAct: sliceAct,
       content: response,
       estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
+      rutaKml: response.data.rutaKml,
       form: {
         id: response.data.id,
         nombre: response.data.carretera.nombre,
@@ -353,6 +355,7 @@ peticionGet=()=>{
       tableAct: sliceAct,
       content: response,
       estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
+      rutaKml: response.data.rutaKml,
       form: {
         id: response.data.id,
         nombre: response.data.carretera.nombre,
@@ -534,7 +537,7 @@ render() {
           </Col>
           <Col md={6}>
             <Row>
-              <MapWithAKmlLayer />
+              <MapWithAKmlLayer rutaKmls={[this.state.rutaKml + '_track.kml', this.state.rutaKml + '_pks.kml']} />
             </Row>
           </Col>
         </Row>

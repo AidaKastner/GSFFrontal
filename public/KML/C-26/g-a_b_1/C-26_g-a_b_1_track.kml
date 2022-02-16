@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-26_g-a_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-26_g-a_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1132</SimpleData>
+            <SimpleData name="CARRETERA">C-26</SimpleData>
+            <SimpleData name="DENOMINACI">ALFARRAS - BORRASSÀ (Eix pre-pirinenc)</SimpleData>
+            <SimpleData name="DESCRIPCIO">A-140, límit provincial Osca - Lleida (coll de Foix)</SimpleData>
+            <SimpleData name="DESCRIPCI1"><![CDATA[AP-7 (rotonda d'enllaç), Borrassà]]></SimpleData>
+            <SimpleData name="TRAM">g</SimpleData>
+            <SimpleData name="DESCRIPCI2">Ripoll (carrer del Progrés)</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-151a, Ripoll</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica restant</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">a_b</SimpleData>
+            <SimpleData name="DESCRIPCI5" />
+            <SimpleData name="ORGANISMER">C-151a, Ripoll</SimpleData>
+            <SimpleData name="COMARCA">Ripollès</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">726</SimpleData>
+            <SimpleData name="IDTRAM">3219</SimpleData>
+            <SimpleData name="X_ini" />
+            <SimpleData name="Y_ini" />
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1" />
+            <SimpleData name="EndMeasure1">Ripoll (carrer del Progrés)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">194</SimpleData>
+            <SimpleData name="BeginOffset1">830</SimpleData>
+            <SimpleData name="EndMarker1">196</SimpleData>
+            <SimpleData name="EndOffset1">28</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.20184320265021,42.2072552496289,0
+2.20202367949043,42.2073674777745,0
+2.20224098761056,42.207483420844,0
+2.20245829652863,42.2075993635062,0
+2.20265242014048,42.2077105884288,0
+2.20283715959724,42.2078167043535,0
+2.20303800452932,42.2079330188073,0
+2.20322874530497,42.2080436788927,0
+2.20341490183931,42.2081528658485,0
+2.2036072764814,42.20826858015,0
+2.20396108812231,42.2084942093737,0
+2.20413015997268,42.2086135438418,0
+2.20429023025449,42.2087358777905,0
+2.20444130120984,42.2088610311603,0
+2.20457928587879,42.2089864539053,0
+2.20470995569699,42.2091156084375,0
+2.2048359800886,42.2092481530297,0
+2.20494757277396,42.2093723117631,0
+2.2050557312712,42.2094998689847,0
+2.2051623688961,42.2096328193374,0
+2.20525845994176,42.2097566903081,0
+2.20535789350534,42.209884547089,0
+2.20545900079768,42.2100142166171,0
+2.20556176154642,42.2101473198804,0
+2.20566644059431,42.2102820574503,0
+2.20571949582526,42.210350331776,0
+2.20577255116972,42.2104186060774,0
+2.20587937548789,42.2105562402945,0
+2.20598596926598,42.2106929721881,0
+2.2060916011699,42.2108291569514,0
+2.20619748481075,42.2109646228552,0
+2.20630361793628,42.2110995500069,0
+2.20640879818237,42.2112332095966,0
+2.20649297177793,42.2113416864758,0
+2.20663340373364,42.2115240432027,0
+2.20670730210355,42.2116211010209,0
+2.20681476045651,42.2117664841087,0
+2.20690265877243,42.2118872349315,0
+2.20699433255798,42.2120161174007,0
+2.20708330563851,42.2121478631445,0
+2.20716331027175,42.2122799071253,0
+2.20723354079686,42.2124185481881,0
+2.20728660577272,42.2125541886696,0
+2.2073298784943,42.2126978671441,0
+2.20735919364047,42.2128338839672,0
+2.20736684152469,42.2128908441057,0
+2.20737892267165,42.2129808222308,0
+2.20738238590784,42.213039786979,0
+2.20738711451687,42.2131202956967,0
+2.20738601644578,42.2131825842106,0
+2.20738461896025,42.2132618568719,0
+2.20736809123607,42.2134017000344,0
+2.2073365058527,42.2135443212213,0
+2.20729450885803,42.2136863301253,0
+2.2072433476222,42.2138248533483,0
+2.20718004714576,42.2139652740828,0
+2.20710895272355,42.2141088832029,0
+2.20704139406655,42.2142409886892,0
+2.20697510059851,42.2143687798638,0
+2.2068919868084,42.2145240139445,0
+2.20682205166252,42.2146523202403,0
+2.20674716911402,42.214788697938,0
+2.20667302887421,42.2149238198365,0
+2.20660061362525,42.2150566119766,0
+2.20656668900794,42.215122649064,0
+2.20654974271929,42.2151536611721,0
+2.2065110218648,42.2152267192722,0
+2.20646706949712,42.2153109262478,0
+2.20645795069734,42.2153285482753,0
+2.2064129276121,42.2154162854285,0
+2.20634640735173,42.2155426336447,0
+2.20628833656694,42.2156521084763,0
+2.20622532733923,42.2157689342596,0
+2.20617845680366,42.2158547099628,0
+2.20613015941665,42.215957677725,0
+2.20612045304203,42.2159781448621,0
+2.20603425502381,42.2161471365131,0
+2.20595640088601,42.2163548457881,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

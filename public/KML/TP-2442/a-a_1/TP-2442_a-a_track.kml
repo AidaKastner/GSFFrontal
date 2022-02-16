@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>TP-2442_a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>TP-2442_a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">2393</SimpleData>
+            <SimpleData name="CARRETERA">TP-2442</SimpleData>
+            <SimpleData name="DENOMINACI">De Sant Jaume dels Domenys al Pla de Manlleu.</SimpleData>
+            <SimpleData name="DESCRIPCIO">TP-2125, Sant Jaume dels Domenys (Intersecció TV-2122)</SimpleData>
+            <SimpleData name="DESCRIPCI1">T-244, Aiguaviva (el Pla de Manlleu)</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">TP-2125, Sant Jaume dels Domenys (Intersecció TV-2122)</SimpleData>
+            <SimpleData name="DESCRIPCI3">B-212, Sant Jaume dels Domenys</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa comarcal</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Tarragona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">TP-2125, Sant Jaume dels Domenys (Intersecció TV-2122)</SimpleData>
+            <SimpleData name="DESCRIPCI5">B-212, Sant Jaume dels Domenys</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Tarragona</SimpleData>
+            <SimpleData name="COMARCA">Baix Penedès</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Comarcal</SimpleData>
+            <SimpleData name="ID1">2142</SimpleData>
+            <SimpleData name="IDTRAM">19989</SimpleData>
+            <SimpleData name="X_ini">379374.198664526</SimpleData>
+            <SimpleData name="Y_ini">4572999.49603662</SimpleData>
+            <SimpleData name="X_fin">379334.971262793</SimpleData>
+            <SimpleData name="Y_fin">4573349.85687296</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">0</SimpleData>
+            <SimpleData name="EndMeasure1">364.919048793231</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">0</SimpleData>
+            <SimpleData name="BeginOffset1">0</SimpleData>
+            <SimpleData name="EndMarker1">0</SimpleData>
+            <SimpleData name="EndOffset1">364.919048793231</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.55919159493693,41.2994379609338,0
+1.55919572933285,41.2994671966743,0
+1.55919925519155,41.2994806618335,0
+1.5592166456883,41.2995479846392,0
+1.55925300843979,41.2996976023319,0
+1.55925940884955,41.2998192824393,0
+1.55924934556211,41.3000703731529,0
+1.55925021152194,41.3001938755588,0
+1.5592557786715,41.3002611404844,0
+1.55925450866996,41.3003188620805,0
+1.55925814057729,41.3003980826426,0
+1.55926162389422,41.3004840569005,0
+1.55926843158317,41.3007392318703,0
+1.5592686278027,41.3008117439564,0
+1.55926869530139,41.300971536208,0
+1.55928285472432,41.3011857293695,0
+1.55926286047068,41.3015624391617,0
+1.55925741455347,41.3016362317512,0
+1.55925379533825,41.3016867180143,0
+1.55923897232641,41.3018501070328,0
+1.55921395106849,41.3019286988203,0
+1.55915738850748,41.3020456277579,0
+1.55909418658152,41.3021440083984,0
+1.55902741388822,41.302220096024,0
+1.55884859681824,41.3023994473414,0
+1.55874193974955,41.3025021478766,0
+1.55865371034452,41.3025870641781,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

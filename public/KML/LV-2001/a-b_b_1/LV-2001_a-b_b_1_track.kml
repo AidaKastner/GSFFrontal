@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>LV-2001_a-b_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>LV-2001_a-b_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1866</SimpleData>
+            <SimpleData name="CARRETERA">LV-2001</SimpleData>
+            <SimpleData name="DENOMINACI">Mollerussa a Juneda</SimpleData>
+            <SimpleData name="DESCRIPCIO">Mollerussa (Ronda de Ponent)</SimpleData>
+            <SimpleData name="DESCRIPCI1">N-240, PK 74+510, Juneda</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">Mollerussa (Ronda de Ponent)</SimpleData>
+            <SimpleData name="DESCRIPCI3">N-240, PK 74+510, Juneda</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa comarcal</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">b_b</SimpleData>
+            <SimpleData name="DESCRIPCI5" />
+            <SimpleData name="ORGANISMER"><![CDATA[Límit comarca el Pla d'Urgell - les Garrigues]]></SimpleData>
+            <SimpleData name="COMARCA"><![CDATA[Pla d'Urgell]]></SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Comarcal</SimpleData>
+            <SimpleData name="ID1">1514</SimpleData>
+            <SimpleData name="IDTRAM">10389</SimpleData>
+            <SimpleData name="X_ini" />
+            <SimpleData name="Y_ini" />
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1" />
+            <SimpleData name="EndMeasure1">Mollerussa (fi tram urbà)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">8</SimpleData>
+            <SimpleData name="BeginOffset1">0</SimpleData>
+            <SimpleData name="EndMarker1">8</SimpleData>
+            <SimpleData name="EndOffset1">830</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.83612104580989,41.5764234347984,0
+0.83611711801906,41.5763794088109,0
+0.83609423297459,41.5762672965945,0
+0.83606357958004,41.5761651255041,0
+0.83602623164942,41.5760622879955,0
+0.83598000153084,41.575959643539,0
+0.83592404718236,41.5758572663388,0
+0.83585962108926,41.5757571614043,0
+0.83578595633262,41.575657152707,0
+0.83570564428414,41.5755658452565,0
+0.83561515237039,41.5754776785238,0
+0.83551786661542,41.5753954182076,0
+0.83541630123044,41.5753192016963,0
+0.83531191565147,41.5752484259998,0
+0.83520418567498,41.5751808295967,0
+0.83508981814737,41.5751144590826,0
+0.83496350363145,41.5750430899794,0
+0.83484146512599,41.5749765747533,0
+0.83472132369356,41.5749107255892,0
+0.83460340625257,41.5748429367453,0
+0.83449057456391,41.5747737124638,0
+0.83438279854778,41.5747039528496,0
+0.83427928423467,41.5746322919742,0
+0.83418297413577,41.5745604064672,0
+0.83408751577119,41.5744845740359,0
+0.83399616614387,41.574407828216,0
+0.83390939568148,41.5743304480782,0
+0.8338257363527,41.5742497040002,0
+0.83374648561996,41.5741662508972,0
+0.83367279700622,41.5740814615003,0
+0.83359834518605,41.5739908034031,0
+0.83358971628941,41.5739798329109,0
+0.8335241488012,41.5738960971147,0
+0.83346579139777,41.5738119567658,0
+0.83337411032761,41.5736698165044,0
+0.83336431849432,41.5736515936253,0
+0.83330444108294,41.573540159834,0
+0.83329581323811,41.5735219840829,0
+0.83323768034733,41.5733988493968,0
+0.83317168864411,41.5732453044778,0
+0.83311365188887,41.5731013663561,0
+0.83305402251286,41.5729476710903,0
+0.83299524049671,41.5728009268222,0
+0.83292540984845,41.5726582073448,0
+0.83284559784856,41.5725162903833,0
+0.83275756337034,41.5723763799404,0
+0.832663161054,41.5722404023338,0
+0.8325677310214,41.5721064767822,0
+0.83247138160806,41.5719713629659,0
+0.83237413690103,41.5718343408058,0
+0.83227611926092,41.5716989251684,0
+0.83217782671626,41.5715609824287,0
+0.8320813685964,41.5714219934024,0
+0.83198755381521,41.5712828740162,0
+0.83189478505231,41.5711447650071,0
+0.83180820118762,41.5710082136162,0
+0.83173246518699,41.5708700654382,0
+0.8316677023094,41.5707337453645,0
+0.83161804485976,41.5705976200962,0
+0.83158015946956,41.5704501884292,0
+0.83155609759003,41.5702982440107,0
+0.83155176344849,41.5702198501001,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

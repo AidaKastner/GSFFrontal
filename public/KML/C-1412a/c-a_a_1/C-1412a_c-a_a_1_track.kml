@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-1412a_c-a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-1412a_c-a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">795</SimpleData>
+            <SimpleData name="CARRETERA">C-1412a</SimpleData>
+            <SimpleData name="DENOMINACI">PONTS - JORBA</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-14, Ponts (nucli urbà)</SimpleData>
+            <SimpleData name="DESCRIPCI1">A-2, Jorba</SimpleData>
+            <SimpleData name="TRAM">c</SimpleData>
+            <SimpleData name="DESCRIPCI2"><![CDATA[Límit comarcal la Segarra - l'Anoia]]></SimpleData>
+            <SimpleData name="DESCRIPCI3">Copons (inici variant)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa comarcal</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">a_a</SimpleData>
+            <SimpleData name="DESCRIPCI5"><![CDATA[Límit comarcal la Segarra - l'Anoia]]></SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA">Anoia</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Comarcal</SimpleData>
+            <SimpleData name="ID1">1300</SimpleData>
+            <SimpleData name="IDTRAM">8961</SimpleData>
+            <SimpleData name="X_ini">368626.919845645</SimpleData>
+            <SimpleData name="Y_ini">4628410.11005852</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">25548.1943151579</SimpleData>
+            <SimpleData name="EndMeasure1"><![CDATA[Límit comarcal la Segarra - l'Anoia]]></SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">25</SimpleData>
+            <SimpleData name="BeginOffset1">575</SimpleData>
+            <SimpleData name="EndMarker1">26</SimpleData>
+            <SimpleData name="EndOffset1">610</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.41875278015104,41.796675367094,0
+1.41885613211779,41.7966291750399,0
+1.41896861145275,41.7965727202507,0
+1.41908524159766,41.7965040734692,0
+1.41920563952732,41.7964241300782,0
+1.41932837894894,41.796332149895,0
+1.41936578740772,41.7962987996519,0
+1.41945277900906,41.7962215487438,0
+1.41956903949696,41.7960993070326,0
+1.41968202611669,41.7959633301171,0
+1.41979801836876,41.7958176672959,0
+1.41991509957874,41.7956717490864,0
+1.42003003537214,41.7955298542847,0
+1.42014365821731,41.7953874909398,0
+1.42025719340708,41.7952437752857,0
+1.42037409155394,41.7950954223195,0
+1.42049350597406,41.7949426005206,0
+1.42061432287996,41.7947865554709,0
+1.42073479589473,41.7946297850372,0
+1.42085480033223,41.7944724675991,0
+1.42097704275993,41.7943122086643,0
+1.42110369317449,41.7941488578209,0
+1.42123338397568,41.793984197614,0
+1.42136282906118,41.7938197140075,0
+1.42149163655644,41.7936566625498,0
+1.42161824019855,41.7934951117836,0
+1.42174519751749,41.7933338359452,0
+1.42187271157566,41.7931743689206,0
+1.42199862339464,41.7930164108538,0
+1.42204892197349,41.7929529745106,0
+1.42212405778061,41.7928582659818,0
+1.42225088782751,41.7926971679342,0
+1.42237938280077,41.792531949564,0
+1.42251160343131,41.7923620086697,0
+1.42264732001572,41.7921868917756,0
+1.42278552821358,41.7920082963295,0
+1.42292583820974,41.79182738786,0
+1.42306949070718,41.7916426522077,0
+1.42321540715784,41.7914538944664,0
+1.42336465054725,41.791261939793,0
+1.42351612914652,41.7910671334605,0
+1.42366859576181,41.7908712596893,0
+1.42382067185176,41.7906765511946,0
+1.42397320396544,41.7904828394911,0
+1.42412599565523,41.7902883205494,0
+1.42428001149156,41.7900929175029,0
+1.42443403960668,41.7898969739821,0
+1.42458734052365,41.7897012004543,0
+1.42474085682634,41.7895064203812,0
+1.4248943744354,41.7893115500372,0
+1.42504658536556,41.7891159410492,0
+1.42519737153466,41.7889195016928,0
+1.42534801444027,41.7887239608761,0
+1.42549755163128,41.7885293053245,0
+1.42564574253167,41.7883355318146,0
+1.42579366551792,41.788142835212,0
+1.4257455743479,41.7882054827106</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

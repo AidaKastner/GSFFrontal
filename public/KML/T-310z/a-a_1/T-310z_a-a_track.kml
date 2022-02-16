@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>T-310z_a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>T-310z_a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">2267</SimpleData>
+            <SimpleData name="CARRETERA">T-310z</SimpleData>
+            <SimpleData name="DENOMINACI">ANTIGA T-310</SimpleData>
+            <SimpleData name="DESCRIPCIO">Intersecció T-310 entrada Mont-roig del Camp</SimpleData>
+            <SimpleData name="DESCRIPCI1">Intersecció T-321 sentit Pratdip</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">Intersecció T-310 entrada Mont-roig del Camp</SimpleData>
+            <SimpleData name="DESCRIPCI3">Intersecció T-321 sentit Pratdip</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Diputació de Tarragona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">Intersecció T-310 entrada Mont-roig del Camp</SimpleData>
+            <SimpleData name="DESCRIPCI5">Intersecció T-321 sentit Pratdip</SimpleData>
+            <SimpleData name="ORGANISMER">Diputació de Tarragona</SimpleData>
+            <SimpleData name="COMARCA">Baix Camp</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">2307</SimpleData>
+            <SimpleData name="IDTRAM">6123</SimpleData>
+            <SimpleData name="X_ini">329820.578368346</SimpleData>
+            <SimpleData name="Y_ini">4551464.64852117</SimpleData>
+            <SimpleData name="X_fin">329623.377543118</SimpleData>
+            <SimpleData name="Y_fin">4551396.20991364</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">13760</SimpleData>
+            <SimpleData name="EndMeasure1">13972.915</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">13,76</SimpleData>
+            <SimpleData name="BeginOffset1">0</SimpleData>
+            <SimpleData name="EndMarker1">13,76</SimpleData>
+            <SimpleData name="EndOffset1">212.915000000001</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.97359552999619,41.0966482907058,0
+0.97343430313858,41.096674975313,0
+0.97327947805418,41.0966827466702,0
+0.97318877567126,41.0966676577255,0
+0.97312769323797,41.0966560883243,0
+0.97301147440137,41.0966220735964,0
+0.97300347626446,41.0966188703901,0
+0.97285044904124,41.0965693398978,0
+0.97269719514475,41.096515571772,0
+0.97254886776122,41.0964526125945,0
+0.97240298981532,41.0963990639507,0
+0.97225923755325,41.0963460929745,0
+0.97211474935999,41.0962938294521,0
+0.97197776688098,41.0962414276492,0
+0.97184768116555,41.0961932003881,0
+0.97161524039852,41.0961087630212,0
+0.97126773973089,41.0959908636328,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

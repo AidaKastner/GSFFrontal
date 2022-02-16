@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-15_c-d_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-15_c-d_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">884</SimpleData>
+            <SimpleData name="CARRETERA">C-15</SimpleData>
+            <SimpleData name="DENOMINACI">EIX PENEDÈS - ANOIA</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-31, Vilanova i la Geltrú (rotonda costat mar inclosa)</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-37 / N-II, la Pobla de Claramunt</SimpleData>
+            <SimpleData name="TRAM">c</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-15z, Vilafranca del Penedès</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-37 / N-II, la Pobla de Claramunt</SimpleData>
+            <SimpleData name="REGIMDEGES">Eix Diagonal concessionària de la Generalitat de Catalunya</SimpleData>
+            <SimpleData name="TECNIC"><![CDATA[Via preferent d'una calçada]]></SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica primaria</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">d</SimpleData>
+            <SimpleData name="DESCRIPCI4">d_b</SimpleData>
+            <SimpleData name="DESCRIPCI5" />
+            <SimpleData name="ORGANISMER"><![CDATA[B-224, Vallbona d'Anoia]]></SimpleData>
+            <SimpleData name="COMARCA">Anoia</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Concessió amb cànon</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">976</SimpleData>
+            <SimpleData name="IDTRAM">17826</SimpleData>
+            <SimpleData name="X_ini" />
+            <SimpleData name="Y_ini" />
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1" />
+            <SimpleData name="EndMeasure1"><![CDATA[Límit comarcal l'Alt Penedès - l'Anoia]]></SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">36</SimpleData>
+            <SimpleData name="BeginOffset1">0</SimpleData>
+            <SimpleData name="EndMarker1">36</SimpleData>
+            <SimpleData name="EndOffset1">956</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.69919694402886,41.5131620200414,0
+1.69915091134148,41.5132122653352,0
+1.69908997922598,41.5132821478835,0
+1.69902320394547,41.5133687592418,0
+1.69893209665008,41.5134963355774,0
+1.6988733364371,41.5135825369234,0
+1.69879720076893,41.5136986959981,0
+1.6986906902827,41.5138770940667,0
+1.69861028072943,41.5140386736755,0
+1.6985519585609,41.514168437597,0
+1.69848593603397,41.5143416189485,0
+1.69840520649096,41.5145490412126,0
+1.6983916366064,41.5145863574657,0
+1.69834585851366,41.5147120298223,0
+1.6982942005197,41.5148799692689,0
+1.69825802103369,41.515058892411,0
+1.69823623852022,41.5152369876507,0
+1.69822373831336,41.5154063608982,0
+1.69821621317345,41.5155846174473,0
+1.69821669298442,41.5157581007019,0
+1.69822488303688,41.5159355442712,0
+1.69823193014279,41.5161042379627,0
+1.69824910022468,41.5162808650835,0
+1.69825757314745,41.5164513936577,0
+1.69827738532922,41.5166173236868,0
+1.69828764979874,41.5167774093761,0
+1.69830152892343,41.5169587977334,0
+1.69830887686567,41.517129987533,0
+1.69831236690171,41.5172920214889,0
+1.69831010477357,41.517472214735,0
+1.69829471920551,41.5176350475795,0
+1.69827398685126,41.5177957949891,0
+1.69823958346182,41.5179665123556,0
+1.69816727464817,41.518213748146,0
+1.69805803312476,41.5184889149556,0
+1.69791520096689,41.5187596516141,0
+1.69775751593487,41.518998994051,0
+1.69762268154672,41.5191724636864,0
+1.6974242929793,41.5193919475037,0
+1.69714570832939,41.5196469715401,0
+1.69689545992735,41.5198284271659,0
+1.69671538581743,41.5199516724383,0
+1.69653909314455,41.5200611136251,0
+1.69642853465938,41.5201253593933,0
+1.6960489104382,41.5203230006732,0
+1.69591953128715,41.5203905837644,0
+1.69578583376961,41.5204490046711,0
+1.69568258994108,41.5204915405302,0
+1.69537104247655,41.5206129584398,0
+1.69521937403388,41.5206623010495,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

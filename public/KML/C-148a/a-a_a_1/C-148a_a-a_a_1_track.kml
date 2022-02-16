@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-148a_a-a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-148a_a-a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">855</SimpleData>
+            <SimpleData name="CARRETERA">C-148a</SimpleData>
+            <SimpleData name="DENOMINACI">ANTIGA C-148</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-53, Vallfogona de Balaguer (la Ràpita)</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-12, Balaguer</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-53, Vallfogona de Balaguer (la Ràpita)</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-12, Balaguer</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">a_a</SimpleData>
+            <SimpleData name="DESCRIPCI5">C-53, Vallfogona de Balaguer (la Ràpita)</SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA">Noguera</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">875</SimpleData>
+            <SimpleData name="IDTRAM">29564</SimpleData>
+            <SimpleData name="X_ini">320279.443648096</SimpleData>
+            <SimpleData name="Y_ini">4627908.33942444</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">0</SimpleData>
+            <SimpleData name="EndMeasure1">C-53, Vallfogona de Balaguer (la Ràpita)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">0</SimpleData>
+            <SimpleData name="BeginOffset1">-99</SimpleData>
+            <SimpleData name="EndMarker1">1</SimpleData>
+            <SimpleData name="EndOffset1">0</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.83732536653218,41.7826787742442,0
+0.83733238104198,41.7827966997198,0
+0.83731978524941,41.7828307470597,0
+0.83728734793879,41.7828872771499,0
+0.83719653747502,41.7829769926386,0
+0.83707196961874,41.7830489301682,0
+0.83694358670916,41.7831207957191,0
+0.83680766993741,41.7831896622051,0
+0.83657556293297,41.7832953653277,0
+0.83629656757968,41.7833976454404,0
+0.8361496432649,41.7834513472249,0
+0.83599785405033,41.7835065783007,0
+0.8358414585849,41.7835628031444,0
+0.83568055591323,41.7836206540431,0
+0.83551658301291,41.7836803381813,0
+0.83535624168229,41.7837393700165,0
+0.8352050403027,41.7837949713635,0
+0.83505578394542,41.7838499787282,0
+0.83490347553534,41.7839062793126,0
+0.83474787454528,41.7839638685706,0
+0.83458897489964,41.7840229265,0
+0.83442569125138,41.7840835226876,0
+0.83425789423337,41.7841459248641,0
+0.83408498254105,41.7842101216714,0
+0.83390878724965,41.7842753370498,0
+0.83373027947813,41.7843413191097,0
+0.83355032827823,41.7844072736655,0
+0.83337345282359,41.784471214506,0
+0.83319925296966,41.7845343049145,0
+0.83302333282152,41.7845984433568,0
+0.8328470182167,41.7846635647764,0
+0.83267459088097,41.7847275884516,0
+0.83250617109069,41.7847905166697,0
+0.8323355621019,41.7848541238283,0
+0.83216117630606,41.7849191004578,0
+0.83198338658462,41.7849850933303,0
+0.83180559954024,41.7850509959128,0
+0.83163218992553,41.7851155398464,0
+0.83146364485953,41.7851785542216,0
+0.8312996126969,41.7852397622323,0
+0.83113961546805,41.7852990648105,0
+0.83098343695564,41.7853557373874,0
+0.83094094872497,41.785371236874,0
+0.83083930932016,41.7854083143071,0
+0.83069071068031,41.7854614370462,0
+0.83054599343063,41.7855136422077,0
+0.83040359726951,41.785564810272,0
+0.83026009428541,41.7856166777535,0
+0.83011658804029,41.7856686350552,0
+0.82997342109454,41.7857212290256,0
+0.82982803159424,41.7857754920183,0
+0.82967640242461,41.7858327891287,0
+0.82951868113229,41.7858923125545,0
+0.82894308100627,41.7861153702156,0
+0.82789051086546,41.7864748283493,0
+0.82740182771521,41.7866617116087,0
+0.82678167667742,41.7868477654109,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

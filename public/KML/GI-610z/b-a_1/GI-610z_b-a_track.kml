@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>GI-610z_b_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>GI-610z_b_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1525</SimpleData>
+            <SimpleData name="CARRETERA">GI-610z</SimpleData>
+            <SimpleData name="DENOMINACI">TRAVESSERES DE PALAU-SAVERDERA I VILAJUÏGA</SimpleData>
+            <SimpleData name="DESCRIPCIO">GI-610, Palau-saverdera (inici travessera)</SimpleData>
+            <SimpleData name="DESCRIPCI1">GI-604, Vilajuïga, (final travessera)</SimpleData>
+            <SimpleData name="TRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI2">GI-610, Vilajuïga, (inici travessera)</SimpleData>
+            <SimpleData name="DESCRIPCI3">GI-604, Vilajuïga, (final travessera)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">GI-610, Vilajuïga, (inici travessera)</SimpleData>
+            <SimpleData name="DESCRIPCI5">GI-604, Vilajuïga, (final travessera)</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="COMARCA">Alt Empordà</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">1678</SimpleData>
+            <SimpleData name="IDTRAM">56504</SimpleData>
+            <SimpleData name="X_ini">507658.808829035</SimpleData>
+            <SimpleData name="Y_ini">4685644.78684001</SimpleData>
+            <SimpleData name="X_fin">507376.009903034</SimpleData>
+            <SimpleData name="Y_fin">4685897.26084101</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">9330</SimpleData>
+            <SimpleData name="EndMeasure1">9709.245</SimpleData>
+            <SimpleData name="Status2">Unable to locate event.  No valid matching marker could be found in the Marker recordset.</SimpleData>
+            <SimpleData name="BeginMarker1" />
+            <SimpleData name="BeginOffset1" />
+            <SimpleData name="EndMarker1" />
+            <SimpleData name="EndOffset1" />
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>3.09294956028596,42.3230094199809,0
+3.09290134397612,42.3230390932582,0
+3.09277743034617,42.3231198895727,0
+3.0926559428587,42.323200143409,0
+3.09253372741839,42.3232807579533,0
+3.09241053862575,42.3233599321717,0
+3.09229074453354,42.3234369420221,0
+3.09215809854224,42.3235227881931,0
+3.09202690697939,42.3236075523004,0
+3.09199417341029,42.323631264978,0
+3.09190203497131,42.3236984353485,0
+3.09177593604793,42.323780493199,0
+3.09165469453989,42.3238647084832,0
+3.09152979836007,42.3239397402809,0
+3.09140928650287,42.3240253957056,0
+3.09129094893601,42.3241042045685,0
+3.09117188077583,42.3241815729021,0
+3.09105803403771,42.3242525287636,0
+3.09046484134254,42.3246362399597,0
+3.08995822304348,42.3249639437134,0
+3.08962023536868,42.3252085523635,0
+3.08952065684629,42.3252859683398,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

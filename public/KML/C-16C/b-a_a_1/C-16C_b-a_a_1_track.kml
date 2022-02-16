@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-16C_b-a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-16C_b-a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">957</SimpleData>
+            <SimpleData name="CARRETERA">C-16C</SimpleData>
+            <SimpleData name="DENOMINACI">MANRESA - SANT FRUITOS DE BAGES</SimpleData>
+            <SimpleData name="DESCRIPCIO">N-141c</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-16, Sant Fruitós de Bages</SimpleData>
+            <SimpleData name="TRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI2">N-141c, Sant Fruitós de Bages (els Plans)</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-16, Sant Fruitós de Bages</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica restant</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">a_a</SimpleData>
+            <SimpleData name="DESCRIPCI5">N-141c, Sant Fruitós de Bages (els Plans)</SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA">Bages</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">670</SimpleData>
+            <SimpleData name="IDTRAM">28239</SimpleData>
+            <SimpleData name="X_ini">404861.22953225</SimpleData>
+            <SimpleData name="Y_ini">4621936.7184877</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">1092.1050919841</SimpleData>
+            <SimpleData name="EndMeasure1">N-141c, Sant Fruitós de Bages (els Plans)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">1</SimpleData>
+            <SimpleData name="BeginOffset1">139</SimpleData>
+            <SimpleData name="EndMarker1">2</SimpleData>
+            <SimpleData name="EndOffset1">470</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.8558167729181,41.7435561791761,0
+1.85590153097657,41.7436187198741,0
+1.85611627511126,41.74377721631,0
+1.85626966685474,41.7438961021659,0
+1.8563174185258,41.7439363876494,0
+1.85635794407501,41.7439704765474,0
+1.85652620510013,41.7441122073152,0
+1.85693030951915,41.7444843373198,0
+1.85725501475318,41.7447834414833,0
+1.85752050166643,41.7450243121923,0
+1.85778501104908,41.7452661633263,0
+1.85779802422692,41.7452783618401,0
+1.85784641319881,41.7453235167284,0
+1.85791290305352,41.7453856042194,0
+1.85798909364854,41.7454567949184,0
+1.85804304350936,41.7455071388861,0
+1.8580924974893,41.7455532950059,0
+1.85839926358863,41.7458405087706,0
+1.85845333433506,41.7458908537445,0
+1.85866500665949,41.7460877742378,0
+1.85893123593851,41.746334863774,0
+1.85924539152668,41.7466262917719,0
+1.85951979491783,41.7468806665476,0
+1.85955990909821,41.7469178125635,0
+1.85982960774699,41.7471731306737,0
+1.86008677637333,41.7474366102173,0
+1.86022506482571,41.7475943407465,0
+1.86035864192249,41.747753285361,0
+1.86074121112432,41.7482167882284,0
+1.86112136166367,41.7486813466616,0
+1.86154065996072,41.7491973604976,0
+1.86193132952612,41.7496719536104,0
+1.86215452399007,41.7499439847562,0
+1.86225443059974,41.7500657508329,0
+1.86233671155742,41.750166034376,0
+1.86241922242419,41.7502665977624,0
+1.86256780593654,41.7504476888713,0
+1.86313567234883,41.7511373736094,0
+1.86369906465839,41.7518264089027,0
+1.86390958892928,41.7520829774147,0
+1.86412319339484,41.7523432973419,0
+1.86456300298103,41.7528648572897,0
+1.8645874823791,41.7528954522221,0
+1.86483874602738,41.7532097514598,0
+1.86502022477777,41.7534297798003,0
+1.86494786063461,41.7533420441161</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
