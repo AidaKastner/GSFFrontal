@@ -713,11 +713,11 @@ controlErrAlta=(controlErrorTramo)=>{
 
   //Maneja la edición  en los forms
   handleChange=async e=>{
-    //e.persist();
+    e.persist();
     await this.setState({
       form:{
         ...this.state.form,
-        //[e.target.name]: e.target.value
+        [e.target.name]: e.target.value
       }
     });
     console.log("Funcion Handle",this.state.form);
