@@ -524,6 +524,7 @@ class EditarTramo extends Component{
       ComboTipFirme: '',
       form:{
         id:'',
+        nombre:'',
         carretera:{
           nombre: '',
           codigo: '',
@@ -564,34 +565,73 @@ class EditarTramo extends Component{
         estadoTram:'',
         idDdCodTecReal:'',
         idDdRedes:'',
-        idDdRedesNombre:'',
-        ddCodTecRealNombre:'',
-        ddOrganismosNombre:'',
-        ddRegimenExplotacionNombre:'',
-        ddRegimenGestionNombre:'',
-        ddZonasTermicaNombre:'',
-        ddZonasPluvNombre:'',
-        firmesTramoNombre:'',
-        firmesTramoInfl:'',
-        firmesTramoCpa:'',
-        firmesTramoAnchCar:'',
-        firmesTramoAnchArc:'',
-        firmesTramoMpd:'',
-        firmesTramoCarRod:'',
-        firmesTramoCarInter:'',
-        firmesTramoCarBase:'',
-        firmesTramoCarSubBase:'',
-        firmesTramoespRodCar:'',
-        firmesTramoespIntdCar:'',
-        firmesTramoespSubBasCar:'',
-        firmesTramoespIntArc:'',
-        firmesTramoespespBasArc:'',
-        firmesTramoespBasArc:'',
-        firmesTramoArcRod:'', 
-        firmesTramoArcInt:'',
-        firmesTramoArcBas:'',
-        firmesTramoArcSub:'',
-        firmesTramoespSubBasArc:'', 
+
+        ddTiposCalzada:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddRede:{
+          nombre: '',
+          codigo: ''
+        },
+       
+        ddCodTecRealModel:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddOrganismos:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddRegimenExplotacion:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddRegimenGestion:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddZonasTermica:{
+          nombre: '',
+          codigo: ''
+        },
+
+        ddZonasPluviometrica:{
+          nombre: '',
+          codigo: ''
+        },
+
+        firmesTramo:{
+          idCarrilDdTiposFirmesTramo: '',
+          idDdNivelesInfluencia: '',
+          cpa: '',
+          anchuraCarril: '',
+          anchuraArcen: '',
+          tipoLogModeloEvolMpd: '',
+          idCarrilDdCapasRodadura: '',
+          idCarrilDdCapasIntermedia: '',
+          idCarrilDdCapasBase: '',
+          idCarrilDdCapasSubbase: '',
+          idArcenDdCapasRodadura: '',
+          idArcenDdCapasIntermedia: '',
+          idArcenDdCapasBase: '',
+          idArcenDdCapasSubbase: '',
+          espesorRodaduraCarril: '',
+          espesorIntermediaCarril: '',
+          espesorBaseCarril: '',
+          espesorSubbaseCarril: '',
+          espesorRodaduraArcen: '',
+          espesorIntermediaArcen: '',
+          espesorBaseArcen: '',
+          espesorSubbaseArcen: '',
+          id:''
+        },
+ 
         carSent:'',
         carrOrd:'',
         idGrafo:'',
@@ -750,7 +790,7 @@ controlErrAlta=(controlErrorTramo)=>{
           }
         });
         break;
-      case 'carretera':
+      case 'nombre':
         await this.setState({
           form: {
             ...this.state.form,
@@ -928,6 +968,7 @@ peticionGet=()=>{
       ComboTipFirme: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
       form: {
         id: response.data.id,
+        nombre: response.data.nombre,
         carretera:{
           nombre: response.data.carretera.nombre,
           codigo: response.data.carretera.codigo,
@@ -966,37 +1007,75 @@ peticionGet=()=>{
         idDdRegimenGestion: response.data.idDdRegimenGestion,
         idDdRegimenExplotacion: response.data.idDdRegimenExplotacion,
         sistemaProyeccion: response.data.sistemaProyeccion,
-
         idDdCodTecReal: response.data.idDdCodTecReal,
-        idDdRedesNombre: response.data.ddRede.nombre,
-        ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
-        ddOrganismosNombre: response.data.ddOrganismos.nombre,
-        ddRegimenExplotacionNombre: response.data.ddRegimenExplotacion.nombre,
-        ddRegimenGestionNombre: response.data.ddRegimenGestion.nombre,
-        ddZonasTermicaNombre: response.data.ddZonasTermica.codigo,
-        ddZonasPluvNombre: response.data.ddZonasPluviometrica.codigo,
-        firmesTramoNombre: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
-        firmesTramoInfl: response.data.firmesTramo.idDdNivelesInfluencia,
-        firmesTramoCpa: response.data.firmesTramo.cpa,
-        firmesTramoAnchCar: response.data.firmesTramo.anchuraCarril,
-        firmesTramoAnchArc: response.data.firmesTramo.anchuraArcen,
-        firmesTramoMpd: response.data.firmesTramo.tipoLogModeloEvolMpd,
-        firmesTramoCarRod: response.data.firmesTramo.idCarrilDdCapasRodadura,
-        firmesTramoCarInter: response.data.firmesTramo.idCarrilDdCapasIntermedia,
-        firmesTramoCarBase: response.data.firmesTramo.idCarrilDdCapasBase,
-        firmesTramoCarSubBase: response.data.firmesTramo.idCarrilDdCapasSubbase,
-        firmesTramoArcRod: response.data.firmesTramo.idArcenDdCapasRodadura,
-        firmesTramoArcInt: response.data.firmesTramo.idArcenDdCapasIntermedia,
-        firmesTramoArcBas: response.data.firmesTramo.idArcenDdCapasBase,
-        firmesTramoArcSub: response.data.firmesTramo.idArcenDdCapasSubbase,
-        firmesTramoespRodCar: response.data.firmesTramo.espesorRodaduraCarril,
-        firmesTramoespIntdCar: response.data.firmesTramo.espesorIntermediaCarril,
-        firmesTramoespBasCar: response.data.firmesTramo.espesorBaseCarril,
-        firmesTramoespSubBasCar: response.data.firmesTramo.espesorSubbaseCarril,
-        firmesTramoespRodArc: response.data.firmesTramo.espesorRodaduraArcen,
-        firmesTramoespIntArc: response.data.firmesTramo.espesorIntermediaArcen,
-        firmesTramoespespBasArc: response.data.firmesTramo.espesorBaseArcen,
-        firmesTramoespSubBasArc: response.data.firmesTramo.espesorSubbaseArcen,
+
+        ddTiposCalzada:{
+          nombre: response.data.ddTiposCalzada.nombre,
+          codigo: response.data.ddTiposCalzada.codigo
+        },
+
+        ddRede:{
+          nombre: response.data.ddRede.nombre,
+          codigo: response.data.ddRede.codigo
+        },
+
+        ddCodTecRealModel:{
+          nombre: response.data.ddCodTecRealModel.nombre,
+          codigo: response.data.ddCodTecRealModel.codigo
+        },
+
+        ddOrganismos:{
+          nombre: response.data.ddOrganismos.nombre,
+          codigo: response.data.ddOrganismos.codigo
+        },
+
+        ddRegimenExplotacion:{
+          nombre: response.data.ddRegimenExplotacion.nombre,
+          codigo: response.data.ddRegimenExplotacion.codigo
+        },
+
+        ddRegimenGestion:{
+          nombre: response.data.ddRegimenGestion.nombre,
+          codigo: response.data.ddRegimenGestion.codigo
+        },
+
+
+        ddZonasTermica:{
+          nombre: response.data.ddZonasTermica.nombre,
+          codigo: response.data.ddZonasTermica.codigo
+        },
+
+        ddZonasPluviometrica:{
+          nombre: response.data.ddZonasPluviometrica.nombre,
+          codigo: response.data.ddZonasPluviometrica.codigo
+        },
+
+        firmesTramo:{
+          idCarrilDdTiposFirmesTramo: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
+          idDdNivelesInfluencia: response.data.firmesTramo.idDdNivelesInfluencia,
+          cpa: response.data.firmesTramo.cpa,
+          anchuraCarril: response.data.firmesTramo.anchuraCarril,
+          anchuraArcen: response.data.firmesTramo.anchuraArcen,
+          tipoLogModeloEvolMpd: response.data.firmesTramo.tipoLogModeloEvolMpd,
+          idCarrilDdCapasRodadura: response.data.firmesTramo.idCarrilDdCapasRodadura,
+          idCarrilDdCapasIntermedia: response.data.firmesTramo.idCarrilDdCapasIntermedia,
+          idCarrilDdCapasBase: response.data.firmesTramo.idCarrilDdCapasBase,
+          idCarrilDdCapasSubbase: response.data.firmesTramo.idCarrilDdCapasSubbase,
+          idArcenDdCapasRodadura: response.data.firmesTramo.idArcenDdCapasRodadura,
+          idArcenDdCapasIntermedia: response.data.firmesTramo.idArcenDdCapasIntermedia,
+          idArcenDdCapasBase: response.data.firmesTramo.idArcenDdCapasBase,
+          idArcenDdCapasSubbase: response.data.firmesTramo.idArcenDdCapasSubbase,
+          espesorRodaduraCarril: response.data.firmesTramo.espesorRodaduraCarril,
+          espesorIntermediaCarril: response.data.firmesTramo.espesorIntermediaCarril,
+          espesorBaseCarril: response.data.firmesTramo.espesorBaseCarril,
+          espesorSubbaseCarril: response.data.firmesTramo.espesorSubbaseCarril,
+          espesorRodaduraArcen: response.data.firmesTramo.espesorRodaduraArcen,
+          espesorIntermediaArcen: response.data.firmesTramo.espesorIntermediaArcen,
+          espesorBaseArcen: response.data.firmesTramo.espesorBaseArcen,
+          espesorSubbaseArcen: response.data.firmesTramo.espesorSubbaseArcen,
+          id: response.data.firmesTramo.id
+        },
+ 
         explanadasTramo:{
           idDdTerrenosNaturales: response.data.explanadasTramo.idDdTerrenosNaturales,
           terrenoNaturalCbr: response.data.explanadasTramo.terrenoNaturalCbr,
@@ -1090,6 +1169,7 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
       ComboTipFirme: tipoFirm,
       form: {
         id: response.data.id,
+        nombre: response.data.nombre,
         carretera:{
           nombre: response.data.carretera.nombre,
           codigo: response.data.carretera.codigo,
@@ -1130,34 +1210,72 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
         sistemaProyeccion: response.data.sistemaProyeccion,
         idDdCodTecReal: response.data.idDdCodTecReal,
 
-        idDdRedesNombre: response.data.ddRede.nombre,
-        ddCodTecRealNombre: response.data.ddCodTecRealModel.nombre,
-        ddOrganismosNombre: response.data.ddOrganismos.nombre,
-        ddRegimenExplotacionNombre: response.data.ddRegimenExplotacion.nombre,
-        ddRegimenGestionNombre: response.data.ddRegimenGestion.nombre,
-        ddZonasTermicaNombre: response.data.ddZonasTermica.codigo,
-        ddZonasPluvNombre: response.data.ddZonasPluviometrica.codigo,
-        firmesTramoNombre: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
-        firmesTramoInfl: response.data.firmesTramo.idDdNivelesInfluencia,
-        firmesTramoCpa: response.data.firmesTramo.cpa,
-        firmesTramoAnchCar: response.data.firmesTramo.anchuraCarril,
-        firmesTramoAnchArc: response.data.firmesTramo.anchuraArcen,
-        firmesTramoMpd: response.data.firmesTramo.tipoLogModeloEvolMpd,
-        firmesTramoCarRod: response.data.firmesTramo.idCarrilDdCapasRodadura,
-        firmesTramoCarInter: response.data.firmesTramo.idCarrilDdCapasIntermedia,
-        firmesTramoCarBase: response.data.firmesTramo.idCarrilDdCapasBase,
-        firmesTramoCarSubBase: response.data.firmesTramo.idCarrilDdCapasSubbase,
-        firmesTramoArcRod: response.data.firmesTramo.idArcenDdCapasRodadura,
-        firmesTramoArcInt: response.data.firmesTramo.idArcenDdCapasIntermedia,
-        firmesTramoArcBas: response.data.firmesTramo.idArcenDdCapasBase,
-        firmesTramoArcSub: response.data.firmesTramo.idArcenDdCapasSubbase,
-        firmesTramoespRodCar: response.data.firmesTramo.espesorRodaduraCarril,
-        firmesTramoespIntdCar: response.data.firmesTramo.espesorIntermediaCarril,
-        firmesTramoespBasCar: response.data.firmesTramo.espesorBaseCarril,
-        firmesTramoespSubBasCar: response.data.firmesTramo.espesorSubbaseCarril,
-        firmesTramoespRodArc: response.data.firmesTramo.espesorRodaduraArcen,
-        firmesTramoespIntArc: response.data.firmesTramo.espesorIntermediaArcen,
-        firmesTramoespespBasArc: response.data.firmesTramo.espesorBaseArcen,
+        ddTiposCalzada:{
+          nombre: response.data.ddTiposCalzada.nombre,
+          codigo: response.data.ddTiposCalzada.codigo
+        },
+
+        ddRede:{
+          nombre: response.data.ddRede.nombre,
+          codigo: response.data.ddRede.codigo
+        },
+
+        ddCodTecRealModel:{
+          nombre: response.data.ddCodTecRealModel.nombre,
+          codigo: response.data.ddCodTecRealModel.codigo
+        },
+
+        ddOrganismos:{
+          nombre: response.data.ddOrganismos.nombre,
+          codigo: response.data.ddOrganismos.codigo
+        },
+
+        ddRegimenExplotacion:{
+          nombre: response.data.ddRegimenExplotacion.nombre,
+          codigo: response.data.ddRegimenExplotacion.codigo
+        },
+
+        ddRegimenGestion:{
+          nombre: response.data.ddRegimenGestion.nombre,
+          codigo: response.data.ddRegimenGestion.codigo
+        },
+        
+        ddZonasTermica:{
+          nombre: response.data.ddZonasTermica.nombre,
+          codigo: response.data.ddZonasTermica.codigo
+        },
+
+        ddZonasPluviometrica:{
+          nombre: response.data.ddZonasPluviometrica.nombre,
+          codigo: response.data.ddZonasPluviometrica.codigo
+        },
+
+        firmesTramo:{
+          idCarrilDdTiposFirmesTramo: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
+          idDdNivelesInfluencia: response.data.firmesTramo.idDdNivelesInfluencia,
+          cpa: response.data.firmesTramo.cpa,
+          anchuraCarril: response.data.firmesTramo.anchuraCarril,
+          anchuraArcen: response.data.firmesTramo.anchuraArcen,
+          tipoLogModeloEvolMpd: response.data.firmesTramo.tipoLogModeloEvolMpd,
+          idCarrilDdCapasRodadura: response.data.firmesTramo.idCarrilDdCapasRodadura,
+          idCarrilDdCapasIntermedia: response.data.firmesTramo.idCarrilDdCapasIntermedia,
+          idCarrilDdCapasBase: response.data.firmesTramo.idCarrilDdCapasBase,
+          idCarrilDdCapasSubbase: response.data.firmesTramo.idCarrilDdCapasSubbase,
+          idArcenDdCapasRodadura: response.data.firmesTramo.idArcenDdCapasRodadura,
+          idArcenDdCapasIntermedia: response.data.firmesTramo.idArcenDdCapasIntermedia,
+          idArcenDdCapasBase: response.data.firmesTramo.idArcenDdCapasBase,
+          idArcenDdCapasSubbase: response.data.firmesTramo.idArcenDdCapasSubbase,
+          espesorRodaduraCarril: response.data.firmesTramo.espesorRodaduraCarril,
+          espesorIntermediaCarril: response.data.firmesTramo.espesorIntermediaCarril,
+          espesorBaseCarril: response.data.firmesTramo.espesorBaseCarril,
+          espesorSubbaseCarril: response.data.firmesTramo.espesorSubbaseCarril,
+          espesorRodaduraArcen: response.data.firmesTramo.espesorRodaduraArcen,
+          espesorIntermediaArcen: response.data.firmesTramo.espesorIntermediaArcen,
+          espesorBaseArcen: response.data.firmesTramo.espesorBaseArcen,
+          espesorSubbaseArcen: response.data.firmesTramo.espesorSubbaseArcen,
+          id: response.data.firmesTramo.id
+        },
+
         firmesTramoespSubBasArc: response.data.firmesTramo.espesorSubbaseArcen,
         explanadasTramo:{
           idDdTerrenosNaturales: response.data.explanadasTramo.idDdTerrenosNaturales,
@@ -1471,7 +1589,7 @@ seleccionarCarril=(carril)=>{
               <Select name="ClasFunRedes" 
                   key="ClasFunRedes"
                   options={ comboRedes } 
-                  defaultValue={comboRedes.find(obj => obj.value === this.state.form.idDdRedesNombre)}
+                  defaultValue={comboRedes.find(obj => obj.value === this.state.form.ddRede.nombre)}
                   onChange={this.handleChange}
                   
                 /> 
@@ -1481,7 +1599,7 @@ seleccionarCarril=(carril)=>{
               <Select name="ClasTecReal" 
                   key="ClasTecReal"
                   options={ comboTecReal } 
-                  defaultValue={comboTecReal.find(obj => obj.value === this.state.form.ddCodTecRealNombre)}
+                  defaultValue={comboTecReal.find(obj => obj.value === this.state.form.ddCodTecRealModel.nombre)}
                   onChange={this.handleChange}
                 /> 
                <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
@@ -1489,7 +1607,7 @@ seleccionarCarril=(carril)=>{
                <Select name="OrgCons" 
                   key="OrgCons"
                   options={ comboOrg } 
-                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismosNombre)}
+                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismos.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1498,7 +1616,7 @@ seleccionarCarril=(carril)=>{
                <Select name="OrgCom" 
                   key="OrgCom"
                   options={ comboOrg } 
-                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismosNombre)}
+                  defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismos.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1506,7 +1624,7 @@ seleccionarCarril=(carril)=>{
                <Select name="RegGest" 
                   key="RegGest"
                   options={ comboGest } 
-                  defaultValue={comboGest.find(obj => obj.value === this.state.form.ddRegimenGestionNombre)}
+                  defaultValue={comboGest.find(obj => obj.value === this.state.form.ddRegimenGestion.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1515,7 +1633,7 @@ seleccionarCarril=(carril)=>{
                <Select name="RegExpl" 
                   key="RegExpl"
                   options={ comboExplo } 
-                  defaultValue={comboExplo.find(obj => obj.value === this.state.form.ddRegimenExplotacionNombre)}
+                  defaultValue={comboExplo.find(obj => obj.value === this.state.form.ddRegimenExplotacion.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1524,7 +1642,7 @@ seleccionarCarril=(carril)=>{
               <Select name="zonTer" 
                   key="zonTer"
                   options={ comboZonTer } 
-                  defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermicaNombre)}
+                  defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermica.nombre)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1533,7 +1651,7 @@ seleccionarCarril=(carril)=>{
             <Select name="ZonaPluv" 
               key="ZonaPluv"
               options={ comboZonPluv } 
-              defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluvNombre)}
+              defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluviometrica.nombre)}
               onChange={this.handleChange}
               /> 
 
@@ -1549,18 +1667,18 @@ seleccionarCarril=(carril)=>{
               {"  "}
               <br /><br />
               <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
-                <Select name="TipoFirmeTramo" 
-                  key="TipoFirmeTramo"
+                <Select name="idCarrilDdTiposFirmesTramo" 
+                  key="idCarrilDdTiposFirmesTramo"
                   options={ comboTipoFirme } 
                   onChange={this.handleComboTipFirme} 
-                  defaultValue={comboTipoFirme.find(obj => obj.value === this.state.form.firmesTramoNombre)}
+                  defaultValue={comboTipoFirme.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdTiposFirmesTramo)}
                 /> 
               <label><Translation ns= "global">{(t) => <>{t('NilInf')}</>}</Translation></label>
                 <Select name="NivelInfluencia" 
                   key="NivelInfluencia"
                   options={ comboNivelInfluencia } 
                   onChange={this.handleChange}
-                  defaultValue={comboNivelInfluencia.find(obj => obj.value === this.state.form.firmesTramoInfl)}
+                  defaultValue={comboNivelInfluencia.find(obj => obj.value === this.state.form.firmesTramo.idDdNivelesInfluencia)}
                   /> 
               <label><Translation ns= "global">{(t) => <>{t('CPA')}</>}</Translation></label>
                 <input
@@ -1569,25 +1687,25 @@ seleccionarCarril=(carril)=>{
                     name="CPA"
                     className="u-full-width"
                     onChange={this.handleChange}
-                    value={this.state.form.firmesTramoCpa}
+                    value={this.state.form.firmesTramo.cpa}
                 />
               <label><Translation ns= "global">{(t) => <>{t('AnchCar')}</>}</Translation></label>
                 <input
-                    id="AnchCar"
+                    id="anchuraCarril"
                     type="text"
-                    name="AnchCar"
+                    name="anchuraCarril"
                     className="u-full-width"
                     onChange={this.handleChange}
-                    value={this.state.form.firmesTramoAnchCar}
+                    value={this.state.form.firmesTramo.anchuraCarril}
                 />
               <label><Translation ns= "global">{(t) => <>{t('AnchArc')}</>}</Translation></label>
                 <input
-                    id="AnchArc"
+                    id="anchuraArcen"
                     type="text"
-                    name="AnchArc"
+                    name="anchuraArcen"
                     className="u-full-width"
                     onChange={this.handleChange}
-                    value={this.state.form.firmesTramoAnchArc}
+                    value={this.state.form.firmesTramo.anchuraArcen}
                 />
               <label><Translation ns= "global">{(t) => <>{t('MPD')}</>}</Translation></label>
                 <Select 
@@ -1595,7 +1713,7 @@ seleccionarCarril=(carril)=>{
                   key="MPD"
                   options={ comboTipoMPD } 
                   onChange={this.handleChange} 
-                  defaultValue={comboTipoMPD.find(obj => obj.value === this.state.form.firmesTramoMpd)}
+                  defaultValue={comboTipoMPD.find(obj => obj.value === this.state.form.firmesTramo.tipoLogModeloEvolMpd)}
                   /> 
               
               <MDBTable>
@@ -1615,84 +1733,84 @@ seleccionarCarril=(carril)=>{
                       <Select name="CapaRodadura" 
                         key="CapaRodadura"
                         options={ comboRod } 
-                        defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramoCarRod)}
+                        defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasRodadura)}
                         onChange={this.handleChange}
                       /> 
                     </td>
                     
-                    <td>{this.state.form.firmesTramoespRodCar}</td>
+                    <td>{this.state.form.firmesTramo.espesorRodaduraCarril}</td>
                     <td>
-                      <Select name="CapaRodaduraArc" 
-                        key="CapaRodaduraArc"
+                      <Select name="idArcenDdCapasRodadura" 
+                        key="idArcenDdCapasRodadura"
                         options={ comboRod } 
-                        defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramoArcRod)}
+                        defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasRodadura)}
                         onChange={this.handleChange}
                       /> 
                     </td>
-                    <td>{this.state.form.firmesTramoespRodArc}</td>
+                    <td>{this.state.form.firmesTramo.espesorRodaduraArcen}</td>
                   </tr>
                   <tr>
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaInter')}</>}</Translation></th>
                     <td>
-                      <Select name="CapaIntermedia" 
-                        key="CapaIntermedia"
+                      <Select name="idCarrilDdCapasIntermedia" 
+                        key="idCarrilDdCapasIntermedia"
                         options={ comboInt } 
-                        defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramoCarInter)}
+                        defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasIntermedia)}
                         onChange={this.handleChange}
                       /> 
                     </td>
-                    <td>{this.state.form.firmesTramoespIntdCar}</td>
+                    <td>{this.state.form.firmesTramo.espesorIntermediaCarril}</td>
                     <td>
-                      <Select name="CapaIntermediaArc" 
-                        key="CapaIntermediaArc"
+                      <Select name="idArcenDdCapasIntermedia" 
+                        key="idArcenDdCapasIntermedia"
                         options={ comboInt } 
-                        defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramoArcInt)}
+                        defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasIntermedia)}
                         onChange={this.handleChange}
                       /> 
                     </td> 
-                    <td>{this.state.form.firmesTramoespIntArc}</td>
+                    <td>{this.state.form.firmesTramo.espesorIntermediaArcen}</td>
                   </tr>
                   <tr>
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaBase')}</>}</Translation></th>
                     <td>
-                      <Select name="CapaBase" 
-                        key="CapaBase"
+                      <Select name="idCarrilDdCapasBase" 
+                        key="idCarrilDdCapasBase"
                         options={ comboBase } 
-                        defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramoCarBase)}
+                        defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasBase)}
                         onChange={this.handleChange}
                       /> 
                     </td>
-                    <td>{this.state.form.firmesTramoespBasCar}</td>
+                    <td>{this.state.form.firmesTramo.espesorBaseCarril}</td>
                     <td>
-                      <Select name="CapaBaseArc" 
-                        key="CapaBaseArc"
+                      <Select name="idArcenDdCapasBase" 
+                        key="idArcenDdCapasBase"
                         options={ comboBase } 
-                        defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramoArcBas)}
+                        defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasBase)}
                         onChange={this.handleChange}
                       /> 
                     </td> 
-                    <td>{this.state.form.firmesTramoespespBasArc}</td>
+                    <td>{this.state.form.firmesTramo.espesorBaseArcen}</td>
                   </tr>
                   <tr>
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaSubb')}</>}</Translation></th>
                     <td>
-                      <Select name="CapaSubBase" 
-                        key="CapaSubBase"
+                      <Select name="idCarrilDdCapasSubbase" 
+                        key="idCarrilDdCapasSubbase"
                         options={ comboSubBase } 
-                        defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramoCarSubBase)}
+                        defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasSubbase)}
                         onChange={this.handleChange}
                       /> 
                     </td>
-                    <td>{this.state.form.firmesTramoespSubBasCar}</td>
+                    <td>{this.state.form.firmesTramo.espesorSubbaseCarril}</td>
                     <td>
-                      <Select name="CapaSubBaseArc" 
-                        key="CapaSubBaseArc"
+                      <Select name="idArcenDdCapasSubbase" 
+                        key="idArcenDdCapasSubbase"
                         options={ comboSubBase } 
-                        defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramoArcSub)}
+                        defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasSubbase)}
                         onChange={this.handleChange}
                       /> 
                     </td>
-                    <td>{this.state.form.firmesTramoespSubBasArc}</td>
+                    <td>{this.state.form.firmesTramo.espesorSubbaseArcen}</td>
                   </tr>
                 </MDBTableBody>
               </MDBTable>
