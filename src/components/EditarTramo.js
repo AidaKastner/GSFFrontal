@@ -757,6 +757,7 @@ controlErrAlta=(controlErrorTramo)=>{
   //Maneja la edición  en los forms
   handleChange=async e=>{
     e.persist();
+    console.log("TARGET NAME: ", e.target.name);
     const name = e.target.name;
     switch (name) {
       case 'fechabaja':
@@ -891,6 +892,108 @@ controlErrAlta=(controlErrorTramo)=>{
     console.log("Funcion Handle",this.state.form);
     console.log("Indice: ",this.state.Index);
   }
+
+
+
+
+
+//Maneja la edición  en los forms
+handleChangeCombos=(e, {name})=>{
+  //e.persist();
+  console.log("TARGET e: ", e);
+  console.log("TARGET name: ", name);
+  console.log("TARGET value: ", e.value);
+  const valor = e.value;
+  const names = name;
+  switch (names) {
+      case 'ClasFunRedes':
+      console.log("VALOR: ", valor);
+      this.state.form.ddRede.nombre = valor;
+      this.setState({
+          form: {
+            ...this.state.form,
+            ddRede: {
+              ...this.state.form.ddRede,
+              'nombre': valor
+            }
+          }
+        });
+        console.log("CASE STATE: ", this.state.form.ddRede);
+        break;
+
+        case 'ClasTecReal':
+          console.log("VALOR: ", valor);
+          this.state.form.ddCodTecRealModel.nombre = valor;
+          this.setState({
+              form: {
+                ...this.state.form,
+                ddCodTecRealModel: {
+                  ...this.state.form.ddCodTecRealModel,
+                  'nombre': valor
+                }
+              }
+            });
+            console.log("CASE STATE: ", this.state.form.ddCodTecRealModel);
+            break;
+
+            case 'OrgCons':
+              console.log("VALOR: ", valor);
+              this.state.form.ddOrganismos.nombre = valor;
+              this.setState({
+                  form: {
+                    ...this.state.form,
+                    ddOrganismos: {
+                      ...this.state.form.ddOrganismos,
+                      'nombre': valor
+                    }
+                  }
+                });
+                console.log("CASE STATE: ", this.state.form.ddOrganismos);
+                break;
+
+            case 'OrgCom':
+              console.log("VALOR: ", valor);
+              this.state.form.ddOrganismos.nombre = valor;
+              this.setState({
+                  form: {
+                    ...this.state.form,
+                    ddOrganismos: {
+                      ...this.state.form.ddOrganismos,
+                      'nombre': valor
+                    }
+                  }
+                });
+                console.log("CASE STATE: ", this.state.form.ddOrganismos);
+                break;
+
+           case 'RegGest':
+              console.log("VALOR: ", valor);
+              this.state.form.ddRegimenGestion.nombre = valor;
+              this.setState({
+                  form: {
+                    ...this.state.form,
+                    ddRegimenGestion: {
+                      ...this.state.form.ddRegimenGestion,
+                      'nombre': valor
+                    }
+                  }
+                });
+                console.log("CASE STATE: ", this.state.form.ddRegimenGestion);
+                break;
+
+      
+    default:
+      this.setState({
+        form:{
+          ...this.state.form,
+          [e.target.name]: e.target.value
+        }
+      });
+      break;
+  }
+  console.log("Funcion Handle Combo",this.state.form);
+
+}
 
     handleComboTipFirme = async e => {
       console.log("EVENTO COMBO: ", e.value);
@@ -1590,7 +1693,7 @@ seleccionarCarril=(carril)=>{
                   key="ClasFunRedes"
                   options={ comboRedes } 
                   defaultValue={comboRedes.find(obj => obj.value === this.state.form.ddRede.nombre)}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                   
                 /> 
 
@@ -1600,7 +1703,7 @@ seleccionarCarril=(carril)=>{
                   key="ClasTecReal"
                   options={ comboTecReal } 
                   defaultValue={comboTecReal.find(obj => obj.value === this.state.form.ddCodTecRealModel.nombre)}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                 /> 
                <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
                
@@ -1608,7 +1711,7 @@ seleccionarCarril=(carril)=>{
                   key="OrgCons"
                   options={ comboOrg } 
                   defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismos.nombre)}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                 /> 
 
                <label><Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation></label>
@@ -1617,7 +1720,7 @@ seleccionarCarril=(carril)=>{
                   key="OrgCom"
                   options={ comboOrg } 
                   defaultValue={comboOrg.find(obj => obj.value === this.state.form.ddOrganismos.nombre)}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                 /> 
 
                <label><Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation></label>
@@ -1642,7 +1745,7 @@ seleccionarCarril=(carril)=>{
               <Select name="zonTer" 
                   key="zonTer"
                   options={ comboZonTer } 
-                  defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermica.nombre)}
+                  defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermica.codigo)}
                   onChange={this.handleChange}
                 /> 
 
@@ -1651,7 +1754,7 @@ seleccionarCarril=(carril)=>{
             <Select name="ZonaPluv" 
               key="ZonaPluv"
               options={ comboZonPluv } 
-              defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluviometrica.nombre)}
+              defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluviometrica.codigo)}
               onChange={this.handleChange}
               /> 
 
@@ -2026,7 +2129,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder= {this.state.form.carretera.nombre}
                       onChange={this.handleChange}
-                      //value={this.state.form.carretera.nombre}
+                      value={this.state.form.carretera.nombre}
                     />
                 </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -2038,7 +2141,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder= {this.state.form.comentario}
                       onChange={this.handleChange}
-                      //value={this.state.form.comentario}
+                      value={this.state.form.comentario}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -2051,7 +2154,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder={this.state.form.puntoIni.pk}
                       onChange={this.handleChange}
-                      //value={this.state.form.puntoIni.pk}
+                      value={this.state.form.puntoIni.pk}
                     />     
                 </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -2064,7 +2167,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder={this.state.form.puntoFin.pk}
                       onChange={this.handleChange}
-                      //value={this.state.form.puntoFin.pk}
+                      value={this.state.form.puntoFin.pk}
                     />     
                 </Col>
               </Row>
@@ -2078,7 +2181,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder= {this.state.form.carretera.codigo}
                       onChange={this.handleChange}
-                      //value={this.state.form.carretera.codigo}
+                      value={this.state.form.carretera.codigo}
                     />
                 </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -2091,7 +2194,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder={this.state.form.longitud}
                       onChange={this.handleChange}
-                      //value={this.state.form.longitud}
+                      value={this.state.form.longitud}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -2104,7 +2207,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder={this.state.form.puntoIni.m}
                       onChange={this.handleChange}
-                      //value={this.state.form.puntoIni.m}
+                      value={this.state.form.puntoIni.m}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -2117,7 +2220,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder={this.state.form.puntoFin.m}
                       onChange={this.handleChange}
-                      //value={this.state.form.puntoFin.m}
+                      value={this.state.form.puntoFin.m}
                     />
                 </Col>
               </Row>
@@ -2127,7 +2230,7 @@ seleccionarCarril=(carril)=>{
                     <input
                       type="text"
                       name="fechaalta"
-                      readOnly = {false}
+                      readOnly = {true}
                       className="u-full-width"                  
                       onChange={this.handleChange}
                       value={this.state.form.fechaAlta}
@@ -2149,7 +2252,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder={this.state.form.puntoIni.descripcion}
                       onChange={this.handleChange}
-                      //value={this.state.form.puntoIni.descripcion}
+                      value={this.state.form.puntoIni.descripcion}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
@@ -2161,7 +2264,7 @@ seleccionarCarril=(carril)=>{
                       readOnly = {false}
                       placeholder={this.state.form.puntoFin.descripcion}
                       onChange={this.handleChange}
-                      //value={this.state.form.puntoFin.descripcion}
+                      value={this.state.form.puntoFin.descripcion}
                     />
                 </Col>
               </Row>
@@ -2172,10 +2275,10 @@ seleccionarCarril=(carril)=>{
                       type="text"
                       name="fechabaja"
                       className="u-full-width"
-                      readOnly = {false}
+                      readOnly = {true}
                       placeholder={this.state.estadoTram}
                       onChange={this.handleChange}
-                      //value={this.state.estadoTram}
+                      value={this.state.estadoTram}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
