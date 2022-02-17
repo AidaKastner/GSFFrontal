@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-58LD_a_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-58LD_a_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1358</SimpleData>
+            <SimpleData name="CARRETERA">C-58LD</SimpleData>
+            <SimpleData name="DENOMINACI">CALÇADES LATERALS DRETA DE LA C-58</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-58, Badia</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-58, Terrassa</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-58, Badia</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-58 / C-58C, Sant Quirze del Vallès</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Calçada lateral</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica restant</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">Sant Quirze del Vallès (incorporació des de C-58)</SimpleData>
+            <SimpleData name="DESCRIPCI5">C-58 / C-58C, Sant Quirze del Vallès</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Vallès Occidental</SimpleData>
+            <SimpleData name="NOMBREDECA">3+0</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">1760</SimpleData>
+            <SimpleData name="IDTRAM">38422</SimpleData>
+            <SimpleData name="X_ini">424504.762385456</SimpleData>
+            <SimpleData name="Y_ini">4597705.42552114</SimpleData>
+            <SimpleData name="X_fin">423797.723848799</SimpleData>
+            <SimpleData name="Y_fin">4598866.54911046</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">12820.6531403048</SimpleData>
+            <SimpleData name="EndMeasure1">14187.469</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">12</SimpleData>
+            <SimpleData name="BeginOffset1">820.653140304845</SimpleData>
+            <SimpleData name="EndMarker1">14</SimpleData>
+            <SimpleData name="EndOffset1">187.468999999999</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.09508471288923,41.527436037236,0
+2.09481241013858,41.5278676542784,0
+2.09457986683194,41.5282639468849,0
+2.09407282659941,41.5291053102336,0
+2.09315047054999,41.5304684597503,0
+2.09271009774307,41.5311401977181,0
+2.09263810083771,41.5312655590703,0
+2.09255327193916,41.5314050093477,0
+2.09186196972821,41.5323023738733,0
+2.09110005435458,41.533208979441,0
+2.09099667143727,41.5333319927292,0
+2.09055076633567,41.5338332344653,0
+2.08896751183715,41.535597482944,0
+2.08862760463317,41.5359921325033,0
+2.08842599695648,41.5361343793715,0
+2.08747762447468,41.5369810244835,0
+2.08694071114871,41.5374530997708,0
+2.08646377551526,41.5378264190705,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

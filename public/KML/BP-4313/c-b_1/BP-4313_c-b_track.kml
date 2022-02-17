@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>BP-4313_c_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>BP-4313_c_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">259</SimpleData>
+            <SimpleData name="CARRETERA">BP-4313</SimpleData>
+            <SimpleData name="DENOMINACI" />
+            <SimpleData name="DESCRIPCIO"><![CDATA[C-59, Santa Maria d'Oló]]></SimpleData>
+            <SimpleData name="DESCRIPCI1">C-1410 (PK 14.300), Súria</SimpleData>
+            <SimpleData name="TRAM">c</SimpleData>
+            <SimpleData name="DESCRIPCI2"><![CDATA[C-25, Santa María d'Oló]]></SimpleData>
+            <SimpleData name="DESCRIPCI3">B-431, Avinyó</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Diputació de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">Avinyó (camí cementiri)</SimpleData>
+            <SimpleData name="DESCRIPCI5">B-431, Avinyó</SimpleData>
+            <SimpleData name="ORGANISMER">Diputació de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Bages</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">284</SimpleData>
+            <SimpleData name="IDTRAM">27759</SimpleData>
+            <SimpleData name="X_ini">415303.091989147</SimpleData>
+            <SimpleData name="Y_ini">4634639.36399248</SimpleData>
+            <SimpleData name="X_fin">414675.553527694</SimpleData>
+            <SimpleData name="Y_fin">4634969.91425716</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">28407.8859509558</SimpleData>
+            <SimpleData name="EndMeasure1">29147.564</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">28</SimpleData>
+            <SimpleData name="BeginOffset1">604.149280955804</SimpleData>
+            <SimpleData name="EndMarker1">29</SimpleData>
+            <SimpleData name="EndOffset1">343.650319999997</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.97956165872218,41.8591323090784,0
+1.97953808929719,41.8591446641888,0
+1.97953129185747,41.8591478462542,0
+1.97948905592509,41.8591672860193,0
+1.97944005686442,41.8591877465151,0
+1.97938975700841,41.8592066642905,0
+1.97932108089403,41.859229561929,0
+1.97932047571597,41.8592297366887,0
+1.97926120976029,41.8592442515334,0
+1.97924984042244,41.8592470327022,0
+1.97903224350378,41.8592855399392,0
+1.97881442402062,41.8593228739087,0
+1.97855735201514,41.8593662533557,0
+1.97832168049286,41.8594048687852,0
+1.97829993690762,41.8594084582989,0
+1.97811495135706,41.8594341939574,0
+1.97792962577146,41.8594585752818,0
+1.97788553477042,41.859465838853,0
+1.97775591907443,41.8594872027663,0
+1.97758198707087,41.8595148372411,0
+1.97757474491889,41.8595156734805,0
+1.97739162597169,41.8595376417478,0
+1.9772007083205,41.8595575588273,0
+1.97709028757399,41.8595689152122,0
+1.97703248219722,41.8595748855002,0
+1.97686425455322,41.8595923019802,0
+1.97684927975146,41.8595945104052,0
+1.97681111565609,41.8596002951874,0
+1.97676005756724,41.8596138010107,0
+1.97655607436314,41.8596824172165,0
+1.97642621944785,41.8597262943494,0
+1.97637110405188,41.8597448977022,0
+1.9763523287857,41.8597512153098,0
+1.97604815374527,41.8598545146966,0
+1.97599848773993,41.8598713650783,0
+1.97597789538624,41.8598782969042,0
+1.97594373492731,41.8598898813886,0
+1.97574398061095,41.8599576331559,0
+1.97553140492763,41.8600285126983,0
+1.97531871550094,41.8600989404939,0
+1.97509922641271,41.860172639743,0
+1.97504362696252,41.8601913282057,0
+1.97487973682704,41.860246338566,0
+1.97462831314136,41.8603279481599,0
+1.97437641847048,41.8604088324579,0
+1.97419993698329,41.8604676023614,0
+1.97402380506333,41.8605270956526,0
+1.97388115007814,41.8605725668913,0
+1.97373814213202,41.8606174943955,0
+1.97356811138798,41.8606796534261,0
+1.97340583814783,41.8607539505363,0
+1.97335586746456,41.8607822356059,0
+1.97330827150032,41.8608127034876,0
+1.97325538314981,41.8608501493189,0
+1.9732052323377,41.8608896911362,0
+1.97315534782343,41.8609351797583,0
+1.97311227652818,41.8609840617357,0
+1.97305524778584,41.8610619107298,0
+1.9729982189038,41.861139759693,0
+1.97292101854682,41.8612433677454,0
+1.97284358132586,41.8613467034242,0
+1.97277177753143,41.8614443250941,0
+1.97270033203678,41.8615421300549,0
+1.97262609396107,41.8616412610131,0
+1.97255018063487,41.8617396564035,0
+1.9724949413946,41.8618034705964,0
+1.97243276102433,41.8618643405379,0
+1.9723921149247,41.8618971218619,0
+1.97234541283068,41.8619243549039,0
+1.97229662442425,41.8619464354282,0
+1.97224783742581,41.8619684258768,0
+1.97220912563236,41.8619857328476,0
+1.97217029335016,41.8620030387275,0
+1.97212993099891,41.862018079224,0
+1.97208664341833,41.8620276894977,0
+1.97205841928732,41.862029598643,0
+1.97203031418124,41.8620315989136,0
+1.97199240069924,41.8620366637904,0
+1.97195448865322,41.8620416386002,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

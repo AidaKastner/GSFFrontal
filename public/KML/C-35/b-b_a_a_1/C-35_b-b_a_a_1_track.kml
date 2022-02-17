@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-35_b-b_a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-35_b-b_a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1225</SimpleData>
+            <SimpleData name="CARRETERA">C-35</SimpleData>
+            <SimpleData name="DENOMINACI">PARETS - LLAGOSTERA</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-17, Parets del Vallès (rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI1"><![CDATA[C-65, Llagostera (Costa de l'Alou,  final concessió)]]></SimpleData>
+            <SimpleData name="TRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI2">BV-5105, Cardedeu</SimpleData>
+            <SimpleData name="DESCRIPCI3">Límit comarcal el Vallès Occidental - la Selva (la Batllòria)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica restant</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">b_a_a</SimpleData>
+            <SimpleData name="DESCRIPCI5">C-251, Llinars del Vallès (can Ferrer)</SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA">Vallès Oriental</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">1123</SimpleData>
+            <SimpleData name="IDTRAM">31172</SimpleData>
+            <SimpleData name="X_ini">452350.752507336</SimpleData>
+            <SimpleData name="Y_ini">4611516.15468417</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">48171.4865371614</SimpleData>
+            <SimpleData name="EndMeasure1">C-251, Llinars del Vallès (can Ferrer)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">48</SimpleData>
+            <SimpleData name="BeginOffset1">265</SimpleData>
+            <SimpleData name="EndMarker1">49</SimpleData>
+            <SimpleData name="EndOffset1">800</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.42773940955197,41.6539693395668,0
+2.42834826553548,41.6541257332754,0
+2.42860844815587,41.6541745833842,0
+2.42887160083796,41.6542135397212,0
+2.42919383265414,41.6542473990387,0
+2.4296719095469,41.654271371936,0
+2.43007404237745,41.6542666088925,0
+2.43040090317985,41.6542458715709,0
+2.43083848175372,41.6541948027141,0
+2.4310392909757,41.6541619801024,0
+2.43112836268167,41.6541446460634,0
+2.43126829497537,41.6541174140042,0
+2.43158106143012,41.6540456410024,0
+2.43220851686039,41.6538855300785,0
+2.43359658804248,41.6535271889489,0
+2.43413757305606,41.6533889176646,0
+2.43442776030067,41.6533164854324,0
+2.43515528476081,41.6531402755709,0
+2.43559333001359,41.6530378515913,0
+2.43625215549737,41.6528889498623,0
+2.43699200647672,41.6527287256193,0
+2.43796131501936,41.6525213507147,0
+2.43839211712216,41.6524360843529,0
+2.43873491561529,41.6523833464912,0
+2.43899401392337,41.6523554336449,0
+2.43926892274227,41.6523380657422,0
+2.43958256211685,41.6523321805456,0
+2.43981825782528,41.652338101927,0
+2.44017040077045,41.6523631441707,0
+2.44040458803843,41.6523907643308,0
+2.44068054620896,41.6524348900189,0
+2.44088931985524,41.6524798449552,0
+2.44104987358343,41.6525144164643,0
+2.44140952587339,41.6526157821786,0
+2.44177314553501,41.6527446378991,0
+2.44209633060986,41.6528832043456,0
+2.44246971487997,41.6530638964772,0
+2.4427990384312,41.6532291519142,0
+2.44336788298887,41.6535148202366,0
+2.44438050045005,41.6540236653439,0
+2.4455314579301,41.654620177452,0
+2.44489317346099,41.6542893707794</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>B-140a_a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>B-140a_a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">92</SimpleData>
+            <SimpleData name="CARRETERA">B-140a</SimpleData>
+            <SimpleData name="DENOMINACI">ANTIGA B-140</SimpleData>
+            <SimpleData name="DESCRIPCIO">Santa Perpètua de Mogoda (final cessió Aj, inici pont riera de Caldes, rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI1">Santa Perpètua de Mogoda (final pont riera de Caldes, rotonda)</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">Santa Perpètua de Mogoda (final cessió Aj, inici pont riera de Caldes, rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI3">Santa Perpètua de Mogoda (final pont riera de Caldes, rotonda)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">Santa Perpètua de Mogoda (final cessió Aj, inici pont riera de Caldes, rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI5">Santa Perpètua de Mogoda (final pont riera de Caldes, rotonda)</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Vallès Occidental</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">72</SimpleData>
+            <SimpleData name="IDTRAM">44704</SimpleData>
+            <SimpleData name="X_ini">431892.64314261</SimpleData>
+            <SimpleData name="Y_ini">4598526.86496869</SimpleData>
+            <SimpleData name="X_fin">432078.048038725</SimpleData>
+            <SimpleData name="Y_fin">4598627.45272423</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">6583</SimpleData>
+            <SimpleData name="EndMeasure1">6794.566</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">6,583</SimpleData>
+            <SimpleData name="BeginOffset1">0</SimpleData>
+            <SimpleData name="EndMarker1">6,583</SimpleData>
+            <SimpleData name="EndOffset1">211.566</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.1835365913079,41.5354970055476,0
+2.18363714101062,41.5355252232,0
+2.18376356007574,41.5355639214559,0
+2.18397557825247,41.5356178439828,0
+2.18508755813191,41.5361322797519,0
+2.18515312692464,41.5361626132848,0
+2.18537891441585,41.5362572335349,0
+2.18551434836082,41.5363171059261,0
+2.18562510161149,41.5363706020588,0
+2.18574762576415,41.536418705645,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

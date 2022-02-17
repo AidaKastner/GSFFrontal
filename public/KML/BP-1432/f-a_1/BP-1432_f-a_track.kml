@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>BP-1432_f_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>BP-1432_f_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">240</SimpleData>
+            <SimpleData name="CARRETERA">BP-1432</SimpleData>
+            <SimpleData name="DENOMINACI" />
+            <SimpleData name="DESCRIPCIO">C-59, Sant Feliu Codines (rotonda)</SimpleData>
+            <SimpleData name="DESCRIPCI1">Carrer dels Banys (carretera vella), a la Garriga</SimpleData>
+            <SimpleData name="TRAM">f</SimpleData>
+            <SimpleData name="DESCRIPCI2"><![CDATA[Intersecció amb l'N-152a, a la Garriga]]></SimpleData>
+            <SimpleData name="DESCRIPCI3">Carrer dels Banys (carretera vella), a la Garriga</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Diputació de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4"><![CDATA[Intersecció amb l'N-152a, a la Garriga]]></SimpleData>
+            <SimpleData name="DESCRIPCI5">Carrer dels Banys (carretera vella), a la Garriga</SimpleData>
+            <SimpleData name="ORGANISMER">Desconegut</SimpleData>
+            <SimpleData name="COMARCA">Desconegut</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">220</SimpleData>
+            <SimpleData name="IDTRAM">40870</SimpleData>
+            <SimpleData name="X_ini">439987.355572</SimpleData>
+            <SimpleData name="Y_ini">4614234.03625656</SimpleData>
+            <SimpleData name="X_fin">440592.485586206</SimpleData>
+            <SimpleData name="Y_fin">4614702.06715898</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">32167.7607355115</SimpleData>
+            <SimpleData name="EndMeasure1">32933.02</SimpleData>
+            <SimpleData name="Status2">Unable to locate event.  No valid matching marker could be found in the Marker recordset.</SimpleData>
+            <SimpleData name="BeginMarker1" />
+            <SimpleData name="BeginOffset1" />
+            <SimpleData name="EndMarker1" />
+            <SimpleData name="EndOffset1" />
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.27899388608143,41.6776127830973,0
+2.27901417821423,41.6776246538135,0
+2.27914916145095,41.6777051225676,0
+2.27927336913226,41.677782281092,0
+2.2792941303417,41.6777951562206,0
+2.27931489155939,41.6778080313452,0
+2.27945461165544,41.6778947443172,0
+2.27975812445174,41.6780858843292,0
+2.27993492369598,41.6781983189739,0
+2.27995806729873,41.678213055351,0
+2.2801578958151,41.6783397749526,0
+2.2802719866986,41.6784085825498,0
+2.28044820824651,41.67850831277,0
+2.28062405189469,41.6786096616352,0
+2.28098851117745,41.6788308128783,0
+2.28135188873305,41.6790522264157,0
+2.28141825097867,41.6790916417408,0
+2.28153772665394,41.6791626434184,0
+2.28154584087832,41.6791676480041,0
+2.28181474617247,41.6793171337382,0
+2.28186133235129,41.6793414735465,0
+2.28201258433484,41.6794289759576,0
+2.28215340280651,41.6795147917817,0
+2.28232150511784,41.6796213138509,0
+2.28242947757357,41.6796897208409,0
+2.28322611990671,41.6801596341329,0
+2.28350606522058,41.6803111868537,0
+2.28386788764674,41.6805062674035,0
+2.28453318443226,41.6809069769434,0
+2.28528038468857,41.681362765333,0
+2.28621693485625,41.681873466292,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

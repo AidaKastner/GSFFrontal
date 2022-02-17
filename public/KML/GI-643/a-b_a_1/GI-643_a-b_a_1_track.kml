@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>GI-643_a-b_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>GI-643_a-b_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1550</SimpleData>
+            <SimpleData name="CARRETERA">GI-643</SimpleData>
+            <SimpleData name="DENOMINACI">TORROELLA DE MONTGRÍ - PARLAVÀ</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-31, Gualta</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-252, Parlavà (GI-642)</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-31, Gualta</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-252, Parlavà (GI-642)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa comarcal</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">b_a</SimpleData>
+            <SimpleData name="DESCRIPCI5">Fontanilles (pont de Mas Veí)</SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA">Baix Empordà</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Comarcal</SimpleData>
+            <SimpleData name="ID1">1770</SimpleData>
+            <SimpleData name="IDTRAM">26281</SimpleData>
+            <SimpleData name="X_ini">507184.123303677</SimpleData>
+            <SimpleData name="Y_ini">4653591.56118604</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">3153.31472337769</SimpleData>
+            <SimpleData name="EndMeasure1">Fontanilles (pont de Mas Veí)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">3</SimpleData>
+            <SimpleData name="BeginOffset1">135</SimpleData>
+            <SimpleData name="EndMarker1">4</SimpleData>
+            <SimpleData name="EndOffset1">540</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>3.08679297685107,42.0343305460716,0
+3.08675411337472,42.0343142736775,0
+3.08671131686142,42.0342931406853,0
+3.08669342444957,42.0342842377415,0
+3.0866480845127,42.0342584232152,0
+3.08657735449624,42.0342183074319,0
+3.08651049227454,42.0341794495955,0
+3.08646152468477,42.0341511158941,0
+3.08645402844294,42.034146798402,0
+3.08642343918049,42.0341293487547,0
+3.0862284172802,42.034017634224,0
+3.08603376339237,42.0339095217325,0
+3.08597198275205,42.0338757034538,0
+3.08583778233916,42.0338022205052,0
+3.08573248463102,42.0337497911593,0
+3.08570818768856,42.0337395418866,0
+3.08562199989362,42.0337030397905,0
+3.08554524798976,42.0336758073704,0
+3.08528043809391,42.033592154217,0
+3.08501502822455,42.0335110227547,0
+3.08486286584724,42.0334651123467,0
+3.08445714092734,42.0333427436173,0
+3.08439985362638,42.0333254032867,0
+3.08389961840295,42.0331740111627,0
+3.08330608139618,42.0329930533273,0
+3.08326498950035,42.0329804740954,0
+3.08296223994159,42.0328881969492,0
+3.08263024375172,42.0327870236632,0
+3.0820589517879,42.0326129783304,0
+3.08195163104954,42.0325803615483,0
+3.0814871804064,42.0324394708949,0
+3.08115434611921,42.032340545593,0
+3.08098539152121,42.032290408887,0
+3.08095686990694,42.0322819629365,0
+3.08094019201344,42.0322770211464,0
+3.08048336462163,42.0321423355788,0
+3.0799789203639,42.0319914697132,0
+3.07988260012906,42.0319627161158,0
+3.07928328599642,42.031780930901,0
+3.07896954868675,42.0316840574759,0
+3.07887927085323,42.0316561995065,0
+3.07867019397071,42.0315916765688,0
+3.07805662290684,42.0314028696151,0
+3.07799946000216,42.0313856160654,0
+3.07776234891115,42.0313139053713,0
+3.07764500207245,42.031278409281,0
+3.07753538995619,42.0312453395928,0
+3.07751762478843,42.0312399477133,0
+3.07697850894231,42.031077293554,0
+3.07658236156621,42.0309578626496,0
+3.07644000030628,42.030914996715,0
+3.07590149429879,42.0307526072764,0
+3.07570040128041,42.0306920365116,0
+3.07533265808914,42.030581138689,0
+3.0752683665793,42.0305617269034,0
+3.07476394552552,42.030409487063,0
+3.07430218559976,42.0302697363724,0
+3.07402604904423,42.0301861546654,0
+3.07393565531141,42.0301588332732,0
+3.07384030689028,42.0301299838975,0
+3.07347487015169,42.0300231315994,0
+3.07313711227802,42.0299279689698,0
+3.0731075056251,42.0299196118289,0
+3.07295838815127,42.0298803485625,0
+3.07280613649466,42.0298467612871,0
+3.07270270824495,42.029829264494,0
+3.07265208308247,42.0298220014616,0
+3.07250081168256,42.0298002118454,0
+3.07221578859935,42.0297591427519,0
+3.07196756246844,42.0297263248461,0
+3.07169819987041,42.0296917936945,0
+3.07160861800175,42.0296842529297,0
+3.07149328604293,42.0296768730049,0
+3.07141512913657,42.0296719000485,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

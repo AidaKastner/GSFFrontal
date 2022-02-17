@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-59_d_h</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-59_d_h</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1374</SimpleData>
+            <SimpleData name="CARRETERA">C-59</SimpleData>
+            <SimpleData name="DENOMINACI"><![CDATA[MARTORELLES - SANTA MARIA D'OLÓ]]></SimpleData>
+            <SimpleData name="DESCRIPCIO">C-33 Mollet del Vallès</SimpleData>
+            <SimpleData name="DESCRIPCI1"><![CDATA[C-25, Santa Maria d'Oló (C-670)]]></SimpleData>
+            <SimpleData name="TRAM">d</SimpleData>
+            <SimpleData name="DESCRIPCI2">B-143, Palau-solità i Plegamans (final variant)</SimpleData>
+            <SimpleData name="DESCRIPCI3"><![CDATA[C-25, Santa Maria d'Oló (C-670)]]></SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa comarcal</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">h</SimpleData>
+            <SimpleData name="DESCRIPCI4">Moià (inici travessera)</SimpleData>
+            <SimpleData name="DESCRIPCI5">Moià (final travessera)</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Bages</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Comarcal</SimpleData>
+            <SimpleData name="ID1">1800</SimpleData>
+            <SimpleData name="IDTRAM">28120</SimpleData>
+            <SimpleData name="X_ini">425279.110248792</SimpleData>
+            <SimpleData name="Y_ini">4628408.19356546</SimpleData>
+            <SimpleData name="X_fin">425077.574882043</SimpleData>
+            <SimpleData name="Y_fin">4629060.06612935</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">37157.6058865937</SimpleData>
+            <SimpleData name="EndMeasure1">37840.0833263569</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">37</SimpleData>
+            <SimpleData name="BeginOffset1">853.159536593674</SimpleData>
+            <SimpleData name="EndMarker1">38</SimpleData>
+            <SimpleData name="EndOffset1">551.013706356855</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.10052466407757,41.8040204682338,0
+2.10037858414696,41.8043607752301,0
+2.10025489740499,41.804649107659,0
+2.10013132863253,41.8049375308694,0
+2.10004897781588,41.8051277415866,0
+2.09988549218297,41.8055071815784,0
+2.09977102436074,41.8057729783083,0
+2.09961201353853,41.8061420950189,0
+2.09946009126515,41.8064948745697,0
+2.09929709894772,41.8068729664539,0
+2.09927532207838,41.8069236845607,0
+2.09917167680839,41.8071641660826,0
+2.09900494257833,41.8075513251356,0
+2.09887528767399,41.8078523087294,0
+2.09838007069018,41.8090394123398,0
+2.09835522667994,41.8091066689109,0
+2.09833961413733,41.8091383406441,0
+2.098286764993,41.8092499713602,0
+2.09825377121756,41.8093192454569,0
+2.0982185298595,41.8093942662975,0
+2.09818242560252,41.8094707214529,0
+2.09814618871387,41.8095566327536,0
+2.09811765226293,41.8096256715702,0
+2.09808152124053,41.8097040179212,0
+2.09804520580784,41.809795512819,0
+2.09801656308636,41.8098721165322,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

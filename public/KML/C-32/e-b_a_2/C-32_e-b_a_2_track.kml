@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-32_e-b_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-32_e-b_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1211</SimpleData>
+            <SimpleData name="CARRETERA">C-32</SimpleData>
+            <SimpleData name="DENOMINACI">EL VENDRELL - TOSSA DE MAR (Corredor del Mediterrani)</SimpleData>
+            <SimpleData name="DESCRIPCIO">AP-7, el Vendrell (N-340, Masia Alfons)</SimpleData>
+            <SimpleData name="DESCRIPCI1">GI-600, Tordera (rotonda)</SimpleData>
+            <SimpleData name="TRAM">e</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-31 / B-20, Montgat</SimpleData>
+            <SimpleData name="DESCRIPCI3">GI-600, Tordera (rotonda)</SimpleData>
+            <SimpleData name="REGIMDEGES">INVICAT (Infraestructures Viàries de Catalunya S.A.)</SimpleData>
+            <SimpleData name="TECNIC">Autopista (AP)</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica primaria</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">b_a</SimpleData>
+            <SimpleData name="DESCRIPCI5">N-II, Cabrera de Mar (enllaç Mataró Sud)</SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA">Maresme</SimpleData>
+            <SimpleData name="NOMBREDECA">3+3</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Concessió lliure de peatge</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">1085</SimpleData>
+            <SimpleData name="IDTRAM">17734</SimpleData>
+            <SimpleData name="X_ini">451196.889235584</SimpleData>
+            <SimpleData name="Y_ini">4597950.8197275</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">97029.2627484846</SimpleData>
+            <SimpleData name="EndMeasure1">N-II, Cabrera de Mar (enllaç Mataró Sud)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">97</SimpleData>
+            <SimpleData name="BeginOffset1">233</SimpleData>
+            <SimpleData name="EndMarker1">98</SimpleData>
+            <SimpleData name="EndOffset1">0</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.4149866058184,41.5317187531379,0
+2.41508769876899,41.5318074488493,0
+2.41510922603687,41.5318262935273,0
+2.41512932140157,41.5318444103381,0
+2.41522159646133,41.5319272964229,0
+2.41538611412118,41.532081347151,0
+2.41554773954912,41.5322371844304,0
+2.41575943744267,41.5324502921841,0
+2.41586143090108,41.5325590781902,0
+2.41595993233946,41.532669647861,0
+2.41608540889398,41.5328198965706,0
+2.41617573172724,41.5329335771467,0
+2.41619517095251,41.5329580856663,0
+2.41620631241149,41.5329721936434,0
+2.41622219038145,41.5329928109354,0
+2.41633274276864,41.5331364983927,0
+2.41645654229829,41.5333001591492,0
+2.41649286431673,41.5333535767362,0
+2.41652906652508,41.5334069937041,0
+2.41660093262684,41.5335204002479,0
+2.41669803027186,41.5336941938093,0
+2.41678959742507,41.5338698508129,0
+2.4168599034921,41.5340102713559,0
+2.41692660323044,41.5341518445445,0
+2.41699592729677,41.5343216240079,0
+2.41705900547809,41.5344928129762,0
+2.41712454023945,41.5346841908207,0
+2.41718262795862,41.5348772423197,0
+2.41720179666441,41.5349587658552,0
+2.41722335018717,41.5350818253679,0
+2.41722401854473,41.5350875033853,0
+2.41723353662131,41.5351624026905,0
+2.41723890530236,41.5352053949521,0
+2.41724420650813,41.5352692839358,0
+2.41725275505155,41.5353721011305,0
+2.41726180912178,41.5355388731017,0
+2.41726454949478,41.5357011995056,0
+2.41725757927194,41.5358635668256,0
+2.41723856999628,41.5360048860649,0
+2.4172114148176,41.5361455335468,0
+2.41717103115153,41.5363175497136,0
+2.41712346202464,41.5364887188196,0
+2.41707121152772,41.5366471638287,0
+2.41702735762346,41.5367649380935,0
+2.41697111542434,41.5369005742332,0
+2.41695469571325,41.5369402135028,0
+2.41687485213892,41.5371141914551,0
+2.41680046834218,41.5372541492134,0
+2.416717833736,41.5373917232057,0
+2.41662133448618,41.5375379640094,0
+2.41656950010378,41.5376097601466,0
+2.41655870650677,41.5376235767673,0
+2.41653966583271,41.5376479802653,0
+2.41651456092384,41.5376801894205,0
+2.41651443942916,41.5376803689518,0
+2.41634638349837,41.537878399386,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

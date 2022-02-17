@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-42_a-b_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-42_a-b_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1267</SimpleData>
+            <SimpleData name="CARRETERA">C-42</SimpleData>
+            <SimpleData name="DENOMINACI"><![CDATA[L'ALDEA - TORTOSA]]></SimpleData>
+            <SimpleData name="DESCRIPCIO"><![CDATA[N-235 / AP-7, l'Aldea]]></SimpleData>
+            <SimpleData name="DESCRIPCI1">C-12, Tortosa</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2"><![CDATA[N-235 / AP-7, l'Aldea]]></SimpleData>
+            <SimpleData name="DESCRIPCI3">Tortosa (Sta, Càndida, rotonda)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Autovia o via preferent de doble calçada</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica restant</SimpleData>
+            <SimpleData name="ORGANISMEC"><![CDATA[Servei Territorial de Mobilitat de Terres de l'Ebre]]></SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">b_b</SimpleData>
+            <SimpleData name="DESCRIPCI5" />
+            <SimpleData name="ORGANISMER">Tortosa (Sta, Càndida, rotonda)</SimpleData>
+            <SimpleData name="COMARCA">Baix Ebre</SimpleData>
+            <SimpleData name="NOMBREDECA">2+2</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">728</SimpleData>
+            <SimpleData name="IDTRAM">9789</SimpleData>
+            <SimpleData name="X_ini" />
+            <SimpleData name="Y_ini" />
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1" />
+            <SimpleData name="EndMeasure1">Tortosa (Campredó, polígon Baix Ebre)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">7</SimpleData>
+            <SimpleData name="BeginOffset1">879</SimpleData>
+            <SimpleData name="EndMarker1">9</SimpleData>
+            <SimpleData name="EndOffset1">580</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.53907652636481,40.7724611409095
+0.53893679991136,40.772616147115,0
+0.53887653731317,40.772689585121,0
+0.53882219287698,40.772758721185,0
+0.53874603997755,40.77286026873,0
+0.53863229881228,40.7730183294648,0
+0.53856255941335,40.7731029608483,0
+0.53846499786196,40.7732455375657,0
+0.53822206462994,40.7735842955687,0
+0.53800068701293,40.7738571537798,0
+0.53781603235975,40.7740637275387,0
+0.53762281278059,40.7742612751416,0
+0.53738361370293,40.7744859299169,0
+0.53716792820588,40.774675372891,0
+0.53694270086622,40.7748671367861,0
+0.53658627055643,40.7751691477571,0
+0.53638154805818,40.7753448927524,0
+0.53612793047948,40.7755658827849,0
+0.53577219573595,40.7758833190005,0
+0.53529672367116,40.7763194271927,0
+0.53495909280086,40.7766375952497,0
+0.53470247590286,40.7768850408878,0
+0.53436160068176,40.7772202829818,0
+0.53404717739221,40.7775337587479,0
+0.53362266222771,40.7779569883705,0
+0.53333585320322,40.7782429248134,0
+0.53283020085654,40.7787470307549,0
+0.53231618790439,40.7792590377006,0
+0.53175016297841,40.7798231559865,0
+0.53120384967087,40.7803661761234,0
+0.5309140457489,40.7806387665697,0
+0.53065089355018,40.7808593499232,0
+0.53035745299773,40.781074549305,0
+0.5299645563351,40.7813271445041,0
+0.52953706295908,40.7815840677508,0
+0.52889326929105,40.7819765814411,0
+0.52813231880693,40.7824538925171,0
+0.52761196520661,40.7827837058708,0
+0.52705226927544,40.7831306572512,0
+0.526892980761,40.7832325558783,0
+0.5267977547592,40.7833230058854,0
+0.52674486319953,40.783387069713,0
+0.52662908148341,40.7834846307961,0
+0.52653203103574,40.7835755623485,0
+0.52649519500852,40.7836184077843,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>LV-2001_a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>LV-2001_a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1865</SimpleData>
+            <SimpleData name="CARRETERA">LV-2001</SimpleData>
+            <SimpleData name="DENOMINACI">Mollerussa a Juneda</SimpleData>
+            <SimpleData name="DESCRIPCIO">Mollerussa (Ronda de Ponent)</SimpleData>
+            <SimpleData name="DESCRIPCI1">N-240, PK 74+510, Juneda</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">Mollerussa (Ronda de Ponent)</SimpleData>
+            <SimpleData name="DESCRIPCI3">N-240, PK 74+510, Juneda</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa comarcal</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">Mollerussa (Ronda de Ponent)</SimpleData>
+            <SimpleData name="DESCRIPCI5">Mollerussa (fi tram urbà)</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="COMARCA"><![CDATA[Pla d'Urgell]]></SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Comarcal</SimpleData>
+            <SimpleData name="ID1">1513</SimpleData>
+            <SimpleData name="IDTRAM">10389</SimpleData>
+            <SimpleData name="X_ini">323805.032488131</SimpleData>
+            <SimpleData name="Y_ini">4610240.15593619</SimpleData>
+            <SimpleData name="X_fin">323465.812149351</SimpleData>
+            <SimpleData name="Y_fin">4609926.51749062</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">680</SimpleData>
+            <SimpleData name="EndMeasure1">1152.6580110374</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">1</SimpleData>
+            <SimpleData name="BeginOffset1">-320</SimpleData>
+            <SimpleData name="EndMarker1">1</SimpleData>
+            <SimpleData name="EndOffset1">152.658011037405</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.88494286760238,41.6244386394919,0
+0.88443291998732,41.6242034682127,0
+0.88438053610482,41.6241779941729,0
+0.88423551790944,41.6241087665462,0
+0.88409224647745,41.6240411920804,0
+0.88394755347521,41.6239730508731,0
+0.883800631571,41.6239033373204,0
+0.88365159187905,41.6238323236958,0
+0.88349779826357,41.623759871354,0
+0.88333913959647,41.6236857080365,0
+0.88317765230035,41.6236099612965,0
+0.88301467950215,41.6235319353366,0
+0.8828510440797,41.6234484930172,0
+0.8826901461794,41.6233584360408,0
+0.88253224046232,41.6232613188133,0
+0.88237947154473,41.6231576311647,0
+0.88227641369568,41.6230790868107,0
+0.88223483841208,41.6230474283796,0
+0.8821039783232,41.6229345070143,0
+0.88197850966341,41.6228145697099,0
+0.88186224375809,41.6226921899478,0
+0.88175266146793,41.622567321335,0
+0.88165097703691,41.6224395359602,0
+0.8815582633481,41.6223127264059,0
+0.88146449186661,41.6221815741419,0
+0.88137046906117,41.6220507774496,0
+0.88127618017843,41.6219207863421,0
+0.88117834809693,41.621792711293,0
+0.88107519997441,41.6216657090094,0
+0.88096598959591,41.621540576295,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

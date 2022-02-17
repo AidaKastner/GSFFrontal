@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>T-332_a_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>T-332_a_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">2299</SimpleData>
+            <SimpleData name="CARRETERA">T-332</SimpleData>
+            <SimpleData name="DENOMINACI">VINARÒS - ULLDECONA</SimpleData>
+            <SimpleData name="DESCRIPCIO">Límit Castelló de la Plana - Tarragona (CS-332) (riu de la Sénia)</SimpleData>
+            <SimpleData name="DESCRIPCI1">TV-3319, rotonda</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">Límit Castelló de la Plana - Tarragona (CS-332) (riu de la Sénia)</SimpleData>
+            <SimpleData name="DESCRIPCI3">TV-3319, rotonda</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa comarcal</SimpleData>
+            <SimpleData name="ORGANISMEC"><![CDATA[Servei Territorial de Mobilitat de Terres de l'Ebre]]></SimpleData>
+            <SimpleData name="SUBTRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI4">T-331, rotonda variant Ulldecona</SimpleData>
+            <SimpleData name="DESCRIPCI5">TV-3319, rotonda</SimpleData>
+            <SimpleData name="ORGANISMER"><![CDATA[Servei Territorial de Mobilitat de Terres de l'Ebre]]></SimpleData>
+            <SimpleData name="COMARCA">Montsià</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Urbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Comarcal</SimpleData>
+            <SimpleData name="ID1">2413</SimpleData>
+            <SimpleData name="IDTRAM">14958</SimpleData>
+            <SimpleData name="X_ini">283882.347296186</SimpleData>
+            <SimpleData name="Y_ini">4496481.75373147</SimpleData>
+            <SimpleData name="X_fin">283659.085505133</SimpleData>
+            <SimpleData name="Y_fin">4496679.57011673</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">13172.579535831</SimpleData>
+            <SimpleData name="EndMeasure1">13471.292</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">13</SimpleData>
+            <SimpleData name="BeginOffset1">178.221165830981</SimpleData>
+            <SimpleData name="EndMarker1">13</SimpleData>
+            <SimpleData name="EndOffset1">476.93363</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.44613351644554,40.5909182514051,0
+0.44600485499537,40.5910120193634,0
+0.44579206489444,40.5911670990347,0
+0.44556965610431,40.5912906290808,0
+0.44552323589924,40.5913221457393,0
+0.44546630776193,40.5913550254694,0
+0.44506759610285,40.5915994614015,0
+0.44481567091681,40.591726596312,0
+0.44470305276856,40.5917951732799,0
+0.44463736601056,40.5918352441738,0
+0.44458885847661,40.5918647961535,0
+0.4444734182194,40.5919361027604,0
+0.44435656593404,40.5920103504712,0
+0.44423790971021,40.5920885214319,0
+0.4441189945952,40.592170379612,0
+0.44400213229371,40.5922541746831,0
+0.44387481222438,40.5923303098967,0
+0.44372257375081,40.5924322313259,0
+0.44364362642826,40.5924902788316,0
+0.44359560153145,40.592523970097,0
+0.44342987347993,40.5926402341129,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

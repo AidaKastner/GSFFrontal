@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>BV-4023_a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>BV-4023_a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">498</SimpleData>
+            <SimpleData name="CARRETERA">BV-4023</SimpleData>
+            <SimpleData name="DENOMINACI" />
+            <SimpleData name="DESCRIPCIO">BV-4022, PK 4.620</SimpleData>
+            <SimpleData name="DESCRIPCI1">Santuari de Nostra Senyora de Lourdes</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">BV-4022, PK 4.620</SimpleData>
+            <SimpleData name="DESCRIPCI3">Santuari de Nostra Senyora de Lourdes</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Diputació de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">BV-4022, PK 4.620</SimpleData>
+            <SimpleData name="DESCRIPCI5">Santuari de Nostra Senyora de Lourdes</SimpleData>
+            <SimpleData name="ORGANISMER">Diputació de Barcelona</SimpleData>
+            <SimpleData name="COMARCA">Desconegut</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">499</SimpleData>
+            <SimpleData name="IDTRAM">37099</SimpleData>
+            <SimpleData name="X_ini">407680.478180773</SimpleData>
+            <SimpleData name="Y_ini">4668635.5693813</SimpleData>
+            <SimpleData name="X_fin">407804.937461973</SimpleData>
+            <SimpleData name="Y_fin">4668516.02825796</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">0</SimpleData>
+            <SimpleData name="EndMeasure1">185.086</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">0</SimpleData>
+            <SimpleData name="BeginOffset1">-19.42275</SimpleData>
+            <SimpleData name="EndMarker1">0</SimpleData>
+            <SimpleData name="EndOffset1">165.66325</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.88239274556455,42.1644135308081,0
+1.88248039658335,42.1644132133999,0
+1.88257360194546,42.1644068257482,0
+1.88262359251426,42.1644002875309,0
+1.88266557566169,42.1643947520945,0
+1.88270880875756,42.1643869772475,0
+1.88274927790631,42.1643711599194,0
+1.88278830568289,42.1643546981101,0
+1.88283831785818,42.164326274824,0
+1.88287353189257,42.1642995087427,0
+1.88289901954523,42.1642682349281,0
+1.88294173986256,42.1642001131322,0
+1.88298470849186,42.164131633486,0
+1.88303469179129,42.1640428679596,0
+1.88308381978382,42.1639545443995,0
+1.88310860716508,42.1639148879096,0
+1.88315163544515,42.1638567659645,0
+1.88319767844933,42.1637993037725,0
+1.88324588101004,42.1637429433223,0
+1.88326281422375,42.1637231141942,0
+1.8833316623604,42.1636492122561,0
+1.88338848899535,42.1635980692063,0
+1.88345035469299,42.1635494968953,0
+1.88351778473212,42.1635011587996,0
+1.88358961541903,42.1634572765285,0
+1.88364578030894,42.1634299934768,0
+1.88370551448539,42.1634062575475,0
+1.88376739876296,42.1633841636212,0
+1.88382976871822,42.1633619843217,0
+1.88391807644427,42.1633517653214,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

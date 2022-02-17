@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>GI-652a_a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>GI-652a_a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1555</SimpleData>
+            <SimpleData name="CARRETERA">GI-652a</SimpleData>
+            <SimpleData name="DENOMINACI">ANTIGA GI-652</SimpleData>
+            <SimpleData name="DESCRIPCIO">GI-652, Pals</SimpleData>
+            <SimpleData name="DESCRIPCI1">C-31, Pals</SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">GI-652, Pals</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-31, Pals</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">GI-652, Pals</SimpleData>
+            <SimpleData name="DESCRIPCI5">C-31, Pals</SimpleData>
+            <SimpleData name="ORGANISMER">Servei Territorial de Carreteres de Girona</SimpleData>
+            <SimpleData name="COMARCA">Baix Empordà</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">1808</SimpleData>
+            <SimpleData name="IDTRAM">26341</SimpleData>
+            <SimpleData name="X_ini">512288.390966612</SimpleData>
+            <SimpleData name="Y_ini">4645234.57170987</SimpleData>
+            <SimpleData name="X_fin">512693.645222269</SimpleData>
+            <SimpleData name="Y_fin">4645467.52688176</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">2630</SimpleData>
+            <SimpleData name="EndMeasure1">3103.398</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">3</SimpleData>
+            <SimpleData name="BeginOffset1">-289.95766</SimpleData>
+            <SimpleData name="EndMarker1">3</SimpleData>
+            <SimpleData name="EndOffset1">183.44034</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>3.14828377184399,41.9589989334362,0
+3.14875970671579,41.9589946932877,0
+3.14886154360165,41.9590426567266,0
+3.14889114031151,41.9590565786331,0
+3.14902741886916,41.9591261132425,0
+3.14909374336075,41.9591588113023,0
+3.14909664260119,41.9591601585324,0
+3.14914580967027,41.9591833317912,0
+3.14949507113464,41.9593552646334,0
+3.14992236039948,41.959557987229,0
+3.15026737636978,41.9597188449844,0
+3.15061359759103,41.9598783490988,0
+3.15093989052054,41.9600297724106,0
+3.15126510301158,41.9601829075008,0
+3.15131052889732,41.9602052741714,0
+3.15152763101996,41.9603120767693,0
+3.15155723082534,41.9603268085875,0
+3.15178859327977,41.9604420581198,0
+3.15203601181743,41.9605597176516,0
+3.1522860778809,41.9606739505597,0
+3.15242233964173,41.9607334836583,0
+3.15255860424492,41.9607940973995,0
+3.1526916169793,41.9608572372086,0
+3.1528089834814,41.9609130571399,0
+3.15282173079356,41.9609191197943,0
+3.15307012235706,41.9610383969991,0
+3.15317897518402,41.9610906704305,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

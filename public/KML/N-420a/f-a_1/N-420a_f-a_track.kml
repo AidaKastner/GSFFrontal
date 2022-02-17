@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>N-420a_f_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>N-420a_f_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">2153</SimpleData>
+            <SimpleData name="CARRETERA">N-420a</SimpleData>
+            <SimpleData name="DENOMINACI" />
+            <SimpleData name="DESCRIPCIO">N-420, Gandesa (Coll del Moro)</SimpleData>
+            <SimpleData name="DESCRIPCI1">T-11, Reus (accés Aeroport)</SimpleData>
+            <SimpleData name="TRAM">f</SimpleData>
+            <SimpleData name="DESCRIPCI2">C-14, Reus (Enllaç Aeroport)</SimpleData>
+            <SimpleData name="DESCRIPCI3">T-11, Reus (accés Aeroport)</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC"><![CDATA[Carreteres de l'Estat Tarragona]]></SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">C-14, Reus (Enllaç Aeroport)</SimpleData>
+            <SimpleData name="DESCRIPCI5">T-11, Reus (accés Aeroport)</SimpleData>
+            <SimpleData name="ORGANISMER"><![CDATA[Carreteres de l'Estat Tarragona]]></SimpleData>
+            <SimpleData name="COMARCA">Baix Camp</SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">2515</SimpleData>
+            <SimpleData name="IDTRAM">1318</SimpleData>
+            <SimpleData name="X_ini">343914.684544541</SimpleData>
+            <SimpleData name="Y_ini">4556587.72860279</SimpleData>
+            <SimpleData name="X_fin">345635.212072644</SimpleData>
+            <SimpleData name="Y_fin">4555893.8292589</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">878090</SimpleData>
+            <SimpleData name="EndMeasure1">879947.92</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">879</SimpleData>
+            <SimpleData name="BeginOffset1">-765.868000000017</SimpleData>
+            <SimpleData name="EndMarker1">880</SimpleData>
+            <SimpleData name="EndOffset1">92.0520000000251</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>1.14003001487819,41.1456018716912,0
+1.14067945972316,41.1455187742765,0
+1.14085196631387,41.1454794122519,0
+1.14103917181914,41.1453957318878,0
+1.14115147537585,41.1453317883649,0
+1.14137671076451,41.1452167084694,0
+1.14161063723133,41.1451167998734,0
+1.14186315428444,41.1450374434272,0
+1.14278745434136,41.1447803683767,0
+1.14477475881621,41.1442042339101,0
+1.14501533596886,41.1441350148716,0
+1.14559323562823,41.1439687384712,0
+1.14609400590806,41.1438246510935,0
+1.14695656299406,41.1435764596013,0
+1.14787285063256,41.1433205652552,0
+1.14857030584063,41.1431219624762,0
+1.14943799166245,41.1428774376045,0
+1.15026940005791,41.1426353644374,0
+1.15202912046219,41.1421375505516,0
+1.15325148298618,41.1417952990082,0
+1.15375032115656,41.1416497350032,0
+1.15497689976508,41.1412999306134,0
+1.15645880326531,41.1408812203868,0
+1.15668582624999,41.1408179558622,0
+1.15783735713648,41.1404897258321,0
+1.15851247128799,41.1402967867179,0
+1.1600068914502,41.1398686676093,0
+1.16069690828237,41.1396836062697,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

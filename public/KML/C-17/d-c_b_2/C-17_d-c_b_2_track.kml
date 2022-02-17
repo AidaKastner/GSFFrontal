@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-17_d-c_b</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-17_d-c_b</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">978</SimpleData>
+            <SimpleData name="CARRETERA">C-17</SimpleData>
+            <SimpleData name="DENOMINACI">BARCELONA - RIPOLL (Eix Congost - Fresser)</SimpleData>
+            <SimpleData name="DESCRIPCIO">C-33 / C-58, Barcelona</SimpleData>
+            <SimpleData name="DESCRIPCI1">N-260, Ripoll</SimpleData>
+            <SimpleData name="TRAM">d</SimpleData>
+            <SimpleData name="DESCRIPCI2">Centelles (inici concessió)</SimpleData>
+            <SimpleData name="DESCRIPCI3">Límit comarcal Osona - el Ripollès</SimpleData>
+            <SimpleData name="REGIMDEGES">Cedinsa Ter Concessionaria de la Generalitat de Catalunya</SimpleData>
+            <SimpleData name="TECNIC">Autovia o via preferent de doble calçada</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica primaria</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Barcelona</SimpleData>
+            <SimpleData name="SUBTRAM">c</SimpleData>
+            <SimpleData name="DESCRIPCI4">c_b</SimpleData>
+            <SimpleData name="DESCRIPCI5" />
+            <SimpleData name="ORGANISMER">C-17z / BV-5225, Masies de Voltregà</SimpleData>
+            <SimpleData name="COMARCA">Osona</SimpleData>
+            <SimpleData name="NOMBREDECA">2+2</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Concessió amb cànon</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">763</SimpleData>
+            <SimpleData name="IDTRAM">2705</SimpleData>
+            <SimpleData name="X_ini" />
+            <SimpleData name="Y_ini" />
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1" />
+            <SimpleData name="EndMeasure1">C-17z, Masies de Voltregà (pla de Torroella)</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">73</SimpleData>
+            <SimpleData name="BeginOffset1">700</SimpleData>
+            <SimpleData name="EndMarker1">75</SimpleData>
+            <SimpleData name="EndOffset1">230</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>2.23740243231894,42.0352734052237
+2.23666258663373,42.0358651240748,0
+2.23648149256947,42.0360252197266,0
+2.23618072358147,42.0362979328755,0
+2.2360438450553,42.0364356391205,0
+2.23587264802785,42.0366159620069,0
+2.23571497211773,42.0367963745932,0
+2.23559487345127,42.036944273127,0
+2.23544027465013,42.037149908792,0
+2.23531978223631,42.0373305682952,0
+2.23516481927311,42.0375664447367,0
+2.23499210665244,42.0378727711205,0
+2.23485672993179,42.0381667444293,0
+2.23475926371164,42.038400482952,0
+2.23467489624029,42.0386695928322,0
+2.23460438297263,42.0389110716675,0
+2.23453269055754,42.0392508342242,0
+2.23443799310693,42.0398172702232,0
+2.23438274880115,42.0401949467171,0
+2.23433967135415,42.0404038443106,0
+2.23428623982228,42.0406303149441,0
+2.23419848653255,42.0408994017929,0
+2.23410080190611,42.0411507802616,0
+2.2340243688606,42.0413216508338,0
+2.23390307795626,42.0415678311041,0
+2.23378214913883,42.0417837700843,0
+2.23328291402066,42.0425314873977,0
+2.23305243176963,42.0428601076214,0
+2.23290758928811,42.0430960483272,0
+2.23278303092284,42.0433321243204,0
+2.23265122507424,42.0436084764927,0
+2.23254831424427,42.0438775211943,0
+2.23251303290651,42.044005335829,0
+2.23246487555552,42.0442298540274,0
+2.23239432816694,42.0446928132831,0
+2.232379526859,42.045000804349,0
+2.23240088190793,42.045325783947,0
+2.23243520788132,42.0456226035142,0
+2.23251334663337,42.045952670264,0
+2.23262323385874,42.0462688257052,0
+2.23281639572133,42.0466823247841,0
+2.2332350115053,42.0474478539138,0
+2.2332767344733,42.0475212885094,0
+2.23348508067096,42.0479373076488,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

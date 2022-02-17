@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>C-28_a-a_a_a_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>C-28_a-a_a_a_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">1146</SimpleData>
+            <SimpleData name="CARRETERA">C-28</SimpleData>
+            <SimpleData name="DENOMINACI"><![CDATA[VIELHA - ESTERRI D'ÀNEU]]></SimpleData>
+            <SimpleData name="DESCRIPCIO">N-230, Vielha e Mijaran</SimpleData>
+            <SimpleData name="DESCRIPCI1"><![CDATA[C-13 (Esterri d'Àneu)]]></SimpleData>
+            <SimpleData name="TRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI2">N-230, Vielha e Mijaran</SimpleData>
+            <SimpleData name="DESCRIPCI3"><![CDATA[C-13 (Esterri d'Àneu)]]></SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa bàsica restant</SimpleData>
+            <SimpleData name="ORGANISMEC">Servei Territorial de Carreteres de Lleida</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">a_a_a_a</SimpleData>
+            <SimpleData name="DESCRIPCI5">N-230, Vielha e Mijaran</SimpleData>
+            <SimpleData name="ORGANISMER" />
+            <SimpleData name="COMARCA"><![CDATA[Val d'Aran]]></SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Bàsica</SimpleData>
+            <SimpleData name="ID1">815</SimpleData>
+            <SimpleData name="IDTRAM">647</SimpleData>
+            <SimpleData name="X_ini">319266.980808636</SimpleData>
+            <SimpleData name="Y_ini">4730195.61265981</SimpleData>
+            <SimpleData name="X_fin" />
+            <SimpleData name="Y_fin" />
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">23510</SimpleData>
+            <SimpleData name="EndMeasure1">N-230, Vielha e Mijaran</SimpleData>
+            <SimpleData name="Status2" />
+            <SimpleData name="BeginMarker1">24</SimpleData>
+            <SimpleData name="BeginOffset1">-499</SimpleData>
+            <SimpleData name="EndMarker1">24</SimpleData>
+            <SimpleData name="EndOffset1">330</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.79328758763746,42.7030025428383,0
+0.79331045660473,42.702991697058,0
+0.79334772124232,42.7029781359486,0
+0.79342851297874,42.7029528142955,0
+0.79406445647545,42.7027159633786,0
+0.79464827832123,42.7024797362393,0
+0.79523183283408,42.7022343885453,0
+0.79536278219317,42.7021277938516,0
+0.79562808549618,42.7018916978164,0
+0.79575084634024,42.7017964309111,0
+0.79588562761173,42.7017281955654,0
+0.79605473528756,42.7016433918804,0
+0.79644928809771,42.7013485232942,0
+0.79668934685533,42.7011655396938,0
+0.79690736981464,42.7010185035706,0
+0.79719541982541,42.7008728140094,0
+0.79737721381391,42.7007831337444,0
+0.79823592776438,42.7004391316793,0
+0.79929457667757,42.7000057884119,0
+0.80004809996012,42.6996871758555,0
+0.80044440787977,42.6995295754162,0
+0.80082004397779,42.6993643912897,0
+0.80115714953599,42.699222240094,0
+0.8012749155206,42.6991818380973,0
+0.80139005014051,42.6991525596472,0
+0.8014761011298,42.6991336007312,0
+0.80158275231194,42.6991180762957,0
+0.80166574338741,42.6991062583922,0
+0.8018310032136,42.6990713536369,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

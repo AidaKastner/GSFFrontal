@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>TV-3023_b_a</name>
+    <Style id="Style1">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Schema id="Schema1" name="">
+      <SimpleField type="xsd:int" name="ID" />
+      <SimpleField type="xsd:string" name="CARRETERA" />
+      <SimpleField type="xsd:string" name="DENOMINACI" />
+      <SimpleField type="xsd:string" name="DESCRIPCIO" />
+      <SimpleField type="xsd:string" name="DESCRIPCI1" />
+      <SimpleField type="xsd:string" name="TRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI2" />
+      <SimpleField type="xsd:string" name="DESCRIPCI3" />
+      <SimpleField type="xsd:string" name="REGIMDEGES" />
+      <SimpleField type="xsd:string" name="TECNIC" />
+      <SimpleField type="xsd:string" name="FUNCIONAL" />
+      <SimpleField type="xsd:string" name="ORGANISMEC" />
+      <SimpleField type="xsd:string" name="SUBTRAM" />
+      <SimpleField type="xsd:string" name="DESCRIPCI4" />
+      <SimpleField type="xsd:string" name="DESCRIPCI5" />
+      <SimpleField type="xsd:string" name="ORGANISMER" />
+      <SimpleField type="xsd:string" name="COMARCA" />
+      <SimpleField type="xsd:string" name="NOMBREDECA" />
+      <SimpleField type="xsd:string" name="ENTORNURBA" />
+      <SimpleField type="xsd:string" name="REGIMDECIR" />
+      <SimpleField type="xsd:string" name="XARXA" />
+      <SimpleField type="xsd:int" name="ID1" />
+      <SimpleField type="xsd:int" name="IDTRAM" />
+      <SimpleField type="xsd:double" name="X_ini" />
+      <SimpleField type="xsd:double" name="Y_ini" />
+      <SimpleField type="xsd:double" name="X_fin" />
+      <SimpleField type="xsd:double" name="Y_fin" />
+      <SimpleField type="xsd:string" name="Status1" />
+      <SimpleField type="xsd:double" name="BeginMeasure1" />
+      <SimpleField type="xsd:double" name="EndMeasure1" />
+      <SimpleField type="xsd:string" name="Status2" />
+      <SimpleField type="xsd:string" name="BeginMarker1" />
+      <SimpleField type="xsd:double" name="BeginOffset1" />
+      <SimpleField type="xsd:string" name="EndMarker1" />
+      <SimpleField type="xsd:double" name="EndOffset1" />
+    </Schema>
+    <Folder>
+      <Placemark>
+        <name>TV-3023_b_a</name>
+        <styleUrl>#Style1</styleUrl>
+        <ExtendedData>
+          <SchemaData schemaUrl="#Schema1">
+            <SimpleData name="ID">2476</SimpleData>
+            <SimpleData name="CARRETERA">TV-3023</SimpleData>
+            <SimpleData name="DENOMINACI">De Miravet a la C-12.</SimpleData>
+            <SimpleData name="DESCRIPCIO"><![CDATA[Miravet (plaça de l'Arenal)]]></SimpleData>
+            <SimpleData name="DESCRIPCI1">C-12, Miravet</SimpleData>
+            <SimpleData name="TRAM">b</SimpleData>
+            <SimpleData name="DESCRIPCI2">Miravet, riu Ebre (marge esquerre)</SimpleData>
+            <SimpleData name="DESCRIPCI3">C-12, Miravet</SimpleData>
+            <SimpleData name="REGIMDEGES">Directament per la pròpia administració competent</SimpleData>
+            <SimpleData name="TECNIC">Carretera de calçada única</SimpleData>
+            <SimpleData name="FUNCIONAL">Xarxa local</SimpleData>
+            <SimpleData name="ORGANISMEC">Diputació de Tarragona</SimpleData>
+            <SimpleData name="SUBTRAM">a</SimpleData>
+            <SimpleData name="DESCRIPCI4">Miravet, riu Ebre (marge esquerre)</SimpleData>
+            <SimpleData name="DESCRIPCI5">C-12, Miravet</SimpleData>
+            <SimpleData name="ORGANISMER">Diputació de Tarragona</SimpleData>
+            <SimpleData name="COMARCA"><![CDATA[Ribera d'Ebre]]></SimpleData>
+            <SimpleData name="NOMBREDECA">1+1</SimpleData>
+            <SimpleData name="ENTORNURBA">Interurbà</SimpleData>
+            <SimpleData name="REGIMDECIR">Públic</SimpleData>
+            <SimpleData name="XARXA">Local</SimpleData>
+            <SimpleData name="ID1">2354</SimpleData>
+            <SimpleData name="IDTRAM">3794</SimpleData>
+            <SimpleData name="X_ini">298989.922000253</SimpleData>
+            <SimpleData name="Y_ini">4545058.74255232</SimpleData>
+            <SimpleData name="X_fin">298836.731058149</SimpleData>
+            <SimpleData name="Y_fin">4544966.15357097</SimpleData>
+            <SimpleData name="Status1" />
+            <SimpleData name="BeginMeasure1">1110</SimpleData>
+            <SimpleData name="EndMeasure1">1309.827</SimpleData>
+            <SimpleData name="Status2">Unable to locate event.  No valid matching marker could be found in the Marker recordset.</SimpleData>
+            <SimpleData name="BeginMarker1" />
+            <SimpleData name="BeginOffset1" />
+            <SimpleData name="EndMarker1" />
+            <SimpleData name="EndOffset1" />
+          </SchemaData>
+        </ExtendedData>
+        <LineString>
+          <coordinates>0.60885373106582,41.0319545757298,0
+0.60887839207873,41.0319107725517,0
+0.60890152253318,41.031869819879,0
+0.60892033014532,41.0318267058601,0
+0.60892632545821,41.0317925132063,0
+0.60892504606354,41.0317555575284,0
+0.6089141896786,41.0317202946016,0
+0.60889569213669,41.0316956816294,0
+0.60886514601604,41.0316753221707,0
+0.60876275342022,41.0316320347709,0
+0.60864245104779,41.0315840521673,0
+0.60851245785962,41.0315409122808,0
+0.60835122840527,41.0314899182043,0
+0.60815232996179,41.0314280539999,0
+0.6079728263252,41.0313824445961,0
+0.60780663488459,41.0313371112957,0
+0.60764801292474,41.0312962583307,0
+0.60751873719376,41.0312596173388,0
+0.6074030762064,41.0312280326786,0
+0.60728884486924,41.0311963875197,0
+0.60721823690425,41.0311721332806,0
+0.60715533683506,41.0311452468676,0
+0.60710452778782,41.0311129370474,0
+0.60706313274312,41.0310834347748,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
