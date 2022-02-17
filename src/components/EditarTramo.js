@@ -522,6 +522,7 @@ class EditarTramo extends Component{
       setMsgOutBoolKO: false,
       setMsgOutActKO: false,
       ComboTipFirme: '',
+      rutaKml: '',
       form:{
         id:'',
         nombre:'',
@@ -879,6 +880,43 @@ controlErrAlta=(controlErrorTramo)=>{
           }
         });
         break;
+      case 'CPA':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            firmesTramo: {
+              ...this.state.form.firmesTramo,
+              'cpa': e.target.value
+            }
+          }
+        });
+        break;
+
+      case 'anchuraCarril':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            firmesTramo: {
+              ...this.state.form.firmesTramo,
+              'anchuraCarril': e.target.value
+            }
+          }
+        });
+        break;
+
+      case 'anchuraArcen':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            firmesTramo: {
+              ...this.state.form.firmesTramo,
+              'anchuraArcen': e.target.value
+            }
+          }
+        });
+        break;
+        
+      
       default:
         await this.setState({
           form:{
@@ -892,9 +930,6 @@ controlErrAlta=(controlErrorTramo)=>{
     console.log("Funcion Handle",this.state.form);
     console.log("Indice: ",this.state.Index);
   }
-
-
-
 
 
 //Maneja la edición  en los forms
@@ -981,7 +1016,82 @@ handleChangeCombos=(e, {name})=>{
                 console.log("CASE STATE: ", this.state.form.ddRegimenGestion);
                 break;
 
+            case 'RegExpl':
+                console.log("VALOR: ", valor);
+                  this.state.form.ddRegimenExplotacion.nombre = valor;
+                  this.setState({
+                      form: {
+                        ...this.state.form,
+                        ddRegimenExplotacion: {
+                          ...this.state.form.ddRegimenExplotacion,
+                          'nombre': valor
+                        }
+                      }
+                    });
+                    console.log("CASE STATE: ", this.state.form.ddRegimenExplotacion);
+                    break;
+
+    case 'zonTer':
+      console.log("VALOR: ", valor);
+      this.state.form.ddZonasTermica.codigo = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              ddZonasTermica: {
+                 ...this.state.form.ddZonasTermica,
+                 'codigo': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.ddZonasTermica);
+      break;
+
+    case 'ZonaPluv':
+      console.log("VALOR: ", valor);
+      this.state.form.ddZonasPluviometrica.codigo = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              ddZonasPluviometrica: {
+                ...this.state.form.ddZonasPluviometrica,
+                'codigo': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.ddZonasPluviometrica);
+      break;
+    case 'NivelInfluencia':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idDdNivelesInfluencia = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idDdNivelesInfluencia': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'MPD':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.tipoLogModeloEvolMpd = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'tipoLogModeloEvolMpd': valor
+              }
+          }
+        });
+        console.log("CASE STATE: ", this.state.form.firmesTramo);
+        break;
+
       
+
     default:
       this.setState({
         form:{
@@ -998,13 +1108,19 @@ handleChangeCombos=(e, {name})=>{
     handleComboTipFirme = async e => {
       console.log("EVENTO COMBO: ", e.value);
       //e.persist();
+      this.state.form.firmesTramo.idCarrilDdTiposFirmesTramo = e.value;
       await this.setState({
         form:{
           ...this.state.form,
+          firmesTramo: {
+            ...this.state.form.firmesTramo,
+            'idCarrilDdTiposFirmesTramo': e.value
+          }
         },
         ComboTipFirme: e.value
       });
       console.log("Combo Tipo Firme: ", this.state.ComboTipFirme);
+      console.log("Objeto API: ", this.state.form);
       this.getComboRodadura(this.state.ComboTipFirme);
       this.peticionRefresh(comboRod, this.state.ComboTipFirme);
     };
@@ -1069,6 +1185,7 @@ peticionGet=()=>{
       content: response,
       estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
       ComboTipFirme: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
+      rutaKml: response.data.rutaKml,
       form: {
         id: response.data.id,
         nombre: response.data.nombre,
@@ -1270,6 +1387,7 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
       content: response,
       estadoTram: this.state.currentYear > response.data.fechaBaja ? 'Inactivo' : 'Activo',
       ComboTipFirme: tipoFirm,
+      rutaKml: response.data.rutaKml,
       form: {
         id: response.data.id,
         nombre: response.data.nombre,
@@ -1728,7 +1846,7 @@ seleccionarCarril=(carril)=>{
                   key="RegGest"
                   options={ comboGest } 
                   defaultValue={comboGest.find(obj => obj.value === this.state.form.ddRegimenGestion.nombre)}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                 /> 
 
                <label><Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation></label>
@@ -1737,7 +1855,7 @@ seleccionarCarril=(carril)=>{
                   key="RegExpl"
                   options={ comboExplo } 
                   defaultValue={comboExplo.find(obj => obj.value === this.state.form.ddRegimenExplotacion.nombre)}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                 /> 
 
               <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
@@ -1746,7 +1864,7 @@ seleccionarCarril=(carril)=>{
                   key="zonTer"
                   options={ comboZonTer } 
                   defaultValue={comboZonTer.find(obj => obj.value === this.state.form.ddZonasTermica.codigo)}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                 /> 
 
             <label><Translation ns= "global">{(t) => <>{t('ZonaPluv')}</>}</Translation></label>
@@ -1755,7 +1873,7 @@ seleccionarCarril=(carril)=>{
               key="ZonaPluv"
               options={ comboZonPluv } 
               defaultValue={comboZonPluv.find(obj => obj.value === this.state.form.ddZonasPluviometrica.codigo)}
-              onChange={this.handleChange}
+              onChange={this.handleChangeCombos}
               /> 
 
           </div>
@@ -1780,13 +1898,13 @@ seleccionarCarril=(carril)=>{
                 <Select name="NivelInfluencia" 
                   key="NivelInfluencia"
                   options={ comboNivelInfluencia } 
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                   defaultValue={comboNivelInfluencia.find(obj => obj.value === this.state.form.firmesTramo.idDdNivelesInfluencia)}
                   /> 
               <label><Translation ns= "global">{(t) => <>{t('CPA')}</>}</Translation></label>
                 <input
                     id="CPA"
-                    type="text"
+                    type="number"
                     name="CPA"
                     className="u-full-width"
                     onChange={this.handleChange}
@@ -1795,7 +1913,7 @@ seleccionarCarril=(carril)=>{
               <label><Translation ns= "global">{(t) => <>{t('AnchCar')}</>}</Translation></label>
                 <input
                     id="anchuraCarril"
-                    type="text"
+                    type="number"
                     name="anchuraCarril"
                     className="u-full-width"
                     onChange={this.handleChange}
@@ -1804,7 +1922,7 @@ seleccionarCarril=(carril)=>{
               <label><Translation ns= "global">{(t) => <>{t('AnchArc')}</>}</Translation></label>
                 <input
                     id="anchuraArcen"
-                    type="text"
+                    type="number"
                     name="anchuraArcen"
                     className="u-full-width"
                     onChange={this.handleChange}
@@ -1815,7 +1933,7 @@ seleccionarCarril=(carril)=>{
                   name="MPD" 
                   key="MPD"
                   options={ comboTipoMPD } 
-                  onChange={this.handleChange} 
+                  onChange={this.handleChangeCombos} 
                   defaultValue={comboTipoMPD.find(obj => obj.value === this.state.form.firmesTramo.tipoLogModeloEvolMpd)}
                   /> 
               
@@ -1951,7 +2069,7 @@ seleccionarCarril=(carril)=>{
                 </td>
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     name="cbr"
                     id="cbr"
                     value={this.state.form.explanadasTramo.terrenoNaturalCbr}
@@ -1985,7 +2103,7 @@ seleccionarCarril=(carril)=>{
                   <th scope='row'><Translation ns= "global">{(t) => <>{t('relleno')}</>}</Translation></th>
                   <th> 
                     <input
-                      type="text"
+                      type="number"
                       name="relleno"
                       id="relleno"
                       value={this.state.form.explanadasTramo.relleno}
@@ -1994,7 +2112,7 @@ seleccionarCarril=(carril)=>{
                  </th>
                   <td>
                     <input
-                      type="text"
+                      type="number"
                       name="rellenoCbr"
                       id="rellenoCbr"
                       value={this.state.form.explanadasTramo.rellenoCbr}
@@ -2006,7 +2124,7 @@ seleccionarCarril=(carril)=>{
                   <th scope='row'><Translation ns= "global">{(t) => <>{t('coronacion')}</>}</Translation></th>
                   <td>
                     <input
-                      type="text"
+                      type="number"
                       name="coronacion"
                       id="coronacion"
                       value={this.state.form.explanadasTramo.coronacion}
@@ -2015,7 +2133,7 @@ seleccionarCarril=(carril)=>{
                   </td>
                   <td>
                     <input
-                      type="text"
+                      type="number"
                       name="coronacionCbr"
                       id="coronacionCbr"
                       value={this.state.form.explanadasTramo.coronacionCbr}
@@ -2331,7 +2449,7 @@ seleccionarCarril=(carril)=>{
                 </Col>
                 <Col md={6} style={{marginTop: '5%'}}>
                   <Row>
-                    <GoogleMapComponent />
+                    <GoogleMapComponent rutaKmls={[this.state.rutaKml + '_track.kml', this.state.rutaKml + '_pks.kml']} />
                   </Row>
                 </Col>
               </Row>
