@@ -17,7 +17,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from "../components/Spinner"; 
 import Container from 'react-bootstrap/Container'
-import MapWithAKmlLayer from '../components/MapWithAKmlLayer';
+import GoogleMapComponent from '../components/GoogleMapComponent';
 import EditarTramo from "../components/EditarTramo";
 import ModalTitle from "react-bootstrap/ModalTitle";
 
@@ -537,7 +537,7 @@ render() {
           </Col>
           <Col md={6}>
             <Row>
-              <MapWithAKmlLayer rutaKmls={[this.state.rutaKml + '_track.kml', this.state.rutaKml + '_pks.kml']} />
+              <GoogleMapComponent rutaKmls={[this.state.rutaKml + '_track.kml', this.state.rutaKml + '_pks.kml']} />
             </Row>
           </Col>
         </Row>
