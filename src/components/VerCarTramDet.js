@@ -995,28 +995,7 @@ render() {
                     value={this.state.form.numCarriles}
                   />
               </Col>
-              <Col xs={3} style={{textAlign: "left"}}>
-                <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
-                  <input
-                    type="text"
-                    name="PosIni"
-                    className="u-full-width"
-                    readOnly = {true}
-                    //placeholder={this.state.form.descFin}
-                    //value={this.state.form.descFin}
-                  />
-              </Col>
-              <Col xs={3} style={{textAlign: "left"}}>
-                <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
-                  <input
-                    type="text"
-                    name="PosFin"
-                    className="u-full-width"
-                    readOnly = {true}
-                    //placeholder={this.state.form.descFin}
-                    //value={this.state.form.descFin}
-                  />
-              </Col>
+ 
             </Row>
           </div>
           </Container>
@@ -1025,7 +1004,7 @@ render() {
               <Col xs={6}>
                 <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
               </Col>
-              <Col md={6} style={{marginTop: '7%'}}>
+              <Col md={6}>
                 <Row>
                   <GoogleMapComponent rutaKml={this.state.rutaKml + '_pks.kml'} />
                 </Row>

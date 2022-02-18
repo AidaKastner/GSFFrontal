@@ -1,5 +1,9 @@
 import React from 'react';
- 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Translation, useTranslation, Trans } from 'react-i18next';
+
 import {
   GoogleApiWrapper,
   Marker,
@@ -99,6 +103,37 @@ class GoogleMapComponent extends React.Component {
       return null;
     } else {
       return (
+        console.log("MAP STATE: ", this.state),
+        console.log("MAP cords 0: ", this.state.cords[0]),
+        console.log("MAP cords 0: ", this.state.cords[1]),
+        <div>
+          <Container>
+            <Row>
+            <Col xs={6} style={{textAlign: "left"}}>
+              <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
+              <input
+                type="text"
+                name="PosIni"
+                className="u-full-width"
+                readOnly = {true}
+                //placeholder={this.state.form.descFin}
+                value={this.state.cords[0].latitude + "-" + this.state.cords[0].longitude}
+              />
+            </Col>
+            <Col xs={6} style={{textAlign: "left"}}>
+              <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
+              <input
+                type="text"
+                name="PosFin"
+                className="u-full-width"
+                readOnly = {true}
+                //placeholder={this.state.form.descFin}
+                value={this.state.cords[1].latitude + "-" + this.state.cords[1].longitude}
+              />
+            </Col>
+            </Row>
+          </Container>
+          {"  "}
         <Map
           google={this.props.google}
           style={customizeMap}
@@ -111,6 +146,7 @@ class GoogleMapComponent extends React.Component {
           {this.drawMarker()}
           {this.drawPolyline()}
         </Map>
+        </div>
       );
     }
   }
