@@ -472,6 +472,16 @@ const comboSubBaseRigid = [{ label: "Seleccionar", value: "" }
 let comboSubBase = [{ label: "Seleccionar", value: "" }];
 
 
+//Combo Calzada
+const comboCalzada = [{ label: "Seleccionar", value: "" }, 
+{ label: "Anada", value: "Anada" },
+{ label: "Desconeguda", value: "Desconeguda" },
+{ label: "Doble", value: "Doble" },
+{ label: "Invers", value: "Invers" },
+{ label: "Tornada", value: "Tornada" },
+{ label: "Unic", value: "Unic" }
+];
+
 let authToken = sessionStorage.getItem("JWT");
 
 let config = {
@@ -1299,6 +1309,19 @@ handleChangeCombos=(e, {name})=>{
       });
       console.log("CASE STATE: ", this.state.form.firmesTramo);
       break;
+
+    case 'idDdTiposCalzada':
+      console.log("VALOR: ", valor);
+      this.state.form.idDdTiposCalzada = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              idDdTiposCalzada: valor            
+          }
+      });
+      console.log("CASE STATE: ", this.state.form);
+      break;
+      
 
     default:
       this.setState({
@@ -2560,10 +2583,14 @@ seleccionarCarril=(carril)=>{
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('TipCalz')}</>}</Translation></label>
-                  <select onChange={this.handleTipCal}>
-                    <option value="Anada">Anada</option>
-                    <option value="Tornada">Tornada</option>               
-                  </select>
+                  <Select 
+                    type="text"
+                    name="idDdTiposCalzada" 
+                    key="idDdTiposCalzada"
+                    options={ comboCalzada } 
+                    onChange={this.handleChangeCombos}
+                    defaultValue={comboCalzada.find(obj => obj.value === this.state.form.idDdTiposCalzada)}
+                  />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('DescIni')}</>}</Translation></label>
