@@ -431,6 +431,7 @@ seleccionarTramo=(tramoEdit)=>{
   this.setState({
     tipoModal: 'Seleccionar',
     form: {
+      ...this.state.form,
       id: tramoEdit.id,
       codigo: tramoEdit.codigo,
       nombre: tramoEdit.nombre,
@@ -1022,7 +1023,8 @@ render() {
           <ModalBody style={{backgroundColor: '#FFFFFF'}}>
             <div style={{marginRight:'1%', marginTop: '1%', backgroundColor: '#FFFFFF'}}>                                  
               <EditarTramo 
-                id = {url + (this.state.form.id)}
+                id={url + (this.state.form.id)}
+                idTramos={this.state.form.id}
               />
             </div>    
           </ModalBody>
