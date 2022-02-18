@@ -1,10 +1,15 @@
 import React from 'react';
  
-import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import {
+  GoogleApiWrapper,
+  Marker,
+  Map,
+  Polyline
+} from 'google-maps-react';
  
 const customizeMap = {
   width: '38%',
-  height: '47%'
+  height: '49%'
 };
  
 let firstLoad = true;
@@ -14,8 +19,8 @@ class GoogleMapComponent extends React.Component {
     super(props);
     this.state = {
       cords: [],
-      longitude: '',
-      latitude: ''
+      longitude: 0,
+      latitude: 0
     };
   }
 
@@ -33,7 +38,7 @@ class GoogleMapComponent extends React.Component {
   }
 
   getCoordinates = () => {
-    fetch(this.props.rutaKmls[1])
+    fetch(this.props.rutaKml)
       .then(response => {
         return response.text();
       })
@@ -45,7 +50,7 @@ class GoogleMapComponent extends React.Component {
           if (element.includes("<coordinates>")) {
             element = element.substring(13);
             var elements = element.split(',');
-            coords.push({ longitude: elements[0], latitude: elements[1] });
+            coords.push({ longitude: Number(elements[0]), latitude: Number(elements[1]) });
           }
         });
         this.setState({
@@ -58,16 +63,39 @@ class GoogleMapComponent extends React.Component {
 
   drawMarker = () => {
     return this.state.cords.map((store, i) => {
-      return <Marker key={i} id={i} position={{
-          lat: store.latitude,
-          lng: store.longitude
-        }}
-        onClick={() => console.log("Event Hanlder Called")} />
+      return (
+        <Marker key={i} id={i} position={{
+            lat: store.latitude,
+            lng: store.longitude
+          }}
+        />
+      );
     });
   }
 
+  drawPolyline = () => {
+    const path = [];
+
+    this.state.cords.map((cord) => {
+      path.push({
+        lat: cord.latitude,
+        lng: cord.longitude
+      });
+    });
+
+    return (
+      <Polyline
+        path={path}
+        geodesic={true}
+        strokeColor={'red'}
+        strokeOpacity={1.0}
+        strokeWeight={3}
+      />
+    );
+  }
+
   render() {
-    if (this.state.latitude == '') {
+    if (this.state.cords.length == 0) {
       return null;
     } else {
       return (
@@ -81,6 +109,7 @@ class GoogleMapComponent extends React.Component {
           }}
         >
           {this.drawMarker()}
+          {this.drawPolyline()}
         </Map>
       );
     }

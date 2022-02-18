@@ -1921,9 +1921,8 @@ seleccionarCarril=(carril)=>{
         label: <Translation ns= "global">{(t) => <>{t('Clasif')}</>}</Translation>,
         
         content: (
-          <div>             
-              {"  "}
-              <br /><br />
+          <div>
+              <br />
               <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>             
               <Select name="ClasFunRedes" 
                   key="ClasFunRedes"
@@ -2003,8 +2002,7 @@ seleccionarCarril=(carril)=>{
         content: (
 
             <div>
-              {"  "}
-              <br /><br />
+              <br />
               <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
                 <Select name="idCarrilDdTiposFirmesTramo" 
                   key="idCarrilDdTiposFirmesTramo"
@@ -2163,8 +2161,7 @@ seleccionarCarril=(carril)=>{
         label: <Translation ns= "global">{(t) => <>{t('Expl')}</>}</Translation>,
         content: (
           <div>
-             {"  "}
-            <br /><br />
+             <br />
             <MDBTable>
               <MDBTableHead>
                 <tr>
@@ -2285,8 +2282,7 @@ seleccionarCarril=(carril)=>{
                   : ''
               }
  
-            {"  "}
-            <br /><br />
+            <br />
             <Row>
             { !this.state.setMsgOutBoolKO
               ? 
@@ -2565,9 +2561,9 @@ seleccionarCarril=(carril)=>{
                     <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
                   </div>
                 </Col>
-                <Col md={6} style={{marginTop: '5%'}}>
+                <Col md={6} style={{marginTop: '5.3%'}}>
                   <Row>
-                    <GoogleMapComponent rutaKmls={[this.state.rutaKml + '_track.kml', this.state.rutaKml + '_pks.kml']} />
+                    <GoogleMapComponent rutaKml={this.state.rutaKml + '_pks.kml'} />
                   </Row>
                 </Col>
               </Row>

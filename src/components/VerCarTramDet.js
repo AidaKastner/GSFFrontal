@@ -2,12 +2,12 @@ import React, { Component, Fragment} from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
+import filterFactory from 'react-bootstrap-table2-filter';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import '../css/Pagination.css';
 import '../css/Menu.css';
 import '../css/Table.css';
-import { Translation, useTranslation, Trans } from 'react-i18next';
+import { Translation } from 'react-i18next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
@@ -16,7 +16,7 @@ import Tab from "./Tab";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from "../components/Spinner"; 
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
 import GoogleMapComponent from '../components/GoogleMapComponent';
 import EditarTramo from "../components/EditarTramo";
 import ModalTitle from "react-bootstrap/ModalTitle";
@@ -450,96 +450,86 @@ render() {
     label: <Translation ns= "global">{(t) => <>{t('Clasif')}</>}</Translation>,        
     content: (
       <Container>
-        {"  "}
-        <br /><br />
+        <br />
         <Row>
-          <Col md={6}>
-            <Row>
-              <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>
-              <input
-                  type="text"
-                  name="ClasFunRedes"
-                  className="u-full-width"
-                  //onChange={actualizarState}
-                  value={this.state.form.idDdRedesNombre}
-              />
-            </Row>
-            <Row>
-              <label><Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation></label>
-              <input
-                  type="text"
-                  name="ClasTecReal"
-                  className="u-full-width"
-                  //onChange={actualizarState}
-                  value={this.state.form.ddCodTecRealNombre}
-              />
-            </Row>
-            <Row>
-              <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
-              <input
-                  type="text"
-                  name="OrgCons"
-                  className="u-full-width"
-                  //onChange={actualizarState}
-                  value={this.state.form.ddOrganismosNombre}
-              />
-            </Row>
-            <Row>
-              <label><Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation></label>
-              <input
-                  type="text"
-                  name="OrgCom"
-                  className="u-full-width"
-                  //onChange={actualizarState}
-                  value={this.state.form.ddOrganismosNombre}
-              />
-            </Row>
-            <Row>
-              <label><Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation></label>
-              <input
-                  type="text"
-                  name="RegGest"
-                  className="u-full-width"
-                  //onChange={actualizarState}
-                  value={this.state.form.ddRegimenGestionNombre}
-              />
-            </Row>
-            <Row>
-              <label><Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation></label>
-              <input
-                  type="text"
-                  name="RegExpl"
-                  className="u-full-width"
-                  //onChange={actualizarState}
-                  value={this.state.form.ddRegimenExplotacionNombre}
-              />
-            </Row>
-            <Row>
-              <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
-              <input
-                  type="text"
-                  name="zonTer"
-                  className="u-full-width"
-                  //onChange={actualizarState}
-                  value={this.state.form.ddZonasTermicaNombre}
-              />
-            </Row>
-            <Row>
-              <label><Translation ns= "global">{(t) => <>{t('ZonaPluv')}</>}</Translation></label>
-              <input
-                  type="text"
-                  name="ZonaPluv"
-                  className="u-full-width"
-                  //onChange={actualizarState}
-                  value={this.state.form.ddZonasPluvNombre}
-              />
-            </Row>
-          </Col>
-          <Col md={6}>
-            <Row>
-              <GoogleMapComponent rutaKmls={[this.state.rutaKml + '_track.kml', this.state.rutaKml + '_pks.kml']} />
-            </Row>
-          </Col>
+          <label><Translation ns= "global">{(t) => <>{t('ClasFunRedes')}</>}</Translation></label>
+          <input
+              type="text"
+              name="ClasFunRedes"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.idDdRedesNombre}
+          />
+        </Row>
+        <Row>
+          <label><Translation ns= "global">{(t) => <>{t('ClasTecReal')}</>}</Translation></label>
+          <input
+              type="text"
+              name="ClasTecReal"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.ddCodTecRealNombre}
+          />
+        </Row>
+        <Row>
+          <label><Translation ns= "global">{(t) => <>{t('OrgCons')}</>}</Translation></label>
+          <input
+              type="text"
+              name="OrgCons"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.ddOrganismosNombre}
+          />
+        </Row>
+        <Row>
+          <label><Translation ns= "global">{(t) => <>{t('OrgCom')}</>}</Translation></label>
+          <input
+              type="text"
+              name="OrgCom"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.ddOrganismosNombre}
+          />
+        </Row>
+        <Row>
+          <label><Translation ns= "global">{(t) => <>{t('RegGest')}</>}</Translation></label>
+          <input
+              type="text"
+              name="RegGest"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.ddRegimenGestionNombre}
+          />
+        </Row>
+        <Row>
+          <label><Translation ns= "global">{(t) => <>{t('RegExpl')}</>}</Translation></label>
+          <input
+              type="text"
+              name="RegExpl"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.ddRegimenExplotacionNombre}
+          />
+        </Row>
+        <Row>
+          <label><Translation ns= "global">{(t) => <>{t('zonTer')}</>}</Translation></label>
+          <input
+              type="text"
+              name="zonTer"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.ddZonasTermicaNombre}
+          />
+        </Row>
+        <Row>
+          <label><Translation ns= "global">{(t) => <>{t('ZonaPluv')}</>}</Translation></label>
+          <input
+              type="text"
+              name="ZonaPluv"
+              className="u-full-width"
+              //onChange={actualizarState}
+              value={this.state.form.ddZonasPluvNombre}
+          />
         </Row>
       </Container>
     ),
@@ -548,8 +538,7 @@ render() {
     label: <Translation ns= "global">{(t) => <>{t('Firme')}</>}</Translation>,
     content: (
       <div>
-        {"  "}
-        <br /><br />
+        <br />
         <label><Translation ns= "global">{(t) => <>{t('TipFirTram')}</>}</Translation></label>
         <input
             type="text"
@@ -646,8 +635,7 @@ render() {
     label: <Translation ns= "global">{(t) => <>{t('Expl')}</>}</Translation>,
     content: (
       <div>
-        {"  "}
-        <br /><br />
+        <br />
         <MDBTable>
           <MDBTableHead>
             <tr>
@@ -748,8 +736,7 @@ render() {
       <Fragment>
         { !this.state.setMsgOutBoolKO
           ? <div>
-              {"  "}
-              <br /><br />
+              <br />
               <BootstrapTable
                 id='tableAfr'
                 bootstrap4 
@@ -778,8 +765,7 @@ render() {
       <Fragment>
         { !this.state.setMsgOutActKO
           ? <div>
-              {"  "}
-              <br /><br />
+              <br />
               <BootstrapTable
                 id='tableAct'
                 bootstrap4 
@@ -813,7 +799,7 @@ render() {
 
     return (
       // Retornamos el formulario
-      <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1200px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
+      <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1250px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
         <form>
           <div className="container" style={{maxWidth: '950px', width: '100%', float:'center'}}>
             <Row style={{paddingBottom: '0.5rem'}}>
@@ -1036,7 +1022,14 @@ render() {
           </Container>
           <Container>
             <Row>
-              <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
+              <Col xs={6}>
+                <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
+              </Col>
+              <Col md={6} style={{marginTop: '7%'}}>
+                <Row>
+                  <GoogleMapComponent rutaKml={this.state.rutaKml + '_pks.kml'} />
+                </Row>
+              </Col>
             </Row>
           </Container>
         </form>
