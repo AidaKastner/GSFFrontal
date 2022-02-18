@@ -509,6 +509,7 @@ class EditarTramo extends Component{
     super(props);
     this.state = {
       idTramSel: props.id,
+      idTramos: props.idTramos,
       offset: 0,
       offsetAf: 0,
       tableData: [],
@@ -536,6 +537,7 @@ class EditarTramo extends Component{
       form:{
         id:'',
         nombre:'',
+        actuacionesTramos: [],
         carretera:{
           nombre: '',
           codigo: '',
@@ -543,12 +545,7 @@ class EditarTramo extends Component{
           comentario: '',
           idGrafo: ''
         },
-        carriles:{
-          idTramos: '',
-          ordenCarril: '',
-          sentido: '',
-          id: ''
-        },
+        carriles: [],
         comentario:'',
         longitud:'',
         idDdTiposCalzada:'',
@@ -677,7 +674,9 @@ class EditarTramo extends Component{
           y: '',
           z: '',
           idDdPuntosCausaCorte: ''
-        }
+        },
+        pksdistoris: [],
+        tramosAforos: []
       }
     }
 
@@ -1345,7 +1344,15 @@ handleChangeCombos=(e, {name})=>{
           ...this.state.form,
           firmesTramo: {
             ...this.state.form.firmesTramo,
-            'idCarrilDdTiposFirmesTramo': e.value
+            'idCarrilDdTiposFirmesTramo': e.value,
+            idCarrilDdCapasRodadura: '',
+            idArcenDdCapasRodadura: '',
+            idCarrilDdCapasIntermedia: '',
+            idArcenDdCapasIntermedia: '',
+            idCarrilDdCapasBase: '',
+            idArcenDdCapasBase: '',
+            idCarrilDdCapasSubbase: '',
+            idArcenDdCapasSubbase: ''
           }
         },
         ComboTipFirme: e.value
@@ -1353,7 +1360,6 @@ handleChangeCombos=(e, {name})=>{
       console.log("Combo Tipo Firme: ", this.state.ComboTipFirme);
       console.log("Objeto API: ", this.state.form);
       this.getComboRodadura(this.state.ComboTipFirme);
-      this.peticionRefresh(comboRod, this.state.ComboTipFirme);
     };
 
   
@@ -1389,8 +1395,10 @@ peticionGet=()=>{
       slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
       slice.forEach((carrile) => {
         dataCarriles.push({
+          id: carrile.id,
           ordenCarrile: carrile.ordenCarril,
-          sentidoCarril: carrile.sentido
+          sentidoCarril: carrile.sentido,
+          idTramos: carrile.idTramos
         });
       });
     }
@@ -1420,19 +1428,9 @@ peticionGet=()=>{
       form: {
         id: response.data.id,
         nombre: response.data.nombre,
-        carretera:{
-          nombre: response.data.carretera.nombre,
-          codigo: response.data.carretera.codigo,
-          id: response.data.carretera.id,              
-          comentario: response.data.carretera.comentario,
-          idGrafo: response.data.carretera.idGrafo
-        },
-        /*carriles:{
-          idTramos: response.data.carriles.idTramos,
-          ordenCarril: response.data.carriles.ordenCarril,
-          sentido: response.data.carriles.sentido,
-          id: response.data.carriles.id
-        },*/
+        actuacionesTramos: dataAct,
+        carretera: response.data.carretera,
+        carriles: data,
         comentario: response.data.comentario,
         longitud: response.data.longitud,
         fechaAlta: response.data.fechaAlta.substr(0, 10),
@@ -1459,104 +1457,20 @@ peticionGet=()=>{
         idDdRegimenExplotacion: response.data.idDdRegimenExplotacion,
         sistemaProyeccion: response.data.sistemaProyeccion,
         idDdCodTecReal: response.data.idDdCodTecReal,
-
-        ddTiposCalzada:{
-          nombre: response.data.ddTiposCalzada.nombre,
-          codigo: response.data.ddTiposCalzada.codigo
-        },
-
-        ddRede:{
-          nombre: response.data.ddRede.nombre,
-          codigo: response.data.ddRede.codigo
-        },
-
-        ddCodTecRealModel:{
-          nombre: response.data.ddCodTecRealModel.nombre,
-          codigo: response.data.ddCodTecRealModel.codigo
-        },
-
-        ddOrganismos:{
-          nombre: response.data.ddOrganismos.nombre,
-          codigo: response.data.ddOrganismos.codigo
-        },
-
-        ddRegimenExplotacion:{
-          nombre: response.data.ddRegimenExplotacion.nombre,
-          codigo: response.data.ddRegimenExplotacion.codigo
-        },
-
-        ddRegimenGestion:{
-          nombre: response.data.ddRegimenGestion.nombre,
-          codigo: response.data.ddRegimenGestion.codigo
-        },
-
-
-        ddZonasTermica:{
-          nombre: response.data.ddZonasTermica.nombre,
-          codigo: response.data.ddZonasTermica.codigo
-        },
-
-        ddZonasPluviometrica:{
-          nombre: response.data.ddZonasPluviometrica.nombre,
-          codigo: response.data.ddZonasPluviometrica.codigo
-        },
-
-        firmesTramo:{
-          idCarrilDdTiposFirmesTramo: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
-          idDdNivelesInfluencia: response.data.firmesTramo.idDdNivelesInfluencia,
-          cpa: response.data.firmesTramo.cpa,
-          anchuraCarril: response.data.firmesTramo.anchuraCarril,
-          anchuraArcen: response.data.firmesTramo.anchuraArcen,
-          tipoLogModeloEvolMpd: response.data.firmesTramo.tipoLogModeloEvolMpd,
-          idCarrilDdCapasRodadura: response.data.firmesTramo.idCarrilDdCapasRodadura,
-          idCarrilDdCapasIntermedia: response.data.firmesTramo.idCarrilDdCapasIntermedia,
-          idCarrilDdCapasBase: response.data.firmesTramo.idCarrilDdCapasBase,
-          idCarrilDdCapasSubbase: response.data.firmesTramo.idCarrilDdCapasSubbase,
-          idArcenDdCapasRodadura: response.data.firmesTramo.idArcenDdCapasRodadura,
-          idArcenDdCapasIntermedia: response.data.firmesTramo.idArcenDdCapasIntermedia,
-          idArcenDdCapasBase: response.data.firmesTramo.idArcenDdCapasBase,
-          idArcenDdCapasSubbase: response.data.firmesTramo.idArcenDdCapasSubbase,
-          espesorRodaduraCarril: response.data.firmesTramo.espesorRodaduraCarril,
-          espesorIntermediaCarril: response.data.firmesTramo.espesorIntermediaCarril,
-          espesorBaseCarril: response.data.firmesTramo.espesorBaseCarril,
-          espesorSubbaseCarril: response.data.firmesTramo.espesorSubbaseCarril,
-          espesorRodaduraArcen: response.data.firmesTramo.espesorRodaduraArcen,
-          espesorIntermediaArcen: response.data.firmesTramo.espesorIntermediaArcen,
-          espesorBaseArcen: response.data.firmesTramo.espesorBaseArcen,
-          espesorSubbaseArcen: response.data.firmesTramo.espesorSubbaseArcen,
-          id: response.data.firmesTramo.id
-        },
- 
-        explanadasTramo:{
-          idDdTerrenosNaturales: response.data.explanadasTramo.idDdTerrenosNaturales,
-          terrenoNaturalCbr: response.data.explanadasTramo.terrenoNaturalCbr,
-          idDdCategoriasExplanadas: response.data.explanadasTramo.idDdCategoriasExplanadas,
-          relleno: response.data.explanadasTramo.relleno,
-          rellenoCbr: response.data.explanadasTramo.rellenoCbr,
-          coronacion: response.data.explanadasTramo.coronacion,
-          coronacionCbr: response.data.explanadasTramo.coronacionCbr,
-          id: response.data.explanadasTramo.id
-        },
-        puntoIni:{
-          pk: response.data.puntoIni.pk,
-          m: response.data.puntoIni.m,
-          descripcion: response.data.puntoIni.descripcion,
-          id: response.data.puntoIni.id,
-          x: response.data.puntoIni.x,
-          y: response.data.puntoIni.y,
-          z: response.data.puntoIni.z,
-          idDdPuntosCausaCorte: response.data.puntoIni.idDdPuntosCausaCorte
-        },
-        puntoFin:{
-          pk: response.data.puntoFin.pk,
-          m: response.data.puntoFin.m,
-          descripcion: response.data.puntoFin.descripcion,
-          id: response.data.puntoFin.id,
-          x: response.data.puntoFin.x,
-          y: response.data.puntoFin.y,
-          z: response.data.puntoFin.z,
-          idDdPuntosCausaCorte: response.data.puntoFin.idDdPuntosCausaCorte
-        }
+        ddTiposCalzada: response.data.ddTiposCalzada,
+        ddRede: response.data.ddRede,
+        ddCodTecRealModel: response.data.ddCodTecRealModel,
+        ddOrganismos: response.data.ddOrganismos,
+        ddRegimenExplotacion: response.data.ddRegimenExplotacion,
+        ddRegimenGestion: response.data.ddRegimenGestion,
+        ddZonasTermica: response.data.ddZonasTermica,
+        ddZonasPluviometrica: response.data.ddZonasPluviometrica,
+        firmesTramo: response.data.firmesTramo,
+        explanadasTramo: response.data.explanadasTramo,
+        puntoIni: response.data.puntoIni,
+        puntoFin: response.data.puntoFin,
+        pksdistoris: response.data.pksdistoris,
+        tramosAforos: response.data.tramosAforos
       }
       
     });
@@ -1591,8 +1505,10 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
       slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
       slice.forEach((carrile) => {
         dataCarriles.push({
+          id: carrile.id,
           ordenCarrile: carrile.ordenCarril,
-          sentidoCarril: carrile.sentido
+          sentidoCarril: carrile.sentido,
+          idTramos: carrile.idTramos
         });
       });
     }
@@ -1622,19 +1538,9 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
       form: {
         id: response.data.id,
         nombre: response.data.nombre,
-        carretera:{
-          nombre: response.data.carretera.nombre,
-          codigo: response.data.carretera.codigo,
-          id: response.data.carretera.id,              
-          comentario: response.data.carretera.comentario,
-          idGrafo: response.data.carretera.idGrafo
-        },
-        /*carriles:{
-          idTramos: response.data.carriles.idTramos,
-          ordenCarril: response.data.carriles.ordenCarril,
-          sentido: response.data.carriles.sentido,
-          id: response.data.carriles.id
-        },*/
+        actuacionesTramos: dataAct,
+        carretera: response.data.carretera,
+        carriles: data,
         comentario: response.data.comentario,
         longitud: response.data.longitud,
         fechaAlta: response.data.fechaAlta.substr(0, 10),
@@ -1661,104 +1567,20 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
         idDdRegimenExplotacion: response.data.idDdRegimenExplotacion,
         sistemaProyeccion: response.data.sistemaProyeccion,
         idDdCodTecReal: response.data.idDdCodTecReal,
-
-        ddTiposCalzada:{
-          nombre: response.data.ddTiposCalzada.nombre,
-          codigo: response.data.ddTiposCalzada.codigo
-        },
-
-        ddRede:{
-          nombre: response.data.ddRede.nombre,
-          codigo: response.data.ddRede.codigo
-        },
-
-        ddCodTecRealModel:{
-          nombre: response.data.ddCodTecRealModel.nombre,
-          codigo: response.data.ddCodTecRealModel.codigo
-        },
-
-        ddOrganismos:{
-          nombre: response.data.ddOrganismos.nombre,
-          codigo: response.data.ddOrganismos.codigo
-        },
-
-        ddRegimenExplotacion:{
-          nombre: response.data.ddRegimenExplotacion.nombre,
-          codigo: response.data.ddRegimenExplotacion.codigo
-        },
-
-        ddRegimenGestion:{
-          nombre: response.data.ddRegimenGestion.nombre,
-          codigo: response.data.ddRegimenGestion.codigo
-        },
-        
-        ddZonasTermica:{
-          nombre: response.data.ddZonasTermica.nombre,
-          codigo: response.data.ddZonasTermica.codigo
-        },
-
-        ddZonasPluviometrica:{
-          nombre: response.data.ddZonasPluviometrica.nombre,
-          codigo: response.data.ddZonasPluviometrica.codigo
-        },
-
-        firmesTramo:{
-          idCarrilDdTiposFirmesTramo: response.data.firmesTramo.idCarrilDdTiposFirmesTramo,
-          idDdNivelesInfluencia: response.data.firmesTramo.idDdNivelesInfluencia,
-          cpa: response.data.firmesTramo.cpa,
-          anchuraCarril: response.data.firmesTramo.anchuraCarril,
-          anchuraArcen: response.data.firmesTramo.anchuraArcen,
-          tipoLogModeloEvolMpd: response.data.firmesTramo.tipoLogModeloEvolMpd,
-          idCarrilDdCapasRodadura: response.data.firmesTramo.idCarrilDdCapasRodadura,
-          idCarrilDdCapasIntermedia: response.data.firmesTramo.idCarrilDdCapasIntermedia,
-          idCarrilDdCapasBase: response.data.firmesTramo.idCarrilDdCapasBase,
-          idCarrilDdCapasSubbase: response.data.firmesTramo.idCarrilDdCapasSubbase,
-          idArcenDdCapasRodadura: response.data.firmesTramo.idArcenDdCapasRodadura,
-          idArcenDdCapasIntermedia: response.data.firmesTramo.idArcenDdCapasIntermedia,
-          idArcenDdCapasBase: response.data.firmesTramo.idArcenDdCapasBase,
-          idArcenDdCapasSubbase: response.data.firmesTramo.idArcenDdCapasSubbase,
-          espesorRodaduraCarril: response.data.firmesTramo.espesorRodaduraCarril,
-          espesorIntermediaCarril: response.data.firmesTramo.espesorIntermediaCarril,
-          espesorBaseCarril: response.data.firmesTramo.espesorBaseCarril,
-          espesorSubbaseCarril: response.data.firmesTramo.espesorSubbaseCarril,
-          espesorRodaduraArcen: response.data.firmesTramo.espesorRodaduraArcen,
-          espesorIntermediaArcen: response.data.firmesTramo.espesorIntermediaArcen,
-          espesorBaseArcen: response.data.firmesTramo.espesorBaseArcen,
-          espesorSubbaseArcen: response.data.firmesTramo.espesorSubbaseArcen,
-          id: response.data.firmesTramo.id
-        },
-
-        firmesTramoespSubBasArc: response.data.firmesTramo.espesorSubbaseArcen,
-        explanadasTramo:{
-          idDdTerrenosNaturales: response.data.explanadasTramo.idDdTerrenosNaturales,
-          terrenoNaturalCbr: response.data.explanadasTramo.terrenoNaturalCbr,
-          idDdCategoriasExplanadas: response.data.explanadasTramo.idDdCategoriasExplanadas,
-          relleno: response.data.explanadasTramo.relleno,
-          rellenoCbr: response.data.explanadasTramo.rellenoCbr,
-          coronacion: response.data.explanadasTramo.coronacion,
-          coronacionCbr: response.data.explanadasTramo.coronacionCbr,
-          id: response.data.explanadasTramo.id
-        },
-        puntoIni:{
-          pk: response.data.puntoIni.pk,
-          m: response.data.puntoIni.m,
-          descripcion: response.data.puntoIni.descripcion,
-          id: response.data.puntoIni.id,
-          x: response.data.puntoIni.x,
-          y: response.data.puntoIni.y,
-          z: response.data.puntoIni.z,
-          idDdPuntosCausaCorte: response.data.puntoIni.idDdPuntosCausaCorte
-        },
-        puntoFin:{
-          pk: response.data.puntoFin.pk,
-          m: response.data.puntoFin.m,
-          descripcion: response.data.puntoFin.descripcion,
-          id: response.data.puntoFin.id,
-          x: response.data.puntoFin.x,
-          y: response.data.puntoFin.y,
-          z: response.data.puntoFin.z,
-          idDdPuntosCausaCorte: response.data.puntoFin.idDdPuntosCausaCorte
-        }
+        ddTiposCalzada: response.data.ddTiposCalzada,
+        ddRede: response.data.ddRede,
+        ddCodTecRealModel: response.data.ddCodTecRealModel,
+        ddOrganismos: response.data.ddOrganismos,
+        ddRegimenExplotacion: response.data.ddRegimenExplotacion,
+        ddRegimenGestion: response.data.ddRegimenGestion,
+        ddZonasTermica: response.data.ddZonasTermica,
+        ddZonasPluviometrica: response.data.ddZonasPluviometrica,
+        firmesTramo: response.data.firmesTramo,
+        explanadasTramo: response.data.explanadasTramo,
+        puntoIni: response.data.puntoIni,
+        puntoFin: response.data.puntoFin,
+        pksdistoris: response.data.pksdistoris,
+        tramosAforos: response.data.tramosAforos
       }
       
     });
@@ -1895,37 +1717,23 @@ peticionDeleteAus=()=>{
 
 /*Editar registro. */
 peticionPut=()=>{
-  const data = new FormData();
-  console.log("Objeto --> API",this.state.form);
-
   config = {
     headers: {
-        'Authorization': sessionStorage.getItem("JWT"),
-        'Accept': 'application/json',
-        'content-type': 'application/json'
+      'Authorization': sessionStorage.getItem("JWT"),
+      'Accept': 'application/json',
+      'content-type': 'application/json'
     }
   };
 
-  this.setState({
-    form:{
-      ...this.state.form,
-    }
-  });
-  console.log("Objeto --> API",this.state.form);
+  Object.assign(this.state.form, { carriles: this.state.form.carriles });
 
-  axios.put(url,this.state.form,config).then(response=>{    
+  axios.put(url, this.state.form, config).then(_ => {
     this.peticionGet();
     this.setState({modalVerificarEd: false});
-  }).catch(error=>{
+  }).catch(_ => {
     this.setState({modalVerificarEd: false});
-    console.log("KO");
-    console.log("URL para PUT:", url);
-    console.log(data);
-    console.log(config);
-    console.log("ERROR PUT");
-    console.log(error);        
     alert("Error mientras se modificaban datos. Pongase en contacto con elservicio técnico"); 
-})   
+  });
 }
 
 
@@ -1980,14 +1788,23 @@ seleccionarCarril=(carril)=>{
 
   // Añadir carril rápido (Orden Carril 2) o carril lento (1)
   AddLane=(sent, ordCarril)=>{
-    this.state.tableData.push({
+    const carrile = {
+      id: 0,
       ordenCarrile: ordCarril,
       sentidoCarril: sent,
-      idTramos: this.state.id
-    });
+      idTramos: this.state.idTramos
+    };
+
+    this.state.tableData.push(carrile);
+    this.state.form.carriles.push(carrile);
+
     this.setState({
       setMsgOutBoolKO: false,
-      tableData: this.state.tableData
+      tableData: this.state.tableData,
+      form: {
+        ...this.state.form,
+        carriles: this.state.form.carriles
+      }
     });
   }
 
@@ -2176,7 +1993,7 @@ seleccionarCarril=(carril)=>{
                     <th scope='col'><Translation ns= "global">{(t) => <>{t('Espesor')}</>}</Translation></th>
                   </tr>
                 </MDBTableHead>
-              <MDBTableBody>
+                <MDBTableBody>
                   <tr>
                     <th scope='row'><Translation ns= "global">{(t) => <>{t('CapaRod')}</>}</Translation></th>
                     <td>
@@ -2184,6 +2001,7 @@ seleccionarCarril=(carril)=>{
                         key="CapaRodadura"
                         options={ comboRod } 
                         defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasRodadura)}
+                        value={comboRod.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasRodadura)}
                         onChange={this.handleChangeCombos}
                       /> 
                     </td>
@@ -2194,6 +2012,7 @@ seleccionarCarril=(carril)=>{
                         key="idArcenDdCapasRodadura"
                         options={ comboRod } 
                         defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasRodadura)}
+                        value={comboRod.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasRodadura)}
                         onChange={this.handleChangeCombos}
                       /> 
                     </td>
@@ -2206,6 +2025,7 @@ seleccionarCarril=(carril)=>{
                         key="idCarrilDdCapasIntermedia"
                         options={ comboInt } 
                         defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasIntermedia)}
+                        value={comboInt.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasIntermedia)}
                         onChange={this.handleChangeCombos}
                       /> 
                     </td>
@@ -2215,6 +2035,7 @@ seleccionarCarril=(carril)=>{
                         key="idArcenDdCapasIntermedia"
                         options={ comboInt } 
                         defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasIntermedia)}
+                        value={comboInt.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasIntermedia)}
                         onChange={this.handleChangeCombos}
                       /> 
                     </td> 
@@ -2227,6 +2048,7 @@ seleccionarCarril=(carril)=>{
                         key="idCarrilDdCapasBase"
                         options={ comboBase } 
                         defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasBase)}
+                        value={comboBase.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasBase)}
                         onChange={this.handleChangeCombos}
                       /> 
                     </td>
@@ -2236,6 +2058,7 @@ seleccionarCarril=(carril)=>{
                         key="idArcenDdCapasBase"
                         options={ comboBase } 
                         defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasBase)}
+                        value={comboBase.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasBase)}
                         onChange={this.handleChangeCombos}
                       /> 
                     </td> 
@@ -2248,6 +2071,7 @@ seleccionarCarril=(carril)=>{
                         key="idCarrilDdCapasSubbase"
                         options={ comboSubBase } 
                         defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasSubbase)}
+                        value={comboSubBase.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasSubbase)}
                         onChange={this.handleChangeCombos}
                       /> 
                     </td>
@@ -2257,6 +2081,7 @@ seleccionarCarril=(carril)=>{
                         key="idArcenDdCapasSubbase"
                         options={ comboSubBase } 
                         defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasSubbase)}
+                        value={comboSubBase.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasSubbase)}
                         onChange={this.handleChangeCombos}
                       /> 
                     </td>
