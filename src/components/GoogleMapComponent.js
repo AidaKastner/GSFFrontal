@@ -99,13 +99,12 @@ class GoogleMapComponent extends React.Component {
   }
 
   render() {
+    const long = this.state.cords.length;
     if (this.state.cords.length == 0) {
       return null;
     } else {
       return (
         console.log("MAP STATE: ", this.state),
-        console.log("MAP cords 0: ", this.state.cords[0]),
-        console.log("MAP cords 0: ", this.state.cords[1]),
         <div>
           <Container>
             <Row>
@@ -116,8 +115,7 @@ class GoogleMapComponent extends React.Component {
                 name="PosIni"
                 className="u-full-width"
                 readOnly = {true}
-                //placeholder={this.state.form.descFin}
-                value={this.state.cords[0].latitude + "-" + this.state.cords[0].longitude}
+                value={this.state.cords[0].latitude + " - " + this.state.cords[0].longitude}
               />
             </Col>
             <Col xs={6} style={{textAlign: "left"}}>
@@ -127,8 +125,7 @@ class GoogleMapComponent extends React.Component {
                 name="PosFin"
                 className="u-full-width"
                 readOnly = {true}
-                //placeholder={this.state.form.descFin}
-                value={this.state.cords[1].latitude + "-" + this.state.cords[1].longitude}
+                value={this.state.cords[long-1].latitude + " - " + this.state.cords[long-1].longitude}
               />
             </Col>
             </Row>
