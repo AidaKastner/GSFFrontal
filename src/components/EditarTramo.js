@@ -645,7 +645,7 @@ class EditarTramo extends Component{
           relleno: '',
           rellenoCbr: '',
           coronacion: '',
-          coronacion: '',
+          coronacionCbr: '',
           id: ''
         },
         puntoIni:{
@@ -915,8 +915,68 @@ controlErrAlta=(controlErrorTramo)=>{
           }
         });
         break;
-        
       
+      case 'cbr':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            explanadasTramo: {
+              ...this.state.form.explanadasTramo,
+              'terrenoNaturalCbr': e.target.value
+            }
+          }
+        });
+        break;      
+      
+      case 'relleno':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            explanadasTramo: {
+              ...this.state.form.explanadasTramo,
+              'relleno': e.target.value
+            }
+          }
+        });
+        break;  
+
+      case 'rellenoCbr':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            explanadasTramo: {
+              ...this.state.form.explanadasTramo,
+              'rellenoCbr': e.target.value
+            }
+          }
+        });
+        break;  
+
+      case 'coronacion':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            explanadasTramo: {
+              ...this.state.form.explanadasTramo,
+              'coronacion': e.target.value
+            }
+          }
+        });
+        break;
+
+      case 'coronacionCbr':
+        await this.setState({
+          form: {
+            ...this.state.form,
+            explanadasTramo: {
+              ...this.state.form.explanadasTramo,
+              'coronacionCbr': e.target.value
+            }
+          }
+        });
+        break;
+        
+
       default:
         await this.setState({
           form:{
@@ -1204,6 +1264,36 @@ handleChangeCombos=(e, {name})=>{
               firmesTramo: {
                 ...this.state.form.firmesTramo,
                 'idArcenDdCapasSubbase': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'idDdTerrenosNaturales':
+      console.log("VALOR: ", valor);
+      this.state.form.explanadasTramo.idDdTerrenosNaturales = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              explanadasTramo: {
+                ...this.state.form.explanadasTramo,
+                'idDdTerrenosNaturales': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'idDdCategoriasExplanadas':
+      console.log("VALOR: ", valor);
+      this.state.form.explanadasTramo.idDdCategoriasExplanadas = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              explanadasTramo: {
+                ...this.state.form.explanadasTramo,
+                'idDdCategoriasExplanadas': valor
               }
           }
       });
@@ -2177,7 +2267,7 @@ seleccionarCarril=(carril)=>{
                   name="idDdTerrenosNaturales" 
                   key="idDdTerrenosNaturales"
                   options={ comboTerNat } 
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                   defaultValue={comboTerNat.find(obj => obj.value === this.state.form.explanadasTramo.idDdTerrenosNaturales)}
                   /> 
                  
@@ -2200,7 +2290,7 @@ seleccionarCarril=(carril)=>{
                   name="idDdCategoriasExplanadas" 
                   key="idDdCategoriasExplanadas"
                   options={ comboExplanada } 
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeCombos}
                   defaultValue={comboExplanada.find(obj => obj.value === this.state.form.explanadasTramo.idDdCategoriasExplanadas)}
                   />
              {"  "}
