@@ -2642,32 +2642,6 @@ seleccionarCarril=(carril)=>{
                     }
                   
                 </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('PosIni')}</>}</Translation></label>
-                    <input
-                      type="number"
-                      name="PosIni"
-                      pattern="[0-9]*"
-                      className="u-full-width"
-                      readOnly = {false}
-                      //placeholder={this.state.form.descFin}
-                      onChange={this.handleChange}
-                      //value={this.state.form.descFin}
-                    />
-                </Col>
-                <Col xs={3} style={{textAlign: "left"}}>
-                  <label><Translation ns= "global">{(t) => <>{t('PosFin')}</>}</Translation></label>
-                    <input
-                      type="number"
-                      name="PosFin"
-                      pattern="[0-9]*"
-                      className="u-full-width"
-
-                      //placeholder={this.state.form.descFin}
-                      onChange={this.handleChange}
-                      //value={this.state.form.descFin}
-                    />
-                </Col>
               </Row>
             </div>
             </Container>
@@ -2678,7 +2652,7 @@ seleccionarCarril=(carril)=>{
                     <Tab activeIndex={activeIndex} onChange={this.onChange} tabs={tabs} />
                   </div>
                 </Col>
-                <Col md={6} style={{marginTop: '5.3%'}}>
+                <Col md={6}>
                   <Row>
                     <GoogleMapComponent rutaKml={this.state.rutaKml + '_pks.kml'} />
                   </Row>
