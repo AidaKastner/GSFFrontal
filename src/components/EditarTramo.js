@@ -1090,7 +1090,125 @@ handleChangeCombos=(e, {name})=>{
         console.log("CASE STATE: ", this.state.form.firmesTramo);
         break;
 
-      
+    case 'CapaRodadura':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idCarrilDdCapasRodadura = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idCarrilDdCapasRodadura': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'idArcenDdCapasRodadura':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idArcenDdCapasRodadura = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idArcenDdCapasRodadura': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+  
+    case 'idCarrilDdCapasIntermedia':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idCarrilDdCapasIntermedia = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idCarrilDdCapasIntermedia': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'idArcenDdCapasIntermedia':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idArcenDdCapasIntermedia = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idArcenDdCapasIntermedia': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'idCarrilDdCapasBase':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idCarrilDdCapasBase = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idCarrilDdCapasBase': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'idArcenDdCapasBase':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idArcenDdCapasBase = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idArcenDdCapasBase': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'idCarrilDdCapasSubbase':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idCarrilDdCapasSubbase = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idCarrilDdCapasSubbase': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
+
+    case 'idArcenDdCapasSubbase':
+      console.log("VALOR: ", valor);
+      this.state.form.firmesTramo.idArcenDdCapasSubbase = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              firmesTramo: {
+                ...this.state.form.firmesTramo,
+                'idArcenDdCapasSubbase': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.firmesTramo);
+      break;
 
     default:
       this.setState({
@@ -1955,7 +2073,7 @@ seleccionarCarril=(carril)=>{
                         key="CapaRodadura"
                         options={ comboRod } 
                         defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasRodadura)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeCombos}
                       /> 
                     </td>
                     
@@ -1965,7 +2083,7 @@ seleccionarCarril=(carril)=>{
                         key="idArcenDdCapasRodadura"
                         options={ comboRod } 
                         defaultValue={comboRod.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasRodadura)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeCombos}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramo.espesorRodaduraArcen}</td>
@@ -1977,7 +2095,7 @@ seleccionarCarril=(carril)=>{
                         key="idCarrilDdCapasIntermedia"
                         options={ comboInt } 
                         defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasIntermedia)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeCombos}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramo.espesorIntermediaCarril}</td>
@@ -1986,7 +2104,7 @@ seleccionarCarril=(carril)=>{
                         key="idArcenDdCapasIntermedia"
                         options={ comboInt } 
                         defaultValue={comboInt.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasIntermedia)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeCombos}
                       /> 
                     </td> 
                     <td>{this.state.form.firmesTramo.espesorIntermediaArcen}</td>
@@ -1998,7 +2116,7 @@ seleccionarCarril=(carril)=>{
                         key="idCarrilDdCapasBase"
                         options={ comboBase } 
                         defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasBase)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeCombos}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramo.espesorBaseCarril}</td>
@@ -2007,7 +2125,7 @@ seleccionarCarril=(carril)=>{
                         key="idArcenDdCapasBase"
                         options={ comboBase } 
                         defaultValue={comboBase.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasBase)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeCombos}
                       /> 
                     </td> 
                     <td>{this.state.form.firmesTramo.espesorBaseArcen}</td>
@@ -2019,7 +2137,7 @@ seleccionarCarril=(carril)=>{
                         key="idCarrilDdCapasSubbase"
                         options={ comboSubBase } 
                         defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramo.idCarrilDdCapasSubbase)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeCombos}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramo.espesorSubbaseCarril}</td>
@@ -2028,7 +2146,7 @@ seleccionarCarril=(carril)=>{
                         key="idArcenDdCapasSubbase"
                         options={ comboSubBase } 
                         defaultValue={comboSubBase.find(obj => obj.value === this.state.form.firmesTramo.idArcenDdCapasSubbase)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeCombos}
                       /> 
                     </td>
                     <td>{this.state.form.firmesTramo.espesorSubbaseArcen}</td>
