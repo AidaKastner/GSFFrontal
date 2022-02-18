@@ -941,50 +941,50 @@ handleChangeCombos=(e, {name})=>{
   const valor = e.value;
   const names = name;
   switch (names) {
-      case 'ClasFunRedes':
+    case 'ClasFunRedes':
       console.log("VALOR: ", valor);
       this.state.form.ddRede.nombre = valor;
       this.setState({
-          form: {
-            ...this.state.form,
-            ddRede: {
-              ...this.state.form.ddRede,
-              'nombre': valor
-            }
+        form: {
+          ...this.state.form,
+          ddRede: {
+            ...this.state.form.ddRede,
+            'nombre': valor
           }
-        });
-        console.log("CASE STATE: ", this.state.form.ddRede);
-        break;
+        }
+      });
+      console.log("CASE STATE: ", this.state.form.ddRede);
+      break;
 
-        case 'ClasTecReal':
-          console.log("VALOR: ", valor);
-          this.state.form.ddCodTecRealModel.nombre = valor;
-          this.setState({
-              form: {
-                ...this.state.form,
-                ddCodTecRealModel: {
-                  ...this.state.form.ddCodTecRealModel,
-                  'nombre': valor
-                }
-              }
-            });
-            console.log("CASE STATE: ", this.state.form.ddCodTecRealModel);
-            break;
+    case 'ClasTecReal':
+      console.log("VALOR: ", valor);
+      this.state.form.ddCodTecRealModel.nombre = valor;
+      this.setState({
+        form: {
+          ...this.state.form,
+          ddCodTecRealModel: {
+            ...this.state.form.ddCodTecRealModel,
+            'nombre': valor
+          }
+        }
+      });
+      console.log("CASE STATE: ", this.state.form.ddCodTecRealModel);
+      break;
 
-            case 'OrgCons':
-              console.log("VALOR: ", valor);
-              this.state.form.ddOrganismos.nombre = valor;
-              this.setState({
-                  form: {
-                    ...this.state.form,
-                    ddOrganismos: {
-                      ...this.state.form.ddOrganismos,
-                      'nombre': valor
-                    }
-                  }
-                });
-                console.log("CASE STATE: ", this.state.form.ddOrganismos);
-                break;
+    case 'OrgCons':
+      console.log("VALOR: ", valor);
+      this.state.form.ddOrganismos.nombre = valor;
+      this.setState({
+        form: {
+          ...this.state.form,
+          ddOrganismos: {
+            ...this.state.form.ddOrganismos,
+            'nombre': valor
+          }
+        }
+      });
+      console.log("CASE STATE: ", this.state.form.ddOrganismos);
+      break;
 
             case 'OrgCom':
               console.log("VALOR: ", valor);
