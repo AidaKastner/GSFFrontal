@@ -58,6 +58,7 @@ class VerCarTramDet extends Component {
     this.state = {
       idTramSel: props.id,
       idmax: props.idmax,
+      idmin: props.idmin,
       offset: 0,
       offsetAf: 0,
       tableData: [],
@@ -793,7 +794,10 @@ render() {
     ),
     disabled: false
   }];
-        
+  
+  const disableFirst = this.state.idmin == this.state.form.id;
+  const disableLast = this.state.idmax == this.state.form.id;
+
   if (!this.state.content) 
     return (
       <div className="u-full-width" style={{marginLeft:'50%'}}>
@@ -811,7 +815,7 @@ render() {
                 <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=>{
                   e.preventDefault();
                   this.peticionSet(urlTrAntCrec + this.state.form.id);
-                }}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
+                }} disabled={disableFirst}>{<Translation ns= "global">{(t) => <>{t('TramAntCrec')}</>}</Translation>}</button>
                 <span className="input-group-addon"> </span>
               </Col>
               <Col xs={4} style={{textAlign: "center"}}>
@@ -825,7 +829,7 @@ render() {
                 <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=>{
                   e.preventDefault();
                   this.peticionSet(urlTrPosCrec + (this.state.form.id));
-                }}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
+                }} disabled={disableLast}>{<Translation ns= "global">{(t) => <>{t('TramPosCrec')}</>}</Translation>}</button>
               </Col>
             </Row>
             <Row>
@@ -833,7 +837,7 @@ render() {
                 <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=>{
                   e.preventDefault();
                   this.peticionSet(urlTrAntDeCrec + (this.state.form.id));
-                }}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
+                }} disabled={disableFirst}>{<Translation ns= "global">{(t) => <>{t('TramAntDeCrec')}</>}</Translation>}</button>
                 <span className="input-group-addon"> </span>
               </Col>
               <Col xs={4} style={{textAlign: "center"}}>
@@ -850,7 +854,7 @@ render() {
                   e.preventDefault();
                   this.peticionSet(urlTrPosDeCrec + (this.state.form.id));
               
-                }}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
+                }} disabled={disableLast}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
               }
               </Col>
             </Row>

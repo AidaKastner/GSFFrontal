@@ -97,8 +97,8 @@ class GoogleMapComponent extends React.Component {
         }
         this.setState({
           cords: coords,
-          longitude: coords[0].longitude,
-          latitude: coords[0].latitude,
+          longitude: coords.length > 0 ? coords[0].longitude : 0,
+          latitude: coords.length > 0 ? coords[0].latitude : 0,
           rutaKmlType: rutaKmlType
         });
       });
