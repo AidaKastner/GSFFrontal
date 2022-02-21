@@ -57,6 +57,7 @@ class VerCarTramDet extends Component {
     super(props);
     this.state = {
       idTramSel: props.id,
+      idmax: props.idmax,
       offset: 0,
       offsetAf: 0,
       tableData: [],
@@ -313,6 +314,8 @@ peticionSet=(urlTram)=>{
 /*Obtención de Tramo Seleccionado desde la pantalla anterior de Carreteras Tramos*/
 peticionGet=()=>{
   console.log("Tramo escogido: ",this.state.idTramSel);
+  console.log("ULTIMO ID: ",this.state.idmax);
+  
   config = {
     headers: {
         'Authorization': sessionStorage.getItem("JWT"),
@@ -840,10 +843,15 @@ render() {
                 <span className="input-group-addon"> </span>
               </Col>
               <Col xs={4} style={{textAlign: "center"}}>
+              {this.state.idmax === this.state.id ? 
+              ""
+              :
                 <button className="btn btn-primary" style={{width: '100%', height: '100%'}} onClick={(e)=> {
                   e.preventDefault();
                   this.peticionSet(urlTrPosDeCrec + (this.state.form.id));
+              
                 }}>{<Translation ns= "global">{(t) => <>{t('TramPosDeCrec')}</>}</Translation>}</button>
+              }
               </Col>
             </Row>
           </div>
