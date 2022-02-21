@@ -565,7 +565,6 @@ class EditarTramo extends Component{
         idDdOrganismoCompetente: '',
         idDdZonasPluviometricas: '',
         idDdZonasTermicas: '',
-        idDdTiposCalzada: '',
         idDdRegimenGestion: '',
         idDdRegimenExplotacion: '',
         sistemaProyeccion: '',
@@ -1055,54 +1054,55 @@ handleChangeCombos=(e, {name})=>{
       console.log("CASE STATE: ", this.state.form.ddOrganismos);
       break;
 
-            case 'OrgCom':
-              console.log("VALOR: ", valor);
-              this.state.form.ddOrganismos.nombre = valor;
-              this.setState({
-                  form: {
-                    ...this.state.form,
-                    ddOrganismos: {
-                      ...this.state.form.ddOrganismos,
-                      'nombre': valor
-                    }
-                  }
-                });
-                console.log("CASE STATE: ", this.state.form.ddOrganismos);
-                break;
+    case 'OrgCom':
+      console.log("VALOR: ", valor);
+      this.state.form.ddOrganismos.nombre = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              ddOrganismos: {
+                  ...this.state.form.ddOrganismos,
+                  'nombre': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.ddOrganismos);
+      break;
 
-           case 'RegGest':
-              console.log("VALOR: ", valor);
-              this.state.form.ddRegimenGestion.nombre = valor;
-              this.setState({
-                  form: {
-                    ...this.state.form,
-                    ddRegimenGestion: {
-                      ...this.state.form.ddRegimenGestion,
-                      'nombre': valor
-                    }
-                  }
-                });
-                console.log("CASE STATE: ", this.state.form.ddRegimenGestion);
-                break;
+    case 'RegGest':
+      console.log("VALOR: ", valor);
+      this.state.form.ddRegimenGestion.nombre = valor;
+      this.setState({
+          form: {
+              ...this.state.form,
+              ddRegimenGestion: {
+                  ...this.state.form.ddRegimenGestion,
+                  'nombre': valor
+              }
+          }
+      });
+      console.log("CASE STATE: ", this.state.form.ddRegimenGestion);
+      break;
 
-            case 'RegExpl':
-                console.log("VALOR: ", valor);
-                  this.state.form.ddRegimenExplotacion.nombre = valor;
-                  this.setState({
-                      form: {
-                        ...this.state.form,
-                        ddRegimenExplotacion: {
-                          ...this.state.form.ddRegimenExplotacion,
-                          'nombre': valor
-                        }
-                      }
-                    });
-                    console.log("CASE STATE: ", this.state.form.ddRegimenExplotacion);
-                    break;
+    case 'RegExpl':
+      console.log("VALOR: ", valor);
+        this.state.form.ddRegimenExplotacion.nombre = valor;
+        this.setState({
+            form: {
+                ...this.state.form,
+                ddRegimenExplotacion: {
+                   ...this.state.form.ddRegimenExplotacion,
+                   'nombre': valor
+                }
+            }
+        });
+        console.log("CASE STATE: ", this.state.form.ddRegimenExplotacion);
+        break;
 
     case 'zonTer':
       console.log("VALOR: ", valor);
       this.state.form.ddZonasTermica.codigo = valor;
+      this.state.form.idDdZonasTermicas= valor;
       this.setState({
           form: {
               ...this.state.form,
@@ -1118,6 +1118,7 @@ handleChangeCombos=(e, {name})=>{
     case 'ZonaPluv':
       console.log("VALOR: ", valor);
       this.state.form.ddZonasPluviometrica.codigo = valor;
+      this.state.form.idDdZonasPluviometricas = valor;
       this.setState({
           form: {
               ...this.state.form,
@@ -1311,16 +1312,19 @@ handleChangeCombos=(e, {name})=>{
 
     case 'idDdTiposCalzada':
       console.log("VALOR: ", valor);
-      this.state.form.idDdTiposCalzada = valor;
+      this.state.form.idDdTiposCalzada = valor;     
       this.setState({
-          form: {
-              ...this.state.form,
-              idDdTiposCalzada: valor            
+        form: {
+          ...this.state.form,
+          ddTiposCalzada: {
+            ...this.state.form.ddTiposCalzada,
+            'nombre': valor,
+            'codigo': valor
           }
+        }
       });
       console.log("CASE STATE: ", this.state.form);
-      break;
-      
+      break;    
 
     default:
       this.setState({
