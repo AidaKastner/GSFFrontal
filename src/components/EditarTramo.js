@@ -2477,7 +2477,7 @@ seleccionarCarril=(carril)=>{
                 </Col>
                 <Col md={6}>
                   <Row>
-                    <GoogleMapComponent rutaKml={this.state.rutaKml + '_pks.kml'} />
+                    <GoogleMapComponent rutaKml={this.state.rutaKml} />
                   </Row>
                 </Col>
               </Row>

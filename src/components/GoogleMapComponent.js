@@ -24,7 +24,8 @@ class GoogleMapComponent extends React.Component {
     this.state = {
       cords: [],
       longitude: 0,
-      latitude: 0
+      latitude: 0,
+      rutaKmlType: ''
     };
   }
 
@@ -41,26 +42,64 @@ class GoogleMapComponent extends React.Component {
     }
   }
 
-  getCoordinates = () => {
-    fetch(this.props.rutaKml)
+  getCoordinates = async() => {
+    let rutaKmlType = 'pks';
+    let rutaKml = this.props.rutaKml + '_pks.kml';
+
+    await fetch(rutaKml)
+      .then(response => {
+        return response.text();
+      })
+      .then(data => {
+        if (!data.includes('<coordinates>')) {
+          rutaKmlType = 'track';
+          rutaKml = this.props.rutaKml + '_track.kml';
+        }
+      });
+
+    fetch(rutaKml)
       .then(response => {
         return response.text();
       })
       .then(data => {
         const dataArray = data.split(/\r\n|\n/);
         const coords = [];
-        dataArray.forEach(element => {
-          element = element.trim();
-          if (element.includes("<coordinates>")) {
-            element = element.substring(13);
-            var elements = element.split(',');
-            coords.push({ longitude: Number(elements[0]), latitude: Number(elements[1]) });
-          }
-        });
+        switch (rutaKmlType) {
+          case 'pks':
+            dataArray.forEach(element => {
+              element = element.trim();
+              if (element.includes("<coordinates>")) {
+                element = element.substring(13);
+                var elements = element.split(',');
+                coords.push({ longitude: Number(elements[0]), latitude: Number(elements[1]) });
+              }
+            });
+            break;
+          case 'track':
+            let coordinatesFound = false;
+            dataArray.forEach(element => {
+              element = element.trim();
+              if (element.includes("<coordinates>")) {
+                coordinatesFound = true;
+                element = element.substring(13);
+              }
+              if (coordinatesFound) {
+                var elements = element.split(',');
+                coords.push({ longitude: Number(elements[0]), latitude: Number(elements[1]) });
+              }
+              if (element.includes("</coordinates>")) {
+                coordinatesFound = false;
+              }
+            });
+            break;
+          default:
+            break;
+        }
         this.setState({
           cords: coords,
           longitude: coords[0].longitude,
-          latitude: coords[0].latitude
+          latitude: coords[0].latitude,
+          rutaKmlType: rutaKmlType
         });
       });
   }
@@ -140,7 +179,7 @@ class GoogleMapComponent extends React.Component {
             lng: this.state.longitude
           }}
         >
-          {this.drawMarker()}
+          { this.state.rutaKmlType == 'pks' || this.state.rutaKmlType == '' ? this.drawMarker() : '' }
           {this.drawPolyline()}
         </Map>
         </div>
