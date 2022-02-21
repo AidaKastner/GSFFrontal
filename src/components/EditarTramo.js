@@ -829,7 +829,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             puntoIni: {
               ...this.state.form.puntoIni,
-              'pk': e.target.value
+              'pk': Number(e.target.value)
             }
           }
         });
@@ -840,7 +840,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             puntoIni: {
               ...this.state.form.puntoIni,
-              'm': e.target.value
+              'm': Number(e.target.value)
             }
           }
         });
@@ -862,7 +862,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             puntoFin: {
               ...this.state.form.puntoFin,
-              'pk': e.target.value
+              'pk': Number(e.target.value)
             }
           }
         });
@@ -873,7 +873,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             puntoFin: {
               ...this.state.form.puntoFin,
-              'm': e.target.value
+              'm': Number(e.target.value)
             }
           }
         });
@@ -895,7 +895,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             firmesTramo: {
               ...this.state.form.firmesTramo,
-              'cpa': e.target.value
+              'cpa': Number(e.target.value)
             }
           }
         });
@@ -907,7 +907,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             firmesTramo: {
               ...this.state.form.firmesTramo,
-              'anchuraCarril': e.target.value
+              'anchuraCarril': Number(e.target.value)
             }
           }
         });
@@ -919,7 +919,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             firmesTramo: {
               ...this.state.form.firmesTramo,
-              'anchuraArcen': e.target.value
+              'anchuraArcen': Number(e.target.value)
             }
           }
         });
@@ -931,7 +931,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             explanadasTramo: {
               ...this.state.form.explanadasTramo,
-              'terrenoNaturalCbr': e.target.value
+              'terrenoNaturalCbr': Number(e.target.value)
             }
           }
         });
@@ -943,7 +943,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             explanadasTramo: {
               ...this.state.form.explanadasTramo,
-              'relleno': e.target.value
+              'relleno': Number(e.target.value)
             }
           }
         });
@@ -955,7 +955,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             explanadasTramo: {
               ...this.state.form.explanadasTramo,
-              'rellenoCbr': e.target.value
+              'rellenoCbr': Number(e.target.value)
             }
           }
         });
@@ -967,7 +967,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             explanadasTramo: {
               ...this.state.form.explanadasTramo,
-              'coronacion': e.target.value
+              'coronacion': Number(e.target.value)
             }
           }
         });
@@ -979,7 +979,7 @@ controlErrAlta=(controlErrorTramo)=>{
             ...this.state.form,
             explanadasTramo: {
               ...this.state.form.explanadasTramo,
-              'coronacionCbr': e.target.value
+              'coronacionCbr': Number(e.target.value)
             }
           }
         });
