@@ -21,7 +21,7 @@ import GoogleMapComponent from '../components/GoogleMapComponent';
 import EditarTramo from "../components/EditarTramo";
 import ModalTitle from "react-bootstrap/ModalTitle";
 
-
+var msg= '';
 const url = "https://localhost:44301/Tramos/";
 const urlTrAntCrec = "https://localhost:44301/Tramos/tramoantcrec/";
 const urlTramGemelo = "https://localhost:44301/Tramos/tramogemelo/";
@@ -81,6 +81,7 @@ class VerCarTramDet extends Component {
       rutaKml: '',
       setMsgOutBoolKO: false,
       setMsgOutActKO: false,
+      setMsgOutKO: false,
       form:{
         id:'',
         codigo:'',
@@ -167,7 +168,8 @@ class VerCarTramDet extends Component {
 // Llamada para cargar desde la API los tramos elegidos en los botones
 peticionSet=(urlTram)=>{
   console.log("Tramo escogido: ",urlTram);
-  
+  this.setState({ setMsgOutKO: false });
+
   this.setState({
     setMsgOutBoolKO: false,
     setMsgOutActKO: false
@@ -274,9 +276,11 @@ peticionSet=(urlTram)=>{
     }); 
     SentCarril = this.state.tableData[0] == undefined ? '' : this.state.tableData[0].sentidoCarril;
   }).catch(error=>{
+    msg= <Translation ns= "global">{(t) => <>{t('SELTRAMKO')}</>}</Translation>;
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", urlTram);
     console.log(error); 
+    this.setState({ setMsgOutKO: true });
   });
 }
 
@@ -315,6 +319,7 @@ peticionSet=(urlTram)=>{
 peticionGet=()=>{
   console.log("Tramo escogido: ",this.state.idTramSel);
   console.log("ULTIMO ID: ",this.state.idmax);
+  this.setState({ setMsgOutKO: false });
   
   config = {
     headers: {
@@ -416,9 +421,11 @@ peticionGet=()=>{
     });
     SentCarril = this.state.tableData[0] == undefined ? '' : this.state.tableData[0].sentidoCarril;
   }).catch(error=>{
+    msg= <Translation ns= "global">{(t) => <>{t('SELTRAMKO')}</>}</Translation>;
     console.log("KO");
     console.log("URL ENTRADA para GET Tramo:", this.state.idTramSel);
     console.log(error); 
+    this.setState({ setMsgOutKO: true });
   });
 }
 
@@ -804,6 +811,14 @@ render() {
     return (
       // Retornamos el formulario
       <div className="app" style={{ backgroundColor: '#FFFFFF', color: '#252831', textDecoration: 'none', height: '1250px', listStyle: 'none', padding: '20px', alignItems: 'center', justifyContent: 'space-between', fontSize: '18px'}} > 
+          { this.state.setMsgOutKO ? 
+            <div><br/>
+             <div className="alert alert-danger">
+                {/*Mostramos mensaje*/}
+                {msg}
+            </div>
+            </div>
+            : ""}
         <form>
           <div className="container" style={{maxWidth: '950px', width: '100%', float:'center'}}>
             <Row style={{paddingBottom: '0.5rem'}}>
