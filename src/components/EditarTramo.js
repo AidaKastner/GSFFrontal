@@ -1725,8 +1725,6 @@ peticionPut=()=>{
     }
   };
 
-  Object.assign(this.state.form, { carriles: this.state.form.carriles });
-
   axios.put(url, this.state.form, config).then(_ => {
     this.peticionGet();
     this.setState({modalVerificarEd: false});
@@ -1796,7 +1794,7 @@ seleccionarCarril=(carril)=>{
     };
 
     this.state.tableData.push(carrile);
-    this.state.form.carriles.push(carrile);
+    this.state.form.carriles.push(Object.assign(carrile, { ordenCarril: ordCarril, sentido: sent }));
 
     this.setState({
       setMsgOutBoolKO: false,
