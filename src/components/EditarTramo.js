@@ -1378,6 +1378,7 @@ handleChangeCombos=(e, {name})=>{
 
 /*Obtención de Tramo Seleccionado*/
 peticionGet=()=>{
+  this.setState({setMsgOutBoolOK: false});
   console.log("Tramo escogido en Edición: ",this.state.idTramSel);
   config = {
     headers: {
@@ -1488,6 +1489,7 @@ peticionGet=()=>{
 
 /*Refresh Tramo Seleccionado*/
 peticionRefresh=(comboSelect, tipoFirm)=>{
+  this.setState({setMsgOutBoolOK: false});
   console.log("Tramo escogido en Edición: ",this.state.idTramSel);
   config = {
     headers: {
@@ -1717,6 +1719,7 @@ peticionDeleteAus=()=>{
 
 /*Editar registro. */
 peticionPut=()=>{
+  this.setState({setMsgOutBoolOK: false});
   config = {
     headers: {
       'Authorization': sessionStorage.getItem("JWT"),
@@ -1726,11 +1729,13 @@ peticionPut=()=>{
   };
 
   axios.put(url, this.state.form, config).then(_ => {
+    this.setState({modalVerificarEd: false, setMsgOutBoolOK: true});
+    msg= <Translation ns= "global">{(t) => <>{t('EDITIONOK')}</>}</Translation>;
     this.peticionGet();
-    this.setState({modalVerificarEd: false});
   }).catch(_ => {
-    this.setState({modalVerificarEd: false});
-    alert("Error mientras se modificaban datos. Pongase en contacto con elservicio técnico"); 
+    this.setState({modalVerificarEd: false, setMsgOutBoolOK: true});
+    msg= <Translation ns= "global">{(t) => <>{t('EDITIONKO')}</>}</Translation>; 
+    this.peticionGet();
   });
 }
 
