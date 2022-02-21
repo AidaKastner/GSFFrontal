@@ -32,6 +32,7 @@ let yearIni = 1979;
 var indice ='';
 var msg = '';
 let authToken = sessionStorage.getItem("JWT");
+let lastTramo ='';
 
 let config = {
   headers: {
@@ -328,7 +329,9 @@ peticionGet2=()=>{
 
       console.log(response2.data);
       var data2 = response2.data;
-      var slice2 = data2.slice(this.state.offset, this.state.offset + this.state.perPage)
+      var slice2 = data2.slice(this.state.offset, this.state.offset + this.state.perPage);
+      lastTramo = slice2.pop();
+      console.log("ULTIMO TRAMO", lastTramo.id);
 
       this.setState({
         pageCount: Math.ceil(data2.length / this.state.perPage),
@@ -741,7 +744,7 @@ seleccionarTramo=(CarTram)=>{
                                
                     <VerCarTramDet 
                        id = {url4 + (this.state.form.id)}
-                       //tramos= {this.peticionGet3(this.state.form?.id)}
+                       idmax= {lastTramo.id}
                     />
                   </div>    
                 </ModalBody>
