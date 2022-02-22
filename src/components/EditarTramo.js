@@ -1366,6 +1366,27 @@ handleChangeCombos=(e, {name})=>{
       this.getComboRodadura(this.state.ComboTipFirme);
     };
 
+
+  validateFields(){ 
+      if (this.state.form.carretera.nombre === "" || this.state.form.carretera.nombre === undefined ||
+          this.state.form.comentario === "" || this.state.form.comentario === undefined ||
+          this.state.form.puntoIni.pk === "" || this.state.form.puntoIni.pk === undefined ||
+          this.state.form.puntoFin.pk === "" || this.state.form.puntoFin.pk === undefined ||
+          this.state.form.carretera.codigo === "" || this.state.form.carretera.codigo === undefined ||
+          this.state.form.longitud === "" || this.state.form.longitud === undefined ||
+          this.state.form.puntoIni.m === "" || this.state.form.puntoIni.m === undefined ||
+          this.state.form.puntoFin.m === "" || this.state.form.puntoFin.m === undefined ||
+          this.state.form.fechaAlta === "" || this.state.form.fechaAlta === undefined ||
+          this.state.form.puntoIni.descripcion === "" || this.state.form.puntoIni.descripcion === undefined ||
+          this.state.form.puntoFin.descripcion === "" || this.state.form.puntoFin.descripcion === undefined) 
+      return (
+        false
+      );
+
+      return(
+        true
+      );  
+    }
   
   componentDidMount(){
     this.peticionGet();
@@ -1614,22 +1635,22 @@ peticionPutBaja=(baja)=>{
     }
   };
   axios.put(baja,config).then(response=>{    
+    this.peticionGet();
     this.setState({modalEliminar: false});
     this.setState({setMsgOutBoolOK: true});
     this.setState({setMsgOutBoolKO: false});
     msg= <Translation ns= "global">{(t) => <>{t('BAJATRAMOK')}</>}</Translation>;
-    this.peticionGet();
   }).catch(error=>{
-    this.setState({setMsgOutBoolKO: true});
-    this.setState({setMsgOutBoolOK: false});
     console.log(baja);
     console.log(this.state.form.id);
     console.log(error);    
     console.log("Error response", error.response);
     console.log("Error response data", error.response?.data);
     this.controlErrBaja(error.response?.data); 
-    this.setState({modalEliminar: false});
     this.peticionGet(); 
+    this.setState({modalEliminar: false});
+    this.setState({setMsgOutBoolKO: true});
+    this.setState({setMsgOutBoolOK: false});
 })   
 
 }
@@ -1645,23 +1666,24 @@ peticionPutAlta=(alta)=>{
         'content-type': 'application/json'
     }
   };
-  axios.put(alta,config).then(response=>{    
+  axios.put(alta,config).then(response=>{   
+    this.peticionGet(); 
     this.setState({modalEliminar: false});
     this.setState({setMsgOutBoolOK: true});
     this.setState({setMsgOutBoolKO: false});
     msg= <Translation ns= "global">{(t) => <>{t('ALTATRAMOK')}</>}</Translation>;
-    this.peticionGet();
   }).catch(error=>{
-    this.setState({setMsgOutBoolKO: true});
-    this.setState({setMsgOutBoolOK: false});
+
     console.log(alta);
     console.log(this.state.form.id);
     console.log(error);    
     console.log("Error response", error.response);
     console.log("Error response data", error.response?.data);
+    this.peticionGet(); 
+    this.setState({setMsgOutBoolKO: true});
+    this.setState({setMsgOutBoolOK: false});
     this.controlErrBaja(error.response?.data); 
     this.setState({modalEliminar: false});
-    this.peticionGet(); 
 })   
 
 }
@@ -1679,17 +1701,17 @@ peticionDelete=()=>{
   };
   axios.delete(urlDel+"/"+this.state.form.IdCarril,config).then(response=>{
     console.log("eliminar");
+    this.peticionGet();
     this.setState({modalEliminarCarril: false});
     msg= <Translation ns= "global">{(t) => <>{t('DELCARRILOK')}</>}</Translation>;   
-    this.peticionGet();
   }).catch(error=>{
     console.log("KO Delete");
     console.log(urlDel);
     console.log(this.state.form.IdCarril);
-    console.log(error);    
+    console.log(error);
+    this.peticionGet();    
     msg= <Translation ns= "global">{(t) => <>{t('DELCARRILKO')}</>}</Translation>; 
     this.setState({modalEliminarCarril: false});
-    this.peticionGet();
 })   
 }
  
@@ -1708,16 +1730,16 @@ peticionDeleteAus=()=>{
   axios.delete(urlDelAus+"/"+this.state.form.IdCarril,config).then(response=>{
     console.log("eliminar");
     this.setState({modalEliminarAusc: false});
-    msg= <Translation ns= "global">{(t) => <>{t('DELCARRILOK')}</>}</Translation>;   
     this.peticionGet();
+    msg= <Translation ns= "global">{(t) => <>{t('DELCARRILOK')}</>}</Translation>;   
   }).catch(error=>{
     console.log("KO Delete");
     console.log(urlDel);
     console.log(this.state.form.IdCarril);
-    console.log(error);    
+    console.log(error);  
+    this.peticionGet();  
     msg= <Translation ns= "global">{(t) => <>{t('DELCARRILKO')}</>}</Translation>; 
     this.setState({modalEliminarAusc: false});
-    this.peticionGet();
 })   
 }
 
@@ -1731,16 +1753,21 @@ peticionPut=()=>{
       'content-type': 'application/json'
     }
   };
+  if (!this.validateFields()) {
+    this.setState({modalVerificarEd: false, setMsgOutBoolOK: false, setMsgOutBoolKO: true});
+    msg= <Translation ns= "global">{(t) => <>{t('VALIDATEKO')}</>}</Translation>;
 
-  axios.put(url, this.state.form, config).then(_ => {
-    this.setState({modalVerificarEd: false, setMsgOutBoolOK: true});
-    msg= <Translation ns= "global">{(t) => <>{t('EDITIONOK')}</>}</Translation>;
-    this.peticionGet();
-  }).catch(_ => {
-    this.setState({modalVerificarEd: false, setMsgOutBoolOK: true});
-    msg= <Translation ns= "global">{(t) => <>{t('EDITIONKO')}</>}</Translation>; 
-    this.peticionGet();
-  });
+  }else{
+    axios.put(url, this.state.form, config).then(_ => {
+      this.peticionGet();
+      this.setState({modalVerificarEd: false, setMsgOutBoolOK: true, setMsgOutBoolKO: false});
+      msg= <Translation ns= "global">{(t) => <>{t('EDITIONOK')}</>}</Translation>;
+    }).catch(_ => {
+      this.peticionGet();
+      this.setState({modalVerificarEd: false, setMsgOutBoolOK: false, setMsgOutBoolKO: true});
+      msg= <Translation ns= "global">{(t) => <>{t('EDITIONKO')}</>}</Translation>; 
+    });
+  }
 }
 
 
@@ -2302,23 +2329,23 @@ seleccionarCarril=(carril)=>{
                     <input
                       type="text"
                       name='nombre'
-                      className="col m3 s12"
+                      className="col m3 s12"  
                       readOnly = {false}
-                      placeholder= {this.state.form.carretera.nombre}
+                      placeholder= {this.state.form.carretera.nombre} 
                       onChange={this.handleChange}
-                      value={this.state.form.carretera.nombre}
+                      value={this.state.form.carretera.nombre} 
                     />
                 </Col>               
                 <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('coment')}</>}</Translation></label>
                     <input
                       type="text"
-                      name="comentario"
+                      name="comentario"                      
                       className="u-full-width"
                       readOnly = {false}
-                      placeholder= {this.state.form.comentario}
+                      placeholder= {this.state.form.comentario} 
                       onChange={this.handleChange}
-                      value={this.state.form.comentario}
+                      value={this.state.form.comentario} 
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
