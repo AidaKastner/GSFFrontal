@@ -331,8 +331,10 @@ peticionGet2=()=>{
       console.log(response2.data);
       var data2 = response2.data;
       var slice2 = data2.slice(this.state.offset, this.state.offset + this.state.perPage);
-      firstTramo = slice2.shift();
-      lastTramo = slice2.pop();
+      if (slice2.length > 0) {
+        firstTramo = slice2[0];
+        lastTramo = slice2[slice2.length - 1];
+      }
       console.log("ULTIMO TRAMO", lastTramo.id);
 
       this.setState({
