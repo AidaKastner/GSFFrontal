@@ -638,7 +638,7 @@ seleccionarTramo=(CarTram)=>{
               pagination={this.pagination}
               filter={filterFactory()}
               bordered={ false } 
-              headerWrapperClasses="table-responsive"
+              wrapperClasses="table-responsive"
               classes="w-auto text-nowrap">
               </BootstrapTable>
           </div>
