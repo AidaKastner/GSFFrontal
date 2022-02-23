@@ -20,7 +20,7 @@ function Menu(props) {
       //Si la sesión no está iniciada, se redirige a la pantalla de Login
       if(authToken == null || authToken == "null"){
         console.log("Sesión no iniciada");
-        routerHistory.push('');
+        //routerHistory.push('');
       }
     }
     return () => { isMounted = false };
@@ -36,6 +36,12 @@ function Menu(props) {
           showSidebar={props.location.state != null ? props.location.state.showSidebar : null}
           prevLocation={props.location.state != null ? props.location.state.prevLocation : null}
           t={t} />
+      </div>
+      <div style={{marginLeft: '15%'}}>
+        <div style={{marginRight: '10%', marginTop: '1%'}}>
+          <h1 style={{textAlign: 'left', marginLeft: '1%'}}>{ t('gestAusc') }</h1>
+          <img src="/AuscultationManagement.png" />
+        </div>
       </div>
     </div>
   );
