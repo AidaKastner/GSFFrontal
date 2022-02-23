@@ -169,7 +169,7 @@ class VerCarTramDet extends Component {
 // Llamada para cargar desde la API los tramos elegidos en los botones
 peticionSet=(urlTram)=>{
   console.log("Tramo escogido: ",urlTram);
-  this.setState({ setMsgOutKO: false });
+  this.setState({ setMsgOutKO: false, modalEditar: false });
 
   this.setState({
     setMsgOutBoolKO: false,
@@ -188,6 +188,7 @@ peticionSet=(urlTram)=>{
     console.log("TRAMO Data", response.data);
     var dataCarriles = [];
     var data = response.data.carriles;
+    console.log("Data", data);
     if (data != null) {
       slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
       slice.forEach((carrile) => {
@@ -1043,7 +1044,11 @@ render() {
         <Modal size="lg" style={{maxWidth: '1700px', width: '100%', backgroundColor: '#FFFFFF'}}  isOpen={this.state.modalEditar}>
           <ModalHeader style={{display: 'block', backgroundColor: '#FFFFFF'}}>
               <span style={{float: 'right'}}>
-                    <button className="btn btn-danger btn-sm" onClick={()=>{this.modalEditar()}}>x</button>                    
+                    <button className="btn btn-danger btn-sm"
+                    onClick={(e)=>{
+                      e.preventDefault();
+                      this.peticionSet(url + (this.state.form.id));
+                    }}>x</button>                    
               </span>
               <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('EditTramo')}</>}</Translation></ModalTitle>
           </ModalHeader>
