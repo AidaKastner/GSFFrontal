@@ -380,12 +380,21 @@ function CrearEditarActuacion({Actuacion, Data}){
    const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
    const [TablaTramos, actualizarTablaTramos] = useState([]);
 
+          
+   const [msgOutSave, guardarMsgOutSave] = useState();
+   const [msgOutBoolOKS, setMsgOutBoolOKS] = useState(false);
+   const [msgOutBoolKOS, setMsgOutBoolKOS] = useState(false);
+
 
 
    //Llamada al controlador para obtener la tabla de tramos
    const peticionSeleccionar=async e=>{
 
+    setMsgOutBoolOK(false);
     setMsgOutBoolKO(false);
+    setMsgOutBoolOKS(false);
+    setMsgOutBoolKOS(false);
+
 
     console.log("ACTUACION A ACTUALIZAR: ", FormActuacion)
 
@@ -546,11 +555,6 @@ function CrearEditarActuacion({Actuacion, Data}){
 
     }, []);
 
-
-    
-    const [msgOutSave, guardarMsgOutSave] = useState();
-    const [msgOutBoolOKS, setMsgOutBoolOKS] = useState(false);
-    const [msgOutBoolKOS, setMsgOutBoolKOS] = useState(false);
 
    //Llamada al controlador para guardar la actuación
    const peticionGuardarActuacion=async e=>{
