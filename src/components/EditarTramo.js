@@ -13,6 +13,8 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import Tab from "./Tab";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -761,6 +763,32 @@ controlErrAlta=(controlErrorTramo)=>{
     }
 
 }
+
+// Maneja el datapicker
+handleChangeData=async e=>{
+  console.log("TARGET DATA: ", e);
+  var datePick = e.getDate();
+  var MonthPick = e.getMonth() + 1;
+  var yearPick = e.getFullYear();
+  //var horaPick = e.getHours();
+  //var MinPick = e.getMinutes();
+  //var SecPick = e.getSeconds();
+  var fechaPick = new Date();
+  
+  if (MonthPick < 10){
+    MonthPick = '0' + MonthPick;
+  }
+  fechaPick = yearPick + "-" + MonthPick + "-" + datePick + 'T23:59:59';
+  console.log("TARGET DATA Format: ", fechaPick);
+  await this.setState({
+    form: {
+      ...this.state.form,
+      'fechaAlta': fechaPick
+    }
+  });
+  console.log("Funcion Cambio Data",this.state.form);
+}
+    
 
 
   //Maneja la edición  en los forms
@@ -1762,7 +1790,9 @@ peticionPut=()=>{
       this.peticionGet();
       this.setState({modalVerificarEd: false, setMsgOutBoolOK: true, setMsgOutBoolKO: false});
       msg= <Translation ns= "global">{(t) => <>{t('EDITIONOK')}</>}</Translation>;
-    }).catch(_ => {
+    }).catch(error => {
+      console.log("KO Edition");
+      console.log(error);  
       this.peticionGet();
       this.setState({modalVerificarEd: false, setMsgOutBoolOK: false, setMsgOutBoolKO: true});
       msg= <Translation ns= "global">{(t) => <>{t('EDITIONKO')}</>}</Translation>; 
@@ -2431,13 +2461,20 @@ seleccionarCarril=(carril)=>{
               <Row>
               <Col xs={3} style={{textAlign: "left"}}>
                   <label><Translation ns= "global">{(t) => <>{t('FechAlt')}</>}</Translation></label>
-                    <input
+                    {/*<input
                       type="text"
                       name="fechaalta"
                       readOnly = {true}
                       className="u-full-width"                  
                       onChange={this.handleChange}
                       value={this.state.form.fechaAlta}
+                    />*/}
+                    <DatePicker 
+                      showTimeSelect 
+                      style={{width: '300px'}}
+                      placeholderText={this.state.form.fechaAlta.substr(0, 10)} 
+                      dateFormat='MM/yyyy'
+                      onChange={this.handleChangeData} 
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
