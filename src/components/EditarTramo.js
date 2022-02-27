@@ -766,6 +766,7 @@ controlErrAlta=(controlErrorTramo)=>{
 
 // Maneja el datapicker
 handleChangeData=async e=>{
+  this.setState({setMsgOutBoolOK: false, setMsgOutBoolKO: false});
   console.log("TARGET DATA: ", e);
   var datePick = e.getDate();
   var MonthPick = e.getMonth() + 1;
@@ -778,14 +779,22 @@ handleChangeData=async e=>{
   if (MonthPick < 10){
     MonthPick = '0' + MonthPick;
   }
+  if (datePick < 10){
+    datePick = '0' + datePick;
+  }
   fechaPick = yearPick + "-" + MonthPick + "-" + datePick + 'T23:59:59';
   console.log("TARGET DATA Format: ", fechaPick);
+  if(this.state.currentYear > fechaPick ){
   await this.setState({
     form: {
       ...this.state.form,
       'fechaAlta': fechaPick
     }
   });
+} else{
+  this.setState({setMsgOutBoolOK: false, setMsgOutBoolKO: true});
+  msg= <Translation ns= "global">{(t) => <>{t('DATAKO')}</>}</Translation>;
+}
   console.log("Funcion Cambio Data",this.state.form);
 }
     
@@ -2471,7 +2480,7 @@ seleccionarCarril=(carril)=>{
                     />*/}
                     <DatePicker 
                       showTimeSelect 
-                      style={{width: '300px'}}
+                      style={{width: '500px'}}
                       placeholderText={this.state.form.fechaAlta.substr(0, 10)} 
                       dateFormat='MM/yyyy'
                       onChange={this.handleChangeData} 
