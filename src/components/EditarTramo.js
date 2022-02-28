@@ -503,8 +503,11 @@ var today = new Date();
 var dd = String(today. getDate()). padStart(2, '0');
 var mm = String(today. getMonth() + 1). padStart(2, '0'); //January is 0!
 var yyyy = today. getFullYear();
+var horaPick = String(today. getHours()). padStart(2, '0');
+var MinPick = String(today. getMinutes()). padStart(2, '0');
+var SecPick = String(today. getSeconds()). padStart(2, '0');
 
-today = yyyy + '-' + mm + '-' + dd;
+today = yyyy + '-' + mm + '-' + dd + 'T' + horaPick +':' + MinPick + ':' + SecPick;
 
 export const CalendarContainer = styled.div``;
 
@@ -2552,11 +2555,11 @@ seleccionarCarril=(carril)=>{
                   {console.log("Año actual", this.state.currentYear)}
                   {console.log("Fecha baja",  this.state.form.fechaBaja)}
                     {
-                      this.state.currentYear > this.state.form.fechaBaja 
+                      this.state.currentYear+'T00:00:00' < this.state.form.fechaBaja 
                       ? 
-                        <button className="btn btn-success btn-sm" style={{width: '300px', marginTop:'9%'}} onClick={(e)=>{e.preventDefault(); this.peticionPutAlta(url3+"/"+this.state.form.id);}}>{<Translation ns= "global">{(t) => <>{t('DarAlta')}</>}</Translation>}</button> 
-                      : 
                         <button className="btn btn-danger btn-sm" style={{width: '300px', marginTop:'9%'}} onClick={(e)=>{e.preventDefault(); this.peticionPutBaja(url2+"/"+this.state.form.id);}}>{<Translation ns= "global">{(t) => <>{t('DarBaja')}</>}</Translation>}</button>
+                      : 
+                        <button className="btn btn-success btn-sm" style={{width: '300px', marginTop:'9%'}} onClick={(e)=>{e.preventDefault(); this.peticionPutAlta(url3+"/"+this.state.form.id);}}>{<Translation ns= "global">{(t) => <>{t('DarAlta')}</>}</Translation>}</button> 
                     }
                   
                 </Col>
