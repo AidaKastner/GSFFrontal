@@ -22,6 +22,7 @@ import Spinner from "./Spinner";
 import Container from 'react-bootstrap/Container'
 import Select from 'react-select';
 import GoogleMapComponent from "./GoogleMapComponent";
+import styled from 'styled-components';
 
 let SentCarril="";
 
@@ -504,6 +505,8 @@ var mm = String(today. getMonth() + 1). padStart(2, '0'); //January is 0!
 var yyyy = today. getFullYear();
 
 today = yyyy + '-' + mm + '-' + dd;
+
+export const CalendarContainer = styled.div``;
 
 class EditarTramo extends Component{
   
@@ -1915,11 +1918,10 @@ seleccionarCarril=(carril)=>{
 
 
 
-    //Devolvemos las Tabs con datos
-    render(){
-        
-        const { activeIndex } = this.state;
-            const tabs = [
+  //Devolvemos las Tabs con datos
+  render() {
+    const { activeIndex } = this.state;
+    const tabs = [
       {
         label: <Translation ns= "global">{(t) => <>{t('Clasif')}</>}</Translation>,
         
@@ -2330,8 +2332,18 @@ seleccionarCarril=(carril)=>{
       }
 
     ];
-        
-      if (!this.state.content) 
+    
+    const calendarContainer = ({ className, children }) => {
+      return (
+        <div style={{ zoom: '1.5' }}>
+          <CalendarContainer className={className}>
+            {children}
+          </CalendarContainer>
+        </div>
+      );
+    };
+
+    if (!this.state.content)
       return (
         <div className="u-full-width" style={{marginLeft:'50%'}}>
           <Spinner /> 
@@ -2478,12 +2490,13 @@ seleccionarCarril=(carril)=>{
                       onChange={this.handleChange}
                       value={this.state.form.fechaAlta}
                     />*/}
-                    <DatePicker 
-                      showTimeSelect 
-                      style={{width: '500px'}}
-                      placeholderText={this.state.form.fechaAlta.substr(0, 10)} 
+                    <DatePicker
+                      style={{zoom: '1.5'}}
+                      placeholderText={this.state.form.fechaAlta.substr(0, 10)}
                       dateFormat='MM/yyyy'
-                      onChange={this.handleChangeData} 
+                      onChange={this.handleChangeData}
+                      calendarContainer={calendarContainer}
+                      selected={new Date(this.state.form.fechaAlta)}
                     />
                 </Col>
                 <Col xs={3} style={{textAlign: "left"}}>
