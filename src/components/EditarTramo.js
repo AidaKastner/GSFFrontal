@@ -2493,7 +2493,7 @@ seleccionarCarril=(carril)=>{
                     <DatePicker
                       style={{zoom: '1.5'}}
                       placeholderText={this.state.form.fechaAlta.substr(0, 10)}
-                      dateFormat='MM/yyyy'
+                      dateFormat='MM/dd/yyyy'
                       onChange={this.handleChangeData}
                       calendarContainer={calendarContainer}
                       selected={new Date(this.state.form.fechaAlta)}
