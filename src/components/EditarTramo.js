@@ -539,7 +539,7 @@ class EditarTramo extends Component{
       fechaAltaFor:'',
       content: null,
       setMsgOutBoolKO: false,
-      setMsgOutActKO: false,
+      setMsgOutCarKO: false,
       ComboTipFirme: '',
       rutaKml: '',
       form:{
@@ -1447,6 +1447,7 @@ handleChangeCombos=(e, {name})=>{
 /*Obtención de Tramo Seleccionado*/
 peticionGet=()=>{
   this.setState({setMsgOutBoolOK: false});
+  this.setState({setMsgOutBoolKO: false});
   console.log("Tramo escogido en Edición: ",this.state.idTramSel);
   config = {
     headers: {
@@ -1478,11 +1479,7 @@ peticionGet=()=>{
     console.log("Data actuaciones", dataAct);
 
     if (data == null) {
-      this.setState({ setMsgOutBoolKO: true });
-    };
-
-    if (dataAct == null) {
-      this.setState({ setMsgOutActKO: true });
+      this.setState({ setMsgOutCarKO: true });
     };
 
     this.setState({
@@ -1558,6 +1555,7 @@ peticionGet=()=>{
 /*Refresh Tramo Seleccionado*/
 peticionRefresh=(comboSelect, tipoFirm)=>{
   this.setState({setMsgOutBoolOK: false});
+  this.setState({setMsgOutBoolKO: false});
   console.log("Tramo escogido en Edición: ",this.state.idTramSel);
   config = {
     headers: {
@@ -1589,11 +1587,7 @@ peticionRefresh=(comboSelect, tipoFirm)=>{
     console.log("Data actuaciones", dataAct);
 
     if (data == null) {
-      this.setState({ setMsgOutBoolKO: true });
-    };
-
-    if (dataAct == null) {
-      this.setState({ setMsgOutActKO: true });
+      this.setState({ setMsgOutCarKO: true });
     };
 
     this.setState({
@@ -1878,7 +1872,7 @@ seleccionarCarril=(carril)=>{
     this.state.form.carriles.push(Object.assign(carrile, { ordenCarril: ordCarril, sentido: sent }));
 
     this.setState({
-      setMsgOutBoolKO: false,
+      setMsgOutCarKO: false,
       tableData: this.state.tableData,
       form: {
         ...this.state.form,
@@ -2285,7 +2279,7 @@ seleccionarCarril=(carril)=>{
         content: (
           <Fragment>
           {
-          !this.state.setMsgOutBoolKO
+          !this.state.setMsgOutCarKO
           ? <div style={{marginLeft:'0%'}}>
               {
                 SentCarril === ""
@@ -2300,7 +2294,7 @@ seleccionarCarril=(carril)=>{
  
             <br />
             <Row>
-            { !this.state.setMsgOutBoolKO
+            { !this.state.setMsgOutCarKO
               ? 
             <Col xs={7} style={{textAlign: "left"}}>
               <BootstrapTable 
@@ -2496,7 +2490,7 @@ seleccionarCarril=(carril)=>{
                     <DatePicker
                       style={{zoom: '1.5'}}
                       placeholderText={this.state.form.fechaAlta.substr(0, 10)}
-                      dateFormat='MM/dd/yyyy'
+                      dateFormat='dd/MM/yyyy'
                       onChange={this.handleChangeData}
                       calendarContainer={calendarContainer}
                       selected={new Date(this.state.form.fechaAlta)}
