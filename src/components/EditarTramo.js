@@ -500,6 +500,7 @@ var slice;
 var sliceAct;
 
 var today = new Date();
+today.toLocaleString('de-DE', { timeZone: 'Europe/Madrid' })
 var dd = String(today. getDate()). padStart(2, '0');
 var mm = String(today. getMonth() + 1). padStart(2, '0'); //January is 0!
 var yyyy = today. getFullYear();
@@ -726,6 +727,7 @@ return (
 
 //Boton de eliminación de Carriles
 ButtonsEliminaCarr = (cell, row, rowIndex) => {
+  console.log("Eliminar Carriles: ", row);
 return (
   <div>
     <button className="btn btn-danger btn-sm" onClick={(e)=>{e.preventDefault(); this.seleccionarCarril(row); this.setState({modalEliminarCarril: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
@@ -822,7 +824,7 @@ handleChangeData=async e=>{
         await this.setState({
           form: {
             ...this.state.form,
-            [e.target.name]: e.target.value
+            [e.target.name]: Number(e.target.value)
           }
         });
         break;
@@ -1850,6 +1852,7 @@ seleccionarCarril=(carril)=>{
   this.setState({
     tipoModal: 'Seleccionar',
     form: {
+      ...this.state.form,
       IdCarril: carril.id
     }
   })
