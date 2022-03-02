@@ -31,7 +31,7 @@ export const SidebarData = [
             },
             {
                 title: <Translation ns= "global">{(t) => <>{t('verEditDicT')}</>}</Translation>,
-                path:'/VerEditTram'
+                path:'/VerDiccionario'
             },
             {
                 title: <Translation ns= "global">{(t) => <>{t('impAf')}</>}</Translation>,
@@ -40,6 +40,10 @@ export const SidebarData = [
             {
                 title: <Translation ns= "global">{(t) => <>{t('impAc')}</>}</Translation>,
                 path:'/CargarActuaciones'
+            },
+            {
+                title: <Translation ns= "global">{(t) => <>{t('impGrafo')}</>}</Translation>,
+                path:'/ImportarGrafo'
             },
         ],
     },

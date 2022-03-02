@@ -16,9 +16,9 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
-import Tab from "../components/Tab";
+import Tab from "./Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
-import Spinner from "../components/Spinner"; 
+import Spinner from "./Spinner"; 
 
 
 const url1 = "https://localhost:44301/DdCodTecReal";
@@ -42,7 +42,7 @@ const config = {
 }
 
 
-class VerEditTrams extends Component{
+class VerDiccionarios extends Component{
   
   constructor(props) {
     super(props);
@@ -969,4 +969,4 @@ seleccionarTramo=(diccionario, editar)=>{
 }
 
 
-export default VerEditTrams;
+export default VerDiccionarios;
