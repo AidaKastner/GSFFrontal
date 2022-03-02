@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import VerEditTrams from "../components/VerEditTrams";
+import VerDiccionarios from "../components/VerDiccionarios";
 import Sidebar from "../components/Sidebar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Menu.css';
@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import SidebarBack from "../components/SidebarBack";
 import { useHistory } from 'react-router-dom';
 
-function VerEditTram(props){
+function VerDiccionario(props){
   const { t, i18n } = useTranslation(['global']);
 
   let authToken = sessionStorage.getItem("JWT");
@@ -39,11 +39,11 @@ function VerEditTram(props){
         <div style={{marginLeft:'15%'}}>         
           <div style={{marginRight:'10%', marginTop: '1%'}}> 
             <h1 style={{textAlign: 'left', marginLeft: '1%'}}>{ t('VerDicTram') }</h1>                            
-              <VerEditTrams />
+              <VerDiccionarios />
             </div>          
         </div>
       </div>       
     );
 }
 
-export default VerEditTram;
+export default VerDiccionario;
