@@ -3,9 +3,9 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import ModalTitle from "react-bootstrap/ModalTitle";
-import '../css/Pagination.css';
-import '../css/Menu.css';
-import '../css/Button.css';
+import '../../../css/Pagination.css';
+import '../../../css/Menu.css';
+import '../../../css/Button.css';
 import { Trans } from 'react-i18next';
 import { Translation } from 'react-i18next';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -15,7 +15,7 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import ImpExcelAforos from './ImpExcelAforos';
-import Spinner from "../components/Spinner"; 
+import Spinner from "../../Spinner"; 
 
 
 const urlAf = "https://localhost:44301/Aforos";

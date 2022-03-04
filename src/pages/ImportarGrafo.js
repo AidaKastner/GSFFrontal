@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import ImportarGrafos from "../components/ImportarGrafos";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/MenuLateral/Sidebar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Menu.css';
 import { useTranslation } from 'react-i18next';
-import SidebarBack from "../components/SidebarBack";
+import SidebarBack from "../components/MenuLateral/SidebarBack";
 import { useHistory } from 'react-router-dom';
 
 function ImportarGrafo(props){

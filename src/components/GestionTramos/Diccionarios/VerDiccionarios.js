@@ -5,9 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import '../css/Pagination.css';
-import '../css/Menu.css';
-import '../css/Button.css';
+import '../../../css/Pagination.css';
+import '../../../css/Menu.css';
+import '../../../css/Button.css';
 import { Translation } from 'react-i18next';
 import { Trans } from 'react-i18next';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -16,9 +16,9 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
-import Tab from "./Tab";
+import Tab from "../../Tab";
 import ModalTitle from "react-bootstrap/ModalTitle";
-import Spinner from "./Spinner"; 
+import Spinner from "../../Spinner"; 
 
 
 const url1 = "https://localhost:44301/DdCodTecReal";

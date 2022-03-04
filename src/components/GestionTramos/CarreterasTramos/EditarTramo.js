@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
-import '../css/Pagination.css';
-import '../css/Menu.css';
+import '../../../css/Pagination.css';
+import '../../../css/Menu.css';
 import { Translation, useTranslation, Trans } from 'react-i18next';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
@@ -15,13 +15,13 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import Tab from "./Tab";
+import Tab from "../../Tab";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Spinner from "./Spinner"; 
+import Spinner from "../../Spinner"; 
 import Container from 'react-bootstrap/Container'
 import Select from 'react-select';
-import GoogleMapComponent from "./GoogleMapComponent";
+import GoogleMapComponent from "../../GoogleMapComponent";
 import styled from 'styled-components';
 
 let SentCarril="";
