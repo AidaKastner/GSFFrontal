@@ -37,7 +37,7 @@ function AnalizAusc(){
 
   const pagination = paginationFactory({
     page: 1,
-    sizePerPage: 20,
+    sizePerPage: 10,
     lastPageText: '>>',
     firstPageText: '<<',
     nextPageText: '>',
@@ -69,6 +69,18 @@ function AnalizAusc(){
   const [TablaAuscultacionesMVLF3, actualizarTablaAuscultacionesMVLF3] = useState([]);
   const [TablaAuscultacionesMVLCuerpo, actualizarTablaAuscultacionesMVLCuerpo] = useState([]);
 
+  const [VerTablaFIS, setVerTablaFIS] = useState(false);
+  const [TablaAuscultacionesFISF2, actualizarTablaAuscultacionesFISF2] = useState([]);
+  const [TablaAuscultacionesFISF3, actualizarTablaAuscultacionesFISF3] = useState([]);
+  const [TablaAuscultacionesFISF4, actualizarTablaAuscultacionesFISF4] = useState([]);
+  const [TablaAuscultacionesFISCuerpo, actualizarTablaAuscultacionesFISCuerpo] = useState([]);
+
+  const [VerTablaROD, setVerTablaROD] = useState(false);
+  const [TablaAuscultacionesRODF2, actualizarTablaAuscultacionesRODF2] = useState([]);
+  const [TablaAuscultacionesRODF3, actualizarTablaAuscultacionesRODF3] = useState([]);
+  const [TablaAuscultacionesRODF4, actualizarTablaAuscultacionesRODF4] = useState([]);
+  const [TablaAuscultacionesRODCuerpo, actualizarTablaAuscultacionesRODCuerpo] = useState([]);
+
   const insertarArchivos=async()=>{
 
     const f = new FormData();
@@ -84,9 +96,19 @@ function AnalizAusc(){
       console.log("ext FICHERO: ", ExtensionFichero);
       console.log(response?.data); 
       console.log("OK");
+      console.log("NOMBRE FICHERO: ", archivo?.name);
       
 
-      if(ExtensionFichero == "DAT"){
+      if(archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
+        console.log("ROD");
+        setVerTablaROD(true);
+        actualizarTablaAuscultacionesRODF2(response.data?.fila2);
+        actualizarTablaAuscultacionesRODF3(response.data?.fila3);
+        actualizarTablaAuscultacionesRODF4(response.data?.fila4);
+        actualizarTablaAuscultacionesRODCuerpo(response.data?.cuerpo);    
+      }
+
+      if(archivo?.name?.includes("DAT") == true || archivo?.name?.includes("dat") == true){
         console.log("Deflexiones");
         setVerTablaDEF(true);
         actualizarTablaAuscultacionesDEFF2(response.data?.fila2);
@@ -94,7 +116,7 @@ function AnalizAusc(){
         actualizarTablaAuscultacionesDEFCuerpo(response.data?.cuerpo);
       }
 
-      if(ExtensionFichero == "IRI"){
+      if(archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true){
         console.log("IRI");
         setVerTablaIRI(true);
         actualizarTablaAuscultacionesIRIF2(response.data?.fila2);
@@ -103,7 +125,7 @@ function AnalizAusc(){
         actualizarTablaAuscultacionesIRICuerpo(response.data?.cuerpo);
       }
 
-      if(ExtensionFichero == "PAQ"){
+      if(archivo?.name?.includes("PAQ") == true || archivo?.name?.includes("paq") == true){
         console.log("PAQ");
         setVerTablaPAQ(true);
         actualizarTablaAuscultacionesPAQF2(response.data?.fila2);
@@ -112,13 +134,23 @@ function AnalizAusc(){
         actualizarTablaAuscultacionesPAQCuerpo(response.data?.cuerpo);
       }
 
-      if(ExtensionFichero == "mvl"){
+      if(archivo?.name?.includes("MVL") == true || archivo?.name?.includes("mvl") == true){
         console.log("MVL");
         setVerTablaMVL(true);
         actualizarTablaAuscultacionesMVLF2(response.data?.fila2);
         actualizarTablaAuscultacionesMVLF3(response.data?.fila3);
         actualizarTablaAuscultacionesMVLCuerpo(response.data?.cuerpo);
       }
+
+      if(archivo?.name?.includes("IRI") == true || archivo?.name?.includes("fsr") == true){
+        console.log("FSR");
+        setVerTablaROD(true);
+        actualizarTablaAuscultacionesFISF2(response.data?.fila2);
+        actualizarTablaAuscultacionesFISF3(response.data?.fila3);
+        actualizarTablaAuscultacionesFISF4(response.data?.fila4);
+        actualizarTablaAuscultacionesFISCuerpo(response.data?.cuerpo);    
+      }
+
  
 
     }).catch(error=>{
@@ -245,7 +277,79 @@ function AnalizAusc(){
     ]
 
 
+   {/*Tabla de Auscultaciones FIS*/}
+   const columnsF2FIS = [
+    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
+    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
+    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+  ]
 
+  const columnsF3FIS = [
+    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+  ]
+
+  const columnsF4FIS = [
+    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+  ]
+
+  const columnsFIS = [
+    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'incidencia.item1', text: <Translation ns= "global">{(t) => <>{t('Incidencias')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'pci.item1', text: <Translation ns= "global">{(t) => <>{t('PCI')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'ift.item1', text: <Translation ns= "global">{(t) => <>{t('IFT')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'ifp.item1', text: <Translation ns= "global">{(t) => <>{t('IFP')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'porcFisTot.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisTot')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'longFisLongi.item1', text: <Translation ns= "global">{(t) => <>{t('LongFisLongit')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'porcSupFisLongi.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisLongi')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'longFisTrans.item1', text: <Translation ns= "global">{(t) => <>{t('LongFisTrans')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'porcSupFisTrans.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisTrans')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'areaOtrasSup.item1', text: <Translation ns= "global">{(t) => <>{t('AreaOtrasSupFis')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+  ]
+
+  const columnsFIS2 = [
+    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'porcOtrasSup.item1', text: <Translation ns= "global">{(t) => <>{t('PorcOtrasSupFis')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'areaSupCuart.item1', text: <Translation ns= "global">{(t) => <>{t('AreaSupCuart')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'porcSupCuart.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupCuart')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'baches.item1', text: <Translation ns= "global">{(t) => <>{t('Baches')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+  ]
+
+
+
+   {/*Tabla de Auscultaciones ROD*/}
+   const columnsF2ROD = [
+    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
+    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
+    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+  ]
+
+  const columnsF3ROD = [
+    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+  ]
+
+  const columnsF4ROD = [
+    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+  ]
+
+  const columnsROD = [
+    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'incidencia.item1', text: <Translation ns= "global">{(t) => <>{t('Incidencias')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'profRodIzq.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodIzq')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'profRodDer.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodDer')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'profRodMax.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodMax')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+  ]
 
   return (
     <div>
@@ -399,8 +503,106 @@ function AnalizAusc(){
           />
         </div>
         : ""} 
-      </div>
 
+
+    {VerTablaFIS == true ?
+        <div>
+
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsF2FIS} 
+            data={TablaAuscultacionesFISF2}
+            bordered={false}
+          />
+          <br/><br/> 
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsF3FIS} 
+            data={TablaAuscultacionesFISF3}
+            bordered={false}
+          />
+          <br/><br/> 
+
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsF4FIS} 
+            data={TablaAuscultacionesFISF4}
+            bordered={false}
+          />
+          <br/><br/> 
+
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsFIS} 
+            data={TablaAuscultacionesFISCuerpo}
+            pagination={pagination}
+            filter={filterFactory()}
+            bordered={false}
+            wrapperClasses="table-responsive"
+            headerWrapperClasses="table-responsive"
+
+          />
+
+        <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsFIS2} 
+            data={TablaAuscultacionesFISCuerpo}
+            pagination={pagination}
+            filter={filterFactory()}
+            bordered={false}
+            wrapperClasses="table-responsive"
+            headerWrapperClasses="table-responsive"
+
+          />
+        </div>
+        : ""} 
+
+{VerTablaROD == true ?
+        <div>
+
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsF2ROD} 
+            data={TablaAuscultacionesRODF2}
+            bordered={false}
+          />
+          <br/><br/> 
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsF3ROD} 
+            data={TablaAuscultacionesRODF3}
+            bordered={false}
+          />
+          <br/><br/> 
+
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsF4ROD} 
+            data={TablaAuscultacionesRODF4}
+            bordered={false}
+          />
+          <br/><br/> 
+
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsROD} 
+            data={TablaAuscultacionesRODCuerpo}
+            pagination={pagination}
+            filter={filterFactory()}
+            bordered={false}
+          />
+        </div>
+        : ""} 
+      </div>
   )
 
 }
