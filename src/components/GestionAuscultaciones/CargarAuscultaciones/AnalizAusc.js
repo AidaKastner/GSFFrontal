@@ -81,7 +81,10 @@ function AnalizAusc(){
   const [TablaAuscultacionesRODF4, actualizarTablaAuscultacionesRODF4] = useState([]);
   const [TablaAuscultacionesRODCuerpo, actualizarTablaAuscultacionesRODCuerpo] = useState([]);
 
-  const insertarArchivos=async()=>{
+
+  const [TipoAuscultacion, actualizarTipoAuscultacion] = useState('');
+
+  const AnalizarAuscultacion=async()=>{
 
     const f = new FormData();
     console.log(archivo);
@@ -98,10 +101,13 @@ function AnalizAusc(){
       console.log("OK");
       console.log("NOMBRE FICHERO: ", archivo?.name);
       
+      setVerTablaROD(false); setVerTablaDEF(false); setVerTablaIRI(false);
+      setVerTablaPAQ(false); setVerTablaMVL(false); setVerTablaFIS(false);
+
 
       if(archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
         console.log("ROD");
-        setVerTablaROD(true);
+        setVerTablaROD(true); actualizarTipoAuscultacion("ROD");
         actualizarTablaAuscultacionesRODF2(response.data?.fila2);
         actualizarTablaAuscultacionesRODF3(response.data?.fila3);
         actualizarTablaAuscultacionesRODF4(response.data?.fila4);
@@ -109,7 +115,7 @@ function AnalizAusc(){
       }
 
       if(archivo?.name?.includes("DAT") == true || archivo?.name?.includes("dat") == true){
-        console.log("Deflexiones");
+        console.log("Deflexiones"); actualizarTipoAuscultacion("DEF");
         setVerTablaDEF(true);
         actualizarTablaAuscultacionesDEFF2(response.data?.fila2);
         actualizarTablaAuscultacionesDEFF3(response.data?.fila3);
@@ -117,7 +123,7 @@ function AnalizAusc(){
       }
 
       if(archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true){
-        console.log("IRI");
+        console.log("IRI"); actualizarTipoAuscultacion("IRI");
         setVerTablaIRI(true);
         actualizarTablaAuscultacionesIRIF2(response.data?.fila2);
         actualizarTablaAuscultacionesIRIF3(response.data?.fila3);
@@ -126,7 +132,7 @@ function AnalizAusc(){
       }
 
       if(archivo?.name?.includes("PAQ") == true || archivo?.name?.includes("paq") == true){
-        console.log("PAQ");
+        console.log("PAQ"); actualizarTipoAuscultacion("PAQ");
         setVerTablaPAQ(true);
         actualizarTablaAuscultacionesPAQF2(response.data?.fila2);
         actualizarTablaAuscultacionesPAQF3(response.data?.fila3);
@@ -135,29 +141,41 @@ function AnalizAusc(){
       }
 
       if(archivo?.name?.includes("MVL") == true || archivo?.name?.includes("mvl") == true){
-        console.log("MVL");
+        console.log("MVL"); actualizarTipoAuscultacion("MVL");
         setVerTablaMVL(true);
         actualizarTablaAuscultacionesMVLF2(response.data?.fila2);
         actualizarTablaAuscultacionesMVLF3(response.data?.fila3);
         actualizarTablaAuscultacionesMVLCuerpo(response.data?.cuerpo);
       }
 
-      if(archivo?.name?.includes("IRI") == true || archivo?.name?.includes("fsr") == true){
-        console.log("FSR");
-        setVerTablaROD(true);
+      if(archivo?.name?.includes("FSR") == true || archivo?.name?.includes("fsr") == true){
+        console.log("FSR"); actualizarTipoAuscultacion("FIS");
+        setVerTablaFIS(true);
         actualizarTablaAuscultacionesFISF2(response.data?.fila2);
         actualizarTablaAuscultacionesFISF3(response.data?.fila3);
         actualizarTablaAuscultacionesFISF4(response.data?.fila4);
         actualizarTablaAuscultacionesFISCuerpo(response.data?.cuerpo);    
       }
 
- 
-
     }).catch(error=>{
       console.log("prueba2");
       console.log("ERROR: ", error);
     })        
   }
+
+
+
+      /*Guardar Auscultación*/
+      const GuardarAuscultacion=async()=>{
+  
+        axios.post(url + "/" + TipoAuscultacion, config).then(response=>{
+          console.log(response);
+  
+        }).catch(error=>{
+          console.log(error);
+
+      })   
+    }
 
 
  
@@ -178,14 +196,14 @@ function AnalizAusc(){
   const columnsDEF = [
       {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t( 'Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
       {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t( 'DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxNoCorrInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxIntCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxNoCorrExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxExtCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+      {dataField: 'deflMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxIntCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+      {dataField: 'deflMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxExtCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
       {dataField: 'incidencias.item1', text: <Translation ns= "global">{(t) => <>{t( 'Incidencia')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
       {dataField: 'temperatura.item1', text: <Translation ns= "global">{(t) => <>{t( 'TempPavimento')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
       {dataField: 'radiCurvMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'RadiCurvMaxInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
       {dataField: 'radiCurvMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'RadiCurvMaxExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+      {dataField: 'deflMaxNoCorrInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+      {dataField: 'deflMaxNoCorrExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
       {dataField: 'coefTemp.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoefTemp')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
       {dataField: 'coefHumedad.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoefHum')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
       {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
@@ -268,7 +286,7 @@ function AnalizAusc(){
     const columnsMVL = [
       {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, },
       {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.distOri?.item2 == true ? 'red': ''}}>{cell}</div>}},
-      {dataField: 'tipoCalz.item1', text: <Translation ns= "global">{(t) => <>{t('TipoCalz')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.tipoCalz?.item2 == true ? 'red': ''}}>{cell}</div>}},
+      {dataField: 'tipoCalz.item1', text: <Translation ns= "global">{(t) => <>{t('TipoCalzada')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.tipoCalz?.item2 == true ? 'red': ''}}>{cell}</div>}},
       {dataField: 'marcaViaria.item1', text: <Translation ns= "global">{(t) => <>{t('MarcaViaria')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.marcaViaria?.item2 == true ? 'red': ''}}>{cell}</div>}},
       {dataField: 'contrasteDia.item1', text: <Translation ns= "global">{(t) => <>{t('ContrasteDia')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteDia?.item2 == true ? 'red': ''}}>{cell}</div>}},
       {dataField: 'contrasteNoche.item1', text: <Translation ns= "global">{(t) => <>{t('ContrasteNoche')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteNoche?.item2 == true ? 'red': ''}}>{cell}</div>}},
@@ -355,7 +373,8 @@ function AnalizAusc(){
     <div>
       <br/>
           <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
-          <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
+          <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
+          <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
           <br/><br/><br/>  
 
         {VerTablaDEF == true ?
