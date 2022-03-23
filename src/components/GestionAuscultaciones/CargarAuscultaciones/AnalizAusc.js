@@ -12,6 +12,10 @@ import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { CloseOutlined, ContentCutOutlined } from '@mui/icons-material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileAlt, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import '../../../css/FileUpload.scss';
 
 
 function AnalizAusc(){
@@ -33,6 +37,12 @@ function AnalizAusc(){
 
   const subirArchivos=e=>{
     setArchivo(e);
+    console.log("subir");
+  }
+
+  const borrarArchivos=e=>{
+    setArchivo();
+    console.log("borrar");
   }
 
   const pagination = paginationFactory({
@@ -84,6 +94,14 @@ function AnalizAusc(){
 
   const [TipoAuscultacion, actualizarTipoAuscultacion] = useState('');
 
+
+  const [msgOutErr, guardarMsgOutErr] = useState();
+  const [msgOutErr1, guardarMsgOutErr1] = useState([]);
+  const [msgOutWar, guardarMsgOutWar] = useState([]);
+  const [msgOutBoolWar, setMsgOutBoolWar] = useState(false);
+  const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
+
+
   const AnalizarAuscultacion=async()=>{
 
     const f = new FormData();
@@ -92,36 +110,185 @@ function AnalizAusc(){
     console.log(archivo);
     var ExtensionFichero = archivo?.name?.split('.').pop();
     console.log("Ext Fich: ", ExtensionFichero);
+    var IdError = 0; 
    
     await axios.post(url, f, config)
     .then(response =>{
+
+      //Se inicializan mensajes salida
+      guardarMsgOutErr();
+      guardarMsgOutErr1([]);
+      guardarMsgOutWar([]);
+      setMsgOutBoolWar(false);
+      setMsgOutBoolKO(false);
+
       console.log("archivo: ", archivo);
       console.log("ext FICHERO: ", ExtensionFichero);
       console.log(response?.data); 
       console.log("OK");
       console.log("NOMBRE FICHERO: ", archivo?.name);
+
+
+      //Comprobación de errores de las cabeceras
+      if(archivo?.name?.includes("DAT") == true || archivo?.name?.includes("dat") == true ||
+         archivo?.name?.includes("MVL") == true || archivo?.name?.includes("mvl") == true){
+
+          if(response.data?.fila2[0].fechaAusc.item2 == true){
+            console.log("error fecha");
+            var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++; 
+          }
+  
+          if(response.data?.fila3[0].comanda.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].numVia.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].numVias.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].pkIni.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          console.log("IDError: ", IdError);
+          if(IdError > 0){
+            console.log("errores");
+            setMsgOutBoolKO(true);
+            var msgKO= <Translation ns= "global">{(t) => <>{t('ErroresAus')}</>}</Translation>
+            guardarMsgOutErr(msgKO);
+          }
+
+         }
+
+      if(archivo?.name?.includes("FSR") == true || archivo?.name?.includes("fsr") == true ||
+         archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true || 
+         archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
+
+          if(response.data?.fila2[0].fechaAusc.item2 == true){
+            console.log("error fecha");
+            var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++; 
+          }
+  
+          if(response.data?.fila4[0].comanda.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].numVia.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].numVias.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].pkIni.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          console.log("IDError: ", IdError);
+          if(IdError > 0){
+            console.log("errores");
+            setMsgOutBoolKO(true);
+            var msgKO= <Translation ns= "global">{(t) => <>{t('ErroresAus')}</>}</Translation>
+            guardarMsgOutErr(msgKO);
+          }
+
+         }
+
+         if(archivo?.name?.includes("PAQ") == true || archivo?.name?.includes("paq") == true){
+          if(response.data?.fila2[0].fechaAusc.item2 == 2){
+            console.log("error fecha");
+            var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++; 
+          }
+  
+          if(response.data?.fila4[0].comanda.item2 == 2){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].numVia.item2 == 2){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].numVias.item2 == 2){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          if(response.data?.fila3[0].pkIni.item2 == 2){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError++;
+          }
+  
+          console.log("IDError: ", IdError);
+          if(IdError > 0){
+            console.log("errores");
+            setMsgOutBoolKO(true);
+            var msgKO= <Translation ns= "global">{(t) => <>{t('ErroresAus')}</>}</Translation>
+            guardarMsgOutErr(msgKO);
+          }
+         }
+
+
       
       setVerTablaROD(false); setVerTablaDEF(false); setVerTablaIRI(false);
       setVerTablaPAQ(false); setVerTablaMVL(false); setVerTablaFIS(false);
-
-
+      
+      
+      //DATOS ROD
       if(archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
         console.log("ROD");
         setVerTablaROD(true); actualizarTipoAuscultacion("ROD");
         actualizarTablaAuscultacionesRODF2(response.data?.fila2);
         actualizarTablaAuscultacionesRODF3(response.data?.fila3);
         actualizarTablaAuscultacionesRODF4(response.data?.fila4);
-        actualizarTablaAuscultacionesRODCuerpo(response.data?.cuerpo);    
+        actualizarTablaAuscultacionesRODCuerpo(response.data?.cuerpo); 
+           
       }
-
+     
+      //DATOS DEFLEXIONES
       if(archivo?.name?.includes("DAT") == true || archivo?.name?.includes("dat") == true){
         console.log("Deflexiones"); actualizarTipoAuscultacion("DEF");
+        console.log("IDError: ", IdError);
         setVerTablaDEF(true);
         actualizarTablaAuscultacionesDEFF2(response.data?.fila2);
         actualizarTablaAuscultacionesDEFF3(response.data?.fila3);
-        actualizarTablaAuscultacionesDEFCuerpo(response.data?.cuerpo);
+        actualizarTablaAuscultacionesDEFCuerpo(response.data?.cuerpo);       
       }
+      
 
+      //DATOS IRI
       if(archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true){
         console.log("IRI"); actualizarTipoAuscultacion("IRI");
         setVerTablaIRI(true);
@@ -129,8 +296,24 @@ function AnalizAusc(){
         actualizarTablaAuscultacionesIRIF3(response.data?.fila3);
         actualizarTablaAuscultacionesIRIF4(response.data?.fila4);
         actualizarTablaAuscultacionesIRICuerpo(response.data?.cuerpo);
-      }
 
+        for(var i=1; i<response?.data?.cuerpo.length; i++){
+          
+          if(response.data?.cuerpo[i].coordX.item2 == true){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('CoordXKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError += 1;  
+          }
+
+        if(response.data?.cuerpo[i].coordY.item2 == true){
+          var msgKO= <Translation ns= "global">{(t) => <>{t('CoordYKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1  })}</>}</Translation> 
+          guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+          IdError += 1;  
+        }
+      }
+    }
+
+      //DATOS PAQ
       if(archivo?.name?.includes("PAQ") == true || archivo?.name?.includes("paq") == true){
         console.log("PAQ"); actualizarTipoAuscultacion("PAQ");
         setVerTablaPAQ(true);
@@ -138,24 +321,63 @@ function AnalizAusc(){
         actualizarTablaAuscultacionesPAQF3(response.data?.fila3);
         actualizarTablaAuscultacionesPAQF4(response.data?.fila4);
         actualizarTablaAuscultacionesPAQCuerpo(response.data?.cuerpo);
+
+        for(var i=1; i<response?.data?.cuerpo.length; i++){
+          
+          if(response.data?.cuerpo[i].crt.item2 == 1){
+            var msgKO= <Translation ns= "global">{(t) => <>{t('CRTKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+            guardarMsgOutWar(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError += 1;  
+            setMsgOutBoolWar(true);
+          }
+
+        if(response.data?.cuerpo[i].textura.item2 == 1){
+          var msgKO= <Translation ns= "global">{(t) => <>{t('TexturaAusKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+          guardarMsgOutWar(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+          IdError += 1; 
+          setMsgOutBoolWar(true); 
+        }
+      }
       }
 
+      //DATOS MVL
       if(archivo?.name?.includes("MVL") == true || archivo?.name?.includes("mvl") == true){
         console.log("MVL"); actualizarTipoAuscultacion("MVL");
         setVerTablaMVL(true);
         actualizarTablaAuscultacionesMVLF2(response.data?.fila2);
         actualizarTablaAuscultacionesMVLF3(response.data?.fila3);
         actualizarTablaAuscultacionesMVLCuerpo(response.data?.cuerpo);
+
+        for(var i=1; i<response?.data?.cuerpo.length; i++){
+          
+          if(response.data?.cuerpo[i].tipoCalz.item2 == true){
+            
+            var msgKO= <Translation ns= "global">{(t) => <>{t('TipoCalzAuscKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+            IdError += 1;              
+          }
+
+        if(response.data?.cuerpo[i].marcaViaria.item2 == true){
+          var msgKO= <Translation ns= "global">{(t) => <>{t('MarcaViKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+          guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+          IdError += 1;  
+        }
+      }
       }
 
+      //DATOS FIS
       if(archivo?.name?.includes("FSR") == true || archivo?.name?.includes("fsr") == true){
         console.log("FSR"); actualizarTipoAuscultacion("FIS");
         setVerTablaFIS(true);
         actualizarTablaAuscultacionesFISF2(response.data?.fila2);
         actualizarTablaAuscultacionesFISF3(response.data?.fila3);
         actualizarTablaAuscultacionesFISF4(response.data?.fila4);
-        actualizarTablaAuscultacionesFISCuerpo(response.data?.cuerpo);    
+        actualizarTablaAuscultacionesFISCuerpo(response.data?.cuerpo);  
+        
+        
       }
+
+      
 
     }).catch(error=>{
       console.log("prueba2");
@@ -233,8 +455,8 @@ function AnalizAusc(){
     {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
     {dataField: 'rodadaDreta.item1', text: <Translation ns= "global">{(t) => <>{t('RodadaDer')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
     {dataField: 'rodadaEsq.item1', text: <Translation ns= "global">{(t) => <>{t('RodadaIzq')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == true ?'#FD0303':''}}>{cell}</div>;}}
   ]
 
 
@@ -372,11 +594,66 @@ function AnalizAusc(){
   return (
     <div>
       <br/>
-          <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
+      <div className='file-card' >
+           <div className='file-inputs' style={{marginRight: '80%'}}>
+         <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
+               <button>
+                 <i>
+                   <FontAwesomeIcon icon={faPlus} /> 
+                 </i>
+                 <Translation ns= "global">{(t) => <>{t('SubirFichero')}</>}</Translation>  
+               </button>
+           </div>
+
+           {archivo?
+           <div className='file-upload' style={{marginRight: '70%'}}>
+           <FontAwesomeIcon icon={faFileAlt} />
+           {archivo?.name }
+           <div className='actions'>
+           <FontAwesomeIcon
+           style={{marginLeft: '70%'}} 
+           icon={faTrash} 
+           onClick={() => borrarArchivos()} />
+           </div>
+         </div>
+         :''}
+
+         </div>
+         
+         
+         
+         
+          <br/> 
           <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
           <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
           <br/><br/><br/>  
 
+      {/*Mensajes de error*/}
+      { msgOutBoolKO ? 
+      <div><br/>
+       <div className="alert alert-danger">
+          {/*Mostramos mensaje*/}
+          {msgOutErr}
+          {msgOutErr1.map(msgOutErr1 => (
+          <li key={msgOutErr1.id}>{msgOutErr1.name}</li>
+        ))}
+      </div>
+      </div>
+      : ""}
+
+    {/*Mensajes de Warning*/}
+    { msgOutBoolWar ? 
+      <div><br/>
+       <div className="alert alert-warning">
+          {/*Mostramos mensaje*/}
+          {msgOutWar.map(msgOutWar => (
+          <li key={msgOutWar.id}>{msgOutWar.name}</li>
+        ))}
+      </div>
+      </div>
+      : ""}
+
+<br/><br/>  
         {VerTablaDEF == true ?
         <div>
 
