@@ -34,15 +34,25 @@ function AnalizAusc(){
 
   const [items, setItems] = useState([]);
   const [archivo, setArchivo]=useState(null);
+  const [uploadFile, setUploadFile] = useState(false);
+  const [validacionOK, setValidacionOK] = useState(false);
 
   const subirArchivos=e=>{
     setArchivo(e);
     console.log("subir");
+    setUploadFile(true);
+    setMsgOutBoolWar(false);
+    setMsgOutBoolKO(false);
+    setValidacionOK(false);
   }
 
   const borrarArchivos=e=>{
     setArchivo();
     console.log("borrar");
+    setUploadFile(false);
+    setMsgOutBoolWar(false);
+    setMsgOutBoolKO(false);
+    setValidacionOK(false);
   }
 
   const pagination = paginationFactory({
@@ -110,7 +120,7 @@ function AnalizAusc(){
     console.log(archivo);
     var ExtensionFichero = archivo?.name?.split('.').pop();
     console.log("Ext Fich: ", ExtensionFichero);
-    var IdError = 0; 
+    
    
     await axios.post(url, f, config)
     .then(response =>{
@@ -121,6 +131,7 @@ function AnalizAusc(){
       guardarMsgOutWar([]);
       setMsgOutBoolWar(false);
       setMsgOutBoolKO(false);
+      setValidacionOK(false);
 
       console.log("archivo: ", archivo);
       console.log("ext FICHERO: ", ExtensionFichero);
@@ -128,260 +139,276 @@ function AnalizAusc(){
       console.log("OK");
       console.log("NOMBRE FICHERO: ", archivo?.name);
 
-
-      //Comprobación de errores de las cabeceras
-      if(archivo?.name?.includes("DAT") == true || archivo?.name?.includes("dat") == true ||
-         archivo?.name?.includes("MVL") == true || archivo?.name?.includes("mvl") == true){
-
-          if(response.data?.fila2[0].fechaAusc.item2 == true){
-            console.log("error fecha");
-            var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++; 
-          }
-  
-          if(response.data?.fila3[0].comanda.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].numVia.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].numVias.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].pkIni.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          console.log("IDError: ", IdError);
-          if(IdError > 0){
-            console.log("errores");
-            setMsgOutBoolKO(true);
-            var msgKO= <Translation ns= "global">{(t) => <>{t('ErroresAus')}</>}</Translation>
-            guardarMsgOutErr(msgKO);
-          }
-
-         }
-
-      if(archivo?.name?.includes("FSR") == true || archivo?.name?.includes("fsr") == true ||
-         archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true || 
-         archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
-
-          if(response.data?.fila2[0].fechaAusc.item2 == true){
-            console.log("error fecha");
-            var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++; 
-          }
-  
-          if(response.data?.fila4[0].comanda.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].numVia.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].numVias.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].pkIni.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          console.log("IDError: ", IdError);
-          if(IdError > 0){
-            console.log("errores");
-            setMsgOutBoolKO(true);
-            var msgKO= <Translation ns= "global">{(t) => <>{t('ErroresAus')}</>}</Translation>
-            guardarMsgOutErr(msgKO);
-          }
-
-         }
-
-         if(archivo?.name?.includes("PAQ") == true || archivo?.name?.includes("paq") == true){
-          if(response.data?.fila2[0].fechaAusc.item2 == 2){
-            console.log("error fecha");
-            var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++; 
-          }
-  
-          if(response.data?.fila4[0].comanda.item2 == 2){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].numVia.item2 == 2){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].numVias.item2 == 2){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          if(response.data?.fila3[0].pkIni.item2 == 2){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError++;
-          }
-  
-          console.log("IDError: ", IdError);
-          if(IdError > 0){
-            console.log("errores");
-            setMsgOutBoolKO(true);
-            var msgKO= <Translation ns= "global">{(t) => <>{t('ErroresAus')}</>}</Translation>
-            guardarMsgOutErr(msgKO);
-          }
-         }
+      var IdError = 0; 
 
 
-      
-      setVerTablaROD(false); setVerTablaDEF(false); setVerTablaIRI(false);
-      setVerTablaPAQ(false); setVerTablaMVL(false); setVerTablaFIS(false);
-      
-      
-      //DATOS ROD
-      if(archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
-        console.log("ROD");
-        setVerTablaROD(true); actualizarTipoAuscultacion("ROD");
-        actualizarTablaAuscultacionesRODF2(response.data?.fila2);
-        actualizarTablaAuscultacionesRODF3(response.data?.fila3);
-        actualizarTablaAuscultacionesRODF4(response.data?.fila4);
-        actualizarTablaAuscultacionesRODCuerpo(response.data?.cuerpo); 
-           
-      }
+      if(archivo?.name?.includes("DAT") == false && archivo?.name?.includes("dat") == false &&
+         archivo?.name?.includes("MVL") == false && archivo?.name?.includes("mvl") == false &&
+         archivo?.name?.includes("FSR") == false && archivo?.name?.includes("fsr") == false &&
+         archivo?.name?.includes("IRI") == false && archivo?.name?.includes("iri") == false &&
+         archivo?.name?.includes("ROD") == false && archivo?.name?.includes("rod") == false &&
+         archivo?.name?.includes("PAQ") == false && archivo?.name?.includes("paq") == false) {
+          //Tipo de fichero incorrecto
+          setMsgOutBoolKO(true);
+          var msgKO= <Translation ns= "global">{(t) => <>{t('TipoAuscKO')}</>}</Translation>
+          guardarMsgOutErr(msgKO);
+
+         }else{
+
+            setMsgOutBoolKO(false);
+            //Comprobación de errores de las cabeceras
+            if(archivo?.name?.includes("DAT") == true || archivo?.name?.includes("dat") == true ||
+            archivo?.name?.includes("MVL") == true || archivo?.name?.includes("mvl") == true){
+
+            if(response.data?.fila2[0].fechaAusc.item2 == true){
+              console.log("error fecha");
+              var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++; 
+            }
+
+            if(response.data?.fila3[0].comanda.item2 == true){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].numVia.item2 == true){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].numVias.item2 == true){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].pkIni.item2 == true){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            console.log("IDError: ", IdError);
+            
+
+            }
+
+            if(archivo?.name?.includes("FSR") == true || archivo?.name?.includes("fsr") == true ||
+            archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true || 
+            archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
+
+            if(response.data?.fila2[0].fechaAusc.item2 == true){
+              console.log("error fecha");
+              var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++; 
+            }
+
+            if(response.data?.fila4[0].comanda.item2 == true){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].numVia.item2 == true){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].numVias.item2 == true){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].pkIni.item2 == true){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            console.log("IDError: ", IdError);
+
+
+            }
+
+            if(archivo?.name?.includes("PAQ") == true || archivo?.name?.includes("paq") == true){
+            if(response.data?.fila2[0].fechaAusc.item2 == 2){
+              console.log("error fecha");
+              var msgKO= <Translation ns= "global">{(t) => <>{t('FechaAuscKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++; 
+            }
+
+            if(response.data?.fila4[0].comanda.item2 == 2){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('ComandaKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].numVia.item2 == 2){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('NumViaKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].numVias.item2 == 2){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('NumViasKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+
+            if(response.data?.fila3[0].pkIni.item2 == 2){
+              var msgKO= <Translation ns= "global">{(t) => <>{t('PKAuscKO')}</>}</Translation>
+              guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+              IdError++;
+            }
+            }
+
+            console.log("IDError: ", IdError);
      
-      //DATOS DEFLEXIONES
-      if(archivo?.name?.includes("DAT") == true || archivo?.name?.includes("dat") == true){
-        console.log("Deflexiones"); actualizarTipoAuscultacion("DEF");
-        console.log("IDError: ", IdError);
-        setVerTablaDEF(true);
-        actualizarTablaAuscultacionesDEFF2(response.data?.fila2);
-        actualizarTablaAuscultacionesDEFF3(response.data?.fila3);
-        actualizarTablaAuscultacionesDEFCuerpo(response.data?.cuerpo);       
+            setVerTablaROD(false); setVerTablaDEF(false); setVerTablaIRI(false);
+            setVerTablaPAQ(false); setVerTablaMVL(false); setVerTablaFIS(false);
+                        
+            //DATOS ROD
+            if(archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
+              console.log("ROD");
+              setVerTablaROD(true); actualizarTipoAuscultacion("ROD");
+              actualizarTablaAuscultacionesRODF2(response.data?.fila2);
+              actualizarTablaAuscultacionesRODF3(response.data?.fila3);
+              actualizarTablaAuscultacionesRODF4(response.data?.fila4);
+              actualizarTablaAuscultacionesRODCuerpo(response.data?.cuerpo); 
+                  
+            }
+            
+            //DATOS DEFLEXIONES
+            if(archivo?.name?.includes("DAT") == true || archivo?.name?.includes("dat") == true){
+              console.log("Deflexiones"); actualizarTipoAuscultacion("DEF");
+              console.log("IDError: ", IdError);
+              setVerTablaDEF(true);
+              actualizarTablaAuscultacionesDEFF2(response.data?.fila2);
+              actualizarTablaAuscultacionesDEFF3(response.data?.fila3);
+              actualizarTablaAuscultacionesDEFCuerpo(response.data?.cuerpo);       
+            }
+            
+            //DATOS IRI
+            if(archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true){
+              console.log("IRI"); actualizarTipoAuscultacion("IRI");
+              setVerTablaIRI(true);
+              actualizarTablaAuscultacionesIRIF2(response.data?.fila2);
+              actualizarTablaAuscultacionesIRIF3(response.data?.fila3);
+              actualizarTablaAuscultacionesIRIF4(response.data?.fila4);
+              actualizarTablaAuscultacionesIRICuerpo(response.data?.cuerpo);
+
+              for(var i=1; i<response?.data?.cuerpo.length; i++){
+                
+                if(response.data?.cuerpo[i].coordX.item2 == true){
+                  console.log("IdError", IdError);
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('CoordXKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+                  guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+                  IdError += 1;  
+                }
+
+              if(response.data?.cuerpo[i].coordY.item2 == true){
+                console.log("IdError", IdError);
+                var msgKO= <Translation ns= "global">{(t) => <>{t('CoordYKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1  })}</>}</Translation> 
+                guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+                IdError += 1;  
+              }
+            }
+            }
+
+            //DATOS PAQ
+            if(archivo?.name?.includes("PAQ") == true || archivo?.name?.includes("paq") == true){
+              console.log("PAQ"); actualizarTipoAuscultacion("PAQ");
+              setVerTablaPAQ(true);
+              actualizarTablaAuscultacionesPAQF2(response.data?.fila2);
+              actualizarTablaAuscultacionesPAQF3(response.data?.fila3);
+              actualizarTablaAuscultacionesPAQF4(response.data?.fila4);
+              actualizarTablaAuscultacionesPAQCuerpo(response.data?.cuerpo);
+
+              //Warnings
+              for(var i=1; i<response?.data?.cuerpo.length; i++){
+                
+                if(response.data?.cuerpo[i].crt.item2 == 1){
+                  console.log("IdError", IdError);
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('CRTKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+                  guardarMsgOutWar(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+                  
+                  setMsgOutBoolWar(true);
+                }
+
+              if(response.data?.cuerpo[i].textura.item2 == 1){
+                console.log("IdError", IdError);
+                var msgKO= <Translation ns= "global">{(t) => <>{t('TexturaAusKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+                guardarMsgOutWar(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+                
+                setMsgOutBoolWar(true); 
+              }
+            }
+            }
+
+            //DATOS MVL
+            if(archivo?.name?.includes("MVL") == true || archivo?.name?.includes("mvl") == true){
+              console.log("MVL"); actualizarTipoAuscultacion("MVL");
+              setVerTablaMVL(true);
+              actualizarTablaAuscultacionesMVLF2(response.data?.fila2);
+              actualizarTablaAuscultacionesMVLF3(response.data?.fila3);
+              actualizarTablaAuscultacionesMVLCuerpo(response.data?.cuerpo);
+
+              for(var i=1; i<response?.data?.cuerpo.length; i++){
+                
+                if(response.data?.cuerpo[i].tipoCalz.item2 == true){
+                  
+                  var msgKO= <Translation ns= "global">{(t) => <>{t('TipoCalzAuscKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+                  guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+                  IdError += 1;              
+                }
+
+              if(response.data?.cuerpo[i].marcaViaria.item2 == true){
+                var msgKO= <Translation ns= "global">{(t) => <>{t('MarcaViKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
+                guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
+                IdError += 1;  
+              }
+            }
+            }
+
+            //DATOS FIS
+            if(archivo?.name?.includes("FSR") == true || archivo?.name?.includes("fsr") == true){
+              console.log("FSR"); actualizarTipoAuscultacion("FIS");
+              setVerTablaFIS(true);
+              actualizarTablaAuscultacionesFISF2(response.data?.fila2);
+              actualizarTablaAuscultacionesFISF3(response.data?.fila3);
+              actualizarTablaAuscultacionesFISF4(response.data?.fila4);
+              actualizarTablaAuscultacionesFISCuerpo(response.data?.cuerpo);  
+              
+              
+            }
+
+      if(IdError > 0){
+        console.log("errores");
+        setMsgOutBoolKO(true);
+        var msgKO= <Translation ns= "global">{(t) => <>{t('ErroresAus')}</>}</Translation>
+        guardarMsgOutErr(msgKO);
       }
-      
 
-      //DATOS IRI
-      if(archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true){
-        console.log("IRI"); actualizarTipoAuscultacion("IRI");
-        setVerTablaIRI(true);
-        actualizarTablaAuscultacionesIRIF2(response.data?.fila2);
-        actualizarTablaAuscultacionesIRIF3(response.data?.fila3);
-        actualizarTablaAuscultacionesIRIF4(response.data?.fila4);
-        actualizarTablaAuscultacionesIRICuerpo(response.data?.cuerpo);
-
-        for(var i=1; i<response?.data?.cuerpo.length; i++){
-          
-          if(response.data?.cuerpo[i].coordX.item2 == true){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('CoordXKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError += 1;  
-          }
-
-        if(response.data?.cuerpo[i].coordY.item2 == true){
-          var msgKO= <Translation ns= "global">{(t) => <>{t('CoordYKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1  })}</>}</Translation> 
-          guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-          IdError += 1;  
-        }
+      if(IdError == 0){
+        console.log("SIN ERRORES");
+        setValidacionOK(true);
       }
     }
-
-      //DATOS PAQ
-      if(archivo?.name?.includes("PAQ") == true || archivo?.name?.includes("paq") == true){
-        console.log("PAQ"); actualizarTipoAuscultacion("PAQ");
-        setVerTablaPAQ(true);
-        actualizarTablaAuscultacionesPAQF2(response.data?.fila2);
-        actualizarTablaAuscultacionesPAQF3(response.data?.fila3);
-        actualizarTablaAuscultacionesPAQF4(response.data?.fila4);
-        actualizarTablaAuscultacionesPAQCuerpo(response.data?.cuerpo);
-
-        for(var i=1; i<response?.data?.cuerpo.length; i++){
-          
-          if(response.data?.cuerpo[i].crt.item2 == 1){
-            var msgKO= <Translation ns= "global">{(t) => <>{t('CRTKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
-            guardarMsgOutWar(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError += 1;  
-            setMsgOutBoolWar(true);
-          }
-
-        if(response.data?.cuerpo[i].textura.item2 == 1){
-          var msgKO= <Translation ns= "global">{(t) => <>{t('TexturaAusKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
-          guardarMsgOutWar(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-          IdError += 1; 
-          setMsgOutBoolWar(true); 
-        }
-      }
-      }
-
-      //DATOS MVL
-      if(archivo?.name?.includes("MVL") == true || archivo?.name?.includes("mvl") == true){
-        console.log("MVL"); actualizarTipoAuscultacion("MVL");
-        setVerTablaMVL(true);
-        actualizarTablaAuscultacionesMVLF2(response.data?.fila2);
-        actualizarTablaAuscultacionesMVLF3(response.data?.fila3);
-        actualizarTablaAuscultacionesMVLCuerpo(response.data?.cuerpo);
-
-        for(var i=1; i<response?.data?.cuerpo.length; i++){
-          
-          if(response.data?.cuerpo[i].tipoCalz.item2 == true){
-            
-            var msgKO= <Translation ns= "global">{(t) => <>{t('TipoCalzAuscKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
-            guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-            IdError += 1;              
-          }
-
-        if(response.data?.cuerpo[i].marcaViaria.item2 == true){
-          var msgKO= <Translation ns= "global">{(t) => <>{t('MarcaViKO', { FilaKO: response?.data.cuerpo[i]?.linea.item1 })}</>}</Translation> 
-          guardarMsgOutErr1(oldArray => [...oldArray, {id: IdError, name: msgKO}]);
-          IdError += 1;  
-        }
-      }
-      }
-
-      //DATOS FIS
-      if(archivo?.name?.includes("FSR") == true || archivo?.name?.includes("fsr") == true){
-        console.log("FSR"); actualizarTipoAuscultacion("FIS");
-        setVerTablaFIS(true);
-        actualizarTablaAuscultacionesFISF2(response.data?.fila2);
-        actualizarTablaAuscultacionesFISF3(response.data?.fila3);
-        actualizarTablaAuscultacionesFISF4(response.data?.fila4);
-        actualizarTablaAuscultacionesFISCuerpo(response.data?.cuerpo);  
-        
-        
-      }
-
-      
 
     }).catch(error=>{
       console.log("prueba2");
       console.log("ERROR: ", error);
+
+      setMsgOutBoolKO(true);
+      var msgKO= <Translation ns= "global">{(t) => <>{t('ErrorAnalizAusc')}</>}</Translation>
+      guardarMsgOutErr(msgKO);
     })        
   }
 
@@ -403,197 +430,198 @@ function AnalizAusc(){
  
   {/*Tabla de Auscultaciones DEF*/}
   const columnsF2DEF = [
-    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
-    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
-    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
  ]
   const columnsF3DEF = [
-    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t( 'Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t( 'ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t( 'PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t( 'NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t( 'NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t( 'Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t( 'ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t( 'PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t( 'NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t( 'NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
   ]
 
   const columnsDEF = [
-      {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t( 'Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t( 'DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxIntCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxExtCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'incidencias.item1', text: <Translation ns= "global">{(t) => <>{t( 'Incidencia')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'temperatura.item1', text: <Translation ns= "global">{(t) => <>{t( 'TempPavimento')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'radiCurvMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'RadiCurvMaxInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'radiCurvMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'RadiCurvMaxExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxNoCorrInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxNoCorrExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'coefTemp.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoefTemp')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'coefHumedad.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoefHum')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+      {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t( 'Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t( 'DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'deflMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxIntCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'deflMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxExtCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'incidencias.item1', text: <Translation ns= "global">{(t) => <>{t( 'Incidencia')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'temperatura.item1', text: <Translation ns= "global">{(t) => <>{t( 'TempPavimento')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'radiCurvMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'RadiCurvMaxInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'radiCurvMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'RadiCurvMaxExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'deflMaxNoCorrInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'deflMaxNoCorrExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'coefTemp.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoefTemp')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, formatter: (cell, row) =>{return <div>{`${row.coefTemp.item1?.toLocaleString('es')}`}</div>;}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'coefHumedad.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoefHum')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, formatter: (cell, row) =>{return <div>{`${row.coefHumedad.item1?.toLocaleString('es')}`}</div>;}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, formatter: (cell, row) =>{return <div>{`${row.coordX.item1?.toLocaleString('es')}`}</div>;}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, formatter: (cell, row) =>{return <div>{`${row.coordY.item1?.toLocaleString('es')}`}</div>;}, headerStyle:{textAlign: 'center'}}
    ]
 
    {/*Tabla de Auscultaciones IRI*/}
   const columnsF2IRI = [
-    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
-    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
-    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
   ]
 
   const columnsF3IRI = [
-    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
   ]
 
   const columnsF4IRI = [
-    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
   ]
 
   const columnsIRI = [
-    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'rodadaDreta.item1', text: <Translation ns= "global">{(t) => <>{t('RodadaDer')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'rodadaEsq.item1', text: <Translation ns= "global">{(t) => <>{t('RodadaIzq')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == true ?'#FD0303':''}}>{cell}</div>;}}
+    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'rodadaDreta.item1', text: <Translation ns= "global">{(t) => <>{t('RodadaDer')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'rodadaEsq.item1', text: <Translation ns= "global">{(t) => <>{t('RodadaIzq')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
   ]
 
 
 
   {/*Tabla de Auscultaciones PAQ*/}
   const columnsF2PAQ = [
-    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
-    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
-    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == 2 ?'red': row.fechaAusc?.item2 == 1 ? 'orange': ''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == 2 ?'red': row.fechaAusc?.item2 == 1 ? 'orange': ''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
  ]
 
   const columnsF3PAQ = [
-    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == 2 ? 'red': row.pkIni?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}},
-    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == 2 ? 'red': row.numVia?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}},
-    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == 2 ? 'red': row.numVias?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}},
+    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == 2 ? 'red': row.pkIni?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == 2 ? 'red': row.numVia?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == 2 ? 'red': row.numVias?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
     ]
 
   const columnsF4PAQ = [
-    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == 2 ? 'red': row.comanda?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}},
-    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == 2 ? 'red': row.claveObra?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}},
+    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == 2 ? 'red': row.comanda?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == 2 ? 'red': row.claveObra?.item2 == 1 ? 'orange': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
   ]
 
   const columnsPAQ = [
-    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, },
-    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.distOri?.item2 == 2 ? 'red': row.distOri?.item2 == 1 ? 'orange': ''}}>{cell}</div>}},
-    {dataField: 'incidencia.item1', text: <Translation ns= "global">{(t) => <>{t('Incidencias')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.incidencia?.item2 == 2 ? 'red': row.incidencia?.item2 == 1 ? 'orange': ''}}>{cell}</div>}},
-    {dataField: 'crt.item1', text: <Translation ns= "global">{(t) => <>{t('CRT')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.crt?.item2 == 2 ? 'red': row.crt?.item2 == 1 ? 'orange': ''}}>{cell}</div>}},
-    {dataField: 'temperatura.item1', text: <Translation ns= "global">{(t) => <>{t('TempPavimento')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.temperatura?.item2 == 2 ? 'red': row.temperatura?.item2 == 1 ? 'orange': ''}}>{cell}</div>}},
-    {dataField: 'textura.item1', text: <Translation ns= "global">{(t) => <>{t('Textura')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.textura?.item2 == 2 ? 'red': row.textura?.item2 == 1 ? 'orange': ''}}>{cell}</div>}},
-    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == 2 ? 'red': row.coordX?.item2 == 1 ? 'orange': ''}}>{cell}</div>}},
-    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == 2 ? 'red': row.coordY?.item2 == 1 ? 'orange': ''}}>{cell}</div>}}
+    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'} },
+    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.distOri?.item2 == 2 ? 'red': row.distOri?.item2 == 1 ? 'orange': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'incidencia.item1', text: <Translation ns= "global">{(t) => <>{t('Incidencias')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.incidencia?.item2 == 2 ? 'red': row.incidencia?.item2 == 1 ? 'orange': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'crt.item1', text: <Translation ns= "global">{(t) => <>{t('CRT')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.crt?.item2 == 2 ? 'red': row.crt?.item2 == 1 ? 'orange': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'temperatura.item1', text: <Translation ns= "global">{(t) => <>{t('TempPavimento')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.temperatura?.item2 == 2 ? 'red': row.temperatura?.item2 == 1 ? 'orange': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'textura.item1', text: <Translation ns= "global">{(t) => <>{t('Textura')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.textura?.item2 == 2 ? 'red': row.textura?.item2 == 1 ? 'orange': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == 2 ? 'red': row.coordX?.item2 == 1 ? 'orange': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == 2 ? 'red': row.coordY?.item2 == 1 ? 'orange': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
   ]
 
     {/*Tabla de Auscultaciones MVL*/}
     const columnsF2MVL = [
-      {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
-      {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
-      {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ? 'red': ''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+      {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ? 'red': ''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
    ]
   
     const columnsF3MVL = [
-      {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ? 'red': ''}}>{cell}</div>;}},
-      {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ? 'red': ''}}>{cell}</div>;}},  
-      {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ? 'red': ''}}>{cell}</div>;}},
-      {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ? 'red': ''}}>{cell}</div>;}},
-      {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ? 'red': ''}}>{cell}</div>;}},
+      {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ? 'red': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ? 'red': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},  
+      {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ? 'red': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ? 'red': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ? 'red': ''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
       ]
   
     const columnsMVL = [
       {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, },
-      {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.distOri?.item2 == true ? 'red': ''}}>{cell}</div>}},
-      {dataField: 'tipoCalz.item1', text: <Translation ns= "global">{(t) => <>{t('TipoCalzada')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.tipoCalz?.item2 == true ? 'red': ''}}>{cell}</div>}},
-      {dataField: 'marcaViaria.item1', text: <Translation ns= "global">{(t) => <>{t('MarcaViaria')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.marcaViaria?.item2 == true ? 'red': ''}}>{cell}</div>}},
-      {dataField: 'contrasteDia.item1', text: <Translation ns= "global">{(t) => <>{t('ContrasteDia')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteDia?.item2 == true ? 'red': ''}}>{cell}</div>}},
-      {dataField: 'contrasteNoche.item1', text: <Translation ns= "global">{(t) => <>{t('ContrasteNoche')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteNoche?.item2 == true ? 'red': ''}}>{cell}</div>}},
-      {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == true ? 'red': ''}}>{cell}</div>}},
-      {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == true ? 'red': ''}}>{cell}</div>}}
+      {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.distOri?.item2 == true ? 'red': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'tipoCalz.item1', text: <Translation ns= "global">{(t) => <>{t('TipoCalzada')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.tipoCalz?.item2 == true ? 'red': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'marcaViaria.item1', text: <Translation ns= "global">{(t) => <>{t('MarcaViaria')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.marcaViaria?.item2 == true ? 'red': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'contrasteDia.item1', text: <Translation ns= "global">{(t) => <>{t('ContrasteDia')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteDia?.item2 == true ? 'red': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'contrasteNoche.item1', text: <Translation ns= "global">{(t) => <>{t('ContrasteNoche')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteNoche?.item2 == true ? 'red': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == true ? 'red': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == true ? 'red': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
     ]
 
 
    {/*Tabla de Auscultaciones FIS*/}
    const columnsF2FIS = [
-    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
-    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
-    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
   ]
 
   const columnsF3FIS = [
-    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
   ]
 
   const columnsF4FIS = [
-    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
   ]
 
   const columnsFIS = [
-    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'incidencia.item1', text: <Translation ns= "global">{(t) => <>{t('Incidencias')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'pci.item1', text: <Translation ns= "global">{(t) => <>{t('PCI')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'ift.item1', text: <Translation ns= "global">{(t) => <>{t('IFT')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'ifp.item1', text: <Translation ns= "global">{(t) => <>{t('IFP')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'porcFisTot.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisTot')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'longFisLongi.item1', text: <Translation ns= "global">{(t) => <>{t('LongFisLongit')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'porcSupFisLongi.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisLongi')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'longFisTrans.item1', text: <Translation ns= "global">{(t) => <>{t('LongFisTrans')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'porcSupFisTrans.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisTrans')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'areaOtrasSup.item1', text: <Translation ns= "global">{(t) => <>{t('AreaOtrasSupFis')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'incidencia.item1', text: <Translation ns= "global">{(t) => <>{t('Incidencias')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'pci.item1', text: <Translation ns= "global">{(t) => <>{t('PCI')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'ift.item1', text: <Translation ns= "global">{(t) => <>{t('IFT')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'ifp.item1', text: <Translation ns= "global">{(t) => <>{t('IFP')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'porcFisTot.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisTot')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'longFisLongi.item1', text: <Translation ns= "global">{(t) => <>{t('LongFisLongit')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'porcSupFisLongi.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisLongi')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'longFisTrans.item1', text: <Translation ns= "global">{(t) => <>{t('LongFisTrans')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'porcSupFisTrans.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupFisTrans')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'areaOtrasSup.item1', text: <Translation ns= "global">{(t) => <>{t('AreaOtrasSupFis')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
   ]
 
   const columnsFIS2 = [
-    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'porcOtrasSup.item1', text: <Translation ns= "global">{(t) => <>{t('PorcOtrasSupFis')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'areaSupCuart.item1', text: <Translation ns= "global">{(t) => <>{t('AreaSupCuart')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'porcSupCuart.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupCuart')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'baches.item1', text: <Translation ns= "global">{(t) => <>{t('Baches')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'porcOtrasSup.item1', text: <Translation ns= "global">{(t) => <>{t('PorcOtrasSupFis')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'areaSupCuart.item1', text: <Translation ns= "global">{(t) => <>{t('AreaSupCuart')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'porcSupCuart.item1', text: <Translation ns= "global">{(t) => <>{t('PorcSupCuart')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'baches.item1', text: <Translation ns= "global">{(t) => <>{t('Baches')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
   ]
 
 
 
    {/*Tabla de Auscultaciones ROD*/}
    const columnsF2ROD = [
-    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
-    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
-    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc?.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
   ]
 
   const columnsF3ROD = [
-    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t('PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t('NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t('NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
   ]
 
   const columnsF4ROD = [
-    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
+    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t('Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t('ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra?.item2 == true ?'#FD0303':''}}>{cell}</div>;}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
   ]
 
   const columnsROD = [
-    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'incidencia.item1', text: <Translation ns= "global">{(t) => <>{t('Incidencias')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'profRodIzq.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodIzq')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'profRodDer.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodDer')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'profRodMax.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodMax')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+    {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t('Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t('DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'incidencia.item1', text: <Translation ns= "global">{(t) => <>{t('Incidencias')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'profRodIzq.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodIzq')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'profRodDer.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodDer')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'profRodMax.item1', text: <Translation ns= "global">{(t) => <>{t('ProfRodMax')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
   ]
 
   return (
     <div>
       <br/>
+      {/*CARGA DE FICHERO*/}
       <div className='file-card' >
            <div className='file-inputs' style={{marginRight: '80%'}}>
          <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
@@ -618,15 +646,14 @@ function AnalizAusc(){
          </div>
          :''}
 
-         </div>
+      </div>
          
-         
-         
-         
-          <br/> 
-          <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
-          <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
-          <br/><br/><br/>  
+      {/*BOTONES ANALIZAR Y CARGAR*/}     
+      <br/> 
+      <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
+      <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+      <br/><br/>     
+
 
       {/*Mensajes de error*/}
       { msgOutBoolKO ? 
@@ -653,7 +680,9 @@ function AnalizAusc(){
       </div>
       : ""}
 
-<br/><br/>  
+      <br/><br/>  
+
+      {/*TABLA DE LA AUSCULTACIÓN CON EL ANÁLISIS. CADA TIPO TIENE UNA ESTRUCTURA DISTINTA*/}
         {VerTablaDEF == true ?
         <div>
 
@@ -681,6 +710,9 @@ function AnalizAusc(){
             pagination={pagination}
             filter={filterFactory()}
             bordered={false}
+            wrapperClasses="table-responsive"
+            headerWrapperClasses="table-responsive"
+            classes="w-auto text-nowrap"
           />
         </div>
         : ""}
@@ -858,7 +890,7 @@ function AnalizAusc(){
         </div>
         : ""} 
 
-{VerTablaROD == true ?
+    {VerTablaROD == true ?
         <div>
 
           <BootstrapTable 
