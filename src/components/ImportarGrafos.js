@@ -18,16 +18,26 @@ import Col from 'react-bootstrap/Col'
 function ImportarGrafos(){
   
   const { t, i18n } = useTranslation(['global']);
-  const url = "https://localhost:44301/api/analizarauscultaciones";
+  const url = "https://localhost:44301/api/importargrafos";
+  const urlComp = "https://localhost:44301/api/importargrafos/compare";
   
 
   const [VerTablaDEF, setVerTablaDEF] = useState(false);
+  const [VerTablaCOMP, setVerTablaCOMP] = useState(false);
+  const [BtnComp, setVerBtnCom] = useState(false);
+  const [MensjExt, setVerMensExt] = useState(false);
 
   const config = {
     headers: {
         'content-type': 'multipart/form-data'
     }
   }
+
+  var slice;
+  var msg="El fichero se ha cargado correctamente";
+  var msgext="La extensión del fichero no es correcta";
+
+  const dataok = [{ codigo: "error7", tipo: 1, línea: 0, listDatosError: "Cargado correctamente" } ];
 
   const [items, setItems] = useState([]);
   const [archivo, setArchivo]=useState(null);
@@ -48,110 +58,210 @@ function ImportarGrafos(){
     className: 'paginationCustom'
   })
   
-  const [TablaAuscultacionesF2, actualizarTablaAuscultacionesF2] = useState([]);
-  const [TablaAuscultacionesF3, actualizarTablaAuscultacionesF3] = useState([]);
-  const [TablaAuscultacionesCuerpo, actualizarTablaAuscultacionesCuerpo] = useState([]);
+  const [TablaWarnings, actualizarTablaWarnings] = useState([]);
+  const [TablaComparative, actualizarTablaComparative] = useState([]);
+
   const insertarArchivos=async()=>{
 
     const f = new FormData();
-    console.log(archivo);
+    console.log("ARCHIVO",archivo);
     f.append('Fichero',archivo);
     console.log(f);
-
+    setVerMensExt(false);
+    setVerTablaDEF(false);
    
     await axios.post(url, f, config)
     .then(response =>{
 
       console.log(response?.data); 
       console.log("OK");
-      setVerTablaDEF(true);
-      actualizarTablaAuscultacionesF2(response.data.fila2);
-      actualizarTablaAuscultacionesF3(response.data.fila3);
-      actualizarTablaAuscultacionesCuerpo(response.data.cuerpo);
- 
+      
+      var data = response?.data[0];
+      var ext = response?.data;
 
+      if (ext != "ext") { 
+        if (data != null) {        
+          console.log("Codigo", response?.data[0].codigo); 
+          console.log("Tipo", response?.data[0].tipo);
+          console.log("Linea", response?.data[0].línea); 
+          console.log("Lista de Errores", response?.data[0].listDatosError); 
+          setVerTablaDEF(true);
+          actualizarTablaWarnings(response.data);
+        }else{
+          console.log("Tabla COMP", VerTablaCOMP)
+          
+          setVerBtnCom(true);
+          console.log("Gestión Boton Comparar", BtnComp)
+          console.log("Datos OK", dataok);
+          setVerTablaDEF(true);
+          actualizarTablaWarnings(dataok);
+        }
+    }else{
+      setVerMensExt(true);
+      console.log("Extensión errónea", MensjExt)
+    }
     }).catch(error=>{
-
-
-      console.log("prueba2");
+      console.log("URL", url);
       console.log("ERROR: ", error);
 
     })        
   }
 
 
+  const compareArchivos=async()=>{
+
+    const f = new FormData();
+   
+    console.log("ARCHIVO",archivo);
+    f.append('Fichero',archivo);
+    console.log(f);
+    setVerTablaCOMP(false);
+
+    await axios.post(urlComp, f, config)
+    .then(response =>{
+
+      //var dataCatalogo = [];
+      var dataCatalogo = {"cuerpo": [] };
+
+      console.log(response?.data); 
+      console.log("OK");
+      console.log("Dato 0", response?.data[0]); 
+      console.log("Dato 0 tablaCatalogo", response?.data[0].tablaCatalogo);
+      console.log("Dato 0 Item1", response?.data[0].tablaCatalogo.item1);
+      console.log("Dato 0 Item2", response?.data[0].tablaCatalogo.item2);
+      console.log("Dato 0 Item3", response?.data[0].tablaCatalogo.item3);
+      
+      var data = response?.data;
+      if (data != null) {
+        slice = data.slice(0, 0 + 50000);
+        slice.forEach((iter) => {
+          dataCatalogo.cuerpo.push({
+            item1: iter.tablaCatalogo.item1,
+            item2: iter.tablaCatalogo.item2,
+            item3: iter.tablaCatalogo.item3
+          });
+        });
+      }
+      
+      console.log("dataCatalogo ", dataCatalogo);
+      console.log("dataCatalogo.cuerpo 2", dataCatalogo.cuerpo);
+      setVerTablaCOMP(true);
+      actualizarTablaComparative(dataCatalogo.cuerpo);
+
+    }).catch(error=>{
+      console.log("URL", url);
+      console.log("ERROR: ", error);
+
+    })        
+  }
  
-  {/*Tabla de Auscultaciones DEF*/}
-  const columnsF2DEF = [
-    {dataField: 'nombreTramo.item1', text: <Translation ns= "global">{(t) => <>{t('NombrTram')}</>}</Translation>},
-    {dataField: 'codigoCarretera.item1', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation>},
-    {dataField: 'fechaAusc.item1', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.fechaAusc.item2 == true ?'#FD0303':''}}>{`${cell != null ? cell.substring(0,10) : cell}`}</div>;}}
+  {/*Tabla de Warnings*/}
+  const columnsWarn = [
+    {dataField: 'tipo', text: <Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{width: '50%', backgroundColor:row.tipo == false ?'#FD0303':'#17b201', color:row.tipo == false ?'#FD0303':'#17b201'}}>{cell}</div>;},}, 
+    {dataField: 'codigo', text: <Translation ns= "global">{(t) => <>{t('mensaje')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${EvaluarMsgError(row.codigo)} `}</div>;},},
+    {dataField: 'línea', text: <Translation ns= "global">{(t) => <>{t('info')}</>}</Translation>, formatter: (cell, row) =>{return <div>{row.tipo == false ? `${"Registro: "} ${row.línea} ${'\r\n'} ${row.listDatosError}`:`${"Proceso de copia a carpeta temporal realizado."}`}</div>;},}
  ]
-  const columnsF3DEF = [
-    {dataField: 'comanda.item1', text: <Translation ns= "global">{(t) => <>{t( 'Comanda')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.comanda.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'claveObra.item1', text: <Translation ns= "global">{(t) => <>{t( 'ClaveObra')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.claveObra.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'pkIni.item1', text: <Translation ns= "global">{(t) => <>{t( 'PKIni')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.pkIni.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVia.item1', text: <Translation ns= "global">{(t) => <>{t( 'NumVia')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVia.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
-    {dataField: 'numVias.item1', text: <Translation ns= "global">{(t) => <>{t( 'NumVias')}</>}</Translation>, formatter: (cell, row) =>{return <div style={{backgroundColor: row.numVias.item2 == true ?'#FD0303':''}}>{cell}</div>;}},
 
-  ]
+  {/*Tabla de Comparative*/}
+  const columnsComp = [
+    {dataField: 'item3', text: <Translation ns= "global">{(t) => <>{t('Tipo')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}, 
+    {dataField: 'item1.codCarretera', text: <Translation ns= "global">{(t) => <>{t('mensaje')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
+    {dataField: 'item1.origen', text: <Translation ns= "global">{(t) => <>{t('info')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
+ ]
 
-  const columnsDEF = [
-      {dataField: 'linea.item1', text: <Translation ns= "global">{(t) => <>{t( 'Linea')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'distOri.item1', text: <Translation ns= "global">{(t) => <>{t( 'DistOri')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxNoCorrInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxIntCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxNoCorrExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxExtCorr')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'incidencias.item1', text: <Translation ns= "global">{(t) => <>{t( 'Incidencia')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'temperatura.item1', text: <Translation ns= "global">{(t) => <>{t( 'TempPavimento')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'radiCurvMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'RadiCurvMaxInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'radiCurvMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'RadiCurvMaxExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxInt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeInt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'deflMaxExt.item1', text: <Translation ns= "global">{(t) => <>{t( 'DeflMaxEjeExt')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'coefTemp.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoefTemp')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'coefHumedad.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoefHum')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true},
-      {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t( 'CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true}
-   ]
 
+    //Evaluamos el mensaje de la API
+    const EvaluarMsgError=(Msgerror)=>{
+        console.log("Mensaje error", Msgerror);      
+ 
+        //En función del error o warning, se mostarrá un mensaje
+        switch(Msgerror){
+       
+          //Error1
+          case 'error1': return "Fichero inválido: El contenido del fichero es corrupto o inválido y no se ha podido leer";
+
+          //Error2
+          case 'error2': return "Campos obligatorios vacíos";
+
+          //Error3    
+          case 'error3': return "Campos con formato erróneo";
+        
+          //Error4
+          case 'error4': return "Campos de tipo listado con valor no existente";
+  
+          //Error5
+          case 'error5': return "Error del contenido del KML";
+ 
+          //Error6
+          case 'error6':  return "Fichero Archivo_Track. Fallo en la lectura de la estructura del grafo";
+
+          //Carga ok
+          case 'error7':  return "Archivo cargado";
+ 
+     }
+ 
+    }
 
   return (
     <div>
       <br/>
           <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
           <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
-          <br/><br/><br/>  
+          
+          {MensjExt == true ?
+            <div>
+              <br/><br/> 
+              <div className="alert alert-danger">
+                {msgext}
+              </div>
+            </div>
+          : ""}
+          
+          {BtnComp == true ?
+            <div>
+              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>compareArchivos()}><Translation ns= "global">{(t) => <>{t('Comparar')}</>}</Translation></button>
+              <br/><br/>           
+              <div className="alert alert-success">            
+                {msg}
+              </div>
+            </div>
+          : ""}
+          <br/><br/><br/>
 
         {VerTablaDEF == true ?
+        
         <div>
-
+          <div style={{  color: '#252831', width: '100%', listStyle: 'none', marginLeft: '50%', justifyContent: 'space-between', fontSize: '20px'}} > 
+            <label><Translation ns= "global">{(t) => <>{t('MensajeSistema')}</>}</Translation></label>
+          </div>
           <BootstrapTable 
             bootstrap4 
             keyField='id' 
-            columns={columnsF2DEF} 
-            data={TablaAuscultacionesF2}
+            columns={columnsWarn} 
+            data={TablaWarnings}
             bordered={false}
-          />
+          >
+          </BootstrapTable>  
           <br/><br/> 
-          <BootstrapTable 
-            bootstrap4 
-            keyField='id' 
-            columns={columnsF3DEF} 
-            data={TablaAuscultacionesF3}
-            bordered={false}
-          />
-          <br/><br/> 
-          <BootstrapTable 
-            bootstrap4 
-            keyField='id' 
-            columns={columnsDEF} 
-            data={TablaAuscultacionesCuerpo}
-            pagination={pagination}
-            filter={filterFactory()}
-            bordered={false}
-          />
          </div>
           : ""}
       
+      {VerTablaCOMP == true ?
+        
+        <div>
+          <BootstrapTable 
+            bootstrap4 
+            keyField='id' 
+            columns={columnsComp} 
+            data={TablaComparative}
+            bordered={false}
+          >
+          </BootstrapTable>  
+          <br/><br/> 
+         </div>
+          : ""}
+
+
       </div>
 
   )
