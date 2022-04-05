@@ -1,13 +1,13 @@
 import * as AiIcons from 'react-icons/ai';
 import * as FaIcons from 'react-icons/fa';
-import Idioma from "../components/Idioma";
+import Idioma from "../Idioma";
 import styled from 'styled-components';
 import SubMenu from './SubMenu';
 import React, { Fragment } from 'react';
 import { IconContext } from 'react-icons/lib';
 import { NavLink } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
-import '../css/Sidebar.css';
+import '../../css/Sidebar.css';
 
 let showSidebarClick = false;
 

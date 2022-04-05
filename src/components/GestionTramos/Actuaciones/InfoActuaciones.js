@@ -7,10 +7,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Select from 'react-select'
 import { View, Text } from "react-native";
-import '../css/Menu.css';
+import '../../../css/Menu.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
-import Tab from "./Tab";
+import Tab from "../../Tab";
 import { Form } from 'reactstrap';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 

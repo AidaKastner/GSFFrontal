@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import Cookies from 'universal-cookie';
-import Sidebar from "../components/Sidebar";
-import SidebarBack from "../components/SidebarBack";
+import Sidebar from "../components/MenuLateral/Sidebar";
+import SidebarBack from "../components/MenuLateral/SidebarBack";
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 

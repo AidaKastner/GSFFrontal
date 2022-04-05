@@ -4,21 +4,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory from 'react-bootstrap-table2-filter';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import '../css/Pagination.css';
-import '../css/Menu.css';
-import '../css/Table.css';
+import '../../../css/Pagination.css';
+import '../../../css/Menu.css';
+import '../../../css/Table.css';
 import { Translation } from 'react-i18next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-import Tab from "./Tab";
+import Tab from "../../Tab";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Spinner from "../components/Spinner"; 
+import Spinner from "../../Spinner"; 
 import Container from 'react-bootstrap/Container';
-import GoogleMapComponent from '../components/GoogleMapComponent';
-import EditarTramo from "../components/EditarTramo";
+import GoogleMapComponent from '../../GoogleMapComponent';
+import EditarTramo from "./EditarTramo";
 import ModalTitle from "react-bootstrap/ModalTitle";
 
 var msg= '';

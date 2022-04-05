@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import CargarExcel from "../components/CargarExcel";
-import VerActuaciones from "../components/VerActuaciones";
-import Sidebar from "../components/Sidebar";
+import VerActuaciones from "../components/GestionTramos/Actuaciones/VerActuaciones";
+import Sidebar from "../components/MenuLateral/Sidebar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form } from "react-bootstrap";
 import '../css/Menu.css';
 import { useTranslation } from 'react-i18next';
-import SidebarBack from "../components/SidebarBack";
+import SidebarBack from "../components/MenuLateral/SidebarBack";
 import { useHistory } from 'react-router-dom';
 
 
@@ -25,7 +24,7 @@ function CargarActuaciones(props){
       //Si la sesión no está iniciada, se redirige a la pantalla de Login
       if(authToken == null || authToken == "null"){
         console.log("Sesión no iniciada");
-        routerHistory.push('');
+        //routerHistory.push('');
       }
      }
     return () => { isMounted = false };

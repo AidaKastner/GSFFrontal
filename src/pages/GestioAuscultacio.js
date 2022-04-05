@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import SidebarBack from "../components/SidebarBack";
-import Sidebar from "../components/Sidebar";
+import SidebarBack from "../components/MenuLateral/SidebarBack";
+import Sidebar from "../components/MenuLateral/Sidebar";
 import { useHistory } from 'react-router-dom';
-import AnalisisAuscultaciones from "../components/AnalizAusc";
+import AnalisisAuscultaciones from "../components/GestionAuscultaciones/CargarAuscultaciones/AnalizAusc";
 
 function GestioAuscultacio(props) {
   const { t } = useTranslation(['global']);

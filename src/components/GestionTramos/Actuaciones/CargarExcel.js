@@ -1,8 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import axios  from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Error from "../components/Error";
-import '../css/Menu.css';
+import '../../../css/Menu.css';
 import { useTranslation } from 'react-i18next';
 import { Translation } from 'react-i18next';
 
