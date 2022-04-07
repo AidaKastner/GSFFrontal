@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import ImportarGrafos from "../components/ImportarGrafos";
+import ImportarGrafos from "../components/GestionTramos/Grafos/ImportarGrafos";
 import Sidebar from "../components/MenuLateral/Sidebar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Menu.css';
