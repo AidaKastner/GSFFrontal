@@ -22,10 +22,6 @@ export const SidebarData = [
 
         subNav: [
             {
-                title: <Translation ns= "global">{(t) => <>{t('impGraf')}</>}</Translation>,
-                path:'/menu'
-            },
-            {
                 title: <Translation ns= "global">{(t) => <>{t('verEditCyT')}</>}</Translation>,
                 path:'/VerEditCarTram'
             },
