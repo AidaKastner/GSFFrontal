@@ -8,6 +8,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+import Spinner from "../../Spinner"; 
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -26,6 +27,7 @@ function ImportarGrafos(){
   const [BtnComp, setVerBtnCom] = useState(false);
   const [MensjExt, setVerMensExt] = useState(false);
   const [BtnApli, setVerBtnApli] = useState(false);
+  const [content, setcontent] = useState(null);
 
   const config = {
     headers: {
@@ -85,6 +87,7 @@ function ImportarGrafos(){
 
   const insertarArchivos=async()=>{
 
+    setcontent(null);
     const f = new FormData();
     console.log("ARCHIVO",archivo);
     f.append('Fichero',archivo);
@@ -92,6 +95,7 @@ function ImportarGrafos(){
     setVerMensExt(false);
     setVerTablaDEF(false);
     setVerBtnApli(false);
+    setVerTablaCOMP(false);
    
     await axios.post(url, f, config)
     .then(response =>{
@@ -110,6 +114,7 @@ function ImportarGrafos(){
           console.log("Lista de Errores", response?.data[0].listDatosError); 
           setVerTablaDEF(true);
           actualizarTablaWarnings(response.data);
+          setcontent(response);
         }else{
           console.log("Tabla COMP", VerTablaCOMP)
           
@@ -132,7 +137,7 @@ function ImportarGrafos(){
 
 
   const compareArchivos=async()=>{
-
+    setcontent(null);
     const f = new FormData();
    
     console.log("ARCHIVO",archivo);
@@ -176,6 +181,7 @@ function ImportarGrafos(){
       setVerTablaCOMP(true);
       actualizarTablaComparative(dataCatalogo?.cuerpo);
       setVerBtnApli(true);
+      setcontent(response);
 
     }).catch(error=>{
       console.log("URL", url);
@@ -209,7 +215,7 @@ function ImportarGrafos(){
   const columnsComp = [
  
     {dataField: 'item3', text: <Translation ns= "global">{(t) => <>{t('accion')}</>}</Translation>, formatter: (cell, row) =>{return <div>{`${EvaluarAccion(row.item3)} `}</div>;},},
-    {dataField: 'item1.origen', text: <Translation ns= "global">{(t) => <>{t('origen')}</>}</Translation> },
+    {dataField: 'item1.origen', text: <Translation ns= "global">{(t) => <>{t('origen')}</>}</Translation> , formatter: (cell, row) =>{return <div>{`${row.item1.origen} ${row} `}</div>;},},
     {dataField: 'item1.codCarretera', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation> }, 
     {dataField: 'item1.pkIni', text: <Translation ns= "global">{(t) => <>{t('PKInicial')}</>}</Translation> },
     {dataField: 'item1.pkFin', text: <Translation ns= "global">{(t) => <>{t('PKFinal')}</>}</Translation> },
@@ -279,13 +285,30 @@ function ImportarGrafos(){
    
       }
 
+     /* if (content===null) 
+      return (
+        <div className="u-full-width" style={{marginLeft:'50%'}}>
+          <Spinner /> 
+        </div>
+      );*/
+
 
   return (
     <div>
       <br/>
-          <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
-          <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
-          
+          <input type="file" name ="files" onChange={(e)=>{subirArchivos(e.target.files[0]); setVerTablaCOMP(false); setVerTablaDEF(false)}} />
+          {BtnComp == true ?
+            <div>
+              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
+              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>compareArchivos()}><Translation ns= "global">{(t) => <>{t('Comparar')}</>}</Translation></button>
+            </div>
+          : 
+            <div>
+              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>        
+            </div>          
+          }
+          <br/><br/><br/>
+
           {MensjExt == true ?
             <div>
               <br/><br/> 
@@ -294,13 +317,6 @@ function ImportarGrafos(){
               </div>
             </div>
           : ""}
-          
-          {BtnComp == true ?
-            <div>
-              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>compareArchivos()}><Translation ns= "global">{(t) => <>{t('Comparar')}</>}</Translation></button>
-            </div>
-          : ""}
-          <br/><br/><br/>
 
         {VerTablaDEF == true ?
         
