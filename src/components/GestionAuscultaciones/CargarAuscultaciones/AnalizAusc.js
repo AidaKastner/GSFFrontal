@@ -21,8 +21,8 @@ import '../../../css/FileUpload.scss';
 function AnalizAusc(){
   
   const { t, i18n } = useTranslation(['global']);
-  const url = "https://localhost:44301/api/analizarauscultaciones";
-  
+  const url = "https://localhost:44301/api/analizarauscultaciones/AnalizarAusc/";
+  const url2 = "https://localhost:44301/api/analizarauscultaciones/GuardarAusc/";
 
   
 
@@ -50,6 +50,11 @@ function AnalizAusc(){
     alwaysShowAllBtns: true,
     className: 'paginationCustom'
   })
+
+   //Campos Actuación
+   const [FormAuscultacion, actualizarFormAuscultacion] = useState({
+    Sobreescribir: false, AdaptarCarriles: true, BuscarInicio: true
+});
   
   const [VerTablaDEF, setVerTablaDEF] = useState(false);
   const [TablaAuscultacionesDEFF2, actualizarTablaAuscultacionesDEFF2] = useState([]);
@@ -464,17 +469,36 @@ function AnalizAusc(){
 
       /*Guardar Auscultación*/
       const GuardarAuscultacion=async()=>{
-  
-        axios.post(url + "/" + TipoAuscultacion, config).then(response=>{
-          console.log(response);
+        console.log("GuardarAuscultacion");
+        const data = new FormData();
+
+        data.append('TipoAuscultacion', TipoAuscultacion)
+        data.append('Sobreescribir', FormAuscultacion.Sobreescribir)
+        data.append('AdaptarCarriles', FormAuscultacion.AdaptarCarriles)
+        data.append('BuscarInicio', FormAuscultacion.BuscarInicio)
+        console.log("data.append ", data);
+
+        axios.post(url2, data, config).then(response=>{
+          console.log("response: ", response);
   
         }).catch(error=>{
-          console.log(error);
+          console.log("error: ", error);
 
       })   
     }
 
+    const handleChange=async e=>{
+      //e.persist();
+      console.log("opción:", e);
+     
+      await actualizarFormAuscultacion({
+          ...FormAuscultacion,
+          [e.target.name]: e.target.value
+        
+      });
 
+      console.log(FormAuscultacion);  
+ }
  
   {/*Tabla de Auscultaciones DEF*/}
   const columnsF2DEF = [
@@ -674,10 +698,11 @@ function AnalizAusc(){
 
   return (
     <div>
+      <div>
       <br/>
       {/*CARGA DE FICHERO*/}
       <div className='file-card' >
-           <div className='file-inputs' style={{marginRight: '80%'}}>
+        <div className='file-inputs'>
          <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
                <button>
                  <i>
@@ -692,20 +717,78 @@ function AnalizAusc(){
            <FontAwesomeIcon icon={faFileAlt} />
            {archivo?.name }
            <div className='actions'>
-           <FontAwesomeIcon
-           style={{marginLeft: '70%'}} 
-           icon={faTrash} 
-           onClick={() => borrarArchivos()} />
+            <FontAwesomeIcon
+            style={{marginLeft: '70%'}} 
+            icon={faTrash} 
+            onClick={() => borrarArchivos()} />
            </div>
          </div>
          :''}
 
       </div>
+                                                                                                        
          
       {/*BOTONES ANALIZAR Y CARGAR*/}     
-      <br/> 
-      <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
-      <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+      
+      <Row>
+        <Col xs={2}>
+          <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
+          <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+        </Col>
+
+        {validacionOK ?
+          <Col xs={10}>
+          <input type="checkbox" 
+            name="Sobreescribir"
+            defaultChecked={FormAuscultacion.Sobreescribir}
+            style={{marginTop: '3%'}}
+            onChange={(e) => {
+              handleChange({
+                target: {
+                  name: e.target.name,
+                  value: e.target.checked,
+                },
+              });
+            }}
+            />{" "}
+            <Translation ns= "global">{(t) => <>{t('Sobreescribir')}</>}</Translation>      
+            
+            <input 
+            type="checkbox" 
+            name="AdaptarCarriles" 
+            defaultChecked={FormAuscultacion.AdaptarCarriles}
+            style={{marginLeft: '3%'}}
+            onChange={(e) => {
+              handleChange({
+                target: {
+                  name: e.target.name,
+                  value: e.target.checked,
+                },
+              });
+            }}
+            />{" "}<Translation ns= "global">{(t) => <>{t('AdaptarCarriles')}</>}</Translation>
+            
+            <input 
+            type="checkbox" 
+            name="BuscarInicio" 
+            defaultChecked={FormAuscultacion.BuscarInicio}
+            style={{marginLeft: '3%'}}
+            onChange={(e) => {
+              handleChange({
+                target: {
+                  name: e.target.name,
+                  value: e.target.checked,
+                },
+              });
+            }}
+            />{" "}<Translation ns= "global">{(t) => <>{t('BuscarInicio')}</>}</Translation>
+
+          </Col> 
+        : null}
+        
+        </Row>
+      </div>
+      
       <br/><br/>     
 
 
