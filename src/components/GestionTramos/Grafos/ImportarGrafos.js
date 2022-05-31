@@ -32,6 +32,7 @@ function ImportarGrafos(){
   const [BtnComp, setVerBtnCom] = useState(false);
   const [MensjExt, setVerMensExt] = useState(false);
   const [BtnApli, setVerBtnApli] = useState(false);
+
   const [dataCompareConst, setdatadataCompare] = useState([{"tablaCatalogo": {"item1":{"accion": null, "autoriza": null, "codCarretera": null, "comarca": null, "competente": null, "conservacion": null,"denominacion": null, "desFin": null, "desIni": null, "explotacion": null, "funReal": null, "gestion": null, "idCarretera": null, "idGraf": null, "idTramo": null,"mFin": null,"mIni": null, "motivo_actualizacion": null, "numCarrCre": null,"numCarrDec": null,"origen": null,"pkFin": null,"pkIni": null,"tecReal": null,"tipoCalzada": null,"tipo_Via": null,"xFin": null,"xIni": null,"yFin": null,"yIni": null},"item2":null,"item3": null,"item4":{"codCarreteraAcc": null,"competenteAcc": null,"conservacionAcc": null,"descFinAcc": null,"descIniAcc": null,"explotacionAcc": null,"funRealAcc": null,"gestionAcc": null,"idAct": null,"numCarrCreAcc": null,"numCarrDecAcc": null,"pkFinAcc": null,"pkIniAcc": null,"tecRealAcc": null,"tipoCalzadaAcc": null}}}]);
 
   const [checkedState, setCheckedState] = useState(
@@ -364,6 +365,7 @@ function ImportarGrafos(){
     console.log("dataBack", dataBack);
   };
 
+  const [content, setcontent] = useState(null);
 
   const config = {
     headers: {
@@ -426,6 +428,7 @@ function ImportarGrafos(){
 
   const insertarArchivos=async()=>{
 
+    setcontent(null);
     const f = new FormData();
     console.log("ARCHIVO",archivo);
     f.append('Fichero',archivo);
@@ -433,6 +436,7 @@ function ImportarGrafos(){
     setVerMensExt(false);
     setVerTablaDEF(false);
     setVerBtnApli(false);
+    setVerTablaCOMP(false);
    
     await axios.post(url, f, config)
     .then(response =>{
@@ -451,6 +455,7 @@ function ImportarGrafos(){
           console.log("Lista de Errores", response?.data[0].listDatosError); 
           setVerTablaDEF(true);
           actualizarTablaWarnings(response.data);
+          setcontent(response);
         }else{
           console.log("Tabla COMP", VerTablaCOMP)
           
@@ -473,7 +478,7 @@ function ImportarGrafos(){
 
 
   const compareArchivos=async()=>{
-
+    setcontent(null);
     const f = new FormData();
    
     console.log("ARCHIVO",archivo);
@@ -537,6 +542,7 @@ function ImportarGrafos(){
       setVerTablaCOMP(true);
       actualizarTablaComparative(dataCatalogo?.cuerpo);
       setVerBtnApli(true);
+      setcontent(response);
 
     }).catch(error=>{
       console.log("URL", url);
@@ -584,7 +590,7 @@ function ImportarGrafos(){
     
     {dataField: '', text: '', formatter: (cell, row) =>{return <div>{row.item2 === false ? <input type="checkbox" id={`custom-checkbox-${row.id}`} name={row.item1.idGraf} checked={checkedState[row.id]} onChange={(e) => handleOnChange(e, row, "fila")} /> : row.item3 !== 0 ? <input type="checkbox" id={`custom-checkbox-${row.id}`} name={row.item1.idGraf} checked={checkedState[row.id]} onChange={(e) => handleOnChange(e,row, "fila")}/> : ''}</div>;},},
     {dataField: 'item3', text: <Translation ns= "global">{(t) => <>{t('accion')}</>}</Translation>, formatter: (cell, row) =>{return <div>{row.item2 === false ? `${EvaluarAccion(row.item3)}` : row.item3 !== 0 ? `${EvaluarAccion(row.item3)}` : ''}</div>;},},
-    {dataField: 'item1.origen', text: <Translation ns= "global">{(t) => <>{t('origen')}</>}</Translation> },
+    {dataField: 'item1.origen', text: <Translation ns= "global">{(t) => <>{t('origen')}</>}</Translation> }, 
     {dataField: 'item1.codCarretera', text: <Translation ns= "global">{(t) => <>{t('CodCarr')}</>}</Translation> }, 
     {dataField: 'item1.pkIni', text: <Translation ns= "global">{(t) => <>{t('PKInicial')}</>}</Translation>, formatter: (cell, row) =>{return row.item3 === 0 ? <div style={{width: '100%', backgroundColor:row.item4 === false ?'#FD0303':'#17b201'}}>{row.item2 === false ? <input type="checkbox" id={`custom-checkbox-${row.id}`} name={row.item1.idGraf} checked={checkedState[row.id]} onChange={(e) => handleOnChngField(e, row, "pkIni")} /> : row.item3 !== 0 ? <input type="checkbox" id={`custom-checkbox-${row.id}`} name={row.item1.idGraf} checked={checkedState[row.id]} onChange={(e) => handleOnChngField(e,row, "pkIni")}/> : ''} {row.item1.pkIni}</div> : <div>{row.item1.pkIni}</div> ;},},  
     {dataField: 'item1.pkFin', text: <Translation ns= "global">{(t) => <>{t('PKFinal')}</>}</Translation>, formatter: (cell, row) =>{return  row.item3 === 0 ? <div style={{width: '100%', backgroundColor:row.item5 === false ?'#FD0303':'#17b201'}}>{row.item2 === false ? <input type="checkbox" id={`custom-checkbox-${row.id}`} name={row.item1.idGraf} checked={checkedState[row.id]} onChange={(e) => handleOnChngField(e, row, "pkFin")} /> : row.item3 !== 0 ? <input type="checkbox" id={`custom-checkbox-${row.id}`} name={row.item1.idGraf} checked={checkedState[row.id]} onChange={(e) => handleOnChngField(e,row, "pkFin")}/> : ''} {row.item1.pkFin}</div> : <div>{row.item1.pkFin}</div> ;},},  
@@ -653,13 +659,29 @@ function ImportarGrafos(){
        }
    
       }
+     /* if (content===null) 
+      return (
+        <div className="u-full-width" style={{marginLeft:'50%'}}>
+          <Spinner /> 
+        </div>
+      );*/
 
   return (
     <div>
       <br/>
-          <input type="file" name ="files" onChange={(e)=>subirArchivos(e.target.files[0])} />
-          <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
-          
+          <input type="file" name ="files" onChange={(e)=>{subirArchivos(e.target.files[0]); setVerTablaCOMP(false); setVerTablaDEF(false)}} />
+          {BtnComp == true ?
+            <div>
+              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
+              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>compareArchivos()}><Translation ns= "global">{(t) => <>{t('Comparar')}</>}</Translation></button>
+            </div>
+          : 
+            <div>
+              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>insertarArchivos()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>        
+            </div>          
+          }
+          <br/><br/><br/>
+
           {MensjExt == true ?
             <div>
               <br/><br/> 
@@ -668,13 +690,6 @@ function ImportarGrafos(){
               </div>
             </div>
           : ""}
-          
-          {BtnComp == true ?
-            <div>
-              <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>compareArchivos()}><Translation ns= "global">{(t) => <>{t('Comparar')}</>}</Translation></button>
-            </div>
-          : ""}
-          <br/><br/><br/>
 
         {VerTablaDEF == true ?
         
