@@ -342,5 +342,16 @@
     "NumCarrilsDeCrec": "Número Carrils Decreixent",
     "AdaptarCarriles": "Adaptar Carrils",
     "Sobreescribir": "Sobreescriure",
-    "BuscarInicio": "Buscar Inici"
+    "BuscarInicio": "Buscar Inici",
+    "AuscCargada": "Auscultació importada per a la carretera {{NomCarr}} PK {{PkIni}} + {{MIni}} -> {{PkFin}} + {{MFin}}; Subtram: {{NomTramo}}; Tipus Calçada {{TipoCalz}}; Carril {{Carril}}. Metres Importants: {{MetrosImp}}; Dades Importats: {{DatosImp}}",
+    "DatosSinImp": "Dades descartades per no cobrir la suficient longitud per a importar {{DtsSinImp}}",
+    "AuscultacionExiste": "Ja existeix una auscultació a la base de dades amb el mateix nom. No s'ha importat la auscultació.",
+    "NoCarretera": "No existeix la carretera a la base de dades.",
+    "SinDatosProxTram": "Les dades del fitxer no arriben a cap tram de la base de dades.",
+    "RevisarTramo": "Inici de fitxer fora de qualsevol tram de la base de dades. Error al identificar el carril d'un altre tram. Revisar el fitxer per a solucionar el problema.",
+    "CarrilAusSinTramo": "Error al cercar el carril de la auscultació. L'inici de les dades del fitxer d'auscultació no està contingut a cap tram.",
+    "SinCarriles": "No existeixen carrils a la base de dades per al tram al qual es troba la auscultació.",
+    "Adaptar Carriles": "La informació del nombre de carrils del fitxer i del tram no coincideix. S'adaptará la informació de {{carriles}} (Fitxer d'auscultació) a {{carillesAux}} (Informació tram).",
+    "CarrilesDifBBDD": "No coincideixen el número de carrils a l'arxiu i a la base de dades.",
+    "BuscarCarrAus": "Error al cercar el carril de la auscultació."
 }

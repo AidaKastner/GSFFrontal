@@ -465,7 +465,8 @@ function AnalizAusc(){
   }     
   }
 
-
+      const [msgOutAusCarg, guardarMsgOutAusCarg] = useState([]);
+      const [msgOutBoolOK, setMsgOutBoolOK] = useState(false);
 
       /*Guardar Auscultación*/
       const GuardarAuscultacion=async()=>{
@@ -479,7 +480,32 @@ function AnalizAusc(){
         console.log("data.append ", data);
 
         axios.post(url2, data, config).then(response=>{
+          console.log("POST");
           console.log("response: ", response);
+
+          var NumFilas = response?.data.auscCargadas.length;
+          console.log("Num Filas: ", NumFilas);
+          if(NumFilas > 0){
+            console.log(1);
+          setMsgOutBoolOK(true);
+          console.log(2);
+          var Auscultaciones = response?.data.auscCargadas;
+            var Id = 0;
+            for(var i=0; i<NumFilas; i++){
+              console.log("Auscultación: ", Auscultaciones[i]);
+              var msgOK = <Translation ns= "global">{(t) => <>{t('AuscCargada', { NomCarr: Auscultaciones[i].nomCarretera, PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni,
+                PkFin: Auscultaciones[i].pkFin, MFin: Auscultaciones[i].mFin, NomTramo: Auscultaciones[i].nombreTramo, TipoCalz: Auscultaciones[i].tipoCalzada, Carril: Auscultaciones[i].carriles,
+                MetrosImp: Auscultaciones[i].metrosImportados, DatosImp: Auscultaciones[i].totalDatos })}</>}</Translation>
+                Id += 1;
+                guardarMsgOutAusCarg(oldArray => [...oldArray, {id: i + 1, name: msgOK}]);
+                console.log("i: ", i);
+              }
+
+              if(response?.data.numDatosRestantes > 0){
+                  var msgOK = <Translation ns= "global">{(t) => <>{t('DatosSinImp', { DtsSinImp: response?.data.numDatosRestantes })}</>}</Translation>
+                  guardarMsgOutAusCarg(oldArray => [...oldArray, {id: Id + 1, name: msgOK}]);
+              }
+        }
   
         }).catch(error=>{
           console.log("error: ", error);
@@ -735,6 +761,17 @@ function AnalizAusc(){
           <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
           <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
         </Col>
+
+        { msgOutBoolOK ? 
+      <div><br/>
+       <div className="alert alert-success">
+          {/*Mostramos mensaje*/}
+          {msgOutAusCarg.map(msgOutAusCarg => (
+          <li key={msgOutAusCarg.id}>{msgOutAusCarg.name}</li>
+        ))}
+      </div>
+      </div>
+      : ""}
 
         {validacionOK ?
           <Col xs={10}>
