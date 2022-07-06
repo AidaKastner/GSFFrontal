@@ -18,10 +18,10 @@ function ImportarGrafo(props){
     console.log('AuthToken:', authToken);
     if (isMounted){
       //Si la sesión no está iniciada, se redirige a la pantalla de Login
-      if(authToken == null || authToken == "null"){
+      /*if(authToken == null || authToken == "null"){
         console.log("Sesión no iniciada");
         routerHistory.push('');
-      }
+      }*/
      }
     return () => { isMounted = false };
     }, []);
