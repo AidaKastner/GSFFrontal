@@ -36,7 +36,7 @@ function AnalizAusc(){
   const [archivo, setArchivo]=useState(null);
   const [uploadFile, setUploadFile] = useState(false);
   const [validacionOK, setValidacionOK] = useState(false);
-
+  const [ModalListar, setModalListar] = useState(false);
   
 
   const pagination = paginationFactory({
@@ -56,6 +56,13 @@ function AnalizAusc(){
     Sobreescribir: false, AdaptarCarriles: true, BuscarInicio: true
 });
   
+  const [msgOutAusCarga, guardarMsgOutAusCarga] = useState([]);
+  const [msgOutAusKOCarga, guardarMsgOutAusKOCarga] = useState([]);
+  const [msgOutBoolOKCarga, setMsgOutBoolOKCarga] = useState(false);
+  const [msgOutBoolKOCarga, setMsgOutBoolKOCarga] = useState(false);
+  const [msgOutErrCarga, guardarMsgOutErrCarga] = useState();
+
+
   const [VerTablaDEF, setVerTablaDEF] = useState(false);
   const [TablaAuscultacionesDEFF2, actualizarTablaAuscultacionesDEFF2] = useState([]);
   const [TablaAuscultacionesDEFF3, actualizarTablaAuscultacionesDEFF3] = useState([]);
@@ -117,6 +124,14 @@ function AnalizAusc(){
     setMsgOutBoolWar(false);
     setMsgOutBoolKO(false);
     setValidacionOK(false);
+
+    setMsgOutBoolOKCarga(false);
+    setMsgOutBoolKOCarga(false);
+    guardarMsgOutAusKOCarga([]);
+    guardarMsgOutAusCarga([]);
+    guardarMsgOutErrCarga("");
+
+
   }
 
   const subirArchivos=e=>{
@@ -218,14 +233,14 @@ function AnalizAusc(){
               }
 
               console.log("IDError: ", IdError);
-              
-
+            
               }
 
             if(archivo?.name?.includes("FSR") == true || archivo?.name?.includes("fsr") == true ||
               archivo?.name?.includes("FIS") == true || archivo?.name?.includes("fis") == true  ||
               archivo?.name?.includes("IRI") == true || archivo?.name?.includes("iri") == true || 
               archivo?.name?.includes("ROD") == true || archivo?.name?.includes("rod") == true){
+                console.log("análisis errores");
 
               if(response.data?.fila2[0].fechaAusc.item2 == true){
                 console.log("error fecha");
@@ -459,7 +474,7 @@ function AnalizAusc(){
 
       }).catch(error=>{
         console.log("prueba2");
-        //console.log("ERROR: ", error);
+        console.log("ERROR: ", error);
 
         setMsgOutBoolKO(true);
         var msgKO= <Translation ns= "global">{(t) => <>{t('ErrorAnalizAusc')}</>}</Translation>
@@ -468,15 +483,16 @@ function AnalizAusc(){
   }     
   }
 
-      const [msgOutAusCarga, guardarMsgOutAusCarga] = useState([]);
-      const [msgOutAusKOCarga, guardarMsgOutAusKOCarga] = useState([]);
-      const [msgOutBoolOKCarga, setMsgOutBoolOKCarga] = useState(false);
-      const [msgOutBoolKOCarga, setMsgOutBoolKOCarga] = useState(false);
-      const [msgOutErrCarga, guardarMsgOutErrCarga] = useState();
-
       /*Guardar Auscultación*/
       const GuardarAuscultacion=async()=>{
         console.log("GuardarAuscultacion");
+        setMsgOutBoolOKCarga(false);
+        setMsgOutBoolKOCarga(false);
+        guardarMsgOutAusKOCarga([]);
+        guardarMsgOutAusCarga([]);
+        guardarMsgOutErrCarga("");
+        var Auscultaciones = [];
+
         const data = new FormData();
 
         data.append('TipoAuscultacion', TipoAuscultacion)
@@ -486,18 +502,15 @@ function AnalizAusc(){
         console.log("data.append ", data);
 
         axios.post(url2, data, config).then(response=>{
-          setMsgOutBoolOKCarga(false);
-          setMsgOutBoolKOCarga(false);
+          
           console.log("POST");
           console.log("response: ", response);
 
           var NumFilas = response?.data.auscCargadas.length;
           console.log("Num Filas: ", NumFilas);
           if(NumFilas > 0){
-            console.log(1);
-          
-          console.log(2);
-          var Auscultaciones = response?.data.auscCargadas;
+
+            Auscultaciones = response?.data.auscCargadas;
             var IdKO = 0; var IdOK = 0;
 
             if(response?.data.mensjError == 1){
@@ -507,9 +520,15 @@ function AnalizAusc(){
             }
 
             for(var i=0; i<NumFilas; i++){
+
+              console.log("Valor de i: ", i);
+              console.log("Auscultación: ", Auscultaciones[i]);
+
               if (Auscultaciones[i].errorAusc > 0){
                 setMsgOutBoolKOCarga(true);
                 IdKO += 1;
+
+                /*Errores de cada auscultación*/
                 switch(Auscultaciones[i].errorAusc){       
                   case 3:
                     var msgKO = <Translation ns= "global">{(t) => <>{t('SinDatosProxTram', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
@@ -522,9 +541,6 @@ function AnalizAusc(){
                     break;
                   case 6: 
                     var msgKO = <Translation ns= "global">{(t) => <>{t('SinCarriles', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 7: 
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('Adaptar Carriles', {carriles: Auscultaciones[i].carriles, carrilesAux: Auscultaciones[i].carrilesAux, PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
                     break;
                   case 8:
                     var msgKO = <Translation ns= "global">{(t) => <>{t('CarrilesDifBBDD', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
@@ -547,16 +563,23 @@ function AnalizAusc(){
                   case 14:
                     var msgKO = <Translation ns= "global">{(t) => <>{t('Recursividad', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
                     break;
+                  default:
+                    var msgKO = <Translation ns= "global">{(t) => <>{t('ErrAusc', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                    break;
                 }
                 guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgKO}]);
 
               }else{
+                console.log("Sin error");
+                console.log("Auscultación: ", Auscultaciones[i]);
                 setMsgOutBoolOKCarga(true);
                 IdOK += 1;
-                console.log("Auscultación: ", Auscultaciones[i]);
+                
+                /*Auscultaciones dadas de alta*/
                 var msgOK = <Translation ns= "global">{(t) => <>{t('AuscCargada', { NomCarr: Auscultaciones[i].nomCarretera, PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni,
                   PkFin: Auscultaciones[i].pkFin, MFin: Auscultaciones[i].mFin, NomTramo: Auscultaciones[i].nombreTramo, TipoCalz: Auscultaciones[i].tipoCalzada, Carril: Auscultaciones[i].carriles,
                   MetrosImp: Auscultaciones[i].metrosImportados, DatosImp: Auscultaciones[i].totalDatos })}</>}</Translation>
+
                   IdOK += 1;
                   guardarMsgOutAusCarga(oldArray => [...oldArray, {id: IdOK, name: msgOK}]);
                   console.log("i: ", i);
@@ -576,7 +599,7 @@ function AnalizAusc(){
                 console.log("Adapt. Carr")
                 IdKO += 1;
                 setMsgOutBoolKOCarga(true);
-                var msgKO = <Translation ns= "global">{(t) => <>{t('AdaptarCarrilesAus', {PkIni: Auscultaciones[i].pkIni, MIniAux: Auscultaciones[i].mIni, carriles: Auscultaciones[i].carriles, carrilesAux: Auscultaciones[i].carrilesAux})}</>}</Translation>
+                var msgKO = <Translation ns= "global">{(t) => <>{t('AdaptarCarrilesAus', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni, carriles: Auscultaciones[i].carriles, carrilesAux: Auscultaciones[i].carrilesAux })}</>}</Translation>
                 guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgKO}]);
               }
             }
@@ -593,6 +616,8 @@ function AnalizAusc(){
   
         }).catch(error=>{
           console.log("error: ", error);
+          var msg = <Translation ns= "global">{(t) => <>{t('ErrCargaAusc')}</>}</Translation>
+            guardarMsgOutErrCarga(msg);
 
       })   
     }
@@ -820,7 +845,10 @@ function AnalizAusc(){
                  </i>
                  <Translation ns= "global">{(t) => <>{t('SubirFichero')}</>}</Translation>  
                </button>
+                    
+  
            </div>
+           
 
            {archivo?
            <div className='file-upload' style={{marginRight: '70%'}}>
@@ -836,6 +864,7 @@ function AnalizAusc(){
          :''}
 
       </div>
+
                                                                                                         
          
       {/*BOTONES ANALIZAR Y CARGAR*/}     
@@ -845,29 +874,6 @@ function AnalizAusc(){
           <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
           <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
         </Col>
-
-      { msgOutBoolOKCarga ? 
-      <div><br/>
-       <div className="alert alert-success">
-          {/*Mostramos mensaje*/}
-          {msgOutAusCarga.map(msgOutAusCarga => (
-          <li key={msgOutAusCarga.id}>{msgOutAusCarga.name}</li>
-        ))}
-      </div>
-      </div>
-      : ""}
-
-    { msgOutBoolKOCarga ? 
-      <div><br/>
-       <div className="alert alert-danger">
-          {/*Mostramos mensaje*/}
-          {msgOutErrCarga}
-          {msgOutAusKOCarga.map(msgOutAusKOCarga => (
-          <li key={msgOutAusKOCarga.id}>{msgOutAusKOCarga.name}</li>
-        ))}
-      </div>
-      </div>
-      : ""}
 
         {validacionOK ?
           <Col xs={10}>
@@ -921,11 +927,33 @@ function AnalizAusc(){
         
         </Row>
       </div>
-      
-      <br/><br/>     
+
+    {/*Mnesajes carga Auscultaciones*/}
+      { msgOutBoolOKCarga ? 
+      <div><br/>
+       <div className="alert alert-success">
+          {/*Mostramos mensaje*/}
+          {msgOutAusCarga.map(msgOutAusCarga => (
+          <li key={msgOutAusCarga.id}>{msgOutAusCarga.name}</li>
+        ))}
+      </div>
+      </div>
+      : ""}
+
+    { msgOutBoolKOCarga ? 
+      <div><br/>
+       <div className="alert alert-danger">
+          {/*Mostramos mensaje*/}
+          {msgOutErrCarga}
+          {msgOutAusKOCarga.map(msgOutAusKOCarga => (
+          <li key={msgOutAusKOCarga.id}>{msgOutAusKOCarga.name}</li>
+        ))}
+      </div>
+      </div>
+      : ""}  
 
 
-      {/*Mensajes de error*/}
+      {/*Mensajes análisis fichero*/}
       { msgOutBoolKO ? 
       <div><br/>
        <div className="alert alert-danger">

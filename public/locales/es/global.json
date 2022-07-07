@@ -342,7 +342,7 @@
     "AdaptarCarriles": "Adaptar Carriles",
     "Sobreescribir": "Sobreescribir",
     "BuscarInicio": "Buscar Inicio",
-    "AuscCargada": "Auscultación importada para la carretera {{NomCarr}} PK {{PkIni}} + {{MIni}} -> {{PkFin}} + {{MFin}}; Subtramo: {{NomTramo}}; Tipo Calzada {{TipoCalz}}; Carril {{Carril}}. Metros importados: {{MetrosImp}}; Datos Importados: {{DatosImp}}",
+    "AuscCargada": "Auscultación importada para la carretera {{NomCarr}} PK {{PkIni}} + {{MIni}} -> {{PkFin}} + {{MFin}}; Subtramo: {{NomTramo}}; Tipo Calzada: {{TipoCalz}}; Carril: {{Carril}}. Metros importados: {{MetrosImp}}; Datos Importados: {{DatosImp}}",
     "DatosSinImp": "Datos descartados por no cubrir la suficiente longitud para importar: {{DtsSinImp}}",
     "AuscultacionExiste": "Ya existe una auscultación en la base de datos con el mismo nombre. No se ha importado la auscultación.",
     "NoCarretera": "Auscultación para {{PkIni}} + {{MIni}}: No existe la carretera en la base de datos.",
@@ -350,7 +350,7 @@
     "RevisarTramo": "Auscultación para {{PkIni}} + {{MIni}}: Inicio de archivo externo a cualquier tramo de la base de datos. Error al identificar el carril de otro tramo. Revisar el archivo para solucionar el problema.",
     "CarrilAusSinTramo": "Auscultación para {{PkIni}} + {{MIni}}: Error al buscar el carril de la auscultación. El comienzo de los datos del archivo de auscultación no está contenido en ningún tramo.",
     "SinCarriles": "Auscultación para {{PkIni}} + {{MIni}}: No existen carriles en la base de datos para el tramo en el que se encuentra la auscultación.",
-    "AdaptarCarrilesAus": "Auscultación para {{PkIni}} + {{MIni}}: La información del número de carriles del archivo y del tramo no coincide. Se adaptará la información de {{carriles}} (Archivo auscultación) a {{carillesAux}} (Información Tramo).",
+    "AdaptarCarrilesAus": "Auscultación para {{PkIni}} + {{MIni}}: La información del número de carriles del archivo y del tramo no coincide. Se adaptará la información de {{carriles}} (Archivo auscultación) a {{carrilesAux}} (Información Tramo).",
     "CarrilesDifBBDD": "Auscultación para {{PkIni}} + {{MIni}}: No coinciden el número de carriles en el archivo y en la base de datos.",
     "BuscarCarrAus": "Auscultación para {{PkIni}} + {{MIni}}: Error al buscar el carril de la auscultación.",
     "AuscNombFechaExiste": "Auscultación para {{PkIni}} + {{MIni}}: Ya existe una auscultacion en el sistema para esta carretera, carril y tramo en esta fecha. Para ignorar este error use la funcionalidad de reemplazar.",
@@ -358,6 +358,7 @@
     "ImpAusKO": "Auscultación para {{PkIni}} + {{MIni}}: Fallo al añadir los datos a la base de datos.",
     "ImpCargarSinDatos": "Auscultación para {{PkIni}} + {{MIni}}: No hay datos en la medición para el siguiente tramo. Se necesitan al menos dos datos para importar.",
     "Recursividad": "Auscultación para {{PkIni}} + {{MIni}}: Error de recursividad.",
-    "DatosDescartados": "{{NumDatosDesc}} datos descartados al no encontrar tramo en {{PkIniAux}} + {{MIniAux}}"
-
+    "DatosDescartados": "{{NumDatosDesc}} datos descartados al no encontrar tramo en {{PkIniAux}} + {{MIniAux}}",
+    "ErrAusc": "Auscultación para {{PkIni}} + {{MIni}}: Error al cargar la auscultación.",
+    "ErrCargaAusc": "Se ha producido un error al cargar el fichero."
 }
