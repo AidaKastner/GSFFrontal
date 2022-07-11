@@ -1463,7 +1463,7 @@ function CrearEditarActuacion({Actuacion, Data}){
             </Container>
 
 
-          {/*Modal para verificar si se quiere Guargar*/}
+          {/*Modal para verificar si se quiere Guardar*/}
           <Modal isOpen={ModalConfGuardar}>
 				      <ModalBody>
               <br />

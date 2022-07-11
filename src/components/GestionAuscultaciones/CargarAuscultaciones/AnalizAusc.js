@@ -16,6 +16,9 @@ import { CloseOutlined, ContentCutOutlined } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import '../../../css/FileUpload.scss';
+import ListarFicheros from "./ListarFicheros";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import ModalTitle from "react-bootstrap/ModalTitle";
 
 
 function AnalizAusc(){
@@ -495,6 +498,7 @@ function AnalizAusc(){
 
         const data = new FormData();
 
+        data.append('Fichero',archivo);
         data.append('TipoAuscultacion', TipoAuscultacion)
         data.append('Sobreescribir', FormAuscultacion.Sobreescribir)
         data.append('AdaptarCarriles', FormAuscultacion.AdaptarCarriles)
@@ -506,18 +510,19 @@ function AnalizAusc(){
           console.log("POST");
           console.log("response: ", response);
 
+          if(response?.data.existeAusc === true){
+            console.log("existe auscultación");
+            setMsgOutBoolKOCarga(true);
+            var msg = <Translation ns= "global">{(t) => <>{t('AuscultacionExiste')}</>}</Translation>
+            guardarMsgOutErrCarga(msg);
+          }
+
           var NumFilas = response?.data.auscCargadas.length;
           console.log("Num Filas: ", NumFilas);
           if(NumFilas > 0){
 
             Auscultaciones = response?.data.auscCargadas;
-            var IdKO = 0; var IdOK = 0;
-
-            if(response?.data.mensjError == 1){
-              setMsgOutBoolKOCarga(true);
-              var msg = <Translation ns= "global">{(t) => <>{t('AuscultacionExiste')}</>}</Translation>
-              guardarMsgOutErrCarga(msg);
-            }
+            var IdKO = 0; var IdOK = 0; 
 
             for(var i=0; i<NumFilas; i++){
 
@@ -605,19 +610,31 @@ function AnalizAusc(){
             }
          
               console.log("Datos rest: ", response?.data.numDatosRestantes)
+              {/*Nº de datos sin cargar*/}
               if(response?.data.numDatosRestantes > 0){
                   console.log("Datos rest: ", response?.data.numDatosRestantes)
                   IdKO += 1;
                   setMsgOutBoolKOCarga(true);
                   var msgOK = <Translation ns= "global">{(t) => <>{t('DatosSinImp', { DtsSinImp: response?.data.numDatosRestantes })}</>}</Translation>
                   guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgOK}]);
-              }            
+              }     
+              
+
+              {/*Ruta del fichero cargado*/}
+              if(response?.data.rutaFichero !== ''){
+                  console.log("Ruta fichero: ", response?.data.rutaFichero)
+                  IdOK += 1;
+                  setMsgOutBoolOKCarga(true);
+                  var msgOK = <Translation ns= "global">{(t) => <>{t('ArchivoGuardado', { Ruta: response?.data.rutaFichero })}</>}</Translation>
+                  guardarMsgOutAusCarga(oldArray => [...oldArray, {id: IdOK, name: msgOK}]);
+              }     
         }
   
         }).catch(error=>{
           console.log("error: ", error);
           var msg = <Translation ns= "global">{(t) => <>{t('ErrCargaAusc')}</>}</Translation>
-            guardarMsgOutErrCarga(msg);
+          guardarMsgOutErrCarga(msg);
+          setMsgOutBoolKOCarga(true);
 
       })   
     }
@@ -833,7 +850,6 @@ function AnalizAusc(){
 
   return (
     <div>
-      <div>
       <br/>
       {/*CARGA DE FICHERO*/}
       <div className='file-card' >
@@ -844,9 +860,7 @@ function AnalizAusc(){
                    <FontAwesomeIcon icon={faPlus} /> 
                  </i>
                  <Translation ns= "global">{(t) => <>{t('SubirFichero')}</>}</Translation>  
-               </button>
-                    
-  
+               </button>               
            </div>
            
 
@@ -865,15 +879,15 @@ function AnalizAusc(){
 
       </div>
 
-                                                                                                        
-         
-      {/*BOTONES ANALIZAR Y CARGAR*/}     
-      
-      <Row>
-        <Col xs={2}>
-          <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
-          <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
-        </Col>
+
+
+                                                                                        
+  {/*BOTONES ANALIZAR, CARGARY LISTAR FICHEROS*/}     
+    
+  <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
+  <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+  <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>setModalListar(true)}><Translation ns= "global">{(t) => <>{t('ListarFich')}</>}</Translation></button>
+             
 
         {validacionOK ?
           <Col xs={10}>
@@ -925,8 +939,6 @@ function AnalizAusc(){
           </Col> 
         : null}
         
-        </Row>
-      </div>
 
     {/*Mnesajes carga Auscultaciones*/}
       { msgOutBoolOKCarga ? 
@@ -1216,7 +1228,21 @@ function AnalizAusc(){
           />
         </div>
         : ""} 
-      </div>
+
+        {/*Modal para cargar un Excel de actuaciones*/}
+        <Modal size="lg" isOpen={ModalListar}>
+                <ModalHeader style={{display: 'block'}}>
+                  <span style={{float: 'right'}}>
+                    <button className="btn btn-danger btn-sm" onClick={()=>{setModalListar(false)}}>x</button>
+                  </span>
+                  <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('FicherosAusc')}</>}</Translation></ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                  <ListarFicheros/>
+                </ModalBody>
+          </Modal> 
+    </div>
+
   )
 
 }
