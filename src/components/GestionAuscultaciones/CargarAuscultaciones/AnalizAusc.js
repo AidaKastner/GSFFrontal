@@ -486,159 +486,172 @@ function AnalizAusc(){
   }     
   }
 
-      /*Guardar Auscultación*/
-      const GuardarAuscultacion=async()=>{
-        console.log("GuardarAuscultacion");
-        setMsgOutBoolOKCarga(false);
-        setMsgOutBoolKOCarga(false);
-        guardarMsgOutAusKOCarga([]);
-        guardarMsgOutAusCarga([]);
-        guardarMsgOutErrCarga("");
-        var Auscultaciones = [];
+  const [ModalSobreescGuardar, setModalSobreescGuardar] = useState(false);
+  const ComprobarGuardarAuscultacion=async()=>{
+    console.log('FormAuscultacion: ', FormAuscultacion);
+    setModalSobreescGuardar(false);
+    if(FormAuscultacion.Sobreescribir === true){
+      setModalSobreescGuardar(true);
+    }else{
+      GuardarAuscultacion();
+    }
+  }
+      
+  /*Guardar Auscultación*/
+  const GuardarAuscultacion=async()=>{
+    console.log("GuardarAuscultacion");
+    setMsgOutBoolOKCarga(false);
+    setMsgOutBoolKOCarga(false);
+    guardarMsgOutAusKOCarga([]);
+    guardarMsgOutAusCarga([]);
+    guardarMsgOutErrCarga("");
+    var Auscultaciones = [];
 
-        const data = new FormData();
+    const data = new FormData();
 
-        data.append('Fichero',archivo);
-        data.append('TipoAuscultacion', TipoAuscultacion)
-        data.append('Sobreescribir', FormAuscultacion.Sobreescribir)
-        data.append('AdaptarCarriles', FormAuscultacion.AdaptarCarriles)
-        data.append('BuscarInicio', FormAuscultacion.BuscarInicio)
-        console.log("data.append ", data);
+    data.append('Fichero',archivo);
+    data.append('TipoAuscultacion', TipoAuscultacion)
+    data.append('Sobreescribir', FormAuscultacion.Sobreescribir)
+    data.append('AdaptarCarriles', FormAuscultacion.AdaptarCarriles)
+    data.append('BuscarInicio', FormAuscultacion.BuscarInicio)
+    console.log("data.append ", data);
 
-        axios.post(url2, data, config).then(response=>{
-          
-          console.log("POST");
-          console.log("response: ", response);
+    axios.post(url2, data, config).then(response=>{
+      
+      console.log("POST");
+      console.log("response: ", response);
 
-          if(response?.data.existeAusc === true){
-            console.log("existe auscultación");
+      if(response?.data.existeAusc === true){
+        console.log("existe auscultación");
+        setMsgOutBoolKOCarga(true);
+        var msg = <Translation ns= "global">{(t) => <>{t('AuscultacionExiste')}</>}</Translation>
+        guardarMsgOutErrCarga(msg);
+      }
+
+      var NumFilas = response?.data.auscCargadas.length;
+      console.log("Num Filas: ", NumFilas);
+      if(NumFilas > 0){
+
+        Auscultaciones = response?.data.auscCargadas;
+        var IdKO = 0; var IdOK = 0; 
+
+        for(var i=0; i<NumFilas; i++){
+
+          console.log("Valor de i: ", i);
+          console.log("Auscultación: ", Auscultaciones[i]);
+
+          if (Auscultaciones[i].errorAusc > 0){
             setMsgOutBoolKOCarga(true);
-            var msg = <Translation ns= "global">{(t) => <>{t('AuscultacionExiste')}</>}</Translation>
-            guardarMsgOutErrCarga(msg);
+            IdKO += 1;
+
+            /*Errores de cada auscultación*/
+            switch(Auscultaciones[i].errorAusc){       
+              case 3:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('SinDatosProxTram', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;   
+              case 4:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('RevisarTramo', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 5:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('CarrilAusSinTramo', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 6: 
+                var msgKO = <Translation ns= "global">{(t) => <>{t('SinCarriles', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 8:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('CarrilesDifBBDD', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 9:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('BuscarCarrAus', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 10:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('AuscNombFechaExiste', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 11:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('ErrorPks', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 12:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('ImpAusKO', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 13:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('ImpCargarSinDatos', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 15:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('Recursividad', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              case 16:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('CercarCarril', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+              default:
+                var msgKO = <Translation ns= "global">{(t) => <>{t('ErrAusc', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
+                break;
+            }
+            guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgKO}]);
+
+          }else{
+            console.log("Sin error");
+            console.log("Auscultación: ", Auscultaciones[i]);
+            setMsgOutBoolOKCarga(true);
+            IdOK += 1;
+            
+            /*Auscultaciones dadas de alta*/
+            var msgOK = <Translation ns= "global">{(t) => <>{t('AuscCargada', { NomCarr: Auscultaciones[i].nomCarretera, PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni,
+              PkFin: Auscultaciones[i].pkFin, MFin: Auscultaciones[i].mFin, NomTramo: Auscultaciones[i].nombreTramo, TipoCalz: Auscultaciones[i].tipoCalzada, Carril: Auscultaciones[i].carriles,
+              MetrosImp: Auscultaciones[i].metrosImportados, DatosImp: Auscultaciones[i].totalDatos })}</>}</Translation>
+
+              IdOK += 1;
+              guardarMsgOutAusCarga(oldArray => [...oldArray, {id: IdOK, name: msgOK}]);
+              console.log("i: ", i);
+          }       
+        
+          console.log("Adapt. Desc: ", Auscultaciones[i].datosDescartados )
+          if(Auscultaciones[i].datosDescartados == true){
+            console.log("Adapt. Desc")
+            IdKO += 1;
+            setMsgOutBoolKOCarga(true);
+            var msgKO = <Translation ns= "global">{(t) => <>{t('DatosDescartados', {NumDatosDesc: Auscultaciones[i].numDatosDescartados, PkIniAux: Auscultaciones[i].pkIniAux, MIniAux: Auscultaciones[i].mIniAux})}</>}</Translation>
+            guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgKO}]);
           }
 
-          var NumFilas = response?.data.auscCargadas.length;
-          console.log("Num Filas: ", NumFilas);
-          if(NumFilas > 0){
-
-            Auscultaciones = response?.data.auscCargadas;
-            var IdKO = 0; var IdOK = 0; 
-
-            for(var i=0; i<NumFilas; i++){
-
-              console.log("Valor de i: ", i);
-              console.log("Auscultación: ", Auscultaciones[i]);
-
-              if (Auscultaciones[i].errorAusc > 0){
-                setMsgOutBoolKOCarga(true);
-                IdKO += 1;
-
-                /*Errores de cada auscultación*/
-                switch(Auscultaciones[i].errorAusc){       
-                  case 3:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('SinDatosProxTram', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;   
-                  case 4:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('RevisarTramo', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 5:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('CarrilAusSinTramo', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 6: 
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('SinCarriles', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 8:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('CarrilesDifBBDD', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 9:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('BuscarCarrAus', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 10:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('AuscNombFechaExiste', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 11:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('ErrorPks', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 12:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('ImpAusKO', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 13:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('ImpCargarSinDatos', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  case 14:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('Recursividad', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                  default:
-                    var msgKO = <Translation ns= "global">{(t) => <>{t('ErrAusc', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni})}</>}</Translation>
-                    break;
-                }
-                guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgKO}]);
-
-              }else{
-                console.log("Sin error");
-                console.log("Auscultación: ", Auscultaciones[i]);
-                setMsgOutBoolOKCarga(true);
-                IdOK += 1;
-                
-                /*Auscultaciones dadas de alta*/
-                var msgOK = <Translation ns= "global">{(t) => <>{t('AuscCargada', { NomCarr: Auscultaciones[i].nomCarretera, PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni,
-                  PkFin: Auscultaciones[i].pkFin, MFin: Auscultaciones[i].mFin, NomTramo: Auscultaciones[i].nombreTramo, TipoCalz: Auscultaciones[i].tipoCalzada, Carril: Auscultaciones[i].carriles,
-                  MetrosImp: Auscultaciones[i].metrosImportados, DatosImp: Auscultaciones[i].totalDatos })}</>}</Translation>
-
-                  IdOK += 1;
-                  guardarMsgOutAusCarga(oldArray => [...oldArray, {id: IdOK, name: msgOK}]);
-                  console.log("i: ", i);
-              }       
-            
-              console.log("Adapt. Desc: ", Auscultaciones[i].datosDescartados )
-              if(Auscultaciones[i].datosDescartados == true){
-                console.log("Adapt. Desc")
-                IdKO += 1;
-                setMsgOutBoolKOCarga(true);
-                var msgKO = <Translation ns= "global">{(t) => <>{t('DatosDescartados', {NumDatosDesc: Auscultaciones[i].numDatosDescartados, PkIniAux: Auscultaciones[i].pkIniAux, MIniAux: Auscultaciones[i].mIniAux})}</>}</Translation>
-                guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgKO}]);
-              }
-
-              console.log("Adapt. Carr: ", Auscultaciones[i].adaptarCarriles)
-              if(Auscultaciones[i].adaptarCarriles == true){
-                console.log("Adapt. Carr")
-                IdKO += 1;
-                setMsgOutBoolKOCarga(true);
-                var msgKO = <Translation ns= "global">{(t) => <>{t('AdaptarCarrilesAus', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni, carriles: Auscultaciones[i].carriles, carrilesAux: Auscultaciones[i].carrilesAux })}</>}</Translation>
-                guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgKO}]);
-              }
-            }
-         
-              console.log("Datos rest: ", response?.data.numDatosRestantes)
-              {/*Nº de datos sin cargar*/}
-              if(response?.data.numDatosRestantes > 0){
-                  console.log("Datos rest: ", response?.data.numDatosRestantes)
-                  IdKO += 1;
-                  setMsgOutBoolKOCarga(true);
-                  var msgOK = <Translation ns= "global">{(t) => <>{t('DatosSinImp', { DtsSinImp: response?.data.numDatosRestantes })}</>}</Translation>
-                  guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgOK}]);
-              }     
-              
-
-              {/*Ruta del fichero cargado*/}
-              if(response?.data.rutaFichero !== ''){
-                  console.log("Ruta fichero: ", response?.data.rutaFichero)
-                  IdOK += 1;
-                  setMsgOutBoolOKCarga(true);
-                  var msgOK = <Translation ns= "global">{(t) => <>{t('ArchivoGuardado', { Ruta: response?.data.rutaFichero })}</>}</Translation>
-                  guardarMsgOutAusCarga(oldArray => [...oldArray, {id: IdOK, name: msgOK}]);
-              }     
+          console.log("Adapt. Carr: ", Auscultaciones[i].adaptarCarriles)
+          if(Auscultaciones[i].adaptarCarriles == true){
+            console.log("Adapt. Carr")
+            IdKO += 1;
+            setMsgOutBoolKOCarga(true);
+            var msgKO = <Translation ns= "global">{(t) => <>{t('AdaptarCarrilesAus', {PkIni: Auscultaciones[i].pkIni, MIni: Auscultaciones[i].mIni, carriles: Auscultaciones[i].carriles, carrilesAux: Auscultaciones[i].carrilesAux })}</>}</Translation>
+            guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgKO}]);
+          }
         }
-  
-        }).catch(error=>{
-          console.log("error: ", error);
-          var msg = <Translation ns= "global">{(t) => <>{t('ErrCargaAusc')}</>}</Translation>
-          guardarMsgOutErrCarga(msg);
-          setMsgOutBoolKOCarga(true);
+     
+          console.log("Datos rest: ", response?.data.numDatosRestantes)
+          {/*Nº de datos sin cargar*/}
+          if(response?.data.numDatosRestantes > 0){
+              console.log("Datos rest: ", response?.data.numDatosRestantes)
+              IdKO += 1;
+              setMsgOutBoolKOCarga(true);
+              var msgOK = <Translation ns= "global">{(t) => <>{t('DatosSinImp', { DtsSinImp: response?.data.numDatosRestantes })}</>}</Translation>
+              guardarMsgOutAusKOCarga(oldArray => [...oldArray, {id: IdKO, name: msgOK}]);
+          }     
+          
 
-      })   
+          {/*Ruta del fichero cargado*/}
+          if(response?.data.rutaFichero !== ''){
+              console.log("Ruta fichero: ", response?.data.rutaFichero)
+              IdOK += 1;
+              setMsgOutBoolOKCarga(true);
+              var msgOK = <Translation ns= "global">{(t) => <>{t('ArchivoGuardado', { Ruta: response?.data.rutaFichero })}</>}</Translation>
+              guardarMsgOutAusCarga(oldArray => [...oldArray, {id: IdOK, name: msgOK}]);
+          }     
     }
 
+    }).catch(error=>{
+      console.log("error: ", error);
+      var msg = <Translation ns= "global">{(t) => <>{t('ErrCargaAusc')}</>}</Translation>
+      guardarMsgOutErrCarga(msg);
+      setMsgOutBoolKOCarga(true);
+
+  })   
+}
     const handleChange=async e=>{
       //e.persist();
       console.log("opción:", e);
@@ -766,17 +779,6 @@ function AnalizAusc(){
       {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == true ? 'red': ''}}>{cell.toLocaleString('es')}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
       {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == true ? 'red': ''}}>{cell.toLocaleString('es')}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
     ]
-
-    const columnHover = () => {
-
-      var Texto = <Translation ns= "global">{(t) => <>{t('PorcSupFisTot')}</>}</Translation>;
-      console.log("TEXTO: ", Texto);
-      console.log(t('PorcSupFisTot'));
-
-      var out = t('PorcSupFisTot');
-      console.log(out);
-      return out;
-    }
     
    {/*Tabla de Auscultaciones FIS*/}
    const columnsF2FIS = [
@@ -885,7 +887,7 @@ function AnalizAusc(){
   {/*BOTONES ANALIZAR, CARGARY LISTAR FICHEROS*/}     
     
   <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
-  <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>GuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
+  <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>ComprobarGuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
   <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>setModalListar(true)}><Translation ns= "global">{(t) => <>{t('ListarFich')}</>}</Translation></button>
              
 
@@ -1241,6 +1243,20 @@ function AnalizAusc(){
                   <ListarFicheros/>
                 </ModalBody>
           </Modal> 
+
+
+        {/*Modal para verificar si se quiere Guardar*/}
+        <Modal isOpen={ModalSobreescGuardar}>
+				  <ModalBody>
+            <br />
+            <Translation ns= "global">{(t) => <>{t('SobreescrGuardar')}</>}</Translation>        
+          <br /><br />     			        
+				  </ModalBody>
+          <ModalFooter>                            
+              <button className="btn btn-primary btn-sm" onClick={()=>{setModalSobreescGuardar(false); GuardarAuscultacion()}}><Translation ns= "global">{(t) => <>{t('Continuar')}</>}</Translation></button>
+              <button className="btn btn-primario btn-sm" onClick={()=>{setModalSobreescGuardar(false)}}><Translation ns= "global">{(t) => <>{t('Cancelar')}</>}</Translation></button>      
+				  </ModalFooter>    
+		    </Modal>
     </div>
 
   )
