@@ -164,6 +164,10 @@ function AnalizAusc(){
 
     setMsgOutBoolOKCarga(false);
     setMsgOutBoolKOCarga(false);
+    setMsgOutBoolWar(false);
+    guardarMsgOutWar([]);
+    guardarMsgOutErr('');
+    guardarMsgOutErr1([]);
     
     if(archivo?.name?.includes("DAT") == false && archivo?.name?.includes("dat") == false &&
     archivo?.name?.includes("MVL") == false && archivo?.name?.includes("mvl") == false &&

@@ -9,7 +9,6 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import ExportJsonExcel from 'js-export-excel';
 import {CSVLink, CSVDownload} from 'react-csv';
 import { Button } from '@material-ui/core';
 import paginationFactory from 'react-bootstrap-table2-paginator';
