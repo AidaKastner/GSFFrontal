@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col'
 import {CSVLink, CSVDownload} from 'react-csv';
 import { Button } from '@material-ui/core';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-
+import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 
 
 function ListarFicheros(){
@@ -47,7 +47,7 @@ function ListarFicheros(){
 
 
   const handleChange=async e=>{
-    //e.persist();
+
     console.log("opción:", e);
    
         await actualizarFormFechas({
@@ -111,8 +111,8 @@ function ListarFicheros(){
 
 
   const TablaFicherosAusc = [
-    {dataField: 'fecha', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
-    {dataField: 'nombreArchivo', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+    {dataField: 'fecha', text: <Translation ns= "global">{(t) => <>{t('Fecha')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}, sort: true, filter: textFilter({placeholder: ' '}) },
+    {dataField: 'nombreArchivo', text: <Translation ns= "global">{(t) => <>{t('nombre')}</>}</Translation>, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}, sort: true, filter: textFilter({placeholder: ' '}) },
  ]
 
 
@@ -153,6 +153,7 @@ function ListarFicheros(){
             data={ListaAusc}
             bordered={false}
             pagination={pagination}
+            filter={filterFactory()}
           />
         </Row>
     
