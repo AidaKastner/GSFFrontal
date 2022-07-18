@@ -19,6 +19,7 @@ import '../../../css/FileUpload.scss';
 import ListarFicheros from "./ListarFicheros";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import ModalTitle from "react-bootstrap/ModalTitle";
+import Spinner from "../../Spinner"; 
 
 
 function AnalizAusc(){
@@ -40,6 +41,7 @@ function AnalizAusc(){
   const [uploadFile, setUploadFile] = useState(false);
   const [validacionOK, setValidacionOK] = useState(false);
   const [ModalListar, setModalListar] = useState(false);
+  const [ModalSalir, setModalSalir] = useState(false);
   
 
   const pagination = paginationFactory({
@@ -109,6 +111,7 @@ function AnalizAusc(){
   const [msgOutWar, guardarMsgOutWar] = useState([]);
   const [msgOutBoolWar, setMsgOutBoolWar] = useState(false);
   const [msgOutBoolKO, setMsgOutBoolKO] = useState(false);
+  const [SWCargando, setSWCargando] = useState(false);
 
   const InicializarDatos=()=>{
     console.log("INICIALIZAR");
@@ -168,6 +171,8 @@ function AnalizAusc(){
     guardarMsgOutWar([]);
     guardarMsgOutErr('');
     guardarMsgOutErr1([]);
+
+    setSWCargando(true);
     
     if(archivo?.name?.includes("DAT") == false && archivo?.name?.includes("dat") == false &&
     archivo?.name?.includes("MVL") == false && archivo?.name?.includes("mvl") == false &&
@@ -191,6 +196,7 @@ function AnalizAusc(){
         console.log("OK");
         console.log("NOMBRE FICHERO: ", archivo?.name);
 
+        setSWCargando(false);
         var IdError = 0; 
 
               setMsgOutBoolKO(false);
@@ -480,6 +486,7 @@ function AnalizAusc(){
       
 
       }).catch(error=>{
+        setSWCargando(false);
         console.log("prueba2");
         console.log("ERROR: ", error);
 
@@ -504,6 +511,7 @@ function AnalizAusc(){
   /*Guardar Auscultación*/
   const GuardarAuscultacion=async()=>{
     console.log("GuardarAuscultacion");
+    setSWCargando(true);
     setMsgOutBoolOKCarga(false);
     setMsgOutBoolKOCarga(false);
     guardarMsgOutAusKOCarga([]);
@@ -525,6 +533,7 @@ function AnalizAusc(){
       console.log("POST");
       console.log("response: ", response);
 
+      setSWCargando(false);
       if(response?.data.existeAusc === true){
         console.log("existe auscultación");
         setMsgOutBoolKOCarga(true);
@@ -649,6 +658,7 @@ function AnalizAusc(){
     }
 
     }).catch(error=>{
+      setSWCargando(false);
       console.log("error: ", error);
       var msg = <Translation ns= "global">{(t) => <>{t('ErrCargaAusc')}</>}</Translation>
       guardarMsgOutErrCarga(msg);
@@ -780,6 +790,7 @@ function AnalizAusc(){
       {dataField: 'marcaViaria.item1', text: <Translation ns= "global">{(t) => <>{t('MarcaViaria')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.marcaViaria?.item2 == true ? 'red': ''}}>{cell}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
       {dataField: 'contrasteDia.item1', text: <Translation ns= "global">{(t) => <>{t('ContrasteDia')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteDia?.item2 == true ? 'red': ''}}>{cell.toLocaleString('es')}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
       {dataField: 'contrasteNoche.item1', text: <Translation ns= "global">{(t) => <>{t('ContrasteNoche')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteNoche?.item2 == true ? 'red': ''}}>{cell.toLocaleString('es')}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
+      {dataField: 'retroflexion.item1', text: <Translation ns= "global">{(t) => <>{t('Retroflexion')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.contrasteNoche?.item2 == true ? 'red': ''}}>{cell.toLocaleString('es')}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
       {dataField: 'coordX.item1', text: <Translation ns= "global">{(t) => <>{t('CoordX')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordX?.item2 == true ? 'red': ''}}>{cell.toLocaleString('es')}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}},
       {dataField: 'coordY.item1', text: <Translation ns= "global">{(t) => <>{t('CoordY')}</>}</Translation>, filter: textFilter({placeholder: ' '}), sort: true, formatter: (cell, row) =>{return <div style={{backgroundColor: row.coordY?.item2 == true ? 'red': ''}}>{cell.toLocaleString('es')}</div>}, style:{textAlign: 'center'}, headerStyle:{textAlign: 'center'}}
     ]
@@ -856,7 +867,9 @@ function AnalizAusc(){
 
   return (
     <div>
-      <br/>
+      {!SWCargando ?
+      <div>
+
       {/*CARGA DE FICHERO*/}
       <div className='file-card' >
         <div className='file-inputs'>
@@ -888,8 +901,9 @@ function AnalizAusc(){
 
 
                                                                                         
-  {/*BOTONES ANALIZAR, CARGARY LISTAR FICHEROS*/}     
+  {/*BOTONES ANALIZAR, CARGAR Y LISTAR FICHEROS*/}     
     
+  
   <button disabled={!uploadFile} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>AnalizarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Analizar')}</>}</Translation></button>
   <button disabled={!validacionOK} className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>ComprobarGuardarAuscultacion()}><Translation ns= "global">{(t) => <>{t('Cargar')}</>}</Translation></button>
   <button className="btn btn-primario btn-sm" style={{marginLeft: '5px'}} onClick={()=>setModalListar(true)}><Translation ns= "global">{(t) => <>{t('ListarFich')}</>}</Translation></button>
@@ -944,7 +958,9 @@ function AnalizAusc(){
 
           </Col> 
         : null}
-        
+    
+   </div>     
+: ""}
 
     {/*Mnesajes carga Auscultaciones*/}
       { msgOutBoolOKCarga ? 
@@ -995,6 +1011,12 @@ function AnalizAusc(){
       </div>
       </div>
       : ""}
+
+      { SWCargando ?
+        <div className="u-full-width"  style={{marginLeft:'50%'}}>
+            <Spinner /> 
+        </div>
+      : "" }
 
       <br/><br/>  
 
@@ -1239,7 +1261,7 @@ function AnalizAusc(){
         <Modal size="lg" isOpen={ModalListar}>
                 <ModalHeader style={{display: 'block'}}>
                   <span style={{float: 'right'}}>
-                    <button className="btn btn-danger btn-sm" onClick={()=>{setModalListar(false)}}>x</button>
+                    <button className="btn btn-danger btn-sm" onClick={()=>{setModalSalir(true)}}>x</button>
                   </span>
                   <ModalTitle as="h2"><Translation ns= "global">{(t) => <>{t('FicherosAusc')}</>}</Translation></ModalTitle>
                 </ModalHeader>
@@ -1261,6 +1283,19 @@ function AnalizAusc(){
               <button className="btn btn-primario btn-sm" onClick={()=>{setModalSobreescGuardar(false)}}><Translation ns= "global">{(t) => <>{t('Cancelar')}</>}</Translation></button>      
 				  </ModalFooter>    
 		    </Modal>
+
+        {/*Modal para verificar si se quiere salir de Listar Ficheros*/}
+        <Modal isOpen={ModalSalir}>
+				      <ModalBody>
+              <br />
+              <Translation ns= "global">{(t) => <>{t('SalirModal')}</>}</Translation>     
+              <br /><br />     			        
+				      </ModalBody>
+				      <ModalFooter>                            
+				        <button className="btn btn-danger btn-sm" onClick={()=>{setModalListar(false); setModalSalir(false)}}><Translation ns= "global">{(t) => <>{t('Salir')}</>}</Translation></button>
+                <button className="btn btn-primary btn-sm" onClick={()=>{setModalSalir(false)}}><Translation ns= "global">{(t) => <>{t('Permanecer')}</>}</Translation></button>
+				      </ModalFooter>
+			    </Modal>
     </div>
 
   )
