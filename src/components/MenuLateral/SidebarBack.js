@@ -27,16 +27,16 @@ const SidebarBack = (props) => {
 };
 
 const SidebarNav = styled.nav`
-  background: #15171c;
+  background: #3f3f3f;
   width: 75px;
   height: 100vh;
   display: flex;
   justify-content: center;
   position: fixed;
-  top: 80px;
   left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
   transition: 350ms;
   z-index: 10;
+  top: 80px;
 `;
 
 export default SidebarBack;

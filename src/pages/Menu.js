@@ -37,10 +37,10 @@ function Menu(props) {
           prevLocation={props.location.state != null ? props.location.state.prevLocation : null}
           t={t} />
       </div>
-      <div style={{marginLeft: '15%'}}>
-        <div style={{marginRight: '10%', marginTop: '1%'}}>
-          <h1 style={{textAlign: 'left', marginLeft: '1%'}}>{ t('gestAusc') }</h1>
-          <img src="/AuscultationManagement.png" />
+      <div clasname = 'continer' style={{marginLeft: '15%'}}>
+        <div clasname = 'img' style={{marginRight: '4%', marginTop: '8%'}}>
+          {/* <h1 style={{textAlign: 'left', marginLeft: '1%'}}>{ t('gestAusc') }</h1>*/}
+          <img src="/AuscultationManagement.png" width="1150px" height="300px"/>
         </div>
       </div>
     </div>

@@ -66,39 +66,28 @@ class Sidebar extends React.Component {
                   <FaIcons.FaBars onClick={() => { this.showSidebar(); }} />
               </NavLink>
             </div>
-            {
-              !this.state.sidebar
-                ? <Fragment>
-                    <img src={'/logo.png'} style={{width: '7rem', height: '7rem', marginLeft: '3rem'}} />
+              {/*!this.state.sidebar /*funcinalidad con barra lateral plegada*/}
+                <Fragment>
+                    <img src={'/logo.png'} style={{width: '50px', height: '50px', marginLeft:'300px'}} />
                     <h3 style={{color: 'white', marginLeft: '3rem'}}>{ t('applicationName') }</h3>
-                  </Fragment>
-                : ''
-            }
+                </Fragment>
             <div className='mail-logged-in'>{sessionStorage.getItem("mail")}</div>
             <Idioma />
           </div>
+
           <SidebarNav sidebar={this.state.sidebar}>
-            <div className="SidebarWrap">
-              <div className="Navicon" style={{width: 'max-content'}}>
+            <div className="SidebarWrap">  
+              {/*<div className="Navicon" style={{width: 'max-content'}}>
                 <NavLink to='#'>
                   <AiIcons.AiOutlineClose onClick={() => { this.showSidebar(); }} />
                 </NavLink>
-                {
-                  this.state.sidebar
-                    ? <Fragment>
-                        <img src={'/logo.png'} style={{width: '7rem', height: '7rem', marginLeft: '3rem'}} />
-                        <h3 style={{color: 'white', marginLeft: '3rem'}}>{ t('applicationName') }</h3>
-                      </Fragment>
-                    : ''
-                }
-              </div>
+               </div>*/}
               {SidebarData.map((item, index) => {
                 if (item.subNav !== undefined) {
                   item.path = this.state.routerHistory === undefined ? item.path : this.state.routerHistory.location.pathname;
                 }
                 return <SubMenu item={item} key={index} />;
               })}
-
             </div>
           </SidebarNav>
         </IconContext.Provider>
@@ -114,7 +103,7 @@ const SidebarNav = styled.nav`
   display: flex;
   justify-content: center;
   position: fixed;
-  top: 0;
+  top: 80px;
   left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
   transition: 350ms;
   z-index: 10;

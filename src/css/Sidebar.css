@@ -1,25 +1,35 @@
+/*EN ESTE CSS DE ESTÁN DEFINIENDO LOAS ELEMENTOS EN COMÚN DE TODAS LAS PANTALLAS*/
+
+/*Barra superior*/
 .Nav{
   background: #3f3f3f;
   height: 80px;
+  width: 100%;
   display: flex;
   align-items: center;
+  margin-top: 0%;
+  position: fixed;
 }
 
+/*Icono superior menú lateral*/
 .Navicon{
-  margin-left: 2rem;
+  margin-left: 2.5rem;
   font-size: 2rem;
   height: 80px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  position: fixed;
 }
 
+/*Menú lateral plegado y desplegado*/
 .SidebarWrap{
   background: #3f3f3f;
   width: 100%;
-  justify-content: flex-start;
+  /*margin-top: 80px;*/
 }
 
+/*Menú lateral plegado y desplegado cursor*/
 .SidebarWrap a:hover{
   background: #9a9ca5;
   border-left: 4px solid #a11510;
@@ -29,7 +39,7 @@
 
 .SidebarLink { 
   display: flex;
-  color: #eaeaee;
+  color: #eeeaed;
   justify-content: space-between;
   align-items: center;
   padding: 20px;

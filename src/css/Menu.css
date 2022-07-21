@@ -1,5 +1,6 @@
+
 .Navig{
-    background: #15171c;
+    background: #3f3f3f;
     height: 80px;
     display: flex;
     align-items: center;
@@ -55,4 +56,17 @@
     border-radius: 4px;
     resize: vertical;
     font-size: 100%;
+  }
+
+  .continer {
+    width: 75vw;
+    max-width: 1150px;
+    min-width: 320px;
+    margin: auto;
+  } 
+
+  img{
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0px 3px 5px rgba(15,15,15,.5);
   }
